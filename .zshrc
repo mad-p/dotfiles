@@ -9,7 +9,7 @@ LC_MESSAGES=en_US.UTF-8
 export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/git/bin:$HOME/share/apache-ant-1.8.0/bin:$PATH
 export MANPATH=$HOME/man:/usr/local/man:$MANPATH:/usr/local/git/share/man
 
-export EDITOR=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+export EDITOR=emacsclient
 
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
@@ -113,6 +113,7 @@ alias \?='dirs -v'
 alias j='jobs'
 alias e=emacsclient
 alias man='LANG=C man'
+alias emacs='LANG=C emacs'
 alias zz=exit
 alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
