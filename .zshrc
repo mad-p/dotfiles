@@ -113,6 +113,7 @@ alias \?='dirs -v'
 alias j='jobs'
 alias e=emacsclient
 alias man='LANG=C man'
+alias zz=exit
 alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
 alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
@@ -121,3 +122,5 @@ alias gl='git --no-pager log --pretty=oneline --abbrev-commit -8'
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
