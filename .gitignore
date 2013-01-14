@@ -12,3 +12,6 @@
 .git
 .rake_tasks
 .emacs.desktop
+.fonts/Ricty*
+.fonts/*.dir
+.fonts/fonts.*
