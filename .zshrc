@@ -59,6 +59,8 @@ setopt list_packed
 setopt auto_menu
 setopt auto_list
 setopt list_types
+bindkey -M menuselect '^r' vi-insert
+bindkey -M menuselect '^s' vi-insert
 
 setopt extended_glob
 setopt numeric_glob_sort
