@@ -1,0 +1,1766 @@
+
+anything-auto-install.el,1010
+(defvar anything-c-source-auto-install-from-emacswikianything-c-source-auto-install-from-emacswiki139,3627
+(defvar anything-c-source-auto-install-from-libraryanything-c-source-auto-install-from-library148,4257
+(defvar anything-c-source-auto-install-batchanything-c-source-auto-install-batch155,4556
+(defvar anything-c-source-auto-install-from-urlanything-c-source-auto-install-from-url162,4884
+(defvar anything-c-source-auto-install-from-gistanything-c-source-auto-install-from-gist168,5118
+(defvar anything-auto-install-buffer "*anything auto install*")anything-auto-install-buffer174,5357
+(defun anything-auto-install-from-emacswiki (&optional file)anything-auto-install-from-emacswiki178,5507
+(defun anything-auto-install-from-library ()anything-auto-install-from-library186,5808
+(defun anything-auto-install-batch ()anything-auto-install-batch192,6022
+(defun anything-auto-install ()anything-auto-install198,6221
+(defun anything-auto-install-init ()anything-auto-install-init209,6735
+
+anything-complete.el,8676
+(defvar anything-complete-version "$Id: anything-complete.el,v 1.86 2010-03-31 23:14:13 rubikitch Exp $")anything-complete-version116,4544
+(defvar anything-complete-target "")anything-complete-target130,5030
+(defun ac-insert (candidate)ac-insert132,5068
+(define-anything-type-attribute 'completecomplete139,5322
+(defun anything-noresume (&optional any-sources any-input any-prompt any-resume any-preselect any-buffer)anything-noresume144,5497
+(defun anything-complete (sources target &optional limit idle-delay input-idle-delay)anything-complete148,5767
+(defvar anything-lisp-complete-symbol-input-idle-delay 0.1anything-lisp-complete-symbol-input-idle-delay160,6435
+(defvar anything-lisp-complete-symbol-add-space-on-startup tanything-lisp-complete-symbol-add-space-on-startup163,6634
+(defun alcs-create-buffer (name)alcs-create-buffer167,6863
+(defvar alcs-variables-buffer " *variable symbols*")alcs-variables-buffer174,7022
+(defvar alcs-functions-buffer " *function symbols*")alcs-functions-buffer175,7075
+(defvar alcs-commands-buffer " *command symbols*")alcs-commands-buffer176,7128
+(defvar alcs-faces-buffer " *face symbols*")alcs-faces-buffer177,7179
+(defvar alcs-symbol-buffer " *other symbols*")alcs-symbol-buffer178,7224
+(defvar alcs-symbols-time nilalcs-symbols-time180,7272
+(defun alcs-make-candidates ()alcs-make-candidates183,7339
+(defun alcs-header-name (name)alcs-header-name205,8365
+(defvar alcs-make-candidates-timer nil)alcs-make-candidates-timer209,8513
+(defun anything-lisp-complete-symbol-set-timer (update-period)anything-lisp-complete-symbol-set-timer210,8553
+(defvar alcs-physical-column-at-startup nil)alcs-physical-column-at-startup218,8927
+(defun alcs-init (bufname)alcs-init219,8972
+(defcustom anything-complete-sort-candidates nilanything-complete-sort-candidates229,9386
+(defcustom anything-execute-extended-command-use-kyr tanything-execute-extended-command-use-kyr234,9528
+(defun alcs-sort-maybe (candidates source)alcs-sort-maybe238,9721
+(defun alcs-fontify-face (candidates source)alcs-fontify-face242,9855
+(defun alcs-current-physical-column ()alcs-current-physical-column248,10035
+(defun alcs-transformer-prepend-spacer (candidates source)alcs-transformer-prepend-spacer253,10227
+(defun alcs-transformer-prepend-spacer-maybe (candidates source)alcs-transformer-prepend-spacer-maybe268,11010
+(defun alcs-describe-function (name)alcs-describe-function275,11335
+(defun alcs-describe-variable (name)alcs-describe-variable277,11423
+(defun alcs-describe-face (name)alcs-describe-face279,11511
+(defun alcs-customize-face (name)alcs-customize-face281,11591
+(defun alcs-find-function (name)alcs-find-function283,11673
+(defun alcs-find-variable (name)alcs-find-variable285,11753
+(defvar anything-c-source-complete-emacs-functionsanything-c-source-complete-emacs-functions288,11834
+(defvar anything-c-source-complete-emacs-commandsanything-c-source-complete-emacs-commands293,12029
+(defvar anything-c-source-complete-emacs-variablesanything-c-source-complete-emacs-variables298,12221
+(defvar anything-c-source-complete-emacs-facesanything-c-source-complete-emacs-faces303,12416
+(defvar anything-c-source-complete-emacs-other-symbolsanything-c-source-complete-emacs-other-symbols308,12595
+(defvar anything-c-source-apropos-emacs-functionsanything-c-source-apropos-emacs-functions314,12844
+(defvar anything-c-source-apropos-emacs-commandsanything-c-source-apropos-emacs-commands320,13072
+(defvar anything-c-source-apropos-emacs-variablesanything-c-source-apropos-emacs-variables326,13297
+(defvar anything-c-source-apropos-emacs-facesanything-c-source-apropos-emacs-faces332,13525
+(defvar anything-c-source-emacs-function-at-pointanything-c-source-emacs-function-at-point338,13737
+(defvar anything-c-source-emacs-variable-at-pointanything-c-source-emacs-variable-at-point345,14044
+(defvar anything-c-source-emacs-face-at-pointanything-c-source-emacs-face-at-point352,14366
+(defvar anything-lisp-complete-symbol-sourcesanything-lisp-complete-symbol-sources360,14677
+(defvar anything-apropos-sourcesanything-apropos-sources367,14960
+(define-anything-type-attribute 'apropos-functionapropos-function375,15267
+(define-anything-type-attribute 'apropos-variableapropos-variable383,15605
+(define-anything-type-attribute 'apropos-faceapropos-face391,15943
+(define-anything-type-attribute 'complete-functioncomplete-function400,16317
+(define-anything-type-attribute 'complete-variablecomplete-variable406,16608
+(define-anything-type-attribute 'complete-facecomplete-face412,16899
+(defvar alcs-this-command nil)alcs-this-command419,17183
+(defun* anything-lisp-complete-symbol-1 (update sources input &optional (buffer "*anything complete*"))anything-lisp-complete-symbol-1420,17214
+(defun alcs-update-restart ()alcs-update-restart434,17893
+(defun tap-symbol ()tap-symbol440,18050
+(defun alcs-initial-input (partial-match)alcs-initial-input448,18328
+(defun anything-lisp-complete-symbol (update)anything-lisp-complete-symbol456,18567
+(defun anything-lisp-complete-symbol-partial-match (update)anything-lisp-complete-symbol-partial-match461,18832
+(defun anything-apropos (update)anything-apropos466,19125
+(defvar anything-c-source-complete-anything-attributesanything-c-source-complete-anything-attributes472,19357
+(defun acaa-describe-anything-attribute (str)acaa-describe-anything-attribute482,19784
+(defun acaa-candidates ()acaa-candidates485,19900
+(defvar acaa-anything-commands-regexpacaa-anything-commands-regexp491,20132
+(defun acaa-completing-attribute-p (point)acaa-completing-attribute-p497,20353
+(defun anything-compile-source--default-value (source)anything-compile-source--default-value543,21894
+(defun ac-new-input-source (prompt require-match &optional additional-attrs)ac-new-input-source553,22320
+(defun* ac-default-source (default &optional accept-empty (additional-attrs '((action . identity))))ac-default-source558,22486
+(defvar anything-use-original-function nilanything-use-original-function569,22899
+(defun anything-completing-read (prompt collection &optional predicate require-match initial hist default inherit-input-method)anything-completing-read571,23009
+(defvar anything-completing-read-use-default tanything-completing-read-use-default591,24164
+(defvar anything-completing-read-history-first nilanything-completing-read-history-first593,24253
+(defvar anything-complete-persistent-action nilanything-complete-persistent-action595,24350
+(defun* acr-sources (prompt collection predicate require-match initial hist default inherit-input-method &optional (additional-attrs '((action . identity))))acr-sources599,24512
+(defun anything-read-buffer (prompt &optional default require-match start matches-set)anything-read-buffer646,27309
+(defun* arb-sources (prompt default require-match start matches-set &optional (additional-attrs '((action . identity))))arb-sources655,27789
+(defun anything-read-symbol-1 (prompt buffer default-value)anything-read-symbol-1670,28447
+(defun anything-read-variable (prompt &optional default-value)anything-read-variable682,29127
+(defun anything-read-command (prompt &optional default-value)anything-read-command687,29371
+(defvar anything-read-string-mode nil)anything-read-string-mode693,29598
+(defvar anything-read-string-mode-flags '(string buffer variable command)anything-read-string-mode-flags706,30429
+(defun anything-read-string-mode (arg)anything-read-string-mode708,30550
+(defun anything-read-string-mode-install ()anything-read-string-mode-install733,31651
+(defun anything-read-string-mode-uninstall ()anything-read-string-mode-uninstall749,32633
+(defun anything-complete-shell-history ()anything-complete-shell-history763,33436
+(defun anything-complete-shell-history-setup-key (key)anything-complete-shell-history-setup-key770,33767
+(defvar zsh-p nil)zsh-p786,34486
+(defvar anything-c-source-complete-shell-historyanything-c-source-complete-shell-history787,34505
+(defun acsh-get-line (s e)acsh-get-line799,34959
+(defvar anything-execute-extended-command-sourcesanything-execute-extended-command-sources828,36330
+(defun anything-execute-extended-command ()anything-execute-extended-command848,37082
+(defvaralias 'anything-c-source-complete-emacs-variables-partial-matchanything-c-source-complete-emacs-variables-partial-match951,40896
+(defvaralias 'anything-c-source-complete-emacs-commands-partial-matchanything-c-source-complete-emacs-commands-partial-match953,41014
+(defvaralias 'anything-c-source-complete-emacs-functions-partial-matchanything-c-source-complete-emacs-functions-partial-match955,41130
+
+anything-config.el,88103
+(defgroup anything-config nilanything-config829,36004
+(defcustom anything-c-adaptive-history-fileanything-c-adaptive-history-file833,36104
+(defcustom anything-c-adaptive-history-length 50anything-c-adaptive-history-length839,36289
+(defcustom anything-c-google-suggest-urlanything-c-google-suggest-url844,36436
+(defcustom anything-c-google-suggest-search-urlanything-c-google-suggest-search-url850,36625
+(defcustom anything-google-suggest-use-curl-p nilanything-google-suggest-use-curl-p856,36806
+(defcustom anything-c-yahoo-suggest-urlanything-c-yahoo-suggest-url862,37027
+(defcustom anything-c-yahoo-suggest-search-urlanything-c-yahoo-suggest-search-url868,37249
+(defcustom anything-c-boring-buffer-regexpanything-c-boring-buffer-regexp874,37429
+(defcustom anything-c-boring-file-regexpanything-c-boring-file-regexp893,38154
+(defcustom anything-kill-ring-threshold 10anything-kill-ring-threshold909,38752
+(defcustom anything-c-kill-ring-max-lines-number nilanything-c-kill-ring-max-lines-number914,38907
+(defcustom anything-su-or-sudo "su"anything-su-or-sudo920,39127
+(defcustom anything-for-files-prefered-listanything-for-files-prefered-list925,39248
+(defcustom anything-create--actions-private nilanything-create--actions-private938,39646
+(defcustom anything-allow-skipping-current-buffer nilanything-allow-skipping-current-buffer947,39941
+(defcustom anything-c-enable-eval-defun-hack tanything-c-enable-eval-defun-hack952,40090
+(defcustom anything-tramp-verbose 0anything-tramp-verbose959,40395
+(defcustom anything-raise-command nilanything-raise-command966,40646
+(defun anything-set-anything-command-map-prefix-key (var key)anything-set-anything-command-map-prefix-key973,40898
+(defcustom anything-command-map-prefix-key "<f5> a"anything-command-map-prefix-key981,41292
+(defcustom anything-c-browse-code-regexp-lispanything-c-browse-code-regexp-lisp991,41596
+(defcustom anything-c-browse-code-regexp-pythonanything-c-browse-code-regexp-python998,41879
+(defcustom anything-c-browse-code-regexp-alistanything-c-browse-code-regexp-alist1004,42059
+(defcustom anything-c-external-programs-associations nilanything-c-external-programs-associations1014,42477
+(defcustom anything-ff-auto-update-initial-value tanything-ff-auto-update-initial-value1021,42755
+(defcustom anything-c-copy-async-prefered-emacs "emacs"anything-c-copy-async-prefered-emacs1027,42977
+(defcustom anything-ff-lynx-style-map tanything-ff-lynx-style-map1034,43221
+(defcustom anything-ff-history-max-length 100anything-ff-history-max-length1041,43485
+(defcustom anything-ff-smart-completion tanything-ff-smart-completion1046,43640
+(defcustom anything-ff-default-kbsize 1024.0anything-ff-default-kbsize1052,43844
+(defcustom anything-ff-tramp-not-fancy tanything-ff-tramp-not-fancy1058,44049
+(defcustom anything-ff-exif-data-program "exiftran"anything-ff-exif-data-program1064,44257
+(defcustom anything-ff-exif-data-program-args "-d"anything-ff-exif-data-program-args1069,44410
+(defcustom anything-c-grep-use-ioccur-style-keys tanything-c-grep-use-ioccur-style-keys1074,44562
+(defcustom anything-c-pdfgrep-default-read-command "xpdf '%f' %p"anything-c-pdfgrep-default-read-command1079,44701
+(defcustom anything-c-etags-tag-file-name "TAGS"anything-c-etags-tag-file-name1085,44923
+(defcustom anything-c-etags-tag-file-search-limit 10anything-c-etags-tag-file-search-limit1090,45042
+(defcustom anything-c-etags-use-regexp-search nilanything-c-etags-use-regexp-search1096,45245
+(defcustom anything-c-etags-search-regexp "^.+: .+ \\<%s"anything-c-etags-search-regexp1104,45584
+(defcustom anything-c-filelist-file-name nilanything-c-filelist-file-name1112,45860
+(defcustom anything-c-eldoc-in-minibuffer-show-fnanything-c-eldoc-in-minibuffer-show-fn1130,46386
+(defcustom anything-c-turn-on-show-completion tanything-c-turn-on-show-completion1137,46600
+(defcustom anything-lisp-completion-or-indent-delay 0.6anything-lisp-completion-or-indent-delay1142,46763
+(defcustom anything-c-default-external-file-browser "nautilus"anything-c-default-external-file-browser1149,47035
+(defcustom anything-c-use-adaptative-sorting nilanything-c-use-adaptative-sorting1159,47424
+(defcustom anything-ff-newfile-prompt-p tanything-ff-newfile-prompt-p1165,47629
+(defcustom anything-ff-avfs-directory nilanything-ff-avfs-directory1172,47800
+(defcustom anything-ff-file-compressed-list '("gz" "bz2" "zip" "7z")anything-ff-file-compressed-list1180,48104
+(defcustom anything-locate-db-file-regexp "m?locate\.db$"anything-locate-db-file-regexp1185,48265
+(defcustom anything-c-locate-command nilanything-c-locate-command1191,48441
+(defcustom anything-c-show-info-in-mode-line-delay 12anything-c-show-info-in-mode-line-delay1206,48902
+(defcustom anything-c-copy-files-async-log-file "/tmp/dired.log"anything-c-copy-files-async-log-file1211,49075
+(defcustom anything-ff-printer-list nilanything-ff-printer-list1216,49259
+(defcustom anything-ff-transformer-show-only-basename nilanything-ff-transformer-show-only-basename1225,49655
+(defcustom anything-ff-quick-delete-dont-prompt-for-deletion nilanything-ff-quick-delete-dont-prompt-for-deletion1232,49951
+(defcustom anything-ff-signal-error-on-dot-files tanything-ff-signal-error-on-dot-files1237,50122
+(defcustom anything-completing-read-handlers-alistanything-completing-read-handlers-alist1243,50313
+(defvar anything-c-external-commands-list nilanything-c-external-commands-list1286,52054
+(defvar anything-c-show-completion-overlay nil)anything-c-show-completion-overlay1291,52239
+(defface anything-buffer-saved-outanything-buffer-saved-out1298,52307
+(defface anything-buffer-not-savedanything-buffer-not-saved1303,52460
+(defface anything-ff-prefixanything-ff-prefix1308,52620
+(defface anything-ff-executableanything-ff-executable1313,52803
+(defface anything-ff-directoryanything-ff-directory1318,52958
+(defface anything-ff-symlinkanything-ff-symlink1323,53133
+(defface anything-ff-invalid-symlinkanything-ff-invalid-symlink1328,53282
+(defface anything-ff-fileanything-ff-file1333,53460
+(defface anything-grep-matchanything-grep-match1338,53620
+(defface anything-grep-fileanything-grep-file1343,53746
+(defface anything-grep-linenoanything-grep-lineno1348,53904
+(defface anything-grep-runninganything-grep-running1353,54047
+(defface anything-grep-finishanything-grep-finish1358,54186
+(defface anything-M-x-key-face '((t (:foreground "orange" :underline t)))anything-M-x-key-face1363,54325
+(defface anything-bmkext-infoanything-bmkext-info1367,54471
+(defface anything-bmkext-w3manything-bmkext-w3m1372,54615
+(defface anything-bmkext-gnusanything-bmkext-gnus1377,54759
+(defface anything-bmkext-mananything-bmkext-man1382,54880
+(defface anything-bmkext-no--fileanything-bmkext-no--file1387,55005
+(defface anything-bmkext-fileanything-bmkext-file1392,55132
+(defface anything-bookmarks-su-face '((t (:foreground "red")))anything-bookmarks-su-face1397,55263
+(defface anything-w3m-bookmarks-face '((t (:foreground "cyan1" :underline t)))anything-w3m-bookmarks-face1401,55379
+(defface anything-emms-playlistanything-emms-playlist1404,55504
+(defface anything-apt-installedanything-apt-installed1409,55662
+(defface anything-gentoo-match-face '((t (:foreground "red")))anything-gentoo-match-face1414,55793
+(defface anything-lisp-show-completionanything-lisp-show-completion1418,55932
+(defface anything-lisp-completion-infoanything-lisp-completion-info1423,56109
+(defface anything-overlay-line-face '((t (:background "IndianRed4" :underline t)))anything-overlay-line-face1428,56270
+(defun anything-configuration ()anything-configuration1432,56438
+(defvar anything-command-map)anything-command-map1443,56602
+(define-prefix-command 'anything-command-map)anything-command-map1444,56632
+(define-key anything-command-map (kbd "<SPC>")     'anything-execute-anything-command)anything-command-map1447,56680
+(define-key anything-command-map (kbd "a")         'anything-c-apropos)anything-command-map1448,56767
+(define-key anything-command-map (kbd "e")         'anything-c-etags-select)anything-command-map1449,56839
+(define-key anything-command-map (kbd "l")         'anything-locate)anything-command-map1450,56916
+(define-key anything-command-map (kbd "s")         'anything-surfraw)anything-command-map1451,56985
+(define-key anything-command-map (kbd "r")         'anything-regexp)anything-command-map1452,57055
+(define-key anything-command-map (kbd "w")         'anything-w3m-bookmarks)anything-command-map1453,57124
+(define-key anything-command-map (kbd "x")         'anything-firefox-bookmarks)anything-command-map1454,57200
+(define-key anything-command-map (kbd "#")         'anything-emms)anything-command-map1455,57280
+(define-key anything-command-map (kbd "m")         'anything-man-woman)anything-command-map1456,57347
+(define-key anything-command-map (kbd "t")         'anything-top)anything-command-map1457,57419
+(define-key anything-command-map (kbd "i")         'anything-imenu)anything-command-map1458,57485
+(define-key anything-command-map (kbd "<tab>")     'anything-lisp-completion-at-point)anything-command-map1459,57553
+(define-key anything-command-map (kbd "p")         'anything-list-emacs-process)anything-command-map1460,57640
+(define-key anything-command-map (kbd "C-x r b")   'anything-c-pp-bookmarks)anything-command-map1461,57721
+(define-key anything-command-map (kbd "M-y")       'anything-show-kill-ring)anything-command-map1462,57798
+(define-key anything-command-map (kbd "C-c <SPC>") 'anything-all-mark-rings)anything-command-map1463,57875
+(define-key anything-command-map (kbd "C-x C-f")   'anything-find-files)anything-command-map1464,57952
+(define-key anything-command-map (kbd "f")         'anything-for-files)anything-command-map1465,58025
+(define-key anything-command-map (kbd "C-:")       'anything-eval-expression-with-eldoc)anything-command-map1466,58097
+(define-key anything-command-map (kbd "C-,")       'anything-calcul-expression)anything-command-map1467,58186
+(define-key anything-command-map (kbd "M-x")       'anything-M-x)anything-command-map1468,58266
+(define-key anything-command-map (kbd "C-x C-w")   'anything-write-file)anything-command-map1469,58332
+(define-key anything-command-map (kbd "C-x i")     'anything-insert-file)anything-command-map1470,58405
+(define-key anything-command-map (kbd "M-s o")     'anything-occur)anything-command-map1471,58479
+(define-key anything-command-map (kbd "M-g s")     'anything-do-grep)anything-command-map1472,58547
+(define-key anything-command-map (kbd "c")         'anything-colors)anything-command-map1473,58617
+(define-key anything-command-map (kbd "F")         'anything-select-xfont)anything-command-map1474,58686
+(define-key anything-command-map (kbd "C-c f")     'anything-recentf)anything-command-map1475,58761
+(define-key anything-command-map (kbd "C-c g")     'anything-google-suggest)anything-command-map1476,58831
+(define-key anything-command-map (kbd "h i")       'anything-info-at-point)anything-command-map1477,58908
+(define-key anything-command-map (kbd "h r")       'anything-info-emacs)anything-command-map1478,58984
+(define-key anything-command-map (kbd "h g")       'anything-info-gnus)anything-command-map1479,59057
+(define-key anything-command-map (kbd "C-x C-b")   'anything-buffers-list)anything-command-map1480,59129
+(define-key anything-command-map (kbd "C-c C-b")   'anything-browse-code)anything-command-map1481,59204
+(define-key anything-command-map (kbd "C-x r i")   'anything-register)anything-command-map1482,59278
+(define-key anything-command-map (kbd "C-c C-x")   'anything-c-run-external-command)anything-command-map1483,59349
+(defvar minibuffer-local-filename-must-match-map (make-sparse-keymap)) ;; Emacs 23.1.+minibuffer-local-filename-must-match-map1487,59557
+(defvar minibuffer-local-must-match-filename-map (make-sparse-keymap)) ;; Older Emacsenminibuffer-local-must-match-filename-map1488,59644
+(define-key anything-map (kbd "C-x C-f") 'anything-quit-and-find-file)anything-map1556,62138
+(define-key anything-map (kbd "M-m")     'anything-toggle-all-marks)anything-map1557,62209
+(define-key anything-map (kbd "C-w")     'anything-yank-text-at-point)anything-map1558,62278
+(defvar anything-c-buffer-mapanything-c-buffer-map1564,62382
+(defvar anything-find-files-mapanything-find-files-map1588,63807
+(defvar anything-c-read-file-mapanything-c-read-file-map1637,67146
+(defvar anything-generic-files-mapanything-generic-files-map1653,68050
+(defvar anything-c-grep-mapanything-c-grep-map1669,68903
+(defvar anything-c-pdfgrep-mapanything-c-pdfgrep-map1683,69641
+(defvar anything-c-etags-mapanything-c-etags-map1692,70016
+(defvar anything-eval-expression-mapanything-eval-expression-map1701,70385
+(defvar anything-c-ucs-mapanything-c-ucs-map1714,70991
+(defun anything-c-list-preconfigured-anything ()anything-c-list-preconfigured-anything1729,71513
+(defun anything-c-format-preconfigured-anything ()anything-c-format-preconfigured-anything1743,72113
+(defun anything-c-buffer-help ()anything-c-buffer-help1821,74745
+(defun anything-ff-help ()anything-ff-help1855,76452
+(defun anything-read-file-name-help ()anything-read-file-name-help1916,79861
+(defun anything-generic-file-help ()anything-generic-file-help1935,80504
+(defun anything-grep-help ()anything-grep-help1962,81535
+(defun anything-pdfgrep-help ()anything-pdfgrep-help1982,82251
+(defun anything-etags-help ()anything-etags-help1999,82738
+(defun anything-c-ucs-help ()anything-c-ucs-help2016,83230
+(defvar anything-buffer-mode-line-stringanything-buffer-mode-line-string2038,83796
+(defvar anything-ff-mode-line-stringanything-ff-mode-line-string2049,84219
+(defvar anything-read-file-name-mode-line-stringanything-read-file-name-mode-line-string2059,84612
+(defvar anything-generic-file-mode-line-stringanything-generic-file-mode-line-string2068,84973
+(defvar anything-grep-mode-line-stringanything-grep-mode-line-string2078,85365
+(defvar anything-pdfgrep-mode-line-stringanything-pdfgrep-mode-line-string2088,85745
+(defvar anything-etags-mode-line-stringanything-etags-mode-line-string2098,86137
+(defvar anything-c-ucs-mode-line-stringanything-c-ucs-mode-line-string2109,86528
+(defun anything-ff-find-printers ()anything-ff-find-printers2123,86884
+(defun anything-c-switch-to-buffer (buffer-or-name)anything-c-switch-to-buffer2135,87363
+(defsubst* anything-c-position (item seq &key (test 'eq))anything-c-position2140,87542
+(defun anything-c-get-pid-from-process-name (process-name)anything-c-get-pid-from-process-name2145,87743
+(defun* anything-current-buffer-narrowed-p (&optionalanything-current-buffer-narrowed-p2153,88087
+(defun anything-region-active-p ()anything-region-active-p2163,88455
+(defun anything-goto-line (lineno)anything-goto-line2166,88552
+(defun anything-show-this-source-only ()anything-show-this-source-only2177,88999
+(defun anything-test-sources ()anything-test-sources2185,89251
+(defun anything-displaying-source-names ()anything-displaying-source-names2194,89621
+(defun anything-select-source ()anything-select-source2205,90015
+(defun anything-insert-string (str)anything-insert-string2227,91045
+(defun anything-insert-buffer-name ()anything-insert-buffer-name2233,91160
+(defalias 'anything-insert-symbol 'next-history-element)anything-insert-symbol2241,91389
+(defalias 'anything-insert-selection 'anything-yank-selection)anything-insert-selection2242,91446
+(defun anything-c-match-on-file-name (candidate)anything-c-match-on-file-name2244,91510
+(defun anything-c-match-on-directory-name (candidate)anything-c-match-on-directory-name2248,91709
+(defun anything-c-match-on-basename (candidate)anything-c-match-on-basename2253,91931
+(defun anything-c-string-match (candidate)anything-c-string-match2257,92126
+(defun anything-c-skip-entries (list regexp)anything-c-skip-entries2262,92312
+(defun anything-c-shadow-entries (list regexp)anything-c-shadow-entries2267,92497
+(defsubst anything-c-stringify (str-or-sym)anything-c-stringify2280,93049
+(defsubst anything-c-symbolify (str-or-sym)anything-c-symbolify2286,93201
+(defun anything-c-describe-function (func)anything-c-describe-function2292,93348
+(defun anything-c-describe-variable (var)anything-c-describe-variable2296,93473
+(defun anything-c-find-function (func)anything-c-find-function2300,93595
+(defun anything-c-find-variable (var)anything-c-find-variable2304,93712
+(defun anything-c-kill-new (candidate &optional replace)anything-c-kill-new2308,93826
+(defun* anything-fast-remove-dups (seq &key (test 'eq))anything-fast-remove-dups2313,94011
+(defadvice eval-defun (after anything-source-hack activate)eval-defun2326,94515
+(defun anything-quit-and-find-file ()anything-quit-and-find-file2342,95248
+(defmacro* anything-c-walk-directory (directory &key path (directories t) match)anything-c-walk-directory2368,96223
+(defvar anything-build-regexp-history nil)anything-build-regexp-history2400,97602
+(defun anything-c-query-replace-regexp (candidate)anything-c-query-replace-regexp2401,97645
+(defun anything-c-kill-regexp-as-sexp (candidate)anything-c-kill-regexp-as-sexp2409,98027
+(defun anything-c-kill-regexp (candidate)anything-c-kill-regexp2414,98214
+(defun anything-c-query-replace-args (regexp)anything-c-query-replace-args2418,98371
+(defvar anything-c-source-regexpanything-c-source-regexp2432,98962
+(defun anything-c-regexp-get-line (s e)anything-c-regexp-get-line2450,99683
+(defun anything-c-regexp-persistent-action (pt)anything-c-regexp-persistent-action2466,100346
+(defun anything-c-regexp-kill-new (input)anything-c-regexp-kill-new2470,100453
+(defun anything-mark-all ()anything-mark-all2480,100593
+(defun anything-unmark-all ()anything-unmark-all2514,102175
+(defun anything-toggle-all-marks ()anything-toggle-all-marks2526,102572
+(defun anything-c-buffer-list ()anything-c-buffer-list2542,103015
+(defvar anything-c-source-buffersanything-c-source-buffers2554,103509
+(defvar anything-c-source-buffer-not-foundanything-c-source-buffer-not-found2559,103631
+(defun anything-c-highlight-buffers (buffers)anything-c-highlight-buffers2570,103991
+(defvar anything-c-source-buffers-listanything-c-source-buffers-list2621,106661
+(defvaralias 'anything-c-source-buffers+ 'anything-c-source-buffers-list)anything-c-source-buffers+2633,107190
+(defun anything-c-buffer-match-major-mode (candidate)anything-c-buffer-match-major-mode2635,107265
+(defun anything-c-buffer-query-replace-1 (&optional regexp-flag)anything-c-buffer-query-replace-12659,108400
+(defun anything-c-buffer-query-replace-regexp (candidate)anything-c-buffer-query-replace-regexp2681,109378
+(defun anything-c-buffer-query-replace (candidate)anything-c-buffer-query-replace2684,109484
+(defun anything-buffer-toggle-diff (candidate)anything-buffer-toggle-diff2687,109575
+(defun anything-buffer-diff-persistent ()anything-buffer-diff-persistent2694,109806
+(defun anything-buffer-revert-and-update (candidate)anything-buffer-revert-and-update2700,110031
+(defun anything-buffer-revert-persistent ()anything-buffer-revert-persistent2706,110248
+(defun anything-buffer-save-and-update (candidate)anything-buffer-save-and-update2712,110491
+(defun anything-buffer-save-persistent ()anything-buffer-save-persistent2721,110793
+(defun anything-buffer-run-kill-buffers ()anything-buffer-run-kill-buffers2728,111041
+(defun anything-buffer-run-grep ()anything-buffer-run-grep2734,111252
+(defun anything-buffer-run-zgrep ()anything-buffer-run-zgrep2740,111443
+(defun anything-buffer-run-query-replace-regexp ()anything-buffer-run-query-replace-regexp2746,111636
+(defun anything-buffer-run-query-replace ()anything-buffer-run-query-replace2752,111874
+(defun anything-buffer-switch-other-window ()anything-buffer-switch-other-window2758,112091
+(defun anything-buffer-switch-other-frame ()anything-buffer-switch-other-frame2764,112317
+(defun anything-buffer-switch-to-elscreen ()anything-buffer-switch-to-elscreen2770,112540
+(defun anything-buffer-run-ediff ()anything-buffer-run-ediff2776,112765
+(defun anything-buffer-run-ediff-merge ()anything-buffer-run-ediff-merge2781,112949
+(defun anything-c-buffers-persistent-kill (buffer)anything-c-buffers-persistent-kill2786,113145
+(defun anything-c-buffers-list-persistent-action (candidate)anything-c-buffers-list-persistent-action2797,113502
+(defvar anything-c-source-file-name-historyanything-c-source-file-name-history2807,113732
+(defvar anything-c-source-files-in-current-diranything-c-source-files-in-current-dir2816,113939
+(defun anything-c-highlight-files (files)anything-c-highlight-files2824,114244
+(defvar anything-c-source-files-in-current-dir+anything-c-source-files-in-current-dir+2835,114698
+(defvar anything-c-find-files-doc-header " (`C-l': Go to precedent level)"anything-c-find-files-doc-header2850,115137
+(defvar anything-ff-auto-update-flag nilanything-ff-auto-update-flag2852,115295
+(defvar anything-ff-last-expanded nilanything-ff-last-expanded2855,115485
+(defvar anything-ff-default-directory nil)anything-ff-default-directory2857,115567
+(defvar anything-ff-history nil)anything-ff-history2858,115610
+(defvar anything-ff-cand-to-mark nil)anything-ff-cand-to-mark2859,115643
+(defvar anything-c-source-find-filesanything-c-source-find-files2862,115683
+(defun anything-find-files-set-prompt-for-action (action files)anything-find-files-set-prompt-for-action2919,118965
+(defun anything-dwim-target-directory ()anything-dwim-target-directory2927,119259
+(defun anything-find-files-do-action (action)anything-find-files-do-action2939,119696
+(defun anything-find-files-copy (candidate)anything-find-files-copy2957,120671
+(defun anything-find-files-rename (candidate)anything-find-files-rename2961,120800
+(defun anything-find-files-symlink (candidate)anything-find-files-symlink2965,120935
+(defun anything-find-files-relsymlink (candidate)anything-find-files-relsymlink2969,121073
+(defun anything-find-files-hardlink (candidate)anything-find-files-hardlink2973,121220
+(defun anything-find-files-byte-compile (candidate)anything-find-files-byte-compile2977,121361
+(defun anything-find-files-load-files (candidate)anything-find-files-load-files2984,121643
+(defun anything-find-files-ediff-files-1 (candidate &optional merge)anything-find-files-ediff-files-12990,121850
+(defun anything-find-files-ediff-files (candidate)anything-find-files-ediff-files3012,122932
+(defun anything-find-files-ediff-merge-files (candidate)anything-find-files-ediff-merge-files3015,123033
+(defun anything-find-files-grep (candidate)anything-find-files-grep3018,123147
+(defun anything-ff-zgrep (candidate)anything-ff-zgrep3023,123356
+(defun anything-ff-pdfgrep (candidate)anything-ff-pdfgrep3029,123589
+(defun anything-ff-etags-select (candidate)anything-ff-etags-select3039,124061
+(defun anything-find-files-switch-to-hist (candidate)anything-find-files-switch-to-hist3046,124375
+(defun anything-c-copy-files-async-1 (flist dest)anything-c-copy-files-async-13053,124538
+(defun anything-c-copy-async-with-log (flist dest)anything-c-copy-async-with-log3099,126739
+(defun anything-ff-copy-async (candidate)anything-ff-copy-async3113,127313
+(defvar eshell-command-aliases-list nil)eshell-command-aliases-list3125,127884
+(defvar anything-eshell-command-on-file-input-history nil)anything-eshell-command-on-file-input-history3126,127925
+(defun anything-find-files-eshell-command-on-file-1 (candidate &optional map)anything-find-files-eshell-command-on-file-13127,127984
+(defun anything-find-files-eshell-command-on-file (candidate)anything-find-files-eshell-command-on-file3198,131426
+(defun anything-ff-switch-to-eshell (candidate)anything-ff-switch-to-eshell3204,131706
+(defun anything-ff-serial-rename-action (method)anything-ff-serial-rename-action3218,132172
+(defun anything-ff-member-directory-p (file directory)anything-ff-member-directory-p3234,133049
+(defun* anything-ff-serial-rename-1anything-ff-serial-rename-13239,133302
+(defun anything-ff-serial-rename (candidate)anything-ff-serial-rename3286,135634
+(defun anything-ff-serial-rename-by-symlink (candidate)anything-ff-serial-rename-by-symlink3293,135920
+(defun anything-ff-serial-rename-by-copying (candidate)anything-ff-serial-rename-by-copying3300,136218
+(defun anything-c-quit-and-execute-action (action)anything-c-quit-and-execute-action3307,136510
+(defun anything-ff-toggle-auto-update (candidate)anything-ff-toggle-auto-update3312,136685
+(defun anything-ff-run-toggle-auto-update ()anything-ff-run-toggle-auto-update3318,136925
+(defun anything-ff-run-switch-to-history ()anything-ff-run-switch-to-history3324,137135
+(defun anything-ff-run-grep ()anything-ff-run-grep3330,137357
+(defun anything-ff-run-pdfgrep ()anything-ff-run-pdfgrep3336,137543
+(defun anything-ff-run-zgrep ()anything-ff-run-zgrep3342,137730
+(defun anything-ff-run-copy-file ()anything-ff-run-copy-file3348,137910
+(defun anything-ff-run-rename-file ()anything-ff-run-rename-file3354,138106
+(defun anything-ff-run-byte-compile-file ()anything-ff-run-byte-compile-file3360,138308
+(defun anything-ff-run-load-file ()anything-ff-run-load-file3366,138528
+(defun anything-ff-run-eshell-command-on-file ()anything-ff-run-eshell-command-on-file3372,138730
+(defun anything-ff-run-ediff-file ()anything-ff-run-ediff-file3378,138970
+(defun anything-ff-run-ediff-merge-file ()anything-ff-run-ediff-merge-file3384,139175
+(defun anything-ff-run-symlink-file ()anything-ff-run-symlink-file3390,139398
+(defun anything-ff-run-hardlink-file ()anything-ff-run-hardlink-file3396,139603
+(defun anything-ff-run-delete-file ()anything-ff-run-delete-file3402,139811
+(defun anything-ff-run-complete-fn-at-point ()anything-ff-run-complete-fn-at-point3408,140015
+(defun anything-ff-run-switch-to-eshell ()anything-ff-run-switch-to-eshell3415,140257
+(defun anything-ff-run-switch-other-window ()anything-ff-run-switch-other-window3421,140471
+(defun anything-ff-run-switch-other-frame ()anything-ff-run-switch-other-frame3427,140688
+(defun anything-ff-run-open-file-externally ()anything-ff-run-open-file-externally3433,140902
+(defun anything-ff-locate (candidate)anything-ff-locate3438,141120
+(defun anything-ff-run-locate ()anything-ff-run-locate3453,141797
+(defun anything-ff-run-gnus-attach-files ()anything-ff-run-gnus-attach-files3459,141981
+(defun anything-ff-run-etags ()anything-ff-run-etags3465,142206
+(defun anything-ff-print (candidate)anything-ff-print3471,142388
+(defun anything-ff-run-print-file ()anything-ff-run-print-file3516,144273
+(defun anything-ff-checksum (file)anything-ff-checksum3521,144449
+(defun anything-ff-toggle-basename (candidate)anything-ff-toggle-basename3539,145118
+(defun anything-ff-run-toggle-basename ()anything-ff-run-toggle-basename3546,145440
+(defun* anything-reduce-file-name (fname level &key unix-close expand)anything-reduce-file-name3551,145623
+(defvar anything-file-completion-sourcesanything-file-completion-sources3578,146875
+(defun anything-file-completion-source-p ()anything-file-completion-source-p3588,147300
+(defun anything-find-files-down-one-level (arg)anything-find-files-down-one-level3594,147573
+(defun anything-ff-retrieve-last-expanded ()anything-ff-retrieve-last-expanded3613,148497
+(defun anything-ff-update-when-only-one-matched ()anything-ff-update-when-only-one-matched3634,149505
+(defun anything-ff-auto-expand-to-home-or-root ()anything-ff-auto-expand-to-home-or-root3693,152891
+(defun anything-c-point-file-in-dired (file)anything-c-point-file-in-dired3721,154290
+(defun anything-create-tramp-name (fname)anything-create-tramp-name3726,154447
+(defun* anything-ff-tramp-hostnames (&optional (pattern anything-pattern))anything-ff-tramp-hostnames3732,154692
+(defun anything-ff-before-action-hook-fn ()anything-ff-before-action-hook-fn3748,155490
+(defun* anything-ff-invalid-tramp-name-p (&optional (pattern anything-pattern))anything-ff-invalid-tramp-name-p3757,155991
+(defun anything-ff-set-pattern (pattern)anything-ff-set-pattern3762,156219
+(defun anything-find-files-get-candidates (&optional require-match)anything-find-files-get-candidates3806,158388
+(defun anything-ff-directory-files (directory &optional full)anything-ff-directory-files3849,160833
+(defun anything-ff-transform-fname-for-completion (fname)anything-ff-transform-fname-for-completion3867,161522
+(defun anything-ff-save-history ()anything-ff-save-history3882,162220
+(defun anything-ff-valid-symlink-p (file)anything-ff-valid-symlink-p3890,162560
+(defun anything-ff-properties (candidate)anything-ff-properties3893,162643
+(defun anything-ff-properties-persistent ()anything-ff-properties-persistent3913,163497
+(defun anything-ff-persistent-delete ()anything-ff-persistent-delete3920,163743
+(defun anything-ff-dot-file-p (file)anything-ff-dot-file-p3926,163962
+(defun anything-ff-quick-delete (candidate)anything-ff-quick-delete3930,164085
+(defun anything-ff-kill-buffer-fname (candidate)anything-ff-kill-buffer-fname3954,165339
+(defun anything-ff-kill-or-find-buffer-fname (candidate)anything-ff-kill-or-find-buffer-fname3962,165603
+(defun anything-ff-run-kill-buffer-persistent ()anything-ff-run-kill-buffer-persistent3979,166299
+(defun anything-ff-human-size (size)anything-ff-human-size3985,166559
+(defun* anything-ff-attributesanything-ff-attributes4003,167461
+(defun anything-ff-prefix-filename (fname &optional file-or-symlinkp new-file)anything-ff-prefix-filename4055,169633
+(defun anything-c-find-files-transformer (files sources)anything-c-find-files-transformer4073,170521
+(defun anything-ff-highlight-files (files sources)anything-ff-highlight-files4086,171091
+(defun anything-find-files-action-transformer (actions candidate)anything-find-files-action-transformer4121,172779
+(defun anything-ff-gnus-attach-files (candidate)anything-ff-gnus-attach-files4152,174350
+(defun anything-ff-rotate-current-image-1 (file &optional num-arg)anything-ff-rotate-current-image-14157,174552
+(defun anything-ff-rotate-image-left (candidate)anything-ff-rotate-image-left4176,175477
+(defun anything-ff-rotate-image-right (candidate)anything-ff-rotate-image-right4181,175656
+(defun anything-ff-rotate-left-persistent ()anything-ff-rotate-left-persistent4186,175833
+(defun anything-ff-rotate-right-persistent ()anything-ff-rotate-right-persistent4192,176066
+(defun anything-ff-exif-data (candidate)anything-ff-exif-data4198,176302
+(defun anything-find-files-persistent-action (candidate)anything-find-files-persistent-action4209,176869
+(defun anything-ff-file-compressed-p (candidate)anything-ff-file-compressed-p4277,180636
+(defun anything-c-insert-file-name-completion-at-point (candidate)anything-c-insert-file-name-completion-at-point4282,180824
+(defun* anything-find-files-history (&key (comp-read t))anything-find-files-history4302,181852
+(defun anything-find-files-1 (fname &optional preselect)anything-find-files-14322,182665
+(defun anything-find-files-initial-input (&optional input)anything-find-files-initial-input4341,183464
+(defun anything-find-files-input (fap tap)anything-find-files-input4348,183715
+(defun anything-c-current-directory ()anything-c-current-directory4363,184421
+(defun anything-ff-find-url-at-point ()anything-ff-find-url-at-point4370,184653
+(defun anything-find-library-at-point ()anything-find-library-at-point4384,185320
+(defvar anything-c-source-write-fileanything-c-source-write-file4409,186441
+(defvar anything-c-source-insert-fileanything-c-source-insert-file4425,187119
+(defvar anything-c-source-copy-filesanything-c-source-copy-files4443,188009
+(defvar  anything-c-source-rename-filesanything-c-source-rename-files4463,188798
+(defvar anything-c-source-symlink-filesanything-c-source-symlink-files4482,189599
+(defvar anything-c-source-hardlink-filesanything-c-source-hardlink-files4502,190364
+(defun* anything-dired-action (candidate &key action follow (files (dired-get-marked-files)))anything-dired-action4518,191005
+(defun anything-c-basename (fname)anything-c-basename4564,193329
+(defun anything-get-dest-fnames-from-list (flist dest-cand rename-dir-flag)anything-get-dest-fnames-from-list4568,193476
+(defun anything-ff-maybe-mark-candidates ()anything-ff-maybe-mark-candidates4586,194300
+(defun* anything-dired-do-action-on-file (&key action)anything-dired-do-action-on-file4604,195104
+(define-minor-mode anything-dired-mode ()anything-dired-mode4635,196576
+(defalias 'anything-dired-bindings 'anything-dired-mode)anything-dired-bindings4660,197674
+(defun* anything-c-read-file-nameanything-c-read-file-name4662,197732
+(defvar anything-c-file-cache-initialized-p nil)anything-c-file-cache-initialized-p4777,202162
+(defvar anything-c-file-cache-files nil)anything-c-file-cache-files4779,202212
+(defvar anything-c-source-file-cacheanything-c-source-file-cache4781,202254
+(defun anything-locate-1 (&optional localdb init)anything-locate-14807,203196
+(defun anything-locate-with-db (&optional db initial-input)anything-locate-with-db4829,204052
+(defun anything-c-locate-init ()anything-c-locate-init4855,205178
+(defvar anything-c-source-locateanything-c-source-locate4880,206320
+(defun anything-c-locate-read-file-name (prompt &optional init)anything-c-locate-read-file-name4890,206635
+(defvar anything-c-grep-default-commandanything-c-grep-default-command4914,207483
+(defvar anything-c-grep-default-recurse-commandanything-c-grep-default-recurse-command4922,207753
+(defvar anything-c-default-zgrep-command "zgrep -niH -e %p %f")anything-c-default-zgrep-command4927,207964
+(defvar anything-c-rzgrep-cache (make-hash-table :test 'equal))anything-c-rzgrep-cache4929,208029
+(defvar anything-c-grep-default-function 'anything-c-grep-init)anything-c-grep-default-function4931,208094
+(defvar anything-c-grep-debug-command-line nilanything-c-grep-debug-command-line4933,208159
+(defvar anything-c-zgrep-recurse-flag nil)anything-c-zgrep-recurse-flag4936,208272
+(defvar anything-c-grep-history nil)anything-c-grep-history4938,208316
+(defvar anything-c-grep-max-length-history 100anything-c-grep-max-length-history4940,208354
+(defun anything-c-grep-prepare-candidates (candidates)anything-c-grep-prepare-candidates4943,208469
+(defun anything-c-grep-recurse-p ()anything-c-grep-recurse-p4976,210291
+(defun anything-c-grep-init (only-files &optional include zgrep)anything-c-grep-init4982,210532
+(defun anything-c-grep-action (candidate &optional where mark)anything-c-grep-action5041,213626
+(defun anything-c-grep-other-window (candidate)anything-c-grep-other-window5073,215130
+(defun anything-c-grep-other-frame (candidate)anything-c-grep-other-frame5077,215286
+(defun anything-c-grep-jump-elscreen (candidate)anything-c-grep-jump-elscreen5081,215439
+(defun anything-c-grep-save-results (candidate)anything-c-grep-save-results5085,215588
+(defun anything-c-grep-persistent-action (candidate)anything-c-grep-persistent-action5110,216653
+(defun anything-c-grep-guess-extensions (files)anything-c-grep-guess-extensions5118,216966
+(defun anything-do-grep-1 (only &optional recurse zgrep)anything-do-grep-15138,217784
+(defun anything-ff-zgrep-1 (flist recursive)anything-ff-zgrep-15202,221172
+(defun anything-c-grep-split-line (line)anything-c-grep-split-line5221,222064
+(defun anything-c-grep-cand-transformer (candidates sources)anything-c-grep-cand-transformer5239,222759
+(defun anything-c-grep-highlight-match (str)anything-c-grep-highlight-match5255,223491
+(defun anything-c-goto-next-or-prec-file (n)anything-c-goto-next-or-prec-file5270,224056
+(defun anything-c-goto-precedent-file ()anything-c-goto-precedent-file5295,225114
+(defun anything-c-goto-next-file ()anything-c-goto-next-file5301,225286
+(defun anything-c-grep-run-persistent-action ()anything-c-grep-run-persistent-action5307,225452
+(defun anything-c-grep-run-default-action ()anything-c-grep-run-default-action5314,225720
+(defun anything-c-grep-run-other-window-action ()anything-c-grep-run-other-window-action5320,225916
+(defun anything-c-grep-run-save-buffer ()anything-c-grep-run-save-buffer5326,226133
+(defun anything-c-grep-buffers-1 (candidate &optional zgrep)anything-c-grep-buffers-15332,226338
+(defun anything-c-grep-buffers (candidate)anything-c-grep-buffers5362,227752
+(defun anything-c-zgrep-buffers (candidate)anything-c-zgrep-buffers5366,227865
+(defvar anything-c-pdfgrep-default-command "pdfgrep --color never -niH %s %s")anything-c-pdfgrep-default-command5375,228125
+(defvar anything-c-pdfgrep-default-function 'anything-c-pdfgrep-init)anything-c-pdfgrep-default-function5376,228204
+(defvar anything-c-pdfgrep-debug-command-line nil)anything-c-pdfgrep-debug-command-line5377,228274
+(defun anything-c-pdfgrep-init (only-files)anything-c-pdfgrep-init5379,228326
+(defun anything-do-pdfgrep-1 (only)anything-do-pdfgrep-15412,229780
+(defun anything-c-pdfgrep-action (candidate)anything-c-pdfgrep-action5447,231303
+(defun anything-do-pdfgrep ()anything-do-pdfgrep5456,231649
+(defvar anything-yank-point nil)anything-yank-point5475,232320
+(defun anything-yank-text-at-point ()anything-yank-text-at-point5478,232369
+(defun anything-reset-yank-point ()anything-reset-yank-point5497,233227
+(defvar anything-c-source-recentfanything-c-source-recentf5507,233463
+(defvar anything-c-source-ffap-guesseranything-c-source-ffap-guesser5521,233955
+(defun anything-c-ffap-file-line-at-point ()anything-c-ffap-file-line-at-point5532,234307
+(defvar anything-c-ffap-line-location nilanything-c-ffap-line-location5541,234651
+(defun anything-c-ffap-line-candidates ()anything-c-ffap-line-candidates5545,234792
+(defun anything-c-ffap-line-goto-line ()anything-c-ffap-line-goto-line5553,235181
+(defvar anything-c-source-ffap-lineanything-c-source-ffap-line5564,235677
+(defun anything-c-files-in-all-dired-candidates ()anything-c-files-in-all-dired-candidates5571,235912
+(defvar anything-c-source-files-in-all-diredanything-c-source-files-in-all-dired5591,236684
+(defvar anything-c-source-filelistanything-c-source-filelist5596,236852
+(defvar anything-c-info-pages nilanything-c-info-pages5608,237170
+(defun anything-c-info-pages-init ()anything-c-info-pages-init5613,237308
+(defvar anything-c-source-info-pagesanything-c-source-info-pages5628,237854
+(defun anything-c-describe-attributes (anything-attribute)anything-c-describe-attributes5639,238308
+(defvar anything-c-source-info-elispanything-c-source-info-elisp5661,239236
+(defvar anything-c-source-info-clanything-c-source-info-cl5666,239356
+(defvar anything-c-source-info-organything-c-source-info-org5671,239465
+(defvar anything-c-source-info-gnusanything-c-source-info-gnus5676,239578
+(defvar anything-c-source-info-ratpoisonanything-c-source-info-ratpoison5681,239699
+(defvar anything-c-source-info-zshanything-c-source-info-zsh5686,239829
+(defvar anything-c-source-info-bashanything-c-source-info-bash5691,239942
+(defvar anything-c-source-info-coreutilsanything-c-source-info-coreutils5696,240063
+(defvar anything-c-source-info-fileutilsanything-c-source-info-fileutils5701,240199
+(defvar anything-c-source-info-findanything-c-source-info-find5706,240330
+(defvar anything-c-source-info-sh-utilsanything-c-source-info-sh-utils5711,240450
+(defvar anything-c-source-info-textutilsanything-c-source-info-textutils5716,240583
+(defvar anything-c-source-info-libcanything-c-source-info-libc5721,240714
+(defvar anything-c-source-info-makeanything-c-source-info-make5726,240830
+(defvar anything-c-source-info-automakeanything-c-source-info-automake5731,240950
+(defvar anything-c-source-info-autoconfanything-c-source-info-autoconf5736,241082
+(defvar anything-c-source-info-emacs-lisp-introanything-c-source-info-emacs-lisp-intro5741,241222
+(defvar anything-c-source-info-emacsanything-c-source-info-emacs5746,241375
+(defvar anything-c-source-info-elibanything-c-source-info-elib5751,241494
+(defvar anything-c-source-info-eieioanything-c-source-info-eieio5756,241611
+(defvar anything-c-source-info-gauche-refeanything-c-source-info-gauche-refe5761,241737
+(defvar anything-c-source-info-guileanything-c-source-info-guile5766,241870
+(defvar anything-c-source-info-guile-tutanything-c-source-info-guile-tut5771,241994
+(defvar anything-c-source-info-goopsanything-c-source-info-goops5776,242126
+(defvar anything-c-source-info-screenanything-c-source-info-screen5781,242247
+(defvar anything-c-source-info-latexanything-c-source-info-latex5787,242438
+(defvar anything-c-source-info-gawkanything-c-source-info-gawk5792,242557
+(defvar anything-c-source-info-sedanything-c-source-info-sed5797,242672
+(defvar anything-c-source-info-m4anything-c-source-info-m45802,242783
+(defvar anything-c-source-info-wgetanything-c-source-info-wget5807,242893
+(defvar anything-c-source-info-binutilsanything-c-source-info-binutils5812,243013
+(defvar anything-c-source-info-asanything-c-source-info-as5817,243139
+(defvar anything-c-source-info-bfdanything-c-source-info-bfd5822,243248
+(defvar anything-c-source-info-gprofanything-c-source-info-gprof5827,243362
+(defvar anything-c-source-info-ldanything-c-source-info-ld5832,243479
+(defvar anything-c-source-info-diffanything-c-source-info-diff5837,243589
+(defvar anything-c-source-info-flexanything-c-source-info-flex5842,243705
+(defvar anything-c-source-info-grepanything-c-source-info-grep5847,243821
+(defvar anything-c-source-info-gzipanything-c-source-info-gzip5852,243937
+(defvar anything-c-source-info-libtoolanything-c-source-info-libtool5857,244056
+(defvar anything-c-source-info-texinfoanything-c-source-info-texinfo5862,244184
+(defvar anything-c-source-info-infoanything-c-source-info-info5867,244309
+(defvar anything-c-source-info-gdbanything-c-source-info-gdb5872,244424
+(defvar anything-c-source-info-stabsanything-c-source-info-stabs5877,244538
+(defvar anything-c-source-info-cvsbookanything-c-source-info-cvsbook5882,244660
+(defvar anything-c-source-info-cvsanything-c-source-info-cvs5887,244784
+(defvar anything-c-source-info-bisonanything-c-source-info-bison5892,244898
+(defvar anything-c-source-info-id-utilsanything-c-source-info-id-utils5897,245021
+(defvar anything-c-source-info-globalanything-c-source-info-global5902,245151
+(defvar anything-c-man-pages nilanything-c-man-pages5910,245283
+(defun anything-c-man-default-action (candidate)anything-c-man-default-action5915,245419
+(defvar anything-c-source-man-pagesanything-c-source-man-pages5930,246026
+(defvar anything-M-x-input-history nil)anything-M-x-input-history5963,247391
+(defun* anything-M-x-get-major-mode-command-alist (mode-map)anything-M-x-get-major-mode-command-alist5965,247432
+(defun anything-get-mode-map-from-mode (mode)anything-get-mode-map-from-mode5972,247751
+(defun anything-M-x-current-mode-map-alist ()anything-M-x-current-mode-map-alist5990,248587
+(defun anything-M-x-transformer (candidates sources)anything-M-x-transformer5997,248851
+(defvar anything-c-source-complex-command-historyanything-c-source-complex-command-history6025,250036
+(defvar anything-c-source-extended-command-historyanything-c-source-extended-command-history6033,250273
+(defvar anything-c-source-emacs-commandsanything-c-source-emacs-commands6043,250556
+(defvar anything-c-source-emacs-functionsanything-c-source-emacs-functions6066,251270
+(defvar anything-c-function-abbrev-regexp nilanything-c-function-abbrev-regexp6081,251852
+(defun anything-c-match-function-by-abbrev (candidate)anything-c-match-function-by-abbrev6087,252074
+(defvar anything-c-source-emacs-functions-with-abbrevsanything-c-source-emacs-functions-with-abbrevs6095,252472
+(defvar anything-c-source-adviceanything-c-source-advice6110,253200
+(defun anything-c-advice-candidates ()anything-c-advice-candidates6120,253611
+(defun anything-c-advice-persistent-action (func-class-advice)anything-c-advice-persistent-action6136,254340
+(defun anything-c-advice-toggle (func-class-advice)anything-c-advice-toggle6141,254532
+(defun anything-c-advice-update-current-display-string ()anything-c-advice-update-current-display-string6153,255021
+(defvar anything-c-source-emacs-variablesanything-c-source-emacs-variables6167,255419
+(defvar anything-c-source-lacarteanything-c-source-lacarte6177,255710
+(defvar anything-c-bookmarks-face1 'anything-ff-directory)anything-c-bookmarks-face16192,256118
+(defvar anything-c-bookmarks-face2 'anything-ff-file)anything-c-bookmarks-face26193,256177
+(defvar anything-c-bookmarks-face3 'anything-bookmarks-su-face)anything-c-bookmarks-face36194,256231
+(defvar anything-c-source-bookmarksanything-c-source-bookmarks6197,256336
+(defvar anything-c-source-bookmark-setanything-c-source-bookmark-set6206,256573
+(defvar anything-c-source-bmanything-c-source-bm6217,256877
+(defun anything-c-bm-init ()anything-c-bm-init6226,257063
+(defvar anything-c-source-bookmarks-sshanything-c-source-bookmarks-ssh6245,257931
+(defvar anything-c-source-bookmarks-suanything-c-source-bookmarks-su6253,258190
+(defvar anything-c-source-bookmarks-localanything-c-source-bookmarks-local6263,258519
+(defun* anything-c-collect-bookmarks (&key local su sudo ssh)anything-c-collect-bookmarks6274,258886
+(defun anything-c-bookmark-root-logged-p ()anything-c-bookmark-root-logged-p6290,259703
+(defun anything-c-highlight-bookmark-su (files source)anything-c-highlight-bookmark-su6296,259918
+(defun anything-c-highlight-not-logged (files source)anything-c-highlight-not-logged6301,260122
+(defun anything-c-highlight-bookmark (bookmarks source)anything-c-highlight-bookmark6305,260266
+(defun anything-c-bmkext-filter-setup-alist (fn &rest args)anything-c-bmkext-filter-setup-alist6361,263122
+(defvar anything-c-source-bmkext-addressbookanything-c-source-bmkext-addressbook6375,263535
+(defun anything-c-bmkext-addressbook-setup-alist ()anything-c-bmkext-addressbook-setup-alist6451,267282
+(defvar anything-c-source-bookmark-w3manything-c-source-bookmark-w3m6456,267502
+(defun anything-c-bookmark-w3m-setup-alist ()anything-c-bookmark-w3m-setup-alist6467,267870
+(defvar anything-c-source-bookmark-imagesanything-c-source-bookmark-images6472,268043
+(defun anything-c-bookmark-images-setup-alist ()anything-c-bookmark-images-setup-alist6483,268420
+(defvar anything-c-source-bookmark-mananything-c-source-bookmark-man6488,268609
+(defun anything-c-bookmark-man-setup-alist ()anything-c-bookmark-man-setup-alist6499,268983
+(defvar anything-c-source-bookmark-gnusanything-c-source-bookmark-gnus6505,269237
+(defun anything-c-bookmark-gnus-setup-alist ()anything-c-bookmark-gnus-setup-alist6516,269608
+(defvar anything-c-source-bookmark-infoanything-c-source-bookmark-info6521,269782
+(defun anything-c-bookmark-info-setup-alist ()anything-c-bookmark-info-setup-alist6532,270153
+(defvar anything-c-source-bookmark-files&dirsanything-c-source-bookmark-files&dirs6537,270346
+(defun anything-c-bookmark-local-files-setup-alist ()anything-c-bookmark-local-files-setup-alist6548,270743
+(defvar anything-c-source-bookmark-su-files&dirsanything-c-source-bookmark-su-files&dirs6553,270954
+(defun anything-c-bookmark-su-files-setup-alist ()anything-c-bookmark-su-files-setup-alist6564,271359
+(defvar anything-c-source-bookmark-ssh-files&dirsanything-c-source-bookmark-ssh-files&dirs6580,272032
+(defun anything-c-bookmark-ssh-files-setup-alist ()anything-c-bookmark-ssh-files-setup-alist6589,272397
+(defvar anything-firefox-bookmark-url-regexp "\\(https\\|http\\|ftp\\|about\\|file\\)://[^ \"]*")anything-firefox-bookmark-url-regexp6616,273377
+(defvar anything-firefox-bookmarks-regexp ">\\([^><]+.[^</a>]\\)")anything-firefox-bookmarks-regexp6617,273475
+(defun anything-get-firefox-user-init-dir ()anything-get-firefox-user-init-dir6619,273543
+(defun anything-guess-firefox-bookmark-file ()anything-guess-firefox-bookmark-file6631,274088
+(defun anything-html-bookmarks-to-alist (file url-regexp bmk-regexp)anything-html-bookmarks-to-alist6635,274253
+(defvar anything-c-firefox-bookmarks-alist nil)anything-c-firefox-bookmarks-alist6651,274903
+(defvar anything-c-source-firefox-bookmarksanything-c-source-firefox-bookmarks6652,274951
+(defun anything-c-firefox-bookmarks-get-value (elm)anything-c-firefox-bookmarks-get-value6678,276060
+(defun anything-c-highlight-firefox-bookmarks (bookmarks source)anything-c-highlight-firefox-bookmarks6681,276171
+(defvar w3m-bookmark-file "~/.w3m/bookmark.html")w3m-bookmark-file6700,276727
+(defvar anything-w3m-bookmarks-regexp ">\\([^><]+.[^</a>]\\)")anything-w3m-bookmarks-regexp6701,276777
+(defvar anything-w3m-bookmark-url-regexp "\\(https\\|http\\|ftp\\|file\\)://[^>]*")anything-w3m-bookmark-url-regexp6702,276840
+(defvar anything-c-w3m-bookmarks-alist nil)anything-c-w3m-bookmarks-alist6703,276924
+(defvar anything-c-source-w3m-bookmarksanything-c-source-w3m-bookmarks6704,276968
+(defun anything-c-w3m-bookmarks-get-value (elm)anything-c-w3m-bookmarks-get-value6744,278676
+(defun anything-c-w3m-browse-bookmark (elm &optional use-firefox new-tab)anything-c-w3m-browse-bookmark6748,278815
+(defun anything-c-highlight-w3m-bookmarks (bookmarks source)anything-c-highlight-w3m-bookmarks6753,279075
+(defun anything-c-w3m-delete-bookmark (elm)anything-c-w3m-delete-bookmark6760,279317
+(defun anything-c-w3m-rename-bookmark (elm)anything-c-w3m-rename-bookmark6773,279712
+(defvar anything-c-source-elisp-library-scananything-c-source-elisp-library-scan6792,280276
+(defun anything-c-elisp-library-scan-init ()anything-c-elisp-library-scan-init6804,280752
+(defun anything-c-elisp-library-scan-list (&optional dirs string)anything-c-elisp-library-scan-list6812,281077
+(defvar anything-c-imenu-delimiter " / ")anything-c-imenu-delimiter6848,282240
+(defvar anything-c-imenu-index-filter nil)anything-c-imenu-index-filter6850,282283
+(defvar anything-c-cached-imenu-alist nil)anything-c-cached-imenu-alist6853,282387
+(defvar anything-c-cached-imenu-candidates nil)anything-c-cached-imenu-candidates6856,282491
+(defvar anything-c-cached-imenu-tick nil)anything-c-cached-imenu-tick6859,282605
+(defun anything-imenu-create-candidates (entry)anything-imenu-create-candidates6865,282772
+(defvar anything-c-source-imenuanything-c-source-imenu6879,283250
+(defun anything-c-imenu-candidates ()anything-c-imenu-candidates6892,283767
+(defun anything-c-imenu-default-action (elm)anything-c-imenu-default-action6916,284864
+(defvar anything-c-ctags-modesanything-c-ctags-modes6929,285172
+(defun anything-c-source-ctags-init ()anything-c-source-ctags-init6934,285409
+(defvar anything-c-source-ctagsanything-c-source-ctags6960,286579
+(defvar anything-c-etags-tag-file-dir nilanything-c-etags-tag-file-dir6983,287117
+(defvar anything-c-etags-mtime-alist nilanything-c-etags-mtime-alist6985,287186
+(defvar anything-c-etags-cache (make-hash-table :test 'equal)anything-c-etags-cache6987,287286
+(defun anything-c-etags-get-tag-file (&optional directory)anything-c-etags-get-tag-file6990,287412
+(defun anything-c-etags-find-tag-file-directory (current-dir)anything-c-etags-find-tag-file-directory7001,287921
+(defun anything-c-source-etags-header-name (x)anything-c-source-etags-header-name7022,288816
+(defmacro anything-c-etags-create-buffer (file)anything-c-etags-create-buffer7028,289029
+(defun anything-c-etags-init ()anything-c-etags-init7054,290224
+(defvar anything-c-source-etags-selectanything-c-source-etags-select7075,291294
+(defun anything-c-etags-search-fn (pattern)anything-c-etags-search-fn7088,291833
+(defun anything-c-etags-default-action (candidate)anything-c-etags-default-action7096,292081
+(defun anything-c-etags-mtime (file)anything-c-etags-mtime7107,292480
+(defun anything-c-etags-file-modified-p (file)anything-c-etags-file-modified-p7111,292605
+(defvar anything-semantic-candidates nil)anything-semantic-candidates7124,292947
+(defun anything-semantic-construct-candidates (tags depth)anything-semantic-construct-candidates7126,292990
+(defun anything-semantic-default-action (candidate)anything-semantic-default-action7147,293844
+(defvar anything-c-source-semanticanything-c-source-semantic7151,293996
+(defvar anything-c-source-simple-call-tree-functions-callersanything-c-source-simple-call-tree-functions-callers7177,294953
+(defvar anything-c-simple-call-tree-tick nil)anything-c-simple-call-tree-tick7189,295548
+(defun anything-c-simple-call-tree-analyze-maybe ()anything-c-simple-call-tree-analyze-maybe7191,295657
+(defun anything-c-simple-call-tree-init-base (function message)anything-c-simple-call-tree-init-base7196,295893
+(defun anything-c-simple-call-tree-functions-callers-init ()anything-c-simple-call-tree-functions-callers-init7211,296549
+(defun anything-c-simple-call-tree-candidates ()anything-c-simple-call-tree-candidates7215,296738
+(defvar anything-c-simple-call-tree-related-functions nil)anything-c-simple-call-tree-related-functions7219,296883
+(defvar anything-c-simple-call-tree-function-index 0)anything-c-simple-call-tree-function-index7220,296942
+(defun anything-c-simple-call-tree-persistent-action (candidate)anything-c-simple-call-tree-persistent-action7221,296996
+(defun anything-c-simple-call-tree-find-definition (candidate)anything-c-simple-call-tree-find-definition7233,297579
+(defvar anything-c-source-simple-call-tree-callers-functionsanything-c-source-simple-call-tree-callers-functions7242,297877
+(defun anything-c-simple-call-tree-callers-functions-init ()anything-c-simple-call-tree-callers-functions-init7254,298465
+(defvar anything-c-auto-document-data nil)anything-c-auto-document-data7265,298736
+(defvar anything-c-source-commands-and-options-in-fileanything-c-source-commands-and-options-in-file7267,298839
+(defun anything-command-and-options-candidates ()anything-command-and-options-candidates7281,299426
+(defvar anything-c-source-customize-faceanything-c-source-customize-face7321,301048
+(defvar anything-c-source-colorsanything-c-source-colors7338,301587
+(defun anything-c-colors-get-name (candidate)anything-c-colors-get-name7358,302522
+(defun anything-c-colors-get-rgb (candidate)anything-c-colors-get-rgb7369,302823
+(defvar anything-c-source-tracker-searchanything-c-source-tracker-search7383,303173
+(defvar anything-c-source-mac-spotlightanything-c-source-mac-spotlight7396,303645
+(defvar anything-c-source-picklistanything-c-source-picklist7407,303958
+(defvar anything-c-source-kill-ringanything-c-source-kill-ring7417,304120
+(defun anything-c-kill-ring-candidates ()anything-c-kill-ring-candidates7428,304523
+(defun anything-c-kill-ring-transformer (candidates source)anything-c-kill-ring-transformer7434,304780
+(defun anything-c-kill-ring-action (str)anything-c-kill-ring-action7453,305591
+(defun anything-c-source-mark-ring-candidates ()anything-c-source-mark-ring-candidates7487,307032
+(defvar anything-mark-ring-cache nil)anything-mark-ring-cache7506,307747
+(defvar anything-c-source-mark-ringanything-c-source-mark-ring7507,307785
+(defvar anything-c-source-global-mark-ringanything-c-source-global-mark-ring7525,308510
+(defun anything-c-source-global-mark-ring-candidates ()anything-c-source-global-mark-ring-candidates7540,309314
+(defvar anything-c-source-registeranything-c-source-register7568,310321
+(defun anything-c-register-candidates ()anything-c-register-candidates7576,310565
+(defun anything-c-register-action-transformer (actions register-and-functions)anything-c-register-action-transformer7634,312992
+(defun anything-c-latex-math-candidates ()anything-c-latex-math-candidates7663,314083
+(defvar anything-c-source-latex-mathanything-c-source-latex-math7671,314390
+(defvar anything-c-source-fixmeanything-c-source-fixme7683,314767
+(defvar anything-c-source-rd-headlineanything-c-source-rd-headline7690,314975
+(defvar anything-c-source-oddmuse-headlineanything-c-source-oddmuse-headline7701,315306
+(defvar anything-c-source-emacs-source-defunanything-c-source-emacs-source-defun7710,315629
+(defvar anything-c-source-emacs-lisp-expectationsanything-c-source-emacs-lisp-expectations7717,315893
+(defvar anything-c-source-emacs-lisp-toplevelsanything-c-source-emacs-lisp-toplevels7725,316204
+(defvar anything-yaoddmuse-use-cache-file nil)anything-yaoddmuse-use-cache-file7740,316811
+(defvar anything-c-yaoddmuse-cache-file "~/.emacs.d/yaoddmuse-cache.el")anything-c-yaoddmuse-cache-file7741,316858
+(defvar anything-c-yaoddmuse-ew-cache nil)anything-c-yaoddmuse-ew-cache7742,316931
+(defun anything-yaoddmuse-get-candidates ()anything-yaoddmuse-get-candidates7744,316975
+(defvar anything-c-source-yaoddmuse-emacswiki-edit-or-viewanything-c-source-yaoddmuse-emacswiki-edit-or-view7756,317452
+(defvar anything-c-source-yaoddmuse-emacswiki-post-libraryanything-c-source-yaoddmuse-emacswiki-post-library7793,319160
+(defun anything-c-yaoddmuse-action-transformer (actions candidate)anything-c-yaoddmuse-action-transformer7816,320025
+(defun anything-yaoddmuse-cache-pages (&optional load)anything-yaoddmuse-cache-pages7825,320371
+(defun anything-yaoddmuse-init ()anything-yaoddmuse-init7845,321093
+(defvar anything-c-source-eev-anchoranything-c-source-eev-anchor7858,321515
+(defvar anything-c-source-org-headlineanything-c-source-org-headline7882,322422
+(defun anything-c-org-headline-insert-link-to-headline (lineno-and-content)anything-c-org-headline-insert-link-to-headline7908,323352
+(defun anything-c-org-headline-refile (lineno-and-content)anything-c-org-headline-refile7915,323626
+(defvar anything-c-source-org-keywordsanything-c-source-org-keywords7928,323957
+(defvar anything-c-org-keywords-info-locationanything-c-org-keywords-info-location7938,324350
+(defun anything-c-org-keywords-init ()anything-c-org-keywords-init7971,325809
+(defun anything-c-org-keywords-candidates ()anything-c-org-keywords-candidates7984,326432
+(defun anything-c-org-keywords-insert (keyword)anything-c-org-keywords-insert7989,326684
+(defun anything-c-org-keywords-show-help (keyword)anything-c-org-keywords-show-help8007,327388
+(defvar bbdb-records)bbdb-records8019,327756
+(defvar bbdb-buffer-name)bbdb-buffer-name8020,327778
+(defun anything-c-bbdb-candidates ()anything-c-bbdb-candidates8022,327805
+(defun anything-c-bbdb-create-contact (actions candidate)anything-c-bbdb-create-contact8031,328127
+(defun anything-c-bbdb-get-record (candidate)anything-c-bbdb-get-record8046,328841
+(defvar anything-c-bbdb-name nilanything-c-bbdb-name8052,329000
+(defvar anything-c-source-bbdbanything-c-source-bbdb8055,329062
+(defun anything-c-bbdb-view-person-action (candidate)anything-c-bbdb-view-person-action8071,329809
+(defun anything-c-bbdb-collect-mail-addresses ()anything-c-bbdb-collect-mail-addresses8079,330184
+(defun anything-c-bbdb-compose-mail (candidate)anything-c-bbdb-compose-mail8086,330465
+(defvar anything-eldoc-active-minibuffers-list nil)anything-eldoc-active-minibuffers-list8098,330825
+(defvar anything-eval-expression-input-history nil)anything-eval-expression-input-history8099,330877
+(defvar anything-c-source-evaluation-resultanything-c-source-evaluation-result8101,330930
+(defun anything-eval-new-line-and-indent ()anything-eval-new-line-and-indent8124,332299
+(defun anything-eldoc-store-minibuffer ()anything-eldoc-store-minibuffer8128,332392
+(defun anything-eldoc-show-in-eval ()anything-eldoc-show-in-eval8133,332623
+(defun anything-c-show-info-in-mode-line (str)anything-c-show-info-in-mode-line8152,333579
+(defvar anything-c-source-calculation-resultanything-c-source-calculation-result8164,333933
+(defvar anything-ggs-max-length-real-flag 0)anything-ggs-max-length-real-flag8179,334433
+(defvar anything-ggs-max-length-num-flag 0)anything-ggs-max-length-num-flag8180,334478
+(defun anything-c-google-suggest-fetch (input)anything-c-google-suggest-fetch8182,334523
+(defun anything-c-google-suggest-set-candidates (&optional request-prefix)anything-c-google-suggest-set-candidates8217,336213
+(defun anything-c-ggs-set-number-result (num)anything-c-ggs-set-number-result8258,338438
+(defvar anything-c-google-suggest-default-browser-function nilanything-c-google-suggest-default-browser-function8273,338945
+(defun anything-c-google-suggest-action (candidate)anything-c-google-suggest-action8278,339178
+(defvar anything-c-google-suggest-default-functionanything-c-google-suggest-default-function8286,339534
+(defvar anything-c-source-google-suggestanything-c-source-google-suggest8290,339687
+(defun anything-c-google-suggest-emacs-lisp ()anything-c-google-suggest-emacs-lisp8299,339991
+(defun anything-c-yahoo-suggest-fetch (input)anything-c-yahoo-suggest-fetch8307,340183
+(defun anything-c-yahoo-suggest-set-candidates ()anything-c-yahoo-suggest-set-candidates8324,340909
+(defun anything-c-yahoo-suggest-action (candidate)anything-c-yahoo-suggest-action8333,341254
+(defvar anything-c-source-yahoo-suggestanything-c-source-yahoo-suggest8338,341500
+(defvar w3m-command "/usr/bin/w3m")w3m-command8355,341976
+(defvar anything-c-home-url "http://www.google.fr"anything-c-home-url8356,342012
+(defvar ac-browse-url-chromium-program "chromium-browser")ac-browse-url-chromium-program8359,342102
+(defvar ac-browse-url-uzbl-program "uzbl-browser")ac-browse-url-uzbl-program8360,342161
+(defvar anything-browse-url-default-browser-alistanything-browse-url-default-browser-alist8361,342212
+(defun* anything-c-generic-browser (url name &rest args)anything-c-generic-browser8375,342933
+(defun ac-browse-url-chromium (url)ac-browse-url-chromium8387,343357
+(defun ac-browse-url-uzbl (url &optional ignore)ac-browse-url-uzbl8393,343532
+(defun anything-browse-url-default-browser (url &rest args)anything-browse-url-default-browser8398,343709
+(defun* anything-c-browse-url (&optional (url anything-c-home-url))anything-c-browse-url8407,344111
+(defvar anything-surfraw-default-browser-function nilanything-surfraw-default-browser-function8419,344413
+(defvar anything-surfraw-engines-history nil)anything-surfraw-engines-history8424,344595
+(defvar anything-surfraw-input-history nil)anything-surfraw-input-history8425,344641
+(defun anything-c-build-elvi-list ()anything-c-build-elvi-list8427,344686
+(defun anything-emms-stream-edit-bookmark (elm)anything-emms-stream-edit-bookmark8439,344948
+(defun anything-emms-stream-delete-bookmark (elm)anything-emms-stream-delete-bookmark8462,346077
+(defvar anything-c-source-emms-streamsanything-c-source-emms-streams8476,346586
+(defvar anything-c-source-emms-diredanything-c-source-emms-dired8494,347490
+(defun anything-c-emms-files-modifier (candidates source)anything-c-emms-files-modifier8512,348317
+(defun anything-c-emms-play-current-playlist ()anything-c-emms-play-current-playlist8528,349112
+(defvar anything-c-source-emms-filesanything-c-source-emms-files8534,349284
+(defun anything-c-jabber-online-contacts ()anything-c-jabber-online-contacts8560,350688
+(defvar anything-c-source-jabber-contactsanything-c-source-jabber-contacts8570,351037
+(defvar anything-source-select-buffer "*anything source select*")anything-source-select-buffer8583,351460
+(defvar anything-c-source-call-sourceanything-c-source-call-source8584,351526
+(defun anything-call-source-from-anything ()anything-call-source-from-anything8608,352505
+(defvar anything-c-source-anything-commandsanything-c-source-anything-commands8615,352751
+(defun anything-c-anything-commands-candidates ()anything-c-anything-commands-candidates8621,352945
+(defun anything-c-occur-init ()anything-c-occur-init8632,353350
+(defun anything-c-occur-get-line (s e)anything-c-occur-get-line8645,353854
+(defun anything-c-occur-query-replace-regexp (candidate)anything-c-occur-query-replace-regexp8648,353966
+(defvar anything-c-source-occuranything-c-source-occur8659,354487
+(defun anything-c-browse-code-get-line (beg end)anything-c-browse-code-get-line8676,354997
+(defvar anything-c-source-browse-codeanything-c-source-browse-code8687,355524
+(defvar anything-c-source-createanything-c-source-create8701,355943
+(defun anything-create-from-anything ()anything-create-from-anything8709,356167
+(defun anything-create--actions (&rest ignored)anything-create--actions8714,356348
+(defvar anything-c-source-minibuffer-historyanything-c-source-minibuffer-history8737,357319
+(defvar anything-c-source-elscreenanything-c-source-elscreen8756,357890
+(defvar anything-c-top-command "COLUMNS=%s top -b -n 1"anything-c-top-command8783,358943
+(defvar anything-c-source-topanything-c-source-top8785,359065
+(defun anything-c-top-sh (cmd)anything-c-top-sh8799,359640
+(defun anything-c-top-sh-persistent-action (pid)anything-c-top-sh-persistent-action8802,359737
+(defun anything-c-top-init ()anything-c-top-init8807,359890
+(defun anything-c-top-display-to-real (line)anything-c-top-display-to-real8814,360150
+(defvar anything-c-source-absolute-time-timersanything-c-source-absolute-time-timers8818,360236
+(defvar anything-c-source-idle-time-timersanything-c-source-idle-time-timers8823,360371
+(defun anything-c-timer-real-to-display (timer)anything-c-timer-real-to-display8828,360503
+(defvar anything-c-xrandr-output "VGA")anything-c-xrandr-output8842,361093
+(defvar anything-c-xrandr-screen "0")anything-c-xrandr-screen8843,361133
+(defvar anything-c-source-xrandr-change-resolutionanything-c-source-xrandr-change-resolution8844,361171
+(defun anything-c-persistent-xfont-action (elm)anything-c-persistent-xfont-action8864,361958
+(defvar anything-c-xfonts-cache nil)anything-c-xfonts-cache8872,362260
+(defvar anything-c-source-xfontsanything-c-source-xfonts8873,362297
+(defvar anything-c-ucs-max-len 0)anything-c-ucs-max-len8892,363114
+(defun anything-c-calculate-ucs-max-len ()anything-c-calculate-ucs-max-len8893,363148
+(defun anything-c-ucs-init ()anything-c-ucs-init8902,363422
+(defun anything-c-ucs-forward-char (candidate)anything-c-ucs-forward-char8923,364239
+(defun anything-c-ucs-backward-char (candidate)anything-c-ucs-backward-char8927,364342
+(defun anything-c-ucs-delete-backward (candidate)anything-c-ucs-delete-backward8931,364447
+(defun anything-c-ucs-insert-char (candidate)anything-c-ucs-insert-char8935,364553
+(defun anything-c-ucs-persistent-insert ()anything-c-ucs-persistent-insert8942,364734
+(defun anything-c-ucs-persistent-forward ()anything-c-ucs-persistent-forward8947,364913
+(defun anything-c-ucs-persistent-backward ()anything-c-ucs-persistent-backward8952,365096
+(defun anything-c-ucs-persistent-delete ()anything-c-ucs-persistent-delete8957,365275
+(defvar anything-c-source-ucsanything-c-source-ucs8962,365458
+(defvar anything-c-source-emacs-processanything-c-source-emacs-process8978,365995
+(defvar anything-c-source-time-worldanything-c-source-time-world8991,366477
+(defvar anything-c-source-aptanything-c-source-apt9004,366868
+(defvar anything-c-apt-query "emacs")anything-c-apt-query9021,367551
+(defvar anything-c-apt-search-command "apt-cache search '%s'")anything-c-apt-search-command9022,367589
+(defvar anything-c-apt-show-command "apt-cache show '%s'")anything-c-apt-show-command9023,367652
+(defvar anything-c-apt-installed-packages nil)anything-c-apt-installed-packages9024,367711
+(defvar anything-c-apt-all-packages nil)anything-c-apt-all-packages9025,367758
+(defvar anything-c-apt-input-history nil)anything-c-apt-input-history9026,367799
+(defun anything-c-apt-refresh ()anything-c-apt-refresh9028,367842
+(defun anything-c-apt-persistent-action (candidate)anything-c-apt-persistent-action9033,368004
+(defun anything-c-apt-candidate-transformer (candidates)anything-c-apt-candidate-transformer9037,368136
+(defun anything-c-apt-init ()anything-c-apt-init9047,368547
+(defun anything-c-apt-display-to-real (line)anything-c-apt-display-to-real9070,369521
+(defun anything-c-shell-command-if-needed (command)anything-c-shell-command-if-needed9076,369696
+(defun anything-c-apt-cache-show (package)anything-c-apt-cache-show9083,370021
+(defun anything-c-apt-install (package)anything-c-apt-install9088,370198
+(defun anything-c-apt-reinstall (package)anything-c-apt-reinstall9092,370343
+(defun anything-c-apt-uninstall (package)anything-c-apt-uninstall9096,370504
+(defun anything-c-apt-purge (package)anything-c-apt-purge9100,370652
+(defun* anything-c-apt-generic-action (&key action)anything-c-apt-generic-action9104,370791
+(defvar anything-c-gentoo-use-flags nil)anything-c-gentoo-use-flags9135,371948
+(defvar anything-c-gentoo-buffer "*anything-gentoo-output*")anything-c-gentoo-buffer9136,371989
+(defvar anything-c-cache-gentoo nil)anything-c-cache-gentoo9137,372050
+(defvar anything-c-cache-world nil)anything-c-cache-world9138,372087
+(defvar anything-c-source-gentooanything-c-source-gentoo9139,372123
+(defun* anything-gentoo-install (candidate &key action)anything-gentoo-install9185,374925
+(defun anything-c-gentoo-default-action (elm command &rest args)anything-c-gentoo-default-action9200,375499
+(defvar anything-c-source-use-flagsanything-c-source-use-flags9211,375958
+(defun anything-c-gentoo-init-list ()anything-c-gentoo-init-list9249,377537
+(defun anything-c-gentoo-setup-cache ()anything-c-gentoo-setup-cache9257,377856
+(defun anything-c-gentoo-eshell-action (elm command)anything-c-gentoo-eshell-action9265,378158
+(defun anything-c-gentoo-get-use ()anything-c-gentoo-get-use9278,378729
+(defun anything-c-gentoo-setup-use-flags-cache ()anything-c-gentoo-setup-use-flags-cache9287,379037
+(defun anything-c-gentoo-get-url (elm)anything-c-gentoo-get-url9295,379364
+(defun anything-c-gentoo-get-world ()anything-c-gentoo-get-world9310,379897
+(defun anything-c-gentoo-get-local-use ()anything-c-gentoo-get-local-use9317,380152
+(defun anything-c-highlight-world (eix)anything-c-highlight-world9325,380400
+(defun anything-c-highlight-local-use (use-flags)anything-c-highlight-local-use9333,380642
+(defvar anything-c-source-ratpoison-commandsanything-c-source-ratpoison-commands9346,380953
+(defun anything-c-ratpoison-commands-init ()anything-c-ratpoison-commands-init9354,381286
+(defun anything-c-ratpoison-commands-display-to-real (display)anything-c-ratpoison-commands-display-to-real9369,381929
+(defun anything-c-ratpoison-commands-execute (candidate)anything-c-ratpoison-commands-execute9373,382071
+(defun anything-comp-read-get-candidates (collection &optional test sort-fn alistp)anything-comp-read-get-candidates9381,382239
+(defun anything-cr-default-transformer (candidates source)anything-cr-default-transformer9426,384101
+(defun* anything-comp-read (prompt collectionanything-comp-read9431,384290
+(defvar anything-completion-mode-string " AC")anything-completion-mode-string9631,393339
+(defvar anything-completion-mode-quit-messageanything-completion-mode-quit-message9633,393387
+(defvar anything-completion-mode-start-messageanything-completion-mode-start-message9636,393468
+(defun anything-completing-read-symbolsanything-completing-read-symbols9642,393580
+(defun anything-completing-read-default-1anything-completing-read-default-19679,395128
+(defun anything-completing-read-with-cands-in-bufferanything-completing-read-with-cands-in-buffer9709,396368
+(defun* anything-completing-read-defaultanything-completing-read-default9723,397138
+(defun* anything-generic-read-file-nameanything-generic-read-file-name9800,401093
+(define-minor-mode anything-completion-modeanything-completion-mode9887,405346
+(defalias 'ac-mode 'anything-completion-mode)ac-mode9921,406756
+(defvar anything-c-source-eshanything-c-source-esh9933,407016
+(defvar anything-ec-target "")anything-ec-target9946,407551
+(defun anything-ec-insert (candidate)anything-ec-insert9947,407582
+(defun anything-esh-get-candidates ()anything-esh-get-candidates9957,407968
+(defvar anything-c-source-eshell-historyanything-c-source-eshell-history9992,409758
+(defun anything-c-show-completion ()anything-c-show-completion10018,410827
+(defun anything-c-show-completion-init-overlay (beg end)anything-c-show-completion-init-overlay10023,411003
+(defmacro with-anything-show-completion (beg end &rest body)with-anything-show-completion10029,411290
+(defun anything-lisp-completion-at-point ()anything-lisp-completion-at-point10051,412166
+(defun anything-lisp-completion-persistent-action (candidate)anything-lisp-completion-persistent-action10089,414026
+(defun anything-lisp-completion-transformer (candidates source)anything-lisp-completion-transformer10098,414341
+(defun anything-c-get-first-line-documentation (sym)anything-c-get-first-line-documentation10110,414874
+(defun anything-c-thing-before-point ()anything-c-thing-before-point10130,415632
+(defun anything-c-complete-file-name-at-point ()anything-c-complete-file-name-at-point10141,416051
+(defvar anything-lisp-completion-counter 0)anything-lisp-completion-counter10156,416659
+(defun anything-lisp-completion-at-point-or-indent (arg)anything-lisp-completion-at-point-or-indent10158,416718
+(defun anything-lisp-completion-or-file-name-at-point ()anything-lisp-completion-or-file-name-at-point10185,417979
+(defun anything-c-apropos-init (test default)anything-c-apropos-init10196,418482
+(defvar anything-external-command-history nil)anything-external-command-history10216,419224
+(defun anything-c-external-commands-list-1 (&optional sort)anything-c-external-commands-list-110218,419272
+(defun anything-run-or-raise (exe &optional file)anything-run-or-raise10240,420492
+(defun anything-c-file-buffers (filename)anything-c-file-buffers10279,422305
+(defun anything-revert-buffer (candidate)anything-revert-buffer10288,422655
+(defun anything-revert-marked-buffers (ignore)anything-revert-marked-buffers10295,422888
+(defun anything-kill-marked-buffers (ignore)anything-kill-marked-buffers10298,422999
+(defun anything-c-delete-file (file &optional error-if-dot-file-p)anything-c-delete-file10301,423097
+(defun anything-get-mailcap-for-file (filename)anything-get-mailcap-for-file10329,424360
+(defun anything-get-default-program-for-file (filename)anything-get-default-program-for-file10340,424888
+(defun anything-c-open-file-externally (file)anything-c-open-file-externally10353,425560
+(defun anything-c-find-file-or-marked (candidate)anything-c-find-file-or-marked10398,428105
+(defun anything-delete-marked-files (ignore)anything-delete-marked-files10425,429487
+(defun anything-ediff-marked-buffers (candidate &optional merge)anything-ediff-marked-buffers10438,430030
+(defun anything-ediff-marked-buffers-merge (candidate)anything-ediff-marked-buffers-merge10458,430757
+(defun anything-bookmark-get-bookmark-from-name (bmk)anything-bookmark-get-bookmark-from-name10463,430955
+(defun anything-delete-marked-bookmarks (ignore)anything-delete-marked-bookmarks10473,431317
+(defun anything-require-or-error (feature function)anything-require-or-error10479,431557
+(defun anything-find-buffer-on-elscreen (candidate)anything-find-buffer-on-elscreen10483,431696
+(defun anything-elscreen-find-file (file)anything-elscreen-find-file10495,432276
+(defun anything-w32-prepare-filename (file)anything-w32-prepare-filename10499,432417
+(defun anything-w32-shell-execute-open-file (file)anything-w32-shell-execute-open-file10508,432717
+(defun anything-c-open-file-with-default-tool (file)anything-c-open-file-with-default-tool10513,432889
+(defun anything-c-open-dired (file)anything-c-open-dired10526,433469
+(defun anything-c-display-to-real-line (candidate)anything-c-display-to-real-line10534,433719
+(defun anything-c-action-line-goto (lineno-and-content)anything-c-action-line-goto10539,433956
+(defun* anything-c-action-file-line-goto (file-line-content &optional (find-file-function #'find-file))anything-c-action-file-line-goto10547,434372
+(defun anything-c-filtered-candidate-transformer-file-line (candidates source)anything-c-filtered-candidate-transformer-file-line10555,434763
+(defun anything-c-filtered-candidate-transformer-file-line-1 (candidate)anything-c-filtered-candidate-transformer-file-line-110558,434932
+(defun* anything-goto-file-line (file lineno content &optional (find-file-function #'find-file))anything-goto-file-line10575,435807
+(defun anything-find-file-as-root (candidate)anything-find-file-as-root10589,436430
+(defun anything-find-many-files (ignore)anything-find-many-files10592,436559
+(defun anything-c-goto-line-with-adjustment (line line-content)anything-c-goto-line-with-adjustment10597,436768
+(defun anything-c-call-interactively (cmd-or-name)anything-c-call-interactively10646,438999
+(defun anything-c-set-variable (var)anything-c-set-variable10661,439655
+(defvar anything-match-line-overlay-face nil)anything-match-line-overlay-face10675,440000
+(defvar anything-match-line-overlay nil)anything-match-line-overlay10676,440046
+(defun anything-match-line-color-current-line (&optional start end buf face rec)anything-match-line-color-current-line10678,440088
+(defalias 'anything-persistent-highlight-point 'anything-match-line-color-current-line)anything-persistent-highlight-point10692,440689
+(defun anything-match-line-cleanup ()anything-match-line-cleanup10697,440848
+(defun anything-match-line-update ()anything-match-line-update10702,441017
+(defun anything-c-transform-file-load-el (actions candidate)anything-c-transform-file-load-el10715,441372
+(defun anything-c-transform-file-browse-url (actions candidate)anything-c-transform-file-browse-url10722,441678
+(defun anything-c-transform-function-call-interactively (actions candidate)anything-c-transform-function-call-interactively10733,442143
+(defun anything-c-transform-sexp-eval-command-sexp (actions candidate)anything-c-transform-sexp-eval-command-sexp10743,442543
+(defun anything-c-skip-boring-buffers (buffers)anything-c-skip-boring-buffers10762,443126
+(defun anything-c-skip-current-buffer (buffers)anything-c-skip-current-buffer10765,443244
+(defun anything-c-shadow-boring-buffers (buffers)anything-c-shadow-boring-buffers10773,443601
+(defvar anything-c-buffer-display-string-functionsanything-c-buffer-display-string-functions10778,443843
+(defun anything-c-transform-buffer-display-string (buffers)anything-c-transform-buffer-display-string10789,444262
+(defun anything-c-buffer-display-string--compilation (buf)anything-c-buffer-display-string--compilation10801,444733
+(defun anything-c-buffer-display-string--eshell (buf)anything-c-buffer-display-string--eshell10805,444893
+(defun anything-c-buffer-display-string--shell (buf)anything-c-buffer-display-string--shell10812,445151
+(defun anything-c-shadow-boring-files (files)anything-c-shadow-boring-files10819,445373
+(defun anything-c-skip-boring-files (files)anything-c-skip-boring-files10824,445603
+(defun anything-c-skip-current-file (files)anything-c-skip-current-file10829,445844
+(defun anything-c-w32-pathname-transformer (args)anything-c-w32-pathname-transformer10833,445984
+(defun anything-c-shorten-home-path (files)anything-c-shorten-home-path10843,446398
+(defun anything-c-mark-interactive-functions (functions)anything-c-mark-interactive-functions10854,446819
+(defvar anything-c-adaptive-done nilanything-c-adaptive-done10869,447288
+(defvar anything-c-adaptive-history nilanything-c-adaptive-history10873,447403
+(defun anything-c-source-use-adaptative-p (&optional source-name)anything-c-source-use-adaptative-p10892,448417
+(defun anything-c-adaptive-store-selection ()anything-c-adaptive-store-selection10908,449465
+(defun anything-c-adaptative-maybe-load-history ()anything-c-adaptative-maybe-load-history10964,452669
+(defun anything-c-adaptive-save-history (&optional arg)anything-c-adaptive-save-history10972,453020
+(defun anything-c-adaptive-sort (candidates source)anything-c-adaptive-sort10986,453617
+(defun anything-c-reset-adaptative-history ()anything-c-reset-adaptative-history11041,456454
+(defun anything-c-adaptive-compare (x y)anything-c-adaptive-compare11049,456824
+(defvar anything-outline-goto-near-line-flag t)anything-outline-goto-near-line-flag11064,457115
+(defvar anything-outline-using nil)anything-outline-using11065,457163
+(defun anything-after-update-hook--outline ()anything-after-update-hook--outline11066,457199
+(defun anything-outline-goto-near-line ()anything-outline-goto-near-line11072,457461
+(defun* anything-c-info-init (&optional (file (anything-attr 'info-file)))anything-c-info-init11098,458294
+(defun anything-c-info-goto (node-line)anything-c-info-goto11119,459216
+(defun anything-c-info-display-to-real (line)anything-c-info-display-to-real11123,459332
+(defun anything-c-make-info-source (source file)anything-c-make-info-source11130,459706
+(defun anything-compile-source--info-index (source)anything-compile-source--info-index11140,460039
+(defun anything-compile-source--candidates-file (source)anything-compile-source--candidates-file11160,460841
+(defun anything-p-candidats-file-init ()anything-p-candidats-file-init11172,461371
+(defun anything-compile-source--anything-headline (source)anything-compile-source--anything-headline11189,462068
+(defun anything-headline-init ()anything-headline-init11200,462515
+(defun anything-headline-get-candidates (regexp subexp)anything-headline-get-candidates11226,463602
+(defun anything-headline-make-candidate-buffer (regexp subexp)anything-headline-make-candidate-buffer11268,465507
+(defun anything-headline-goto-position (pos recenter)anything-headline-goto-position11277,465902
+(defun anything-compile-source--persistent-help (source)anything-compile-source--persistent-help11284,466100
+(defun anything-persistent-help-string ()anything-persistent-help-string11288,466319
+(defun anything-c-uniq-list (lst)anything-c-uniq-list11308,467330
+(defvar anything-additional-type-attributes nil)anything-additional-type-attributes11312,467508
+(defun anything-c-arrange-type-attribute (type spec)anything-c-arrange-type-attribute11313,467557
+(defun anything-compile-source--type-customize (source)anything-compile-source--type-customize11340,468853
+(defun anything-compile-source--default-action (source)anything-compile-source--default-action11347,469164
+(defvar anything-mp-initial-highlight-delay nil)anything-mp-initial-highlight-delay11360,469637
+(defun anything-c-toggle-match-plugin ()anything-c-toggle-match-plugin11363,469702
+(define-anything-type-attribute 'bufferbuffer11400,471266
+(define-anything-type-attribute 'filefile11424,472646
+(define-anything-type-attribute 'variablevariable11477,475409
+(define-anything-type-attribute 'sexpsexp11485,475727
+(define-anything-type-attribute 'bookmarkbookmark11491,475998
+(define-anything-type-attribute 'lineline11510,476966
+(define-anything-type-attribute 'file-linefile-line11530,477674
+(define-anything-type-attribute 'timertimer11552,478489
+(defun anything-mini ()anything-mini11575,479311
+(defun anything-for-files ()anything-for-files11583,479657
+(defun anything-recentf ()anything-recentf11590,479936
+(defun anything-info-at-point (arg)anything-info-at-point11596,480114
+(defun anything-info-emacs ()anything-info-emacs11610,480704
+(defun anything-show-kill-ring ()anything-show-kill-ring11616,480889
+(defun anything-minibuffer-history ()anything-minibuffer-history11631,481467
+(defun anything-gentoo ()anything-gentoo11639,481761
+(defun anything-imenu ()anything-imenu11647,482021
+(defun anything-google-suggest ()anything-google-suggest11654,482207
+(defun anything-yahoo-suggest ()anything-yahoo-suggest11660,482422
+(defun anything-for-buffers ()anything-for-buffers11667,482675
+(defun anything-buffers-list ()anything-buffers-list11673,482859
+(defalias 'anything-buffers+ 'anything-buffers-listanything-buffers+11681,483193
+(defun anything-bbdb ()anything-bbdb11686,483351
+(defun anything-locate (arg)anything-locate11696,483558
+(defun anything-w3m-bookmarks ()anything-w3m-bookmarks11713,484094
+(defun anything-firefox-bookmarks ()anything-firefox-bookmarks11725,484402
+(defun anything-colors ()anything-colors11744,484971
+(defun anything-bookmarks ()anything-bookmarks11752,485183
+(defun anything-c-pp-bookmarks ()anything-c-pp-bookmarks11758,485367
+(defun anything-c-insert-latex-math ()anything-c-insert-latex-math11767,485726
+(defun anything-register ()anything-register11773,485935
+(defun anything-man-woman ()anything-man-woman11779,486122
+(defun anything-org-keywords ()anything-org-keywords11785,486316
+(defun anything-emms ()anything-emms11791,486503
+(defun anything-eev-anchors ()anything-eev-anchors11800,486805
+(defun anything-bm-list ()anything-bm-list11806,486996
+(defun anything-timers ()anything-timers11817,487288
+(defun anything-list-emacs-process ()anything-list-emacs-process11825,487563
+(defun anything-occur ()anything-occur11831,487762
+(defun anything-browse-code ()anything-browse-code11843,488257
+(defun anything-org-headlines ()anything-org-headlines11851,488508
+(defun anything-info-gnus ()anything-info-gnus11857,488700
+(defun anything-regexp ()anything-regexp11863,488881
+(defun anything-c-copy-files-async ()anything-c-copy-files-async11882,489748
+(defun anything-find-files (arg)anything-find-files11896,490318
+(defun anything-write-file ()anything-write-file11920,491427
+(defun anything-insert-file ()anything-insert-file11930,491807
+(defun anything-dired-rename-file ()anything-dired-rename-file11940,492182
+(defun anything-dired-copy-file ()anything-dired-copy-file11946,492362
+(defun anything-dired-symlink-file ()anything-dired-symlink-file11952,492536
+(defun anything-dired-hardlink-file ()anything-dired-hardlink-file11958,492719
+(defun anything-do-grep ()anything-do-grep11964,492905
+(defun anything-do-zgrep (candidate)anything-do-zgrep11985,493856
+(defun anything-c-etags-select (arg)anything-c-etags-select11995,494272
+(defun anything-filelist ()anything-filelist12023,495595
+(defun anything-filelist+ ()anything-filelist+12031,495845
+(defun anything-M-x ()anything-M-x12048,496373
+(defun anything-manage-advice ()anything-manage-advice12102,498842
+(defun anything-bookmark-ext ()anything-bookmark-ext12108,499045
+(defun anything-simple-call-tree ()anything-simple-call-tree12130,499797
+(defun anything-mark-ring ()anything-mark-ring12142,500217
+(defun anything-global-mark-ring ()anything-global-mark-ring12148,500394
+(defun anything-all-mark-rings ()anything-all-mark-rings12154,500592
+(defun anything-yaoddmuse-emacswiki-edit-or-view ()anything-yaoddmuse-emacswiki-edit-or-view12162,500877
+(defun anything-yaoddmuse-emacswiki-post-library ()anything-yaoddmuse-emacswiki-post-library12172,501172
+(defun anything-eval-expression (arg)anything-eval-expression12182,501465
+(defun anything-eval-expression-with-eldoc ()anything-eval-expression-with-eldoc12192,501870
+(defun anything-calcul-expression ()anything-calcul-expression12209,502687
+(defun anything-surfraw (pattern engine)anything-surfraw12215,502912
+(defun anything-call-source ()anything-call-source12241,504152
+(defun anything-execute-anything-command ()anything-execute-anything-command12248,504373
+(defun anything-create (&optional string initial-input)anything-create12255,504626
+(defun anything-top ()anything-top12267,505225
+(defun anything-select-xfont ()anything-select-xfont12279,505640
+(defun anything-world-time ()anything-world-time12285,505829
+(defun anything-apt (arg)anything-apt12291,506021
+(defun anything-esh-pcomplete ()anything-esh-pcomplete12303,506473
+(defun anything-eshell-history ()anything-eshell-history12321,507283
+(defun anything-c-run-external-command (program)anything-c-run-external-command12340,507863
+(defun anything-ratpoison-commands ()anything-ratpoison-commands12359,508690
+(defun anything-ucs ()anything-ucs12366,508942
+(defun anything-c-apropos ()anything-c-apropos12373,509140
+
+anything-grep.el,2249
+(defvar anything-grep-version "$Id: anything-grep.el,v 1.27 2010-03-21 11:31:04 rubikitch Exp $")anything-grep-version159,5200
+(defvar anything-grep-save-buffers-before-grep nilanything-grep-save-buffers-before-grep163,5335
+(defvar anything-grep-goto-hook nilanything-grep-goto-hook166,5450
+(defvar anything-grep-find-file-function 'find-fileanything-grep-find-file-function169,5554
+(defvar anything-grep-multiline tanything-grep-multiline173,5688
+(defvar anything-grep-fontify-file-name tanything-grep-fontify-file-name177,5813
+(defvar anything-grep-alistanything-grep-alist180,5919
+(defvar anything-grep-filter-command nilanything-grep-filter-command210,6875
+(defvar anything-grep-sources nilanything-grep-sources219,7177
+(defvar anything-grep-buffer-name nil)anything-grep-buffer-name221,7269
+(defun anything-grep-base (sources &optional bufname)anything-grep-base222,7308
+(defun agrep-source (command pwd)agrep-source235,8001
+(defun anything-compile-source--agrep-init (source)anything-compile-source--agrep-init251,8457
+(defun agrep-init ()agrep-init257,8632
+(defun agrep-real-to-display (file-line-content)agrep-real-to-display260,8726
+(defvar agrep-source-local nil)agrep-source-local268,9057
+(defvar agrep-waiting-source nilagrep-waiting-source269,9089
+(defun agrep-do-grep (command pwd)agrep-do-grep271,9183
+(defvar agrep-do-after-minibuffer-exit nil)agrep-do-after-minibuffer-exit289,10090
+(defun agrep-minibuffer-exit-hook ()agrep-minibuffer-exit-hook290,10134
+(defun agrep-show (func)agrep-show296,10375
+(defun agrep-sentinel (proc stat)agrep-sentinel302,10602
+(defun agrep-fontify ()agrep-fontify313,11038
+(defun agrep-create-buffer (command pwd)agrep-create-buffer333,11895
+(defun agrep-goto  (file-line-content)agrep-goto343,12500
+(defun anything-grep (command pwd)anything-grep355,13028
+(defun agrep-preprocess-command (command)agrep-preprocess-command372,13821
+(defvar agbn-last-name nilagbn-last-name386,14329
+(defun agrep-by-name-read-info (&rest kinds)agrep-by-name-read-info389,14409
+(defun anything-grep-by-name (&optional query name)anything-grep-by-name405,15133
+(defun anything-grep-by-name-reversed (&optional name query)anything-grep-by-name-reversed424,15960
+
+anything-gtags.el,1354
+(defgroup anything-gtags nilanything-gtags147,4859
+(defcustom anything-gtags-enable-initial-pattern nilanything-gtags-enable-initial-pattern151,4938
+(defvar anything-c-source-gtags-selectanything-c-source-gtags-select156,5112
+(defun anything-gtags-select ()anything-gtags-select176,5975
+(defvar anything-gtags-hijack-gtags-select-mode tanything-gtags-hijack-gtags-select-mode185,6333
+(defcustom anything-gtags-classify nilanything-gtags-classify187,6435
+(defvar aggs-base-sourceaggs-base-source193,6753
+(defvar aggs-buffer "*anything gtags select*")aggs-buffer199,6986
+(defun aggs-candidate-display (s e)aggs-candidate-display201,7034
+(defun aggs-search-not-space-point (s e)aggs-search-not-space-point204,7143
+(defun aggs-set-anything-current-position ()aggs-set-anything-current-position212,7396
+(defun ag-hijack-gtags-select-mode ()ag-hijack-gtags-select-mode220,7690
+(defun aggs-candidate-buffer-by-filename (filename)aggs-candidate-buffer-by-filename253,9260
+(defun aggs-meta-source-init ()aggs-meta-source-init255,9372
+(defun aggs-select-it (candidate)aggs-select-it284,10618
+(defun anything-gtags-resume ()anything-gtags-resume296,11097
+(defadvice switch-to-buffer (around anything-gtags activate)switch-to-buffer301,11246
+(defadvice gtags-select-mode (around anything-gtags activate)gtags-select-mode311,11802
+
+anything-ipa.el,510
+(defvar anything-ipa-version "$Id: anything-ipa.el,v 1.6 2009/03/01 22:52:44 rubikitch Exp $")anything-ipa-version70,2190
+(defvar anything-c-source-ipaanything-c-source-ipa76,2378
+(defun anything-ipa-candidates ()anything-ipa-candidates83,2593
+(defun anything-ipa ()anything-ipa96,3122
+(defvar anything-c-source-ipa-globalanything-c-source-ipa-global102,3251
+(defun anything-ipa-go-to-annotation (pos)anything-ipa-go-to-annotation111,3624
+(defun anything-ipa-global ()anything-ipa-global116,3764
+
+anything-match-plugin.el,3769
+(defcustom anything-grep-candidates-fast-directory-regexp nilanything-grep-candidates-fast-directory-regexp158,5067
+(defvar anything-use-multiple-patterns tanything-use-multiple-patterns169,5414
+(defvar anything-mp-space-regexp "[\\ ] "anything-mp-space-regexp171,5511
+(defvar anything-mp-match-source-name tanything-mp-match-source-name173,5617
+(defun amp-mp-make-regexps (pattern)amp-mp-make-regexps178,5853
+(defun amp-mp-1-make-regexp (pattern)amp-mp-1-make-regexp185,6164
+(defmacro amp-define-memoizer (prefix pattern-expr)amp-define-memoizer188,6263
+(defmacro amp-define (prefix pattern-expr)amp-define201,6779
+(defun anything-exact-match (str &optional pattern)anything-exact-match218,7623
+(defun anything-exact-search (pattern &rest ignore)anything-exact-search220,7722
+(defun anything-exact-search-backward (pattern &rest ignore)anything-exact-search-backward223,7868
+(defun anything-prefix-match (str &optional pattern)anything-prefix-match229,8172
+(defun anything-prefix-search (pattern &rest ignore)anything-prefix-search234,8388
+(defun anything-prefix-search-backward (pattern &rest ignore)anything-prefix-search-backward236,8505
+(defvar anything-mp-3-pattern-str nil)anything-mp-3-pattern-str245,8980
+(defvar anything-mp-3-pattern-list nil)anything-mp-3-pattern-list246,9019
+(defsubst anything-mp-3-get-patterns (pattern)anything-mp-3-get-patterns247,9059
+(defun anything-mp-3-get-patterns-internal (pattern)anything-mp-3-get-patterns-internal253,9327
+(defun anything-mp-handle-source-name-maybe (pattern self else)anything-mp-handle-source-name-maybe259,9615
+(defun* anything-mp-3-match (str &optional (pattern anything-pattern))anything-mp-3-match274,10241
+(defmacro anything-mp-3-search-base (searchfn1 searchfn2 b e)anything-mp-3-search-base281,10518
+(defun anything-mp-3-search (pattern &rest ignore)anything-mp-3-search297,11113
+(defun anything-mp-3-search-backward (pattern &rest ignore)anything-mp-3-search-backward302,11341
+(defun* anything-mp-3p-match (str &optional (pattern anything-pattern))anything-mp-3p-match308,11646
+(defun anything-mp-3p-search (pattern &rest ignore)anything-mp-3p-search317,12051
+(defun anything-mp-3p-search-backward (pattern &rest ignore)anything-mp-3p-search-backward323,12287
+(defface anything-matchanything-match330,12574
+(defvar anything-mp-highlight-delay 0.7anything-mp-highlight-delay335,12681
+(defvar anything-mp-highlight-threshold 2anything-mp-highlight-threshold339,12821
+(defun anything-mp-highlight-match ()anything-mp-highlight-match343,12962
+(defun anything-mp-highlight-region (start end regexp face)anything-mp-highlight-region353,13493
+(defun* anything-mp-highlight-match-internal (end)anything-mp-highlight-match-internal362,13832
+(defvar anything-mp-default-match-functionsanything-mp-default-match-functions376,14501
+(defvar anything-mp-default-search-functionsanything-mp-default-search-functions378,14613
+(defvar anything-mp-default-search-backward-functionsanything-mp-default-search-backward-functions380,14729
+(defun anything-compile-source--match-plugin (source)anything-compile-source--match-plugin383,14916
+(defun agp-candidates (&optional filter)agp-candidates399,15621
+(defun agp-candidates-synchronous-grep (&optional filter)agp-candidates-synchronous-grep405,15897
+(defun agp-candidates-synchronous-grep--direct-insert-match (&optional filter)agp-candidates-synchronous-grep--direct-insert-match413,16228
+(defun agp-command-line (query files &optional limit filter search-from-end)agp-command-line424,16753
+(defun agp-command-line-2 (filter &optional search-from-end)agp-command-line-2449,17880
+(defun anything-compile-source--grep-candidates (source)anything-compile-source--grep-candidates456,18236
+
+anything-menu.el,783
+(defvar anything-menu-version "$Id: anything-menu.el,v 1.6 2010/04/01 12:10:35 rubikitch Exp $")anything-menu-version100,2812
+(defgroup anything-menu nilanything-menu102,2929
+(defvar am/tmp-file "/tmp/.am-tmp-file")am/tmp-file106,2993
+(defvar am/frame nil)am/frame107,3034
+(defun am/set-frame ()am/set-frame108,3056
+(defun am/close-frame ()am/close-frame116,3323
+(defun am/write-result (line)am/write-result122,3567
+(defun anything-menu (&optional any-sources any-input any-prompt any-resume any-preselect any-buffer any-keymap)anything-menu125,3645
+(defun anything-menu-select (am-prompt &rest am-selections)anything-menu-select137,4166
+(defun* anything-menu-select-from-file (am-filename &optional (am-prompt "selection"))anything-menu-select-from-file146,4589
+
+anything-migemo.el,529
+(defvar anything-use-migemo nilanything-use-migemo124,3726
+(defun anything-migemo (with-migemo &rest anything-args)anything-migemo126,3813
+(defvar anything-previous-migemo-info '("" . "")anything-previous-migemo-info133,4097
+(defun* anything-string-match-with-migemo (str &optional (pattern anything-pattern))anything-string-match-with-migemo135,4205
+(defun anything-compile-source--migemo (source)anything-compile-source--migemo152,5322
+(defmacro anything-migemize-command (command)anything-migemize-command187,6837
+
+anything-obsolete.el,895
+(defvar anything-read-file-name-map nil)anything-read-file-name-map62,1995
+(defvar arfn-followed nil)arfn-followed63,2036
+(defvar arfn-dir nil)arfn-dir64,2063
+(defun anything-read-file-name-map ()anything-read-file-name-map65,2085
+(defun anything-read-file-name-follow-directory ()anything-read-file-name-follow-directory73,2505
+(defun* anything-read-file-name (prompt &optional dir default-filename require-match initial-input predicate (additional-attrs '((action . identity))))anything-read-file-name98,3717
+(defun arfn-candidates (dir)arfn-candidates117,4788
+(defun* arfn-sources (prompt dir default-filename require-match initial-input predicate &optional (additional-attrs '((action . identity))))arfn-sources125,5139
+(defvar anything-find-file-additional-sources nil)anything-find-file-additional-sources166,6965
+(defun anything-find-file ()anything-find-file167,7016
+
+anything-show-completion.el,1318
+(defvar anything-show-completion-version "$Id: anything-show-completion.el,v 1.19 2009/11/19 20:16:51 rubikitch Exp rubikitch $")anything-show-completion-version164,5270
+(defgroup anything-show-completion nilanything-show-completion166,5420
+(defvar asc-overlay nil)asc-overlay170,5509
+(defcustom anything-show-completion-face anything-selection-faceanything-show-completion-face171,5534
+(defcustom anything-show-completion-activate tanything-show-completion-activate175,5690
+(defcustom anything-show-completion-minimum-window-height 7anything-show-completion-minimum-window-height179,5843
+(defun asc-initialize-maybe ()asc-initialize-maybe185,5997
+(defun asc-cleanup ()asc-cleanup191,6199
+(defun asc-overlay-activate-p ()asc-overlay-activate-p197,6325
+(defadvice anything-mark-current-line (after anything-show-completion activate)anything-mark-current-line201,6509
+(defun asc-display-overlay (selection)asc-display-overlay211,6984
+(defun use-anything-show-completion (function prefix-length-sexp)use-anything-show-completion219,7262
+(defun anything-show-completion-install (prefix-length-sexp)anything-show-completion-install228,7789
+(defun asc-point-at-upper-half-of-window-p (pt)asc-point-at-upper-half-of-window-p235,8008
+(defun asc-display-function (buf)asc-display-function243,8373
+
+anything-startup.el,0
+
+anything.el,28705
+(defvar anything-version "1.3.6")anything-version639,23648
+(defvar anything-sources nilanything-sources649,23804
+(defvar anything-type-attributes nilanything-type-attributes655,24044
+(defvaralias 'anything-enable-digit-shortcuts 'anything-enable-shortcutsanything-enable-digit-shortcuts665,24466
+(defvar anything-enable-shortcuts nilanything-enable-shortcuts670,24716
+(defvar anything-shortcut-keys-alistanything-shortcut-keys-alist686,25423
+(defvar anything-display-source-at-screen-top tanything-display-source-at-screen-top691,25594
+(defvar anything-candidate-number-limit 50anything-candidate-number-limit695,25768
+(defvar anything-idle-delay 0.3anything-idle-delay704,26145
+(defvar anything-input-idle-delay 0.3anything-input-idle-delay714,26614
+(defvar anything-samewindow nilanything-samewindow725,27049
+(defvar anything-source-filter nilanything-source-filter729,27178
+(defvar anything-mapanything-map736,27385
+(defgroup anything nilanything804,31792
+(defface anything-headeranything-header808,31878
+(defvar anything-header-face 'anything-headeranything-header-face813,32008
+(defface anything-candidate-numberanything-candidate-number816,32107
+(defvar anything-selection-face 'highlightanything-selection-face820,32259
+(defvar anything-buffer "*anything*"anything-buffer823,32343
+(defvar anything-action-buffer "*anything action*"anything-action-buffer826,32414
+(defvar anything-selection-overlay nilanything-selection-overlay829,32495
+(defvar anything-digit-overlays nilanything-digit-overlays832,32595
+(defvar anything-candidate-cache nilanything-candidate-cache835,32701
+(defvar anything-patternanything-pattern838,32812
+(defvar anything-inputanything-input841,32897
+(defvar anything-async-processes nilanything-async-processes844,32967
+(defvar anything-digit-shortcut-count 0anything-digit-shortcut-count847,33080
+(defvar anything-before-initialize-hook nilanything-before-initialize-hook850,33182
+(defvar anything-after-initialize-hook nilanything-after-initialize-hook854,33330
+(defvar anything-update-hook nilanything-update-hook859,33524
+(defvar anything-after-update-hook nilanything-after-update-hook865,33779
+(defvar anything-cleanup-hook nilanything-cleanup-hook870,34043
+(defvar anything-select-action-hook nilanything-select-action-hook874,34176
+(defvar anything-before-action-hook nilanything-before-action-hook877,34258
+(defvar anything-after-action-hook nilanything-after-action-hook883,34453
+(defvar anything-after-persistent-action-hook nilanything-after-persistent-action-hook886,34526
+(defvar anything-move-selection-before-hook nilanything-move-selection-before-hook889,34621
+(defvar anything-move-selection-after-hook nilanything-move-selection-after-hook892,34725
+(defvar anything-restored-variablesanything-restored-variables895,34827
+(defvar anything-saved-selection nilanything-saved-selection903,35067
+(defvar anything-current-prefix-arg nilanything-current-prefix-arg906,35180
+(defvar anything-candidate-separatoranything-candidate-separator909,35279
+(defvar anything-current-buffer nilanything-current-buffer913,35391
+(defvar anything-buffer-file-name nilanything-buffer-file-name916,35476
+(defvar anything-saved-action nilanything-saved-action919,35576
+(defvar anything-last-sources nilanything-last-sources922,35669
+(defvar anything-saved-current-source nilanything-saved-current-source925,35762
+(defvar anything-compiled-sources nilanything-compiled-sources928,35869
+(defvar anything-in-persistent-action nilanything-in-persistent-action931,35953
+(defvar anything-quick-update nilanything-quick-update934,36043
+(defvar anything-last-sources-local nilanything-last-sources-local939,36267
+(defvar anything-last-buffer nilanything-last-buffer942,36355
+(defvar anything-save-configuration-functionsanything-save-configuration-functions945,36446
+(defvar anything-persistent-action-use-special-display nilanything-persistent-action-use-special-display957,37036
+(defvar anything-execute-action-at-once-if-one nilanything-execute-action-at-once-if-one960,37166
+(defvar anything-quit-if-no-candidate nilanything-quit-if-no-candidate964,37335
+(defvar anything-scroll-amount nilanything-scroll-amount970,37543
+(defvar anything-display-function 'anything-default-display-bufferanything-display-function977,37796
+(defvar anything-delayed-init-executed nil)anything-delayed-init-executed982,37997
+(defvar anything-mode-line-string "\\<anything-map>\\[anything-help]:help \anything-mode-line-string984,38042
+(defvar anything-help-messageanything-help-message995,38593
+(defvar anything-source-in-each-line-flag nilanything-source-in-each-line-flag1004,38918
+(defvaralias 'anything-debug-variables 'anything-debug-forms)anything-debug-variables1008,39059
+(defvar anything-debug-forms nilanything-debug-forms1010,39122
+(defvar anything-debug nilanything-debug1015,39287
+(defvar anything-test-candidate-list nil)anything-test-candidate-list1022,39552
+(defvar anything-test-mode nil)anything-test-mode1023,39594
+(defvar anything-source-name nil)anything-source-name1024,39626
+(defvar anything-candidate-buffer-alist nil)anything-candidate-buffer-alist1025,39660
+(defvar anything-check-minibuffer-input-timer nil)anything-check-minibuffer-input-timer1026,39705
+(defvar anything-match-hash (make-hash-table :test 'equal))anything-match-hash1027,39756
+(defvar anything-cib-hash (make-hash-table :test 'equal))anything-cib-hash1028,39816
+(defvar anything-tick-hash (make-hash-table :test 'equal))anything-tick-hash1029,39874
+(defvar anything-issued-errors nil)anything-issued-errors1030,39933
+(defvar anything-shortcut-keys nil)anything-shortcut-keys1031,39969
+(defvar anything-once-called-functions nil)anything-once-called-functions1032,40005
+(defvar anything-follow-mode nil)anything-follow-mode1033,40049
+(defvar anything-let-variables nil)anything-let-variables1034,40083
+(defvar anything-split-window-state nil)anything-split-window-state1035,40119
+(defvar anything-selection-point nil)anything-selection-point1036,40160
+(defun anything-log (format-string &rest args)anything-log1040,40228
+(defmacro anything-log-eval (&rest exprs)anything-log-eval1058,41029
+(defun anything-log-run-hook (hook)anything-log-run-hook1062,41182
+(defun anything-log-eval-internal (exprs)anything-log-eval-internal1071,41502
+(defun anything-log-get-current-function ()anything-log-get-current-function1078,41750
+(defun anything-log-error (&rest args)anything-log-error1089,42255
+(defvar anything-last-log-file nil)anything-last-log-file1097,42589
+(defun anything-log-save-maybe ()anything-log-save-maybe1098,42625
+(defun anything-open-last-log ()anything-open-last-log1112,43262
+(defun anything-print-error-messages ()anything-print-error-messages1119,43479
+(defmacro anything-aif (test-form then-form &rest else-forms)anything-aif1128,43760
+(defun anything-mklist (obj)anything-mklist1135,44064
+(defun anything-buffer-get ()anything-buffer-get1145,44291
+(defun anything-window ()anything-window1151,44480
+(defun anything-action-window ()anything-action-window1155,44594
+(defmacro with-anything-window (&rest body)with-anything-window1159,44723
+(defmacro with-anything-current-buffer (&rest body)with-anything-current-buffer1168,45012
+(defmacro with-anything-restore-variables(&rest body)with-anything-restore-variables1174,45208
+(defun* anything-attr (attribute-name &optionalanything-attr1192,46072
+(defun* anything-attr* (attribute-nameanything-attr*1200,46374
+(defun* anything-attr-defined (attribute-nameanything-attr-defined1207,46700
+(defun* anything-attrset (attribute-name valueanything-attrset1214,46993
+(defun anything-set-source-filter (sources)anything-set-source-filter1225,47436
+(defun anything-set-sources (sources &optional no-init no-update)anything-set-sources1263,48844
+(defvar anything-compile-source-functionsanything-compile-source-functions1275,49402
+(defun anything-get-sources ()anything-get-sources1282,49680
+(defun* anything-get-selection (&optional (buffer nil buffer-s) (force-display-part))anything-get-selection1305,50280
+(defun anything-get-action ()anything-get-action1329,51565
+(defun anything-get-current-source ()anything-get-current-source1340,52032
+(defun anything-buffer-is-modified (buffer)anything-buffer-is-modified1368,53447
+(defun anything-current-buffer-is-modified ()anything-current-buffer-is-modified1379,53938
+(defvar anything-quit nil)anything-quit1383,54123
+(defun anything-run-after-quit (function &rest args)anything-run-after-quit1384,54150
+(defun define-anything-type-attribute (type definition &optional doc)define-anything-type-attribute1393,54448
+(defvaralias 'anything-attributes 'anything-additional-attributes)anything-attributes1405,54960
+(defvar anything-additional-attributes nilanything-additional-attributes1406,55027
+(defun anything-document-attribute (attribute short-doc &optional long-doc)anything-document-attribute1408,55110
+(defun anything-interpret-value (value &optional source)anything-interpret-value1423,55710
+(defun anything-once (function &rest args)anything-once1444,56484
+(defun* anything-empty-buffer-p (&optional (buffer anything-buffer))anything-empty-buffer-p1453,56802
+(defun anything-let-eval-varlist (varlist)anything-let-eval-varlist1458,57014
+(defun anything-let-internal (binding bodyfunc)anything-let-internal1483,57948
+(defun anything-current-line-contents ()anything-current-line-contents1493,58266
+(defun anything-funcall-with-source (source func &rest args)anything-funcall-with-source1497,58418
+(defun anything-funcall-foreach (sym)anything-funcall-foreach1507,58869
+(defun anything-normalize-sources (sources)anything-normalize-sources1513,59097
+(defun anything-approximate-candidate-number (&optional in-current-source)anything-approximate-candidate-number1522,59399
+(defmacro with-anything-quittable (&rest body)with-anything-quittable1553,60854
+(defun anything-compose (arg-lst func-lst)anything-compose1563,61171
+(defun anything-composed-funcall-with-source (source funcs &rest args)anything-composed-funcall-with-source1572,61500
+(defun anything-new-timer (variable timer)anything-new-timer1582,61944
+(defconst anything-argument-keysanything-argument-keys1590,62162
+(defun anything (&rest plist)anything1594,62294
+(defun anything-parse-keys (keys)anything-parse-keys1680,64980
+(defun anything-internal (&optionalanything-internal1702,66038
+(defun* anything-resume (&optionalanything-resume1747,68070
+(defun* anything-resume-window-only (&optionalanything-resume-window-only1767,68978
+(defun anything-resume-p (any-resume)anything-resume-p1773,69226
+(defun anything-resume-select-buffer (input)anything-resume-select-buffer1778,69411
+(defun anything-at-point (&optionalanything-at-point1790,69843
+(defun anything-other-buffer (any-sources any-buffer)anything-other-buffer1809,70614
+(defun anything-nest (&rest same-as-anything)anything-nest1814,70854
+(defvar anything-buffers nilanything-buffers1846,72155
+(defun anything-initialize (any-resume any-input any-sources)anything-initialize1848,72243
+(defun anything-execute-selection-action-1 ()anything-execute-selection-action-11867,73192
+(defun anything-restore-position-on-quit ()anything-restore-position-on-quit1881,73799
+(defun anything-recent-push (elt list-var)anything-recent-push1885,73949
+(defvar anything-current-position nilanything-current-position1894,74309
+(defun anything-current-position (save-or-restore)anything-current-position1898,74513
+(defvar anything-last-frame-or-window-configuration nilanything-last-frame-or-window-configuration1917,75353
+(defun anything-frame-or-window-configuration (save-or-restore)anything-frame-or-window-configuration1919,75479
+(defun anything-display-buffer (buf)anything-display-buffer1941,76657
+(defun anything-default-display-buffer (buf)anything-default-display-buffer1946,76825
+(defun anything-initial-setup ()anything-initial-setup1955,77144
+(defvar anything-reading-pattern nilanything-reading-pattern1985,78476
+(defun anything-read-pattern-maybe (any-prompt any-inputanything-read-pattern-maybe1987,78563
+(defun anything-create-anything-buffer (&optional test-mode)anything-create-anything-buffer2017,80078
+(defun anything-initialize-overlays (buffer)anything-initialize-overlays2042,81257
+(defun anything-hooks (setup-or-cleanup)anything-hooks2070,82586
+(defun anything-cleanup ()anything-cleanup2084,83182
+(defun anything-clean-up-minibuffer ()anything-clean-up-minibuffer2105,83977
+(defun anything-check-minibuffer-input ()anything-check-minibuffer-input2116,84360
+(defun anything-check-minibuffer-input-1 ()anything-check-minibuffer-input-12127,84897
+(defun anything-check-new-input (input)anything-check-new-input2133,85135
+(defvar anything-compile-source-functions-default anything-compile-source-functionsanything-compile-source-functions-default2144,85516
+(defun anything-compile-sources (sources funcs)anything-compile-sources2146,85634
+(defadvice documentation-property (after anything-document-attribute activate)documentation-property2162,86136
+(defun anything-process-delayed-init (source)anything-process-delayed-init2176,86848
+(defun anything-get-candidates (source)anything-get-candidates2186,87321
+(defun anything-get-cached-candidates (source)anything-get-cached-candidates2202,88091
+(defun anything-process-candidate-transformer (candidates source)anything-process-candidate-transformer2228,89302
+(defun anything-process-filtered-candidate-transformer (candidates source)anything-process-filtered-candidate-transformer2234,89587
+(defun anything-process-filtered-candidate-transformer-maybe (candidates source process-p)anything-process-filtered-candidate-transformer-maybe2240,89906
+(defun anything-process-real-to-display (candidates source)anything-process-real-to-display2247,90225
+(defun anything-transform-candidates (candidates source &optional process-p)anything-transform-candidates2260,90853
+(defun anything-candidate-number-limit (source)anything-candidate-number-limit2270,91266
+(defconst anything-default-match-functionsanything-default-match-functions2282,91742
+(defun anything-compute-matches (source)anything-compute-matches2287,91944
+(defun anything-candidate-get-display (candidate)anything-candidate-get-display2298,92381
+(defun anything-process-pattern-transformer (pattern source)anything-process-pattern-transformer2303,92597
+(defun anything-match-functions (source)anything-match-functions2309,92867
+(defmacro anything-accumulate-candidates-internal (cand newmatchesanything-accumulate-candidates-internal2313,92986
+(defun anything-take-first-elements (seq n)anything-take-first-elements2327,93477
+(defun anything-match-from-candidates (cands matchfns limit)anything-match-from-candidates2332,93593
+(defun anything-compute-matches-internal (source)anything-compute-matches-internal2348,94256
+(defun anything-process-source (source)anything-process-source2365,95076
+(defun anything-insert-match-with-digit-overlay (match)anything-insert-match-with-digit-overlay2388,96182
+(defun anything-put-digit-overlay-maybe ()anything-put-digit-overlay-maybe2393,96353
+(defun anything-process-source--direct-insert-match (source)anything-process-source--direct-insert-match2403,96757
+(defun anything-process-delayed-sources (delayed-sources &optional preselect)anything-process-delayed-sources2416,97348
+(defvar anything-input-local nil)anything-input-local2440,98451
+(defvar anything-process-delayed-sources-timer nil)anything-process-delayed-sources-timer2441,98485
+(defun anything-update (&optional preselect)anything-update2442,98537
+(defun anything-update-source-p (source)anything-update-source-p2494,101351
+(defun anything-delayed-source-p (source)anything-delayed-source-p2503,101691
+(defun anything-update-move-first-line (&optional without-hook)anything-update-move-first-line2510,101961
+(defun anything-force-update (&optional preselect)anything-force-update2517,102209
+(defun anything-force-update--reinit (source)anything-force-update--reinit2534,102896
+(defun anything-keep-selection (source selection)anything-keep-selection2544,103301
+(defun anything-remove-candidate-cache (source)anything-remove-candidate-cache2556,103680
+(defun anything-insert-match (match insert-function source)anything-insert-match2563,103958
+(defun anything-insert-header-from-source (source)anything-insert-header-from-source2583,104962
+(defun anything-insert-header (name &optional display-string)anything-insert-header2593,105359
+(defun anything-insert-candidate-separator ()anything-insert-candidate-separator2611,106081
+(defun anything-output-filter (process string)anything-output-filter2620,106383
+(defun anything-output-filter-1 (process-assoc string)anything-output-filter-12624,106549
+(defun anything-output-filter--process-source (process string source limit)anything-output-filter--process-source2640,107210
+(defun anything-output-filter--collect-candidates (lines incomplete-line-info)anything-output-filter--collect-candidates2657,108038
+(defun anything-output-filter--post-process ()anything-output-filter--post-process2668,108455
+(defun anything-kill-async-processes ()anything-kill-async-processes2676,108755
+(defun anything-kill-async-process (process)anything-kill-async-process2681,108985
+(defun anything-execute-selection-action (&optionalanything-execute-selection-action2688,109173
+(defun anything-coerce-selection (selection source)anything-coerce-selection2711,110290
+(defun anything-get-default-action (action)anything-get-default-action2718,110559
+(defun anything-select-action ()anything-select-action2724,110748
+(defun anything-show-action-buffer (actions)anything-show-action-buffer2747,111872
+(defun anything-move-selection-common (move-func unit direction)anything-move-selection-common2764,112564
+(defun anything-display-source-at-screen-top-maybe (unit)anything-display-source-at-screen-top-maybe2779,113288
+(defun anything-skip-noncandidate-line (direction)anything-skip-noncandidate-line2784,113525
+(defun anything-skip-header-and-separator-line (direction)anything-skip-header-and-separator-line2790,113746
+(defvar anything-mode-line-string-real nil)anything-mode-line-string-real2798,114086
+(defun anything-display-mode-line (source)anything-display-mode-line2799,114130
+(defun anything-show-candidate-number (&optional name)anything-show-candidate-number2821,115288
+(defun anything-previous-line ()anything-previous-line2831,115673
+(defun anything-next-line ()anything-next-line2849,116465
+(defun anything-previous-page ()anything-previous-page2865,117049
+(defun anything-next-page ()anything-next-page2875,117311
+(defun anything-beginning-of-buffer ()anything-beginning-of-buffer2885,117560
+(defun anything-end-of-buffer ()anything-end-of-buffer2892,117741
+(defun anything-previous-source ()anything-previous-source2899,117915
+(defun anything-next-source ()anything-next-source2912,118290
+(defun anything-goto-source (source-or-name)anything-goto-source2920,118510
+(defun anything-mark-current-line (&optional resumep)anything-mark-current-line2933,119016
+(defun anything-this-command-key ()anything-this-command-key2954,119913
+(defun anything-select-with-shortcut-internal (types get-key-func)anything-select-with-shortcut-internal2958,120078
+(defun anything-select-with-prefix-shortcut ()anything-select-with-prefix-shortcut2974,120814
+(defun anything-select-with-digit-shortcut ()anything-select-with-digit-shortcut2981,121035
+(defvar anything-exit-status 0anything-exit-status2991,121439
+(defvar anything-minibuffer-confirm-state nil)anything-minibuffer-confirm-state2999,121789
+(defun anything-confirm-and-exit-minibuffer ()anything-confirm-and-exit-minibuffer3000,121836
+(defun anything-confirm-and-exit-hook ()anything-confirm-and-exit-hook3024,122946
+(defun anything-exit-minibuffer ()anything-exit-minibuffer3031,123247
+(defun anything-keyboard-quit ()anything-keyboard-quit3038,123477
+(defun anything-get-next-header-pos ()anything-get-next-header-pos3047,123760
+(defun anything-get-previous-header-pos ()anything-get-previous-header-pos3051,123913
+(defun anything-pos-multiline-p ()anything-pos-multiline-p3055,124078
+(defun anything-get-next-candidate-separator-pos ()anything-get-next-candidate-separator-pos3059,124243
+(defun anything-get-previous-candidate-separator-pos ()anything-get-previous-candidate-separator-pos3063,124435
+(defun anything-pos-header-line-p ()anything-pos-header-line-p3067,124639
+(defun anything-pos-candidate-separator-p ()anything-pos-candidate-separator-p3072,124856
+(defun anything-help-internal (bufname insert-content-fn)anything-help-internal3078,125052
+(defun anything-help-event-loop ()anything-help-event-loop3092,125579
+(defun anything-help ()anything-help3100,125798
+(defun anything-debug-output ()anything-debug-output3110,126047
+(defun anything-debug-output-function (&optional vars)anything-debug-output-function3115,126230
+(defun anything-kill-buffer-hook ()anything-kill-buffer-hook3129,126782
+(defun anything-preselect (candidate-or-regexp)anything-preselect3136,127125
+(defun anything-delete-current-selection ()anything-delete-current-selection3151,127714
+(defun anything-end-of-source-p ()anything-end-of-source-p3171,128595
+(defun anything-edit-current-selection-internal (func)anything-edit-current-selection-internal3179,128823
+(defmacro anything-edit-current-selection (&rest forms)anything-edit-current-selection3190,129219
+(defun anything-set-pattern (pattern &optional noupdate)anything-set-pattern3197,129467
+(defun anything-delete-minibuffer-contents ()anything-delete-minibuffer-contents3208,129901
+(defalias 'anything-delete-minibuffer-content 'anything-delete-minibuffer-contents)anything-delete-minibuffer-content3212,130056
+(defun anything-compile-source--type (source)anything-compile-source--type3218,130191
+(defun anything-add-type-attribute (type definition)anything-add-type-attribute3225,130418
+(defvar anything-types nil)anything-types3230,130659
+(defun anything-document-type-attribute (type doc)anything-document-type-attribute3231,130687
+(defadvice documentation-property (after anything-document-type-attribute activate)documentation-property3236,130870
+(defun anything-dummy-candidate (candidate source)anything-dummy-candidate3245,131359
+(defun anything-compile-source--dummy (source)anything-compile-source--dummy3250,131548
+(defvar anything-orig-enable-shortcuts nil)anything-orig-enable-shortcuts3262,131948
+(defun anything-save-enable-shortcuts ()anything-save-enable-shortcuts3263,131992
+(defun anything-compile-source--disable-shortcuts (source)anything-compile-source--disable-shortcuts3269,132178
+(defun anything-candidates-in-buffer ()anything-candidates-in-buffer3282,132842
+(defun anything-candidates-in-buffer-search-from-start (pattern)anything-candidates-in-buffer-search-from-start3356,135913
+(defun anything-candidates-in-buffer-search-from-end (pattern)anything-candidates-in-buffer-search-from-end3360,136089
+(defun anything-candidates-in-buffer-1 (buffer pattern get-line-fnanything-candidates-in-buffer-13364,136265
+(defun anything-point-is-moved (proc)anything-point-is-moved3379,136977
+(defun anything-search-from-candidate-buffer (pattern get-line-fn search-fnsanything-search-from-candidate-buffer3383,137132
+(defun anything-initial-candidates-from-candidate-buffer (endp get-line-fn limit search-from-end)anything-initial-candidates-from-candidate-buffer3409,138280
+(defun anything-search-from-candidate-buffer-internal (search-fn)anything-search-from-candidate-buffer-internal3419,138774
+(defun anything-candidate-buffer (&optional create-or-buffer)anything-candidate-buffer3433,139106
+(defun anything-compile-source--candidates-in-buffer (source)anything-compile-source--candidates-in-buffer3490,141510
+(defun anything-toggle-resplit-window ()anything-toggle-resplit-window3499,141828
+(defun anything-enlarge-window-1 (n)anything-enlarge-window-13515,142486
+(defun anything-narrow-window ()anything-narrow-window3523,142782
+(defun anything-enlarge-window ()anything-enlarge-window3528,142894
+(defun anything-select-nth-action (n)anything-select-nth-action3534,143055
+(defun anything-get-nth-action (n action)anything-get-nth-action3542,143400
+(defun anything-select-2nd-action ()anything-select-2nd-action3553,143747
+(defun anything-select-3rd-action ()anything-select-3rd-action3558,143899
+(defun anything-select-4th-action ()anything-select-4th-action3563,144051
+(defun anything-select-2nd-action-or-end-of-line ()anything-select-2nd-action-or-end-of-line3568,144203
+(defmacro with-anything-display-same-window (&rest body)with-anything-display-same-window3578,144535
+(defvar anything-persistent-action-display-window nil)anything-persistent-action-display-window3585,144848
+(defun anything-initialize-persistent-action ()anything-initialize-persistent-action3586,144903
+(defun* anything-execute-persistent-action (&optional (attr 'persistent-action) onewindow)anything-execute-persistent-action3589,145030
+(defun anything-persistent-action-display-window (&optional onewindow)anything-persistent-action-display-window3611,145992
+(defun anything-select-persistent-action-window (&optional onewindow)anything-select-persistent-action-window3625,146701
+(defun anything-persistent-action-display-buffer (buf &optional not-this-window)anything-persistent-action-display-buffer3633,147086
+(defun anything-scroll-other-window-base (command)anything-scroll-other-window-base3654,148222
+(defun anything-scroll-other-window ()anything-scroll-other-window3658,148389
+(defun anything-scroll-other-window-down ()anything-scroll-other-window-down3663,148551
+(defface anything-visible-markanything-visible-mark3670,148756
+(defvar anything-visible-mark-face 'anything-visible-mark)anything-visible-mark-face3679,149081
+(defvar anything-visible-mark-overlays nil)anything-visible-mark-overlays3680,149140
+(defun anything-clear-visible-mark ()anything-clear-visible-mark3682,149185
+(defvar anything-marked-candidates nilanything-marked-candidates3688,149469
+(defun anything-this-visible-mark ()anything-this-visible-mark3691,149566
+(defun anything-delete-visible-mark (overlay)anything-delete-visible-mark3696,149725
+(defun anything-make-visible-mark ()anything-make-visible-mark3705,150054
+(defun anything-toggle-visible-mark ()anything-toggle-visible-mark3715,150584
+(defun anything-display-all-visible-marks ()anything-display-all-visible-marks3724,150859
+(defun anything-marked-candidates ()anything-marked-candidates3734,151247
+(defun anything-reset-marked-candidates ()anything-reset-marked-candidates3750,151910
+(defun anything-current-source-name= (name)anything-current-source-name=3757,152219
+(defun anything-revive-visible-mark ()anything-revive-visible-mark3762,152385
+(defun anything-next-point-in-list (curpos points &optional prev)anything-next-point-in-list3780,153340
+(defun anything-next-visible-mark (&optional prev)anything-next-visible-mark3799,153952
+(defun anything-prev-visible-mark ()anything-prev-visible-mark3811,154354
+(defun anything-yank-selection ()anything-yank-selection3817,154518
+(defun anything-kill-selection-and-quit ()anything-kill-selection-and-quit3822,154676
+(defun anything-follow-mode ()anything-follow-mode3835,155079
+(defun anything-follow-execute-persistent-action-maybe ()anything-follow-execute-persistent-action-maybe3843,155415
+(defun anything-migrate-sources ()anything-migrate-sources3858,156072
+(defadvice cua-delete-region (around anything-avoid-cua activate)cua-delete-region3944,159291
+(defadvice copy-region-as-kill (around anything-avoid-cua activate)copy-region-as-kill3947,159386
+(defun anything-describe-anything-attribute (anything-attribute)anything-describe-anything-attribute3953,159551
+(defvar anything-maintainer-mail-address "emacs-anything@googlegroups.com")anything-maintainer-mail-address4244,173379
+(defvar anything-bug-report-salutationanything-bug-report-salutation4246,173456
+(defvar anything-no-dump-variablesanything-no-dump-variables4258,173883
+(defun anything-dumped-variables-in-bug-report ()anything-dumped-variables-in-bug-report4266,174086
+(defun anything-send-bug-report ()anything-send-bug-report4277,174572
+(defun anything-send-bug-report-from-anything ()anything-send-bug-report-from-anything4289,174943
+(defun* anything-test-candidatesanything-test-candidates4295,175145
+
+auto-install-batch-list.el,0
+
+auto-install.el,6753
+(defvar auto-install-version "$Id: auto-install.el,v 1.53 2011/04/12 06:28:20 rubikitch Exp $")auto-install-version27,1064
+(defgroup auto-install nilauto-install641,22829
+(defcustom auto-install-directory "~/.emacs.d/auto-install/"auto-install-directory645,22907
+(defcustom auto-install-buffer-name "auto-install"auto-install-buffer-name653,23205
+(defcustom auto-install-emacswiki-base-url "http://www.emacswiki.org/cgi-bin/wiki/download/"auto-install-emacswiki-base-url658,23352
+(defcustom auto-install-gist-base-url "http://gist.github.com/"auto-install-gist-base-url663,23553
+(defcustom auto-install-filter-urlauto-install-filter-url668,23727
+(defcustom auto-install-save-confirm tauto-install-save-confirm677,24092
+(defcustom auto-install-replace-confirm nilauto-install-replace-confirm685,24382
+(defcustom auto-install-install-confirm nilauto-install-install-confirm691,24575
+(defcustom auto-install-from-dired-confirm tauto-install-from-dired-confirm697,24769
+(defcustom auto-install-wget-command "wget"auto-install-wget-command703,24965
+(defcustom auto-install-use-wget tauto-install-use-wget708,25119
+(defcustom auto-install-batch-listauto-install-batch-list715,25285
+(defvar auto-install-batch-list-internal nilauto-install-batch-list-internal730,25830
+(defvar auto-install-batch-list-el-urlauto-install-batch-list-el-url733,25927
+(defvar auto-install-download-buffer nilauto-install-download-buffer738,26153
+(defvar auto-install-download-url nilauto-install-download-url743,26341
+(defvar auto-install-last-url nilauto-install-last-url748,26517
+(defvar auto-install-last-gist-id nilauto-install-last-gist-id751,26603
+(defvar auto-install-package-name-list nilauto-install-package-name-list754,26703
+(defvar auto-install-minor-mode-mapauto-install-minor-mode-map757,26796
+(defvar auto-install-add-load-path-flag tauto-install-add-load-path-flag765,27141
+(defvar auto-install-add-exec-path-flag tauto-install-add-exec-path-flag769,27292
+(defvar auto-install-waiting-url-list nilauto-install-waiting-url-list775,27515
+(defvar auto-install-url-queue nilauto-install-url-queue777,27583
+(defvar auto-install-download-buffer-alist nilauto-install-download-buffer-alist779,27643
+(defvar auto-install-batch-using nil)auto-install-batch-using781,27731
+(define-minor-mode auto-install-minor-modeauto-install-minor-mode783,27770
+(defun auto-install-from-buffer ()auto-install-from-buffer791,28034
+(defun auto-install-from-url (&optional url)auto-install-from-url799,28317
+(defun auto-install-from-emacswiki (&optional file)auto-install-from-emacswiki806,28607
+(defun auto-install-from-gist (&optional gistid-or-url)auto-install-from-gist818,29260
+(defun auto-install-from-library (&optional library)auto-install-from-library832,29931
+(defun auto-install-from-directory (directory)auto-install-from-directory847,30707
+(defun auto-install-from-dired ()auto-install-from-dired866,31547
+(defun auto-install-network-available-p (host)auto-install-network-available-p877,32105
+(defun auto-install-update-emacswiki-package-name (&optional unforced)auto-install-update-emacswiki-package-name885,32488
+(defun auto-install-dired-mark-files ()auto-install-dired-mark-files900,33251
+(defun auto-install-mode ()auto-install-mode912,33809
+(defun auto-install-buffer-quit ()auto-install-buffer-quit927,34257
+(defun auto-install-compatibility-setup ()auto-install-compatibility-setup935,34515
+(defun auto-install-batch (&optional extension-name)auto-install-batch951,35269
+(defun auto-install-batch-edit ()auto-install-batch-edit967,35918
+(defun auto-install-batch-real (&optional extension-name)auto-install-batch-real978,36401
+(defun auto-install-flatten (obj &rest rest)auto-install-flatten1023,38197
+(defun auto-install-batch-get-info (extension batch-list)auto-install-batch-get-info1029,38448
+(defun auto-install-use-wget-p ()auto-install-use-wget-p1083,40750
+(defun auto-install-download (url &optional handle-function)auto-install-download1086,40866
+(defun auto-install-download-by-wget (url handle-function download-buffer)auto-install-download-by-wget1103,41571
+(defun auto-install-download-by-url-retrieve (url handle-function download-buffer)auto-install-download-by-url-retrieve1116,42291
+(defun auto-install-download-callback (&optional redirect download-buffer-name handle-function)auto-install-download-callback1139,43334
+(defun auto-install-download-callback-continue (download-buffer-name handle-function)auto-install-download-callback-continue1153,44107
+(defun auto-install-retrieve-decode (retrieve-buffer-name)auto-install-retrieve-decode1162,44576
+(defun auto-install-handle-download-content (download-buffer)auto-install-handle-download-content1187,45649
+(defun auto-install-check-update ()auto-install-check-update1217,47072
+(defun auto-install-handle-emacswiki-package-name (download-buffer &optional prompt-install)auto-install-handle-emacswiki-package-name1226,47475
+(defun auto-install-handle-dired-mark-files (download-buffer)auto-install-handle-dired-mark-files1238,48044
+(defun auto-install-handle-emacswiki-package-install (download-buffer)auto-install-handle-emacswiki-package-install1246,48371
+(defun auto-install-update-emacswiki-package-list (download-buffer)auto-install-update-emacswiki-package-list1251,48608
+(defun auto-install-buffer-diff ()auto-install-buffer-diff1263,49094
+(defun auto-install-buffer-save (&optional filename)auto-install-buffer-save1275,49584
+(defun auto-install-install (file-path)auto-install-install1310,51182
+(defun auto-install-install-next-file ()auto-install-install-next-file1323,51810
+(defun auto-install-cleanup ()auto-install-cleanup1335,52360
+(defun auto-install-quit ()auto-install-quit1342,52567
+(defun auto-install-get-path (library)auto-install-get-path1349,52735
+(defun auto-install-get-buffer (url)auto-install-get-buffer1363,53293
+(defun auto-install-dired-mark-files-internal ()auto-install-dired-mark-files-internal1370,53613
+(defun auto-install-region-or-thing (&optional thing)auto-install-region-or-thing1389,54278
+(defun auto-install-get-library-list (&optional dirs string)auto-install-get-library-list1408,55070
+(defun auto-install-get-candidate (prompt collection)auto-install-get-candidate1434,56081
+(defun auto-install-from-url-list (&optional url-list)auto-install-from-url-list1443,56454
+(defun nthcdr+ (n list)nthcdr+1450,56692
+(defun nthcar (n list)nthcar1459,56924
+(defvar auto-install-maintainer-mail-addressauto-install-maintainer-mail-address1466,57130
+(defvar auto-install-bug-report-salutationauto-install-bug-report-salutation1468,57219
+(defun auto-install-send-bug-report ()auto-install-send-bug-report1480,57710
+
+descbinds-anything.el,1863
+(defgroup descbinds-anything nildescbinds-anything80,2602
+(defcustom descbinds-anything-actionsdescbinds-anything-actions85,2741
+(defcustom descbinds-anything-candidate-formatterdescbinds-anything-candidate-formatter97,3123
+(defcustom descbinds-anything-window-style 'one-windowdescbinds-anything-window-style105,3358
+(defcustom descbinds-anything-section-orderdescbinds-anything-section-order114,3617
+(defcustom descbinds-anything-source-templatedescbinds-anything-source-template120,3844
+(defun descbinds-anything-all-sections (buffer &optional prefix menus)descbinds-anything-all-sections129,4179
+(defun descbinds-anything-action:execute (candidate)descbinds-anything-action:execute170,5473
+(defun descbinds-anything-action:describe (candidate)descbinds-anything-action:describe174,5622
+(defun descbinds-anything-action:find-func (candidate)descbinds-anything-action:find-func178,5773
+(defun descbinds-anything-default-candidate-formatter (key binding)descbinds-anything-default-candidate-formatter182,5917
+(defun descbinds-anything-sort-sections (sections)descbinds-anything-sort-sections186,6055
+(defun descbinds-anything-transform-candidates (candidates)descbinds-anything-transform-candidates195,6372
+(defun descbinds-anything-transform-actions (actions candidate)descbinds-anything-transform-actions203,6614
+(defun descbinds-anything-sources (buffer &optional prefix menus)descbinds-anything-sources206,6755
+(defun descbinds-anything-source (name candidates)descbinds-anything-source213,7013
+(defun descbinds-anything (&optional prefix buffer)descbinds-anything218,7158
+(defvar descbinds-anything-Orig-describe-bindingsdescbinds-anything-Orig-describe-bindings234,7755
+(defun descbinds-anything-install ()descbinds-anything-install237,7846
+(defun descbinds-anything-uninstall ()descbinds-anything-uninstall242,8019
+
+ipa.el,3379
+(defvar ipa-file "~/.ipa"ipa-file88,3109
+(defvar ipa-file-function 'ipa-get-global-fileipa-file-function92,3211
+(defvar ipa-context-size 16ipa-context-size98,3473
+(defvar ipa-annotation-face 'highlightipa-annotation-face103,3671
+(defvar ipa-file-face 'header-lineipa-file-face106,3738
+(defvar ipa-annotations-in-buffer nil)ipa-annotations-in-buffer111,3894
+(defvar ipa-annotation-display t)ipa-annotation-display115,3991
+(defconst ipa-line-continuation "|")ipa-line-continuation117,4026
+(defconst ipa-file-marker "\f")ipa-file-marker119,4064
+(defconst ipa-file-regexp (concat "^" ipa-file-marker "\\s-*"))ipa-file-regexp121,4097
+(defconst ipa-annotation-id-regexp "\\s-*\\[\\(.+\\)?\\]\\(.*\\)")ipa-annotation-id-regexp123,4162
+(defvar ipa-pos-info-face '(face nil invisible t))ipa-pos-info-face127,4232
+(defvar ipa-font-lock-keywords `((,(concat ipa-file-regexpipa-font-lock-keywords129,4284
+(define-derived-mode ipa-mode fundamental-mode "IPA"ipa-mode137,4670
+(define-key ipa-mode-map (kbd "<return>") 'ipa-go-to-annotation)ipa-mode-map140,4801
+(defvar ipa-overriding-mapipa-overriding-map143,4868
+(defvar ipa-old-global-map nil)ipa-old-global-map156,5421
+(defvar ipa-overlay-being-moved nil)ipa-overlay-being-moved158,5454
+(defvar ipa-original-position-of-overlay-being-moved nil)ipa-original-position-of-overlay-being-moved160,5492
+(defun ipa-insert ()ipa-insert164,5554
+(defun ipa-edit (&optional arg)ipa-edit181,5993
+(defun ipa-move (&optional arg)ipa-move205,6743
+(defun ipa-show-help ()ipa-show-help223,7324
+(defun ipa-move-cancel ()ipa-move-cancel229,7500
+(defun ipa-move-help ()ipa-move-help237,7725
+(defun ipa-move-finish ()ipa-move-finish242,7836
+(defun ipa-cleanup ()ipa-cleanup249,7957
+(defun ipa-move-left ()ipa-move-left256,8129
+(defun ipa-move-right ()ipa-move-right261,8208
+(defun ipa-move-line-up ()ipa-move-line-up266,8287
+(defun ipa-move-line-down ()ipa-move-line-down271,8369
+(defun ipa-move-page-up ()ipa-move-page-up276,8449
+(defun ipa-move-page-down ()ipa-move-page-down281,8529
+(defun ipa-move-overlay (movefunc)ipa-move-overlay286,8609
+(defun ipa-next ()ipa-next296,8848
+(defun ipa-previous ()ipa-previous318,9411
+(defun ipa-warn-if-annotation-is-empty (overlay)ipa-warn-if-annotation-is-empty341,9990
+(defun ipa-toggle (&optional arg)ipa-toggle346,10153
+(defun ipa-show ()ipa-show365,10921
+(defun ipa-save-annotations-in-buffer (&optional even-if-empty)ipa-save-annotations-in-buffer381,11438
+(defun ipa-load-annotations-into-buffer ()ipa-load-annotations-into-buffer437,13744
+(defun ipa-get-pos-info ()ipa-get-pos-info507,16748
+(defun ipa-set-overlay-text (overlay text)ipa-set-overlay-text512,16834
+(defun ipa-save-annotations-if-necessary (&optional even-if-empty)ipa-save-annotations-if-necessary521,17147
+(defun ipa-create-overlay (pos text)ipa-create-overlay527,17347
+(defun ipa-sort-overlays ()ipa-sort-overlays534,17561
+(defun ipa-find-storage-file ()ipa-find-storage-file543,17803
+(defun ipa-get-global-file ()ipa-get-global-file549,17947
+(defun ipa-get-directory-file ()ipa-get-directory-file553,17991
+(defun ipa-go-to-annotation ()ipa-go-to-annotation562,18291
+(defun ipa-font-lock-pos-info (limit)ipa-font-lock-pos-info595,19359
+(defun ipa-jump ()ipa-jump613,19893
+(defun ipa-get-buffer-file-name ()ipa-get-buffer-file-name638,20764

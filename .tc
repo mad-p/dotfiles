@@ -1,0 +1,102 @@
+;;; -*-emacs-lisp-*- This file is automatically created
+(setq tcode-data-directory "~/share/tc/")
+(setq eelll-text "~/share/tc/EELLLTXT")
+
+(setq
+ input-method-verbose-flag nil
+ tcode-auto-remove-help-count 4
+ tcode-load-immediate t
+ tcode-adjust-window-for-help t
+ tcode-isearch-enable-wrapped-search t
+ tcode-use-postfix-bushu-as-default t
+ tcode-use-egg-in-mazegaki nil
+ tcode-mazegaki-gakushu-p t
+ tcode-bushu-on-demand 0
+ tcode-kakutei-register ?=
+ tcode-mazegaki-gakusyu-kouho-offset 0
+ tcode-mazegaki-inline-kouho-count 1
+ tcode-help-first-stroke "●"
+ tcode-help-second-stroke "○"
+ tcode-package-name-alist
+    `(("japanese-T-Code" . ,(expand-file-name "~/share/emacs/site-lisp/tc/tc-my-tbl"))
+      ("japanese-TUT-Code" . "tutc-tbl")))
+
+(and (charsetp 'japanese-jisx0213.2004-1)
+     (defconst tcode-jisx0208 'japanese-jisx0213.2004-1))
+
+(add-hook 'post-command-hook 'tcode-auto-remove-help)
+
+(defun my-tcode-setup ()
+  (tcode-set-key-layout "dvorak")
+  (tcode-set-key-layout "dvorak")
+  (tcode-set-key "?" 'expand-abbrev)
+  (tcode-set-key "=" 'toggle-tcode-mode-and-self-insert)
+  (tcode-set-key "<" 'toggle-tcode-mode-and-self-insert)
+  (tcode-set-key "\\" 'tcode-insert-ya-outset)
+  (tcode-set-key "!" nil 'literal)
+  (tcode-set-key "|" nil 'literal)
+  (and window-system
+       (progn
+	 (tcode-enable-cursor-to-change-color)
+	 ;; 安全のため
+	 (add-hook 'tcode-toggle-hook
+		   'tcode-enable-cursor-to-change-color)))
+  ;; Tコードモードに最初に入った時に交ぜ書き変換の辞書を読み込む。
+  (save-excursion
+    (tcode-mazegaki-switch-to-dictionary)))
+(add-hook 'tcode-ready-hook 'my-tcode-setup)
+
+(defun toggle-tcode-mode-and-self-insert (arg)
+  "T-Codeモードをトグルしてから入力した字を挿入する。"
+  (interactive "*p")
+  (toggle-input-method)
+  (self-insert-command arg))
+
+(define-key global-map "\C-z" 'toggle-input-method)
+(define-key isearch-mode-map "\C-z" 'isearch-toggle-tcode)
+(define-key isearch-mode-map "\C-j" 'isearch-toggle-tcode)
+
+(add-hook 'tcode-mazegaki-init-hook
+	  '(lambda ()
+	     ;; 候補選択に使用するキーを二段だけにする
+	     (setq tcode-mazegaki-priority-list
+		   ;; キー配置
+		   ;;  0  1  2  3  4    5  6  7  8  9
+		   ;; 10 11 12 13 14   15 16 17 18 19
+		   ;; 20 21 22 23 24   25 26 27 28 29
+		   ;; 30 31 32 33 34   35 36 37 38 39
+		   '(26 27 28 29	20 21 22 23
+			36 37 38 39	30 31 32 33
+			16 17 18 19	10 11 12 13
+			)
+		   tcode-mazegaki-alternative-select-first-keys '(26)
+		   tcode-mazegaki-alternative-select-second-keys '(27))))
+
+(setq tcode-ya-outset-map-list
+  '(["√" "∂" "『" "』"  "　"     "《"  "》" "【" "】" "“"
+
+;     "┌" "┬" "┐" "│"  "◎"     "◆"  "■" "●" "▲" "▼"
+;     "├" "┼" "┤" "─"  "　"     "◇"  "□" "○" "△" "▽"
+;     "└" "┴" "┘" "／"  "＼"     "♪"  "§" "¶" "†" "‡"]
+     "┏" "┳" "┓" "┃"  "◎"     "◆"  "■" "●" "▲" "▼"
+     "┣" "╋" "┫" "━"  "　"     "◇"  "□" "○" "△" "▽"
+     "┗" "┻" "┛" "／"  "＼"     "♪"  "§" "¶" "†" "‡"]
+
+    ["♠" "♡" "♢" "♣"  "㌧"     "㊤"  "㊥" "㊦" "㊧" "㊨"
+
+     "㉖" "㉗" "㉘" "㉙"  "㉚"     "⑪"  "⑫" "⑬" "⑭" "⑮"
+     "⑯" "⑰" "⑱" "⑲"  "⑳"     "①"  "②" "③" "④" "⑤"
+     "㉑" "㉒" "㉓" "㉔"  "㉕"     "⑥"  "⑦" "⑧" "⑨" "⑩"]
+
+    ["∵" "∴" "≪" "≫"  "≡"     "≦"  "≧" "∝" "∽" "⊥"
+
+     "⊇" "⊆" "∃" "∀"  "⇔"     "＜"  "＞" "≠" "＝" "∠"
+     "∋" "¬" "∨" "∧"  "⇒"     "＋"  "×" "÷" "−" "±"
+     "∈" "⊂" "∪" "∩"  "⊃"     "∞"  "≒" "∫" "∬" "⌒"]
+
+    ["■" "Ξ" "Φ" "Ψ"  "■"     "■"  "Υ" "Λ" "■" "■"
+
+     "Γ" "Σ" "Π" "π"  "ψ"     "φ"  "γ" "Δ" "ρ" "λ"
+     "α" "ο" "ε" "υ"  "ι"     "δ"  "χ" "τ" "ν" "σ"
+     "Θ" "θ" "η" "κ"  "ξ"     "β"  "μ" "ω" "Ω" "ζ"]))
+

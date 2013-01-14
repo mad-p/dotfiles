@@ -1,0 +1,3 @@
+#!/bin/sh
+prefix=$HOME/.emacs.d
+exec skkinput -config ${datarootdir}/tc "$@"
