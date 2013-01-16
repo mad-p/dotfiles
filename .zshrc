@@ -59,6 +59,7 @@ setopt list_packed
 setopt auto_menu
 setopt auto_list
 setopt list_types
+zmodload zsh/complist
 bindkey -M menuselect '^r' vi-insert
 bindkey -M menuselect '^s' vi-insert
 
