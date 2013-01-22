@@ -58,7 +58,6 @@
 (define-key global-map "\e&" 'query-replace-regexp)
 (define-key global-map "\ec" 'capitalize-word-hack)
 ;(define-key global-map "\ec" 'capitalize-word)
-(define-key global-map "\eg" 'garbage-collect)
 
 ;; definition of *-word-hack are found in ~/emacs/mylisp/myfns.el
 
@@ -91,6 +90,11 @@
 (define-key global-map "\C-cw" 'ispell-word)
 ;(define-key global-map "\C-cv" 'kaoru-word-vbar)
 ;(define-key global-map "\C-c|" 'quote-bar-region)
+(define-key global-map "\C-cj" 'anything-c-pp-bookmarks)
+(define-key global-map "\C-xj" 'anything-c-pp-bookmarks)
+(define-key global-map "\C-ca" 'ack)
+
+(find-function-setup-keys)
 
 (define-key global-map [f1] 'next-error)
 (define-key global-map [f2] 'call-last-kbd-macro)
@@ -174,3 +178,18 @@
 (define-key view-mode-map "t" 'View-scroll-line-forward)
 (define-key view-mode-map "n" 'View-scroll-line-backward)
 (add-hook 'view-mode-hook #'(lambda () (setq view-mode-auto-exit nil)))
+
+;; Make C-M-h backword-kill-word
+(defun check-C-M-h ()
+  (let ((cmd (lookup-key (current-local-map) (kbd "C-M-h"))))
+    (if (and (symbolp cmd) (not (eq cmd 'backward-kill-word-stop-at-uppercase)))
+        (define-key (current-local-map) (kbd "C-M-h") 'backward-kill-word-stop-at-uppercase))))
+
+(mapc #'(lambda (hook) (add-hook hook 'check-C-M-h))
+      '(java-mode-hook c-mode-hook c++-mode-hook))
+
+;;
+;; Diff mode
+(add-hook 'diff-mode-hook
+          #'(lambda ()
+              (define-key diff-mode-map (kbd "M-q") 'scroll-down)))

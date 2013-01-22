@@ -1,5 +1,8 @@
 (setq anything-command-map-prefix-key "C-.")
 (require 'anything-startup)
+(anything-read-string-mode-uninstall)
+
+(define-key global-map (kbd "C-;") 'anything)
 
 (define-key anything-map "\C-k" (lambda () (interactive) (delete-minibuffer-contents)))
 (setq anything-map-C-j-binding 'anything-select-3rd-action)
@@ -25,6 +28,9 @@
 (define-key anything-command-map "x" 'anything-execute-extended-command)
 (define-key anything-command-map "o" 'anything-occur)
 (define-key anything-command-map "b" 'anything-for-buffers)
+(define-key anything-command-map "y" 'anything-show-kill-ring)
+(define-key anything-command-map "j" 'anything-c-pp-bookmarks)
+(define-key anything-command-map (kbd "C-.") 'anything-c-etags-select)
 
 (defun anything-update-or-select-action ()
   "Immediately update anything candidates without delay.
