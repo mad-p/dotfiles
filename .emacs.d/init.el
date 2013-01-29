@@ -5,7 +5,7 @@
   (mapc '(lambda (path)
 	   (add-to-list 'load-path path))
 	(mapcar 'expand-file-name paths)))
-(add-to-load-path "~/.emacs.d/auto-install" "~/.emacs.d/elisp" "~/.emacs.d/my-elisp")
+(add-to-load-path "~/.emacs.d/auto-install" "~/.emacs.d/elisp" "~/.emacs.d/my-elisp" "~/share/emacs/site-lisp")
 ;;-------------------------------------------------;;
 (load "~/.emacs.d/conf/conf-auto-install")
 (load "~/.emacs.d/conf/conf-anything")
