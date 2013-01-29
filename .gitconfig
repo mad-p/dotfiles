@@ -12,11 +12,13 @@ st = status
 stat = status
 ci = commit
 co = checkout
+chp = cherry-pick
 br = branch
 l = log --pretty=oneline --abbrev-commit
 lg = log --graph --pretty=oneline --abbrev-commit
 lo = log --pretty=short
 url = config --get remote.origin.url
+svnmerge = merge --no-ff --no-commit
 
 [color]
 branch = auto
