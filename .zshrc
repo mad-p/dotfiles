@@ -92,6 +92,9 @@ case "${TERM}" in
 kterm*|xterm*|screen*)
     PROMPT=$(print "%{\e]2;%n@%m: %~\7%}$PROMPT0") # title bar
     ;;
+*)
+    PROMPT="$PROMPT0"
+    ;;
 esac
 
 # source additional scripts
