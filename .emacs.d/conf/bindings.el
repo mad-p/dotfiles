@@ -186,7 +186,7 @@
         (define-key (current-local-map) (kbd "C-M-h") 'backward-kill-word-stop-at-uppercase))))
 
 (mapc #'(lambda (hook) (add-hook hook 'check-C-M-h))
-      '(java-mode-hook c-mode-hook c++-mode-hook))
+      '(java-mode-hook c-mode-hook c++-mode-hook ruby-mode-hook))
 
 ;;
 ;; Diff mode
