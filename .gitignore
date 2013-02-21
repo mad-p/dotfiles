@@ -11,8 +11,9 @@
 .svn
 .git
 .rake_tasks
-.emacs.desktop
+.emacs.desktop*
 .fonts/Ricty*
 .fonts/*.dir
 .fonts/fonts.*
 share
+.zsh.d/projects.zsh
