@@ -125,7 +125,8 @@ alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
 alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
 
-alias gl='git --no-pager log --pretty=oneline --abbrev-commit -8'
+alias gl='git --no-pager log --oneline --decorate -8'
+alias gg='gl --graph'
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
