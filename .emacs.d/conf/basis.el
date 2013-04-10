@@ -37,3 +37,7 @@
 
 (load "server")
 (unless (server-running-p) (server-start))
+
+(global-auto-revert-mode 1)
+(setq auto-revert-interval 10)
+(setq auto-revert-check-vc-info t)
