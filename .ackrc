@@ -4,5 +4,5 @@
 --ignore-dir=vendor
 --ignore-dir=coverage
 --ignore-dir=spec/reports
---type-add=ruby=.feature,.opts
+--type-add=ruby=.feature,.opts,.yml.deploy,.yml.ci,.sample,.haml
 

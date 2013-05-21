@@ -67,10 +67,8 @@ setopt extended_glob
 setopt numeric_glob_sort
 
 setopt hist_expire_dups_first
-setopt hist_ignore_dups
 setopt hist_no_store
 setopt hist_reduce_blanks
-setopt hist_save_no_dups
 setopt inc_append_history
 
 setopt correct
@@ -114,7 +112,7 @@ fi
 alias p=pushd
 alias ,=popd
 alias ..=pushd +2
-alias r=rails
+alias r='bundle exec ./script/rails'
 alias \?='dirs -v'
 alias j='jobs'
 alias e=emacsclient
