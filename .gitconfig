@@ -6,6 +6,7 @@ email = kaoru.maeda@gmail.com
 user = mad-p
 
 [svn]
+pushmergeinfo = true
 
 [alias]
 st = status

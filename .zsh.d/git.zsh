@@ -31,3 +31,6 @@ _git-br () {
 _git-co () {
   _git-checkout
 }
+
+source ~/.zsh.d/git-escape-magic
+git-escape-magic
