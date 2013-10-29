@@ -126,6 +126,9 @@
 (define-key global-map [?\C->] 'end-of-buffer)
 (define-key global-map [?\C-\]] 'toggle-tcode-mode)
 
+(define-key global-map "\C-cl" 'align)
+(define-key global-map "\C-cn" 'align-regexp)
+
 (define-key emacs-lisp-mode-map "\eq" 'scroll-down)
 (define-key lisp-interaction-mode-map "\eq" 'scroll-down)
 (define-key emacs-lisp-mode-map "\e\^x" 'eval-defvar-as-defconst)

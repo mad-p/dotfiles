@@ -8,6 +8,11 @@
                (repeat . t)
                (modes  . '(ruby-mode))))
 (add-to-list 'align-rules-list
+             '(ruby-keyword-list-literal
+               (regexp . "[a-zA-Z]:\\(\\s-*\\) \\S-")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
              '(ruby-hash-literal
                (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
                (repeat . t)

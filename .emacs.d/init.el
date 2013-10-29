@@ -12,6 +12,7 @@
 (load "~/.emacs.d/conf/basis")
 (load "~/.emacs.d/conf/calc")
 (load "~/.emacs.d/conf/fonts")
+(load "~/.emacs.d/conf/highlight-indentation")
 (load "~/.emacs.d/conf/bindings")
 (load "~/.emacs.d/conf/w32")
 (load "~/.emacs.d/conf/macosx")
@@ -54,7 +55,7 @@
  '(recentf-max-saved-items 50)
  '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
  '(show-paren-mode t)
- '(tempbuf-minimum-timeout 1800)
+ '(tempbuf-minimum-timeout 60)
  '(tool-bar-mode nil)
  '(tramp-mode nil)
  '(transient-mark-mode nil)
@@ -65,7 +66,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
-  '(cperl-nonoverridable-face ((((class color) (background light)) (:foreground "dark green"))))
+ '(cperl-nonoverridable-face ((((class color) (background light)) (:foreground "dark green"))))
  '(cursor ((t (:background "black" :underline t))))
  '(font-lock-builtin-face ((((class color) (background light)) (:foreground "dark green" :underline t))))
  '(font-lock-comment-face ((((class color) (background light)) (:background "gray80"))))
@@ -74,6 +75,8 @@
  '(font-lock-string-face ((((class color) (background light)) (:background "pink"))))
  '(font-lock-type-face ((((class color) (background light)) (:foreground "dark green"))))
  '(font-lock-variable-name-face ((((class color) (background light)) (:foreground "brown"))))
+ '(highlight-indentation-current-column-face ((t (:background "antiquewhite3"))))
+ '(highlight-indentation-face ((t (:background "antiquewhite"))))
  '(message-header-subject-face ((t (:background "light blue" :weight bold))) t)
  '(message-header-to-face ((t (:background "lavender" :weight bold))) t)
- '(trailing-whitespace ((((class color) (background light)) (:background "pink")))))
+ '(trailing-whitespace ((((class color) (background light)) (:background "red")))))
