@@ -1,5 +1,7 @@
 (require 'highlight-indentation)
-(add-hook 'highlight-indentation-mode-hook 'highlight-indentation-current-column-mode)
+(defun turn-on-highlight-indentation-mode ()
+  (highlight-indentation-mode 1)
+  (highlight-indentation-current-column-mode 1))
 
-(add-hook 'ruby-mode-hook 'highlight-indentation-mode)
-(add-hook 'emacs-lisp-mode-hook  'highlight-indentation-mode)
+(add-hook 'ruby-mode-hook 'turn-on-highlight-indentation-mode)
+(add-hook 'emacs-lisp-mode-hook  'turn-on-highlight-indentation-mode)
