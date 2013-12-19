@@ -58,3 +58,8 @@ autosetupmerge = true
 	fontdiff = -family sgothic -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 [push]
 	default = simple
+
+[pager]
+	log = diff-highlight | less
+        show = diff-highlight | less
+        diff = diff-highlight | less
