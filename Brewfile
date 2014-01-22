@@ -58,6 +58,8 @@ cask install xquartz
 cask install virtualbox
 cask install vagrant
 cask install yorufukurou
+cask install nosleep
+cask install bettertouchtool
 
 # Remove outdated versions
 cleanup
