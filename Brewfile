@@ -30,13 +30,16 @@ install cmake
 # install automake
 # install mosh
 # install markdown
-# install pidof # pidof
-install proctools # pkill, pgrep, pfind
+# install pidof
+##  pidof
+install proctools
+##  pkill, pgrep, pfind
 install gnu-tar
 # install openssl
 install rbenv
 install emacs --with-x
-#install coreutils --default-names # http://takuya-1st.hatenablog.jp/entry/20111230/1325272152
+# install coreutils --default-names
+###  http://takuya-1st.hatenablog.jp/entry/20111230/1325272152
 install brew-cask
 
 # .dmg with homebrew-cask
