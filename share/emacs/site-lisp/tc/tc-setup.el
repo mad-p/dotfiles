@@ -57,11 +57,6 @@
 			 'tcode-use-package
 			 "TT"
 			 "a kanji direct input method")
-  (register-input-method "japanese-S-Code"
-			 "Japanese"
-			 'tcode-use-package
-			 "SC"
-			 "a kanji direct input method")
   (register-input-method "japanese-T-Code"
 			 "Japanese"
 			 'tcode-use-package

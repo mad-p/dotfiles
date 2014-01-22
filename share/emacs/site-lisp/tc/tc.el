@@ -290,7 +290,9 @@ nil のときは `tcode-mode' から得る。")
 (defvar tcode-shift-state nil)
 
 (defvar tcode-input-command-list
-  '(c-electric-semi&comma
+  '(asm-colon
+    asm-comment
+    c-electric-semi&comma
     c-electric-slash
     canna-self-insert-command
     digit-argument
@@ -299,9 +301,12 @@ nil のときは `tcode-mode' から得る。")
     electric-c-semi
     electric-c-terminator
     electric-perl-terminator
+    org-self-insert-command
+    perl-electric-terminator
     self-insert-command
     sgml-slash
-    org-self-insert-command
+    sql-magic-semicolon
+    sql-magic-go
     tcode-electric-comma
     tcode-self-insert-command
     tcode-mazegaki-self-insert-or-convert)
@@ -677,7 +682,7 @@ t ... cancel"
 (defun tcode-input-method (ch)
   "The input method function for T-Code."
   (setq last-command 'self-insert-command
-	last-command-char ch)
+	last-command-event ch)
   (if input-method-verbose-flag
       (unless tcode-input-method-verbose-flag
 	;; push some variables' values
@@ -1228,7 +1233,7 @@ The remaining arguments are libraries to be loaded before using the package."
   "Encode Tcode character and insert."
   (interactive "P")
   (tcode-cancel-undo-boundary)
-  (let ((events (tcode-input-method last-command-char)))
+  (let ((events (tcode-input-method last-command-event)))
     (while events
       (let* ((ch (car events))
 	     (command (tcode-default-key-binding (char-to-string ch))))
@@ -1239,7 +1244,7 @@ The remaining arguments are libraries to be loaded before using the package."
 	      (setq command 'self-insert-command))
 	  (setq prefix-arg current-prefix-arg
 		this-command command
-		last-command-char ch) ; for self-insert-command
+		last-command-event ch) ; for self-insert-command
 	  (command-execute command)))
       (setq events (cdr events)))))
 
@@ -1479,7 +1484,6 @@ Type \\[tcode-mode-help] for more detail."
 		    (unless (one-window-p)
 		      (select-window orig-win))
 		    (set-window-buffer (selected-window) orig-buf)
-                    (set-buffer orig-buf)
 		    (goto-char orig-pos)))
 		 ((not (one-window-p))
 		  (delete-window help-win))))

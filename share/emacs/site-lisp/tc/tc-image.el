@@ -160,7 +160,7 @@ Appropriate value is 1, 2 or 3.")
 
 (defun tc-image-make-blank-data-xpm (w h &optional val)
   (mapconcat 'identity
-	     (make-list h (concat "\"" (make-string w (or val 32)) 
+	     (make-list h (concat "\"" (make-string w (or val 32))
 				  "\",\n"))
 	     ""))
 
@@ -184,7 +184,7 @@ Appropriate value is 1, 2 or 3.")
 	 (h (tc-image-button-height))
 	 (v (make-vector h nil)))
     (dotimes (i h)
-      (aset v i (concat (nth i button) 
+      (aset v i (concat (nth i button)
 			(make-string (- w (length (nth i button))) 32))))
     v))
 
@@ -261,7 +261,7 @@ Appropriate value is 1, 2 or 3.")
 	(funcall set-func image offset w h (+ x j) (+ y i) (aref line j))))))
 
 (defun tc-image-set-button (image key type)
-  (tc-image-internal-set-button 
+  (tc-image-internal-set-button
    image (aref tc-image-cache 3)
    (aref tc-image-cache 0) (aref tc-image-cache 1)
    (aref (aref tc-image-cache 5) (% key 10))
@@ -295,7 +295,7 @@ Appropriate value is 1, 2 or 3.")
       ;; key1 != key3, key2 != key3
       (tc-image-set-button image key3 5))
     (let ((s (make-string tc-image-columns ?X)))
-      (put-text-property 
+      (put-text-property
        0 (length s) 'display
        (create-image image tc-image-type t ':ascent 'center)
        s)

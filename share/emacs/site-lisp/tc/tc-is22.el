@@ -3,13 +3,11 @@
 ;; Copyright (C) 1994,97-2001, 2005 Kaoru Maeda, Mikihiko Nakao, KITAJIMA Akira and Masayuki Ataka
 
 ;; Author: Kaoru Maeda <maeda@src.ricoh.co.jp>
-;;	Mikihiko Nakao
-;;	KITAJIMA Akira <kitajima@isc.osakac.ac.jp>
-;;      Masayuki Ataka <ataka@milk.freemail.ne.jp>
+;;      Mikihiko Nakao
+;;      KITAJIMA Akira <kitajima@isc.osakac.ac.jp>
+;;      Masayuki Ataka <masayuki.ataka@gmail.com>
 ;; Maintainer: Masayuki Ataka
 ;; Create: 12 Feb (Sat), 2005
-
-;; $Id: $
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -35,10 +33,10 @@
 ;;;
 (defvar tcode-isearch-start-state nil
   "*インクリメンタルサーチ開始時のTコードモードを指定する。
-	nil: バッファのTコードモードに同期(デフォールト)。
-	t:   バッファのTコードモードと独立。開始時はバッファと同じ。
-	0:   バッファと独立に常に非Tコードモードサーチから開始。
-	1:   バッファと独立に常にTコードモードサーチから開始。
+       nil: バッファのTコードモードに同期(デフォールト)。
+       t:   バッファのTコードモードと独立。開始時はバッファと同じ。
+       0:   バッファと独立に常に非Tコードモードサーチから開始。
+       1:   バッファと独立に常にTコードモードサーチから開始。
 バッファローカル変数。")
 (make-variable-buffer-local 'tcode-isearch-start-state)
 (setq-default tcode-isearch-start-state nil)
@@ -74,9 +72,22 @@
 ;;;
 (defadvice isearch-search-string (around tcode-handling activate)
   (let ((isearch-regexp (if (or isearch-word isearch-regexp)
-                            isearch-regexp 
+                            isearch-regexp
                           tcode-isearch-enable-wrapped-search)))
     ad-do-it))
+
+(defun tcode-isearch-search-fun ()
+  (cond (isearch-word
+	 (if isearch-forward
+	     'word-search-forward 'word-search-backward))
+	((or isearch-regexp
+	     (and (boundp 'tcode-isearch-enable-wrapped-search)
+		  tcode-isearch-enable-wrapped-search))
+	 (if isearch-forward
+	     're-search-forward 're-search-backward))
+	(t
+	 (if isearch-forward 'search-forward 'search-backward))))
+(setq isearch-search-fun-function #'tcode-isearch-search-fun)
 
 (defun isearch-printing-char ()
   "Add this ordinary printing character to the search string and search."
@@ -92,17 +103,17 @@
 		((stringp action)
 		 (setq action
 		       (mapconcat 'char-to-string
-				  (tcode-apply-filters 
+				  (tcode-apply-filters
 				   (string-to-list action))
 				  nil))
 		 (tcode-isearch-process-string action prev))
 		((char-or-string-p action)
-		 (tcode-isearch-process-string 
+		 (tcode-isearch-process-string
 		  (char-to-string (car (tcode-apply-filters (list action))))
 		  prev))
 		((and (not (tcode-function-p action))
 		      (consp action))
-		 (tcode-isearch-process-string 
+		 (tcode-isearch-process-string
 		  (mapconcat 'char-to-string
 			     (tcode-apply-filters
 			      (mapcar 'string-to-char
@@ -146,7 +157,7 @@
 (defun isearch-yank-word ()
   "Pull next word from buffer into search string."
   (interactive)
-  (isearch-yank-internal (lambda () 
+  (isearch-yank-internal (lambda ()
 			   (if (= (char-width (char-after)) 2)
 			       (forward-char 1)
 			     (forward-word 1))
@@ -189,16 +200,16 @@
 	    (progn
 	      (if isearch-wrap-function
 		  (funcall isearch-wrap-function)
-	        (goto-char (if isearch-forward (point-min) (point-max))))
+		(goto-char (if isearch-forward (point-min) (point-max))))
 	      (setq isearch-wrapped t))))
     ;; C-s in reverse or C-r in forward, change direction.
     (setq isearch-forward (not isearch-forward)))
 
-  (setq isearch-barrier (point)) ; For subsequent \| if regexp.
+  (setq isearch-barrier (point))	; For subsequent \| if regexp.
 
   (if (equal isearch-string "")
       (setq isearch-success t)
-    (if (and isearch-success 
+    (if (and isearch-success
 	     (equal (point) isearch-other-end)
 	     (not isearch-just-started))
 	;; If repeating a search that found
@@ -214,7 +225,7 @@
 
   (isearch-push-state)
   (isearch-update))
-
+
 (defun tcode-isearch-read-string ()
   "インクリメンタルサーチ中に文字列を読み込む。"
   (let* (overriding-terminal-local-map
@@ -246,7 +257,7 @@
 	  (while (cdr isearch-cmds)
 	    (isearch-pop-state))
 	  (let* (overriding-terminal-local-map
-		 (minibuffer-setup-hook 
+		 (minibuffer-setup-hook
 		  (lambda ()
 		    (tcode-activate tcode-mode)
 		    (tcode-mazegaki-begin-conversion nil)))
@@ -277,7 +288,7 @@
 			(string= msg (isearch-message-state (car isearch-cmds))))
 	      (isearch-delete-char)))
 	  (let ((msg (isearch-message-state (car isearch-cmds))))
-	    (while (and msg 
+	    (while (and msg
 			(string= msg (isearch-message-state (car isearch-cmds))))
 	      (isearch-delete-char)))
 	  (isearch-process-search-string
@@ -291,9 +302,9 @@ PREV と合成できるときはその合成した文字で検索する。"
   (if (stringp prev)
       (tcode-isearch-bushu-henkan prev str)
     (isearch-process-search-string
-       (if prev
-	   ""
-	 (tcode-isearch-make-string-for-wrapping str)) str)))
+     (if prev
+	 ""
+       (tcode-isearch-make-string-for-wrapping str)) str)))
 
 (defun tcode-regexp-unquote (str)
   (let* ((ll (string-to-list str))

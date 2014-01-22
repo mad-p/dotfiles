@@ -829,7 +829,7 @@ Emacs内部のcompletionの実装上の問題のため、「?」を
       (when (< 0 padr)
 	(goto-char (1- (if (<= cw sw) p2e p1e)))
 	(insert 32)
-	(put-text-property (1- (point)) (point) 
+	(put-text-property (1- (point)) (point)
 			   'display `(space :width (,padr))))
       (when (< 0 padl)
 	(goto-char (if (<= cw sw) p2 p1))

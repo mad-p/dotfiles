@@ -228,7 +228,7 @@ BODY should be a list of lisp expressions."
 ;;;
 ;;; Fix incompatibilities between 18 and 19.
 ;;;
-(if (string-match "^\\(19\\|2[0123]\\)" emacs-version)
+(if (string-match "^\\(19\\|2[01234]\\)" emacs-version)
     (progn
       (defun tcode-redo-command (ch)
 	"キー CH を現在のキーマップで再実行する"
@@ -240,7 +240,7 @@ BODY should be a list of lisp expressions."
       ;; XEmacs
       (or (fboundp 'isearch-last-command-char)
 	  (defun isearch-last-command-char ()
-	    last-command-char))
+	    last-command-event))
       (or (boundp 'search-upper-case)
 	  (setq search-upper-case 'not-yanks)))
   ;; NEmacs

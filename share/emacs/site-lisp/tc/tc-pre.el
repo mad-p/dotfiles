@@ -49,8 +49,6 @@ nemacs, mule-1, mule-2, mule-3, mule-4, xemacsのいずれか。")
 	 'tc-is19)
 	((numberp (string-match "^22" emacs-version))
 	 'tc-is22)
-	((numberp (string-match "^23" emacs-version))
-	 'tc-is23)
 	(t
 	 'tc-is20))
   "isearchで用いるTコード用モジュールのタイプ。")
@@ -97,7 +95,7 @@ nemacs, mule-1, mule-2, mule-3, mule-4, xemacsのいずれか。")
 
 ;;;; Version
 
-(defconst tcode-version "2.3.1")
+(defconst tcode-version "3.0")
 
 (defun tcode-version ()
   "Tコード入力環境のバージョンを表示する。"
@@ -118,7 +116,6 @@ nemacs, mule-1, mule-2, mule-3, mule-4, xemacsのいずれか。")
 ;;;; package
 (defvar tcode-package-name-alist
   '(("japanese-T-Code" . "tc-tbl")
-    ("japanese-S-Code" . "sc-tbl")
     ("japanese-TT-Code" . "ttc-tbl")
     ("japanese-Try-Code" . "try-tbl")
     ("japanese-TUT-Code" . "tutc-tbl"))
@@ -127,7 +124,7 @@ nemacs, mule-1, mule-2, mule-3, mule-4, xemacsのいずれか。")
 ;;;; site information
 
 
-(defconst tcode-site-data-directory (expand-file-name "~/share/tc/"))
+(defconst tcode-site-data-directory "/Users/maeda/share/tc/")
 
 (provide 'tc-pre)
 

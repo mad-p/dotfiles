@@ -497,6 +497,52 @@ PREFIX が nil でなければリージョン中の文字列で始まる文字列を探す。"
 	 (tcode-display-direct-stroke
 	  (char-to-string (tcode-preceding-char)))
 	 (tcode-auto-remove-help-char))))
+
+(defvar tcode-katakana-begin-point (point-min)
+  "直前の後置型カタカナ変換の開始位置")
+(defvar tcode-katakana-end-point (point-min)
+  "直前の後置型カタカナ変換の終了位置")
+
+(defun tcode-katakana-previous-chars (&optional hiracnt)
+  "現ポイント以前で連続するひらがなや「ー」をカタカナに変換する。
+ひらがなとして残す文字数を HIRACNT で指定可能。
+ただし、交ぜ書き変換の読みがあれば、読みをカタカナとして確定する。"
+  (interactive "*p")
+  (if tcode-mazegaki-prefix
+      (let ((beg tcode-mazegaki-prefix))
+	(tcode-mazegaki-restore-yomi-and-quit)
+	(japanese-katakana-region beg (point)))
+    (save-excursion
+      (let* ((end (point))
+	     (beg0 (re-search-backward "[^ぁ-んー]" nil t))
+	     (beg (+ (if beg0
+			 ;; 「キーとばりゅー」に対して1文字残してカタカナ変換で
+			 ;; 「キーとバリュー」になるように始まりの「ー」は除く
+			 (if (and (looking-at ".ー")
+				  (re-search-forward "[ぁ-ん]" end t))
+			     (match-beginning 0)
+			   (+ beg0 1))
+		       (point-min))
+		     (or hiracnt 0))))
+	(when (< beg end)
+	  (setq tcode-katakana-begin-point beg)
+	  (setq tcode-katakana-end-point end)
+	  (japanese-katakana-region beg end))))))
+
+(defun tcode-katakana-shrink (&optional cnt)
+  "直前の後置型カタカナ変換を縮める"
+  ;; 単にカタカナを縮めるのではなく、直前の後置型カタカナ変換を縮める。
+  ;; 「キーとばりゅー」後置型カタカナ変換→「キートバリュー」
+  ;; 直前の後置型カタカナ変換を1文字縮める→「キーとバリュー」
+  ;; (もし単にカタカナを縮めると→「きートバリュー」)
+  (interactive "*p")
+  (when (and (= (point) tcode-katakana-end-point)
+	     (> tcode-katakana-end-point tcode-katakana-begin-point))
+    (let ((hiraend (min (+ tcode-katakana-begin-point (or cnt 1))
+			tcode-katakana-end-point)))
+      (save-excursion
+	(japanese-hiragana-region tcode-katakana-begin-point hiraend))
+      (setq tcode-katakana-begin-point hiraend))))
 
 ;;;; 区点・JIS コードによる漢字入力
 
@@ -703,6 +749,23 @@ leim パッケージが入っていなければ使うことはできない。
 			 key))))
   (if char
       (zap-to-char arg char)))
+
+;;;; トグルではなく、ON/OFFキーを使用
+
+;;;###autoload
+(defun tcode-activate-input-method ()
+  (interactive)
+  (activate-input-method default-input-method))
+;;;###autoload
+(defun tcode-inactivate-input-method ()
+  (interactive)
+  (inactivate-input-method))
+;;;###autoload
+(defun tcode-inactivate-input-method-recenter ()
+  (interactive)
+  (inactivate-input-method)
+  (recenter-top-bottom))
+
 
 (provide 'tc-util)
 
