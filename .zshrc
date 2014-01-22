@@ -1,12 +1,14 @@
+uname=`uname | tr A-Z a-z`
+
 ### environments
 if [ -f ~/.proxyrc ]; then
-        source ~/.proxyrc
+  source ~/.proxyrc
 fi
 
 LANG=ja_JP.UTF-8
 LC_MESSAGES=en_US.UTF-8
 
-export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/git/bin:$HOME/share/apache-ant-1.8.0/bin:$PATH
+export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/git/bin:$PATH
 export MANPATH=$HOME/man:/usr/local/man:$MANPATH:/usr/local/git/share/man
 
 export EDITOR=emacsclient
@@ -107,6 +109,8 @@ if [ -d ~/.zsh.d ]; then
     esac
   done
 fi
+[ -f "$HOME/.zshrc_$uname" ] && source "$HOME/.zshrc_$uname"
+[ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
 
 ## aliases
 alias p=pushd
@@ -127,6 +131,4 @@ alias gl='git --no-pager log --oneline --decorate -8'
 alias gg='gl --graph'
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-PATH=$PATH:/usr/local/rvm/bin # Add RVM to PATH for scripting
+[[ -d ~/.rbenv/bin ]] && export PATH="$HOME/.rbenv/bin:$PATH"
