@@ -109,8 +109,6 @@ if [ -d ~/.zsh.d ]; then
     esac
   done
 fi
-[ -f "$HOME/.zshrc_$uname" ] && source "$HOME/.zshrc_$uname"
-[ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
 
 ## aliases
 alias p=pushd
@@ -132,3 +130,6 @@ alias gg='gl --graph'
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
 [[ -d ~/.rbenv/bin ]] && export PATH="$HOME/.rbenv/bin:$PATH"
+
+[ -f "$HOME/.zshrc_$uname" ] && source "$HOME/.zshrc_$uname"
+[ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
