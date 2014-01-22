@@ -8,5 +8,5 @@
        (setq ns-alternate-modifier 'super)
 
        ;; frame size
-       (modify-frame-parameters (selected-frame) '((width . 96) (height . 40)))
+       (modify-frame-parameters (selected-frame) '((width . 96) (height . 36)))
        ))
