@@ -1,3 +1,4 @@
+(setq auto-install-wget-command "/usr/local/bin/wget")
 (require 'auto-install)
 (setq auto-install-directory "~/.emacs.d/auto-install/")
 (auto-install-update-emacswiki-package-name t)

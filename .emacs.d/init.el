@@ -11,25 +11,25 @@
 (load "~/.emacs.d/conf/conf-anything")
 (load "~/.emacs.d/conf/basis")
 (load "~/.emacs.d/conf/calc")
-(load "~/.emacs.d/conf/fonts")
 (load "~/.emacs.d/conf/highlight-indentation")
 (load "~/.emacs.d/conf/bindings")
-(load "~/.emacs.d/conf/w32")
-(load "~/.emacs.d/conf/macosx")
 (load "~/.emacs.d/conf/tcode")
 (load "~/.emacs.d/conf/grep")
 (load "~/.emacs.d/conf/programming")
 (load "~/.emacs.d/conf/tempbuf")
+(load "~/.emacs.d/conf/fonts")
+(load "~/.emacs.d/conf/w32")
+(load "~/.emacs.d/conf/macosx")
 (let* ((host (system-name))
        (file (concat "~/.emacs.d/local/" host ".el")))
   (if (file-exists-p file)
       (load file)))
 ;;-------------------------------------------------;;
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(calendar-date-display-form (quote (year "/" month "/" day)))
  '(calendar-time-display-form (quote (24-hours ":" minutes (if time-zone " (") time-zone (if time-zone ")"))) t)
  '(cperl-comment-column 40)
@@ -40,6 +40,7 @@
  '(diff-switches "-u")
  '(display-time-mode t)
  '(indent-tabs-mode nil)
+ '(ispell-program-name "aspell")
  '(js2-auto-indent-flag t)
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
@@ -62,10 +63,10 @@
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(view-read-only t))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((((class color) (background light)) (:foreground "dark green"))))
  '(cursor ((t (:background "black" :underline t))))
  '(font-lock-builtin-face ((((class color) (background light)) (:foreground "dark green" :underline t))))

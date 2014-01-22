@@ -38,6 +38,7 @@ install gnu-tar
 # install openssl
 install rbenv
 install emacs --with-x
+install aspell
 # install coreutils --default-names
 ###  http://takuya-1st.hatenablog.jp/entry/20111230/1325272152
 install brew-cask
@@ -60,6 +61,7 @@ cask install vagrant
 cask install yorufukurou
 cask install nosleep
 cask install bettertouchtool
+cask install emacs
 
 # Remove outdated versions
 cleanup
