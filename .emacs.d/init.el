@@ -54,6 +54,7 @@
  '(js2-strict-trailing-comma-warning nil)
  '(line-number-mode nil)
  '(recentf-max-saved-items 50)
+ '(recentf-mode t)
  '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
  '(show-paren-mode t)
  '(tempbuf-minimum-timeout 60)
