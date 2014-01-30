@@ -23,9 +23,11 @@ chpwd()
 }
 
 #compdef git-br git-co
-if [ -f /usr/share/zsh/*/functions/_git ]; then
-  source /usr/share/zsh/*/functions/_git
+x=( /usr/share/zsh/**/_git )
+if [ -f "$x" ]; then
+  source $x
 fi
+unset x
 
 _git-br () {
   _git-branch
