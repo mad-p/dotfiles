@@ -37,10 +37,15 @@ install proctools
 install gnu-tar
 # install openssl
 install rbenv
+install ruby-build
 install emacs --with-x
 install aspell
+install mysql
+install readline
 # install coreutils --default-names
 ###  http://takuya-1st.hatenablog.jp/entry/20111230/1325272152
+install wireshark
+
 install brew-cask
 
 # .dmg with homebrew-cask

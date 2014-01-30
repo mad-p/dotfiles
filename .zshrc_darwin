@@ -1,2 +1,1 @@
-export PATH=/Users/maeda/.rbenv/shims:$PATH
 alias emacs='LANG=C open ~/Applications/Emacs.app'
