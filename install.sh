@@ -32,4 +32,6 @@ fi
 
 # vim -c ':NeoBundleInstall!' -c ':q!' -c ':q!'
 
-popd
+popd || true
+
+exit 0
