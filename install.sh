@@ -8,14 +8,18 @@ pushd ~/dotfiles
 git submodule init
 git submodule update
 
-for i in `ls -a`
-do
+for i in `ls -a`; do
   [ $i = "." ] && continue
   [ $i = ".." ] && continue
   [ $i = ".git" ] && continue
   [ $i = "README.md" ] && continue
   [ $i = "install.sh" ] && continue
-  ln -s ~/dotfiles/$i ~/
+  [ $i = "bin" ] && continue
+  ln -s dotfiles/$i ~/
+done
+[[ -d ~/bin ]] || mkdir ~/bin
+for i in bin/*; do
+  ln -s ../dotfiles/$i ~/bin/
 done
 
 if [ `uname` = "Darwin" ]; then
@@ -28,4 +32,6 @@ fi
 
 # vim -c ':NeoBundleInstall!' -c ':q!' -c ':q!'
 
-popd
+popd || true
+
+exit 0
