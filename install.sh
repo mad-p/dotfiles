@@ -17,6 +17,7 @@ for i in `ls -a`; do
   [ $i = "bin" ] && continue
   ln -s dotfiles/$i ~/
 done
+[[ -d ~/bin ]] || mkdir ~/bin
 for i in bin/*; do
   ln -s ../dotfiles/$i ~/bin/
 done
