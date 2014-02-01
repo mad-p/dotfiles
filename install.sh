@@ -2,8 +2,8 @@
 
 # stolen from github.com/sonots/.dotfiles
 
-[[ -e ~/dotfiles ]] || git clone git@github.com:mad-p/dotfiles.git ~/dotfiles
-pushd ~/dotfiles
+[ -e ~/dotfiles ] || git clone git@github.com:mad-p/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 
 git submodule init
 git submodule update
@@ -17,7 +17,7 @@ for i in `ls -a`; do
   [ $i = "bin" ] && continue
   ln -s dotfiles/$i ~/
 done
-[[ -d ~/bin ]] || mkdir ~/bin
+[ -d ~/bin ] || mkdir ~/bin
 for i in bin/*; do
   ln -s ../dotfiles/$i ~/bin/
 done
@@ -31,7 +31,5 @@ if [ `uname` = "Darwin" ]; then
 fi
 
 # vim -c ':NeoBundleInstall!' -c ':q!' -c ':q!'
-
-popd || true
 
 exit 0
