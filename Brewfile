@@ -67,6 +67,7 @@ cask install yorufukurou
 cask install nosleep
 cask install bettertouchtool
 cask install emacs
+cask install menumeters
 
 # Remove outdated versions
 cleanup
