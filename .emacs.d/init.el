@@ -56,6 +56,7 @@
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
+ '(sh-indentation 2)
  '(show-paren-mode t)
  '(tempbuf-minimum-timeout 60)
  '(tool-bar-mode nil)
