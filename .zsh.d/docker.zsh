@@ -12,10 +12,13 @@ dccommit() {
 }
 
 dcrun() {
-  echo "Running ${CONTAINER_ID=${1:-devenv}}"
-  CONTAINER_ID=`docker run -name $CONTAINER_ID -d mad-p/$CONTAINER_ID`
+  IMAGE_ID=${1:-${IMAGE_ID:-devenv}}
+  echo "Running $IMAGE_ID"
+  CONTAINER_ID=`docker run -name $IMAGE_ID -d mad-p/$IMAGE_ID`
   if [ "x$CONTAINER_ID" != "x" ]; then
+    echo "IMAGE_ID=$IMAGE_ID"
     echo "CONTAINER_ID=$CONTAINER_ID"
+    export IMAGE_ID
     export CONTAINER_ID
     sleep 1
     dcssh $CONTAINER_ID
