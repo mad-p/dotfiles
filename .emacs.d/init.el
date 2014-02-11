@@ -36,6 +36,7 @@
  '(cperl-continued-statement-offset 4)
  '(cperl-indent-level 4)
  '(cperl-regexp-indent-step 2)
+ '(desktop-path (quote ("." "~/.emacs.d/" "~")))
  '(desktop-save-mode t)
  '(diff-switches "-u")
  '(display-time-mode t)
