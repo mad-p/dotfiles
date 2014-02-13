@@ -238,8 +238,8 @@ BODY should be a list of lisp expressions."
 	  (defun character-to-event (ch)
 	    ch))
       ;; XEmacs
-      (or (fboundp 'isearch-last-command-char)
-	  (defun isearch-last-command-char ()
+      (or (fboundp 'isearch-last-command-event)
+	  (defun isearch-last-command-event ()
 	    last-command-event))
       (or (boundp 'search-upper-case)
 	  (setq search-upper-case 'not-yanks)))

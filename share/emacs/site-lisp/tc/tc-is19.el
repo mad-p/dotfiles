@@ -164,8 +164,8 @@ PREV と合成できるときはその合成した文字で検索する。"
   "Add this ordinary printing character to the search string and search."
   (interactive)
   (if (not tcode-isearch-active)
-      (isearch-process-search-char (isearch-last-command-char))
-    (let* ((decoded (tcode-decode-chars (isearch-last-command-char)))
+      (isearch-process-search-char (isearch-last-command-event))
+    (let* ((decoded (tcode-decode-chars (isearch-last-command-event)))
 	   (action (car decoded))
 	  (prev (tcode-isearch-bushu)))
       (cond ((null action)

@@ -305,7 +305,7 @@ Tコードモードのときに、このリストのコマンドが呼ばれた後に
 					      (tcode-preceding-char))))
 			      (string-match (regexp-quote prev-char)
 					    tcode-no-following-space-chars)))
-		       (tcode-redo-command last-command-char)))
+		       (tcode-redo-command last-command-event)))
 	       (condition-case nil
 		   (let* ((echo-keystrokes 0)
 			  (ch (read-char)))
@@ -398,7 +398,7 @@ LEVEL 番目の表が対象となる。"
 	  (cond (elm
 		 (let (current-prefix-arg)
 		   (tcode-insert elm)))
-		((= ch last-command-char)
+		((= ch last-command-event)
 		 (tcode-insert-ya-outset (1+ level)))
 		((= ch ? )
 		 (self-insert-command level))
@@ -679,7 +679,7 @@ RET で終了。
     (unwind-protect
 	(let* ((echo-keystrokes 0)
 	       (ch (read-char)))
-	  (cond ((= ch last-command-char)
+	  (cond ((= ch last-command-event)
 		 (tcode-katakana-preceding-chars (1+ arg)))
 		((= ch ?\C-?)
 		 (tcode-katakana-preceding-chars (- arg)))

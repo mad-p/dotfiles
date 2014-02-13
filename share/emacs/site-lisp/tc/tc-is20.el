@@ -139,10 +139,10 @@
 (defun isearch-printing-char ()
   "Add this ordinary printing character to the search string and search."
   (interactive)
-  (let ((char (isearch-last-command-char)))
+  (let ((char (isearch-last-command-event)))
     (if (and (boundp 'tcode-mode) tcode-mode)
 	;; isearch for T-Code
-	(let* ((decoded (tcode-decode-chars (isearch-last-command-char)))
+	(let* ((decoded (tcode-decode-chars (isearch-last-command-event)))
 	       (action (car decoded))
 	       (prev (tcode-isearch-bushu)))
 	  (cond ((null action)
