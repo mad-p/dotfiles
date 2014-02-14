@@ -26,11 +26,16 @@
 
 (add-hook 'post-command-hook 'tcode-auto-remove-help)
 
+(defun my-tc-insert-register (register &optional arg)
+  (interactive "*cInsert register: \nP")
+  (insert-register register arg)
+  (exchange-point-and-mark))
+
 (defun my-tcode-setup ()
   (tcode-set-key-layout "dvorak")
   (tcode-set-key-layout "dvorak")
-  (tcode-set-key "?" 'expand-abbrev)
-  (tcode-set-key "=" 'toggle-tcode-mode-and-self-insert)
+  ;(tcode-set-key "?" 'dabbrev-expand)
+  (tcode-set-key "=" 'my-tc-insert-register)
   (tcode-set-key "<" 'toggle-tcode-mode-and-self-insert)
   (tcode-set-key "\\" 'tcode-insert-ya-outset)
   (tcode-set-key "!" nil 'literal)
