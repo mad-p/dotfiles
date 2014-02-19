@@ -46,3 +46,10 @@ dcssh() {
     return 1
   fi
 }
+
+dcdestroy() {
+  echo "Killing ${CONTAINER_ID=${1:-devenv}}"
+  docker kill $CONTAINER_ID
+  docker rm $CONTAINER_ID
+  echo "Removed $CONTAINER_ID"
+}
