@@ -13,8 +13,17 @@ dccommit() {
 
 dcrun() {
   IMAGE_ID=${1:-${IMAGE_ID:-devenv}}
+  NAME=`perl -E '{$_=shift;s/:.*//;say}' $IMAGE_ID`
+  if [ x`docker ps -q $NAME` != x ]; then
+    echo "Container $NAME is already running! Stop it first."
+    return 1
+  fi
+  if [ x`docker ps -q -a $NAME` != x ]; then
+    echo "Removed stopped container $NAME."
+    docker rm $NAME
+  fi
   echo "Running $IMAGE_ID"
-  CONTAINER_ID=`docker run -name $IMAGE_ID -d mad-p/$IMAGE_ID`
+  CONTAINER_ID=`docker run -name $NAME -d mad-p/$IMAGE_ID`
   if [ "x$CONTAINER_ID" != "x" ]; then
     echo "IMAGE_ID=$IMAGE_ID"
     echo "CONTAINER_ID=$CONTAINER_ID"
