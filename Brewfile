@@ -59,8 +59,8 @@ cask install skype
 # cask install sublime-text
 # cask install marked2
 cask install xquartz
-# cask install wireshark
-# cask install kobito
+cask install wireshark
+cask install kobito
 cask install virtualbox
 cask install vagrant
 cask install yorufukurou
