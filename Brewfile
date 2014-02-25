@@ -44,7 +44,7 @@ install mysql
 install readline
 # install coreutils --default-names
 ###  http://takuya-1st.hatenablog.jp/entry/20111230/1325272152
-install wireshark
+# install wireshark
 
 install brew-cask
 
