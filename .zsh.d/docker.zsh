@@ -8,7 +8,7 @@ dcclean() {
 }
 
 dccommit() {
-  docker commit -run='{"Cmd":["/bin/sh","-c","/usr/sbin/sshd -D"],"PortSpecs":["2222"]}' $*
+  docker commit --run='{"Cmd":["/bin/sh","-c","/usr/sbin/sshd -D"],"PortSpecs":["2222","9981","80"]}' $*
 }
 
 dcrun() {
@@ -23,7 +23,7 @@ dcrun() {
     docker rm $NAME
   fi
   echo "Running $IMAGE_ID"
-  CONTAINER_ID=`docker run -name $NAME -d mad-p/$IMAGE_ID`
+  CONTAINER_ID=`docker run -t --name $NAME -d mad-p/$IMAGE_ID`
   if [ "x$CONTAINER_ID" != "x" ]; then
     echo "IMAGE_ID=$IMAGE_ID"
     echo "CONTAINER_ID=$CONTAINER_ID"
