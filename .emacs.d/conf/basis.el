@@ -3,6 +3,8 @@
 
 (auto-compression-mode 1)
 
+(fmakunbound 'gomoku) ;; so that go-l completes to goto-line
+
 (put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
