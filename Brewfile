@@ -68,6 +68,7 @@ cask install nosleep
 cask install bettertouchtool
 cask install emacs
 cask install menumeters
+cask install boot2docker
 
 # Remove outdated versions
 cleanup
