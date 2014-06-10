@@ -7,3 +7,4 @@ fi
 if [ -x "`which rbenv 2>/dev/null`" ]; then
   eval "$(rbenv init - zsh)"
 fi
+alias be='bundle exec'
