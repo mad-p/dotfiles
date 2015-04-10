@@ -127,6 +127,11 @@ alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
 
 alias gl='git --no-pager log --oneline --decorate -8'
 alias gg='gl --graph'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias g='git'
+alias st='git status'
+alias gst='git status'
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
 [[ -d ~/.rbenv/bin ]] && export PATH="$HOME/.rbenv/bin:$PATH"
