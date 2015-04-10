@@ -20,3 +20,4 @@
         '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control))))))
        )
       )
+(setq ispell-program-name "/usr/local/bin/aspell")

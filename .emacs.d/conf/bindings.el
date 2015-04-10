@@ -183,12 +183,13 @@
 (add-hook 'view-mode-hook #'(lambda () (setq view-mode-auto-exit nil)))
 
 ;; Make C-M-h backword-kill-word
-(defun check-C-M-h ()
+(defun check-bindings ()
+  (define-key (current-local-map) (kbd "C-d") 'recenter)
   (let ((cmd (lookup-key (current-local-map) (kbd "C-M-h"))))
     (if (and (symbolp cmd) (not (eq cmd 'backward-kill-word-stop-at-uppercase)))
         (define-key (current-local-map) (kbd "C-M-h") 'backward-kill-word-stop-at-uppercase))))
 
-(mapc #'(lambda (hook) (add-hook hook 'check-C-M-h))
+(mapc #'(lambda (hook) (add-hook hook 'check-bindings))
       '(java-mode-hook c-mode-hook c++-mode-hook ruby-mode-hook))
 
 ;;
