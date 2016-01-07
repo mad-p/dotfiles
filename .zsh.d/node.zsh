@@ -1,1 +1,1 @@
-export NODE_PATH=/usr/local/lib/node_modules
+export PATH=$HOME/.nodebrew/current/bin:$PATH
