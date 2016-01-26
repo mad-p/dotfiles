@@ -42,6 +42,7 @@
  '(display-time-mode t)
  '(edit-server-new-frame-alist (quote ((name . "Edit with Emacs FRAME") (width . 96) (height . 32) (minibuffer . t) (menu-bar-lines . t))))
  '(indent-tabs-mode nil)
+ '(ispell-program-name "aspell" t)
  '(js-indent-level 2)
  '(js2-auto-indent-flag t)
  '(js2-basic-offset 2)
