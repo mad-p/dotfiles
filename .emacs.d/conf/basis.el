@@ -20,7 +20,7 @@
       next-line-add-newlines t
       eval-expression-print-length nil
       eval-expression-print-level nil
-      visible-bell t
+      visible-bell (eq (window-system) 'x)
       split-width-threshold nil
       transient-mark-mode nil
       )
