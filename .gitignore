@@ -17,3 +17,4 @@
 .fonts/fonts.*
 share
 .zsh.d/projects.zsh
+share/tc/mazegaki.dic

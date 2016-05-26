@@ -23,6 +23,7 @@ export CLICOLOR=1
 export LSCOLORS=exgxcxdxcxegedabagacad
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+setopt combining_chars
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 HISTFILE=$HOME/.zsh-history
@@ -124,7 +125,11 @@ alias zz=exit
 alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
 alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
+function d () { colordiff -u $@ | diff-highlight | less -R; }
 
+alias g='git'
+alias gd='git diff'
+alias gst='git status'
 alias gl='git --no-pager log --oneline --decorate -8'
 alias gg='gl --graph'
 alias gd='git diff'
