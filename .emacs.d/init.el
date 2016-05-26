@@ -16,6 +16,7 @@
 (load "~/.emacs.d/conf/tcode")
 (load "~/.emacs.d/conf/grep")
 (load "~/.emacs.d/conf/programming")
+(load "~/.emacs.d/conf/tuareg")
 (load "~/.emacs.d/conf/tempbuf")
 (load "~/.emacs.d/conf/fonts")
 (load "~/.emacs.d/conf/w32")
