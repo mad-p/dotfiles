@@ -13,6 +13,13 @@
         '(mouse-wheel-progressive-speed nil)
         '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control))))))
        )
+
+      ;; turn-around visible-bell glitches
+      (setq visible-bell nil)
+      (setq ring-bell-function (lambda ()
+                                 (invert-face 'mode-line)
+                                 (run-with-timer 0.1 nil 'invert-face 'mode-line)))
+
       ((eq window-system 'x)
        (modify-frame-parameters (selected-frame) '((width . 96) (height . 36)))
        (custom-set-variables

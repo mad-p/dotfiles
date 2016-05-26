@@ -61,6 +61,14 @@
 (define-key isearch-mode-map "\C-z" 'isearch-toggle-tcode)
 (define-key isearch-mode-map "\C-j" 'isearch-toggle-tcode)
 
+(defconst tcode-switch-table-list
+  '(((tcode-touten . "、")
+     (tcode-kuten . "。"))
+
+    ((tcode-touten . "，")
+     (tcode-kuten . "．")))
+  "テーブル中の変数値を切り替えるための表。")
+
 (add-hook 'tcode-mazegaki-init-hook
 	  '(lambda ()
 	     ;; 候補選択に使用するキーを二段だけにする
@@ -85,7 +93,7 @@
 ;     "└" "┴" "┘" "／"  "＼"     "♪"  "§" "¶" "†" "‡"]
      "┏" "┳" "┓" "┃"  "◎"     "◆"  "■" "●" "▲" "▼"
      "┣" "╋" "┫" "━"  "　"     "◇"  "□" "○" "△" "▽"
-     "┗" "┻" "┛" "／"  "＼"     "♪"  "§" "¶" "†" "‡"]
+     "┗" "┻" "┛" "／"  "＼"     "※"  "§" "¶" "†" "‡"]
 
     ["♠" "♡" "♢" "♣"  "㌧"     "㊤"  "㊥" "㊦" "㊧" "㊨"
 
