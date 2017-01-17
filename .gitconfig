@@ -1,6 +1,6 @@
 [user]
 name = Kaoru Maeda
-email = kaoru.maeda@gmail.com
+	email = maeda@lepidum.co.jp
 
 [github]
 user = mad-p
@@ -51,6 +51,7 @@ whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 excludesfile = ~/.gitignore
 	precomposeunicode = true
 	quotepath = false
+	autoCRLF = false
 
 [branch]
 autosetupmerge = true
