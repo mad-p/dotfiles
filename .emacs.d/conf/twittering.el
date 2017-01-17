@@ -3,7 +3,7 @@
 %FILL[  ]{%T // %r%R}
 ")
 
-(defvar tsuda-hashtag "#http2study")
+(defvar tsuda-hashtag "#llot")
 
 (defun tsuda (beg end)
   (interactive "r")
