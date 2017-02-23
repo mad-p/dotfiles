@@ -18,3 +18,4 @@
 share
 .zsh.d/projects.zsh
 share/tc/mazegaki.dic
+.emacs.d/bookmarks

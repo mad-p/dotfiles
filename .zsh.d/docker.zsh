@@ -1,4 +1,5 @@
 alias dc=docker
+alias dcm=docker-machine
 
 dcclean() {
   containers=( `docker ps -a -q` )

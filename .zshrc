@@ -23,6 +23,7 @@ export CLICOLOR=1
 export LSCOLORS=exgxcxdxcxegedabagacad
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+setopt combining_chars
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 HISTFILE=$HOME/.zsh-history
