@@ -1,3 +1,4 @@
+モードティップスを表示: true
 Mazegaki dictionary file: /Users/maeda/Settings/MacUIM/mazegaki.dic
 Personal mazegaki dictionary file: /Users/maeda/.mazegaki.dic
 Code table file: /Users/maeda/Settings/MacUIM/tcode.scm
