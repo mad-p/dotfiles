@@ -1,0 +1,6 @@
+Mazegaki dictionary file: /Users/maeda/Settings/MacUIM/mazegaki.dic
+Personal mazegaki dictionary file: /Users/maeda/.mazegaki.dic
+Code table file: /Users/maeda/Settings/MacUIM/tcode.scm
+Use Dvorak: true
+bushu.index2 file: /Library/Dictionaries/tc/bushu.index2
+bushu.expand file: /Library/Dictionaries/tc/bushu.expand

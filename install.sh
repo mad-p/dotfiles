@@ -5,6 +5,9 @@
 [ -e ~/dotfiles ] || git clone git@github.com:mad-p/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
+git config user.name "Kaoru Maeda"
+git config user.email "kaoru.maeda@gmail.com"
+
 git submodule init
 git submodule update
 
