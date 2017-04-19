@@ -27,6 +27,7 @@
                (regexp . "\\(\\s-*\\)# => [^#\t\n]")
                (repeat . nil)
                (modes  . '(ruby-mode))))
+(setq flycheck-ruby-executable "/Users/kaoru.maeda/.rbenv/shims/ruby")
 
 ;;
 ;; Java
