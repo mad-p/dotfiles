@@ -33,3 +33,11 @@
 ;;
 (require 'java-mode-indent-annotations)
 (add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
+
+;;
+;; editor config
+;;
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))

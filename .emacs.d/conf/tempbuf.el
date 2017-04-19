@@ -14,7 +14,7 @@
 (add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
 
 (defun my-tempbuf-skip-if-light ()
-  (if (< (length (buffer-list)) 50)
+  (if (< (length (buffer-list)) 1000)
       (throw 'tempbuf-skip-kill t)))
 (defun my-tempbuf-skip-if-dired ()
   (and (eq major-mode 'dired-mode)

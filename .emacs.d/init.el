@@ -1,6 +1,19 @@
 ;;-------------------------------------------------;;
 ;; load-path configuration
 ;;-------------------------------------------------;;
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (defun add-to-load-path (&rest paths)
   (mapc '(lambda (path)
 	   (add-to-list 'load-path path))
@@ -31,7 +44,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(calendar-date-display-form (quote (year "/" month "/" day)))
- '(calendar-time-display-form (quote (24-hours ":" minutes (if time-zone " (") time-zone (if time-zone ")"))) t)
+ '(calendar-time-display-form
+   (quote
+    (24-hours ":" minutes
+              (if time-zone " (")
+              time-zone
+              (if time-zone ")"))) t)
  '(cperl-comment-column 40)
  '(cperl-continued-statement-offset 4)
  '(cperl-indent-level 4)
@@ -40,7 +58,13 @@
  '(desktop-save-mode t)
  '(diff-switches "-u")
  '(display-time-mode t)
- '(edit-server-new-frame-alist (quote ((name . "Edit with Emacs FRAME") (width . 96) (height . 32) (minibuffer . t) (menu-bar-lines . t))))
+ '(edit-server-new-frame-alist
+   (quote
+    ((name . "Edit with Emacs FRAME")
+     (width . 96)
+     (height . 32)
+     (minibuffer . t)
+     (menu-bar-lines . t))))
  '(indent-tabs-mode nil)
  '(js-indent-level 2)
  '(js2-auto-indent-flag t)
@@ -54,9 +78,13 @@
  '(js2-mode-indent-ignore-first-tab nil)
  '(js2-rebind-eol-bol-keys nil)
  '(js2-strict-trailing-comma-warning nil)
+ '(json-mode-indent-level 4)
  '(line-number-mode nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
+ '(package-selected-packages
+   (quote
+    (editorconfig use-package json-mode flymake-jslint flymake-ruby flymake-json flycheck)))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
