@@ -19,6 +19,7 @@ export HOMEBREW_GITHUB_API_TOKEN=9a5406bbaefe4f44a2ac9f17da25d1ed8f0aa28e
 unset VISUAL
 export PAGER=less
 export LESS=R
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 export CLICOLOR=1
 export LSCOLORS=exgxcxdxcxegedabagacad
@@ -121,7 +122,7 @@ alias \?='dirs -v'
 alias j='jobs'
 alias e=emacsclient
 alias man='LANG=C man'
-alias emacs='LANG=C emacs'
+alias emacs='LANG=C /Applications/Emacs.app/Contents/MacOS/Emacs'
 alias zz=exit
 alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'

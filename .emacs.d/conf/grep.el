@@ -10,3 +10,10 @@
 (require 'color-moccur)
 
 (require 'summarye)
+
+(defun purge-grep-buffer ()
+  (interactive)
+  (mapcar #'(lambda (b)
+              (if (string-match "\\*grep\\*" (buffer-name b))
+                  (kill-buffer b)))
+          (buffer-list)))

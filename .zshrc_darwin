@@ -1,2 +1,2 @@
-alias emacs='LANG=C open ~/Applications/Emacs.app'
+alias emacs='LANG=C /Applications/Emacs.app/Contents/MacOS/Emacs'
 unset i

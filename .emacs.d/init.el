@@ -1,6 +1,6 @@
-;;-------------------------------------------------;;
-;; load-path configuration
-;;-------------------------------------------------;;
+;;;-------------------------------------------------;;;
+;;; load-path configuration
+;;;-------------------------------------------------;;;
 
 (require 'package)
 (add-to-list 'package-archives
@@ -20,6 +20,7 @@
 	(mapcar 'expand-file-name paths)))
 (add-to-load-path "~/.emacs.d/auto-install" "~/.emacs.d/elisp" "~/.emacs.d/my-elisp" "~/share/emacs/site-lisp")
 ;;-------------------------------------------------;;
+(load "~/.emacs.d/conf/frame-title.el")
 (load "~/.emacs.d/conf/conf-auto-install")
 (load "~/.emacs.d/conf/conf-anything")
 (load "~/.emacs.d/conf/basis")
@@ -28,6 +29,9 @@
 (load "~/.emacs.d/conf/bindings")
 (load "~/.emacs.d/conf/tcode")
 (load "~/.emacs.d/conf/grep")
+(load "~/.emacs.d/conf/guard")
+(load "~/.emacs.d/conf/jslint")
+(load "~/.emacs.d/conf/perlbrew")
 (load "~/.emacs.d/conf/programming")
 (load "~/.emacs.d/conf/tempbuf")
 (load "~/.emacs.d/conf/fonts")
@@ -43,6 +47,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(Buffer-menu-name-width 35)
  '(calendar-date-display-form (quote (year "/" month "/" day)))
  '(calendar-time-display-form
    (quote
@@ -84,9 +89,11 @@
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(package-selected-packages
    (quote
-    (editorconfig use-package json-mode flymake-jslint flymake-ruby flymake-json flycheck)))
+    (scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck)))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
+ '(ruby-deep-arglist nil)
+ '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
  '(sh-indentation 2)
  '(show-paren-mode t)
@@ -112,6 +119,11 @@
  '(font-lock-variable-name-face ((((class color) (background light)) (:foreground "brown"))))
  '(highlight-indentation-current-column-face ((t (:background "antiquewhite3"))))
  '(highlight-indentation-face ((t (:background "antiquewhite"))))
+ '(markdown-inline-code-face ((t (:inherit font-lock-type-face))))
+ '(markdown-pre-face ((t (:inherit font-lock-type-face))))
  '(message-header-subject-face ((t (:background "light blue" :weight bold))) t)
  '(message-header-to-face ((t (:background "lavender" :weight bold))) t)
  '(trailing-whitespace ((((class color) (background light)) (:background "red")))))
+
+(provide 'init)
+;;; init.el ends here

@@ -106,7 +106,7 @@
 (define-key global-map [insert] (lookup-key global-map "\C-ct"))
 ;(define-key global-map [end] 'execute-extended-command)
 (define-key global-map "\eu" 'kill-ring-save)
-(define-key global-map "\C-x\C-q" 'toggle-read-only)
+(define-key global-map "\C-x\C-q" 'read-only-mode)
 (define-key global-map [S-tab] 'other-frame)
 (define-key global-map [S-iso-lefttab] 'other-frame)
 (define-key global-map [S-right] 'other-frame)
@@ -147,6 +147,7 @@
 	      (define-key dired-mode-map "\C-m" 'scroll-down)
 	      (define-key dired-mode-map "t" 'dired-next-line)
 	      (define-key dired-mode-map "n" 'dired-previous-line)
+	      (define-key dired-mode-map "r" #'(lambda () (interactive) (find-file-read-only-other-window (dired-get-file-for-visit))))
 	      (define-key dired-mode-map "\^t" 'dired-next-line)
 	      (define-key dired-mode-map "\^n" 'dired-previous-line)
 	      (define-key dired-mode-map "h" 'dired-hide-subdir)
@@ -190,7 +191,7 @@
         (define-key (current-local-map) (kbd "C-M-h") 'backward-kill-word-stop-at-uppercase))))
 
 (mapc #'(lambda (hook) (add-hook hook 'check-bindings))
-      '(java-mode-hook c-mode-hook c++-mode-hook ruby-mode-hook))
+      '(java-mode-hook c-mode-hook c++-mode-hook ruby-mode-hook groovy-mode-hook))
 
 ;;
 ;; Diff mode

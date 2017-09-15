@@ -42,4 +42,4 @@
 
 (global-auto-revert-mode 1)
 (setq auto-revert-interval 10)
-(setq auto-revert-check-vc-info t)
+(setq auto-revert-check-vc-info nil)

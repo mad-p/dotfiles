@@ -51,6 +51,7 @@ whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 excludesfile = ~/.gitignore
 	precomposeunicode = true
 	quotepath = false
+	ignorecase = false
 
 [branch]
 autosetupmerge = true
@@ -69,3 +70,7 @@ autosetupmerge = true
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[commit]
+	template = ~/.commit_template
+[hub]
+	host = github.dena.jp

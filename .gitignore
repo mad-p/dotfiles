@@ -20,4 +20,6 @@ share
 share/tc/mazegaki.dic
 .emacs.d/bookmarks
 .emacs.d/recentf
+vendor/bundle
 elpa
+TAGS

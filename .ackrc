@@ -4,5 +4,7 @@
 --ignore-dir=vendor
 --ignore-dir=coverage
 --ignore-dir=spec/reports
+--ignore-file=is:.emacs.desktop
+--ignore-file=is:TAGS
 --type-add=ruby=.feature,.opts,.yml.deploy,.yml.ci,.sample,.haml
 
