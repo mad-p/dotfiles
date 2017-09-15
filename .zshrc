@@ -15,7 +15,6 @@ export EDITOR=emacsclient
 
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
-export HOMEBREW_GITHUB_API_TOKEN=9a5406bbaefe4f44a2ac9f17da25d1ed8f0aa28e
 unset VISUAL
 export PAGER=less
 export LESS=R
