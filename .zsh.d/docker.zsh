@@ -1,4 +1,5 @@
 alias dc=docker
+alias dcc=docker-compose
 alias dcm=docker-machine
 
 dcclean() {
