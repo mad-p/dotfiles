@@ -1,0 +1,20 @@
+AllCops:
+  TargetRubyVersion: 2.3
+Metrics/MethodLength:
+  Max: 50
+Metrics/LineLength:
+  Max: 120
+Metrics/BlockLength:
+  Max: 60
+Style/StringLiterals:
+  Enabled: false
+Style/SpaceBeforeFirstArg:
+  Enabled: false
+Style/TrailingCommaInLiteral:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: false
+Style/BlockDelimiters:
+  Enabled: false
+Style/MultilineBlockChain:
+  Enabled: false
