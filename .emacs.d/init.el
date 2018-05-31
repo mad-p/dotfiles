@@ -22,7 +22,9 @@
 ;;-------------------------------------------------;;
 (load "~/.emacs.d/conf/frame-title.el")
 (load "~/.emacs.d/conf/conf-auto-install")
-(load "~/.emacs.d/conf/conf-anything")
+(load "~/.emacs.d/conf/conf-ivy")
+(load "~/.emacs.d/conf/lsp")
+;; (load "~/.emacs.d/conf/conf-anything")
 (load "~/.emacs.d/conf/basis")
 (load "~/.emacs.d/conf/calc")
 (load "~/.emacs.d/conf/highlight-indentation")
@@ -30,11 +32,12 @@
 (load "~/.emacs.d/conf/tcode")
 (load "~/.emacs.d/conf/grep")
 (load "~/.emacs.d/conf/guard")
-(load "~/.emacs.d/conf/jslint")
+;;(load "~/.emacs.d/conf/jslint")
 (load "~/.emacs.d/conf/perlbrew")
 (load "~/.emacs.d/conf/programming")
 (load "~/.emacs.d/conf/tempbuf")
 (load "~/.emacs.d/conf/fonts")
+(load "~/.emacs.d/conf/company")
 (load "~/.emacs.d/conf/w32")
 (load "~/.emacs.d/conf/macosx")
 (let* ((host (system-name))
@@ -89,7 +92,7 @@
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(package-selected-packages
    (quote
-    (scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck)))
+    (typescript-mode markdown-mode+ counsel-dash company-lsp lsp-mode counsel ivy company scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck)))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(ruby-deep-arglist nil)
