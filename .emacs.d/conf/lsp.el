@@ -5,7 +5,7 @@
 (require 'lsp-typescript)
 (require 'lsp-javascript-typescript)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(setq lsp-ui-sideline-enable nil)
+(setq lsp-ui-sideline-enable t)
 (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
 (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)
 ;;(add-hook 'js-mode-hook #'lsp-typescript-enable)
