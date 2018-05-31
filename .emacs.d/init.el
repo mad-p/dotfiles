@@ -24,7 +24,7 @@
 (load "~/.emacs.d/conf/conf-auto-install")
 (load "~/.emacs.d/conf/conf-ivy")
 (load "~/.emacs.d/conf/lsp")
-;; (load "~/.emacs.d/conf/conf-anything")
+(load "~/.emacs.d/conf/conf-anything")
 (load "~/.emacs.d/conf/basis")
 (load "~/.emacs.d/conf/calc")
 (load "~/.emacs.d/conf/highlight-indentation")
@@ -104,6 +104,7 @@
  '(tool-bar-mode nil)
  '(tramp-mode nil)
  '(transient-mark-mode nil)
+ '(typescript-indent-level 2)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(view-read-only t))
 (custom-set-faces

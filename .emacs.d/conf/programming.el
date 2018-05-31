@@ -1,8 +1,9 @@
 ;;
 ;; flycheck
 ;;
-(require 'flycheck)
-(global-flycheck-mode)
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 ;;
 ;; Ruby
@@ -69,3 +70,7 @@
 ;;
 (add-to-list 'auto-mode-alist '("\\bJenkinsfile\\b" . groovy-mode))
 
+;;
+;; Typescript
+;;
+(require 'typescript-mode)

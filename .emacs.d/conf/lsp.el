@@ -1,12 +1,16 @@
 (add-to-load-path "~/share/emacs/site-lisp/lsp-ui")
-(add-to-load-path "~/share/emacs/site-lisp/lsp-typescript")
+(add-to-load-path "~/share/emacs/site-lisp/lsp-javascript")
 (require 'lsp-mode)
 (require 'lsp-ui)
+(require 'lsp-typescript)
 (require 'lsp-javascript-typescript)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (setq lsp-ui-sideline-enable nil)
 (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
 (add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)
+;;(add-hook 'js-mode-hook #'lsp-typescript-enable)
+;;(add-hook 'typescript-mode-hook #'lsp-typescript-enable)
+
 
 (lsp-define-stdio-client
  ;; This can be a symbol of your choosing. It will be used as a the
