@@ -74,3 +74,25 @@
 ;; Typescript
 ;;
 (require 'typescript-mode)
+(require 'prettier-js)
+(add-hook 'typescript-mode-hook 'prettier-js-mode)
+;; (add-hook 'typescript-mode-hook 'lsp-ui-mode)
+(add-hook 'typescript-mode-hook
+          #'(lambda ()
+              (setq flycheck-checker 'typescript-tslint)
+              (flycheck-mode nil)
+              (flycheck-mode 1)
+              ))
+(defvar flycheck-typescript-tslint-project "tsconfig.json")
+(flycheck-define-checker typescript-tslint
+  "Redefine the tslint checker to handle --type-check."
+  :command ("tslint" "--format" "json"
+            (config-file "--config" flycheck-typescript-tslint-config)
+            (option "--rules-dir" flycheck-typescript-tslint-rulesdir)
+            (config-file "--project" flycheck-typescript-tslint-project)
+            (eval flycheck-tslint-args)
+            ;; Must use inplace to satisfy paths in project.
+            source-inplace)
+  :error-parser flycheck-parse-tslint
+  :modes (typescript-mode))
+

@@ -73,6 +73,7 @@
      (height . 32)
      (minibuffer . t)
      (menu-bar-lines . t))))
+ '(flycheck-idle-change-delay 3)
  '(indent-tabs-mode nil)
  '(js-indent-level 2)
  '(js2-auto-indent-flag t)
@@ -88,7 +89,7 @@
  '(js2-strict-trailing-comma-warning nil)
  '(json-mode-indent-level 2)
  '(line-number-mode nil)
- '(lsp-ui-flycheck-enable nil)
+ '(lsp-ui-flycheck-enable t)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(package-selected-packages
