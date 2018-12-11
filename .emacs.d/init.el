@@ -10,6 +10,9 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
+(if (>= emacs-major-version 26)
+  (fset 'string-to-int 'string-to-number))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
