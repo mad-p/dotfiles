@@ -1,0 +1,13 @@
+#!/bin/bash
+sleep 1
+echo "
+tell application \"Terminal\"
+    activate
+  tell application \"System Events\"
+    keystroke \"i\" using {shift down,command down}
+    keystroke Tab
+    keystroke \"$1\"
+    key code 53
+  end tell
+end tell
+" | osascript -

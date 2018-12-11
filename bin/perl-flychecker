@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if carton list &> /dev/null; then
+  exec carton exec perl ${1+"$@"}
+else
+  exec perl ${1+"$@"}
+fi
