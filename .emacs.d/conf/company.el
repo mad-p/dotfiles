@@ -8,7 +8,7 @@
 (setq company-dabbrev-downcase nil)
 (defun my-dabbrev (arg)
   (interactive "P")
-  (if arg
+  (if (or arg (eq last-command 'my-dabbrev))
       (dabbrev-expand arg)
     (company-complete)))
 (global-set-key (kbd "M-/") 'my-dabbrev)

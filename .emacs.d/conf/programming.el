@@ -69,6 +69,9 @@
 ;; Groovy
 ;;
 (add-to-list 'auto-mode-alist '("\\bJenkinsfile\\b" . groovy-mode))
+(add-hook 'groovy-mode-hook
+          #'(lambda ()
+              (define-key groovy-mode-map "\eq" 'scroll-down)))
 
 ;;
 ;; Typescript
