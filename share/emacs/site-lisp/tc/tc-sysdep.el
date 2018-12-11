@@ -228,7 +228,7 @@ BODY should be a list of lisp expressions."
 ;;;
 ;;; Fix incompatibilities between 18 and 19.
 ;;;
-(if (string-match "^\\(19\\|2[012345]\\)" emacs-version)
+(if (string-match "^\\(19\\|2[0-9]\\)" emacs-version)
     (progn
       (defun tcode-redo-command (ch)
 	"キー CH を現在のキーマップで再実行する"
@@ -243,10 +243,12 @@ BODY should be a list of lisp expressions."
 	    last-command-event))
       (or (boundp 'search-upper-case)
 	  (setq search-upper-case 'not-yanks)))
-  ;; NEmacs
-  (defun tcode-redo-command (ch)
-    "キー CH を現在のキーマップで再実行する"
-    (setq unread-command-char ch)))
+  (if (tcode-nemacs-p)
+      ;; NEmacs
+      (defun tcode-redo-command (ch)
+        "キー CH を現在のキーマップで再実行する"
+        (setq unread-command-char ch))
+    (error "Unknown emacs version %s" emacs-version)))
 
 (if (not (tcode-nemacs-p))
     (progn
