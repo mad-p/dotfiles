@@ -121,6 +121,7 @@ alias j='jobs'
 alias e=emacsclient
 alias man='LANG=C man'
 alias emacs='LANG=C emacs'
+alias amke=make
 alias zz=exit
 alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'

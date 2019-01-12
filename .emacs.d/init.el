@@ -72,7 +72,8 @@
  '(recentf-mode t)
  '(safe-local-variable-values
    (quote
-    ((eval highlight-regexp "^[^	]+	[^	]+	[^	]+$\\|^[^	]+	[^	]+$"
+    ((visual-basic-mode-indent . 4)
+     (eval highlight-regexp "^[^	]+	[^	]+	[^	]+$\\|^[^	]+	[^	]+$"
            (quote hi-pink))
      (eval highlight-regexp "^[^	]+	[^	]+	[^	]+$\\|^[^	]+	[^	]+$"
            (quote hi-yellow))
