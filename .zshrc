@@ -27,8 +27,8 @@ setopt combining_chars
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 HISTFILE=$HOME/.zsh-history
-HISTSIZE=110000
-SAVEHIST=100000
+HISTSIZE=210000
+SAVEHIST=200000
 
 umask 022
 limit coredumpsize 20m
