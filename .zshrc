@@ -103,8 +103,9 @@ esac
 if [ -d ~/.zsh.d ]; then
   for f in ~/.zsh.d/*; do
     case `basename $f` in
-    _*) ;; # ignore completion autoload files
-    *)
+      _*) ;; # ignore completion autoload files
+      *~) ;; # ignore emacs backup files
+      *)
         # echo "loading $f"
 	source $f
 	;;

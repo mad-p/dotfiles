@@ -28,11 +28,6 @@ done
 if [ `uname` = "Darwin" ]; then
   echo installing homebrew
   bash brew-install.sh
-  echo 'To install ricty font, do the folling:'
-  echo brew tap sanemat/font
-  echo brew install ricty
-  echo cp -f /usr/local/Cellar/ricty/*/share/fonts/Ricty*.ttf ~/Library/Fonts/
-  echo fc-cache -vf
 fi
 
 # vim -c ':NeoBundleInstall!' -c ':q!' -c ':q!'
