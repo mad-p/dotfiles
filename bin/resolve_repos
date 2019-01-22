@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+# Find suitable git clone for repositories
+
+dirs = Dir.glob("*")
+
+dirs.each do |dir|
+  next unless File.directory?(dir)
+  git_remote = `cd #{dir}; git remote -v 2>&1 | egrep '\\(fetch\\)$|^fatal'`
+  next if /^fatal/ =~ git_remote
+
+  remotes = {}
+  git_remote.split(/\n/).each do |line|
+    name, url, = line.split
+    remotes[name] = url
+  end
+
+  if remotes['origin']
+    mirror = /\.git$/ =~ dir ? "--mirror" : ""
+    puts "git clone #{mirror} #{remotes['origin']} #{dir}"
+  end
+
+  remotes.each do |k, v|
+    next if k == 'origin'
+    puts "(cd #{dir}; git remote add #{k} #{v})"
+  end
+end
