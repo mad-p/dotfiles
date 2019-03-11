@@ -56,16 +56,24 @@ setopt pushd_ignore_dups
 
 setopt always_last_prompt
 setopt complete_in_word
-zstyle ':completion:*:default' menu select
+zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 setopt menu_complete
 setopt list_packed
 setopt auto_menu
 setopt auto_list
 setopt list_types
+setopt magic_equal_subst
 zmodload zsh/complist
-bindkey -M menuselect '^r' vi-insert
-bindkey -M menuselect '^s' vi-insert
+bindkey -M menuselect '^l' forward-char
+bindkey -M menuselect '^b' backward-char
+bindkey -M menuselect '^n' down-history
+bindkey -M menuselect '^p' up-history
+bindkey -M menuselect '^g' send-break
+bindkey -M menuselect '^k' accept-and-infer-next-history
+bindkey -M menuselect '.' vi-insert
+bindkey -M menuselect '^r' history-incremental-search-backward
+bindkey -M menuselect '^s' history-incremental-search-forward
 
 setopt extended_glob
 setopt numeric_glob_sort

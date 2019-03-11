@@ -99,3 +99,12 @@
   :error-parser flycheck-parse-tslint
   :modes (typescript-mode))
 
+;;
+;; C/C++
+;;
+(add-hook 'c-mode-hook
+          #'(lambda ()
+              (define-key c-mode-map "\eq" 'scroll-down)))
+(add-hook 'c++-mode-hook
+          #'(lambda ()
+              (define-key c++-mode-map "\eq" 'scroll-down)))
