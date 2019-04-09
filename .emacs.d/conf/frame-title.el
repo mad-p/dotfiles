@@ -12,5 +12,5 @@
           (filtered-frame-list
            #'(lambda (frame)
                (and (< (frame-parameter frame 'height) 2)
-                    (< (frame-parameter frame 'width) 12)
+                    (< (frame-parameter frame 'width) 30)
                     (frame-parameter frame 'visibility))))))
