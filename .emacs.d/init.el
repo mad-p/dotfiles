@@ -65,7 +65,7 @@
  '(cperl-continued-statement-offset 4)
  '(cperl-indent-level 4)
  '(cperl-regexp-indent-step 2)
- '(desktop-path (quote ("." "~/.emacs.d/" "~")))
+ '(desktop-path (quote ("." ".." "../.." "../../.." "../../../.." "~/.emacs.d/" "~")))
  '(desktop-save-mode t)
  '(diff-switches "-u")
  '(display-time-mode t)
@@ -98,12 +98,13 @@
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(package-selected-packages
    (quote
-    (typescript-mode markdown-mode+ counsel-dash company-lsp lsp-mode counsel ivy company scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck)))
+    (go-eldoc go-autocomplete ggo-mode company-go go-mode typescript-mode markdown-mode+ counsel-dash company-lsp lsp-mode counsel ivy company scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck)))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
+ '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-paren-mode t)
  '(tempbuf-minimum-timeout 60)

@@ -1,6 +1,6 @@
-(require 'perlbrew)
-(perlbrew-switch "perl-5.22.3")
-(setq flycheck-perl-executable (expand-file-name "~/bin/perl-flychecker"))
+;; (require 'perlbrew)
+;; (perlbrew-switch "perl-5.22.3")
+;; (setq flycheck-perl-executable (expand-file-name "~/bin/perl-flychecker"))
 
 ;; (flycheck-define-checker perl-auto-carton
 ;;   "A perl syntax checker."

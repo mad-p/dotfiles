@@ -147,9 +147,16 @@ alias gdc='git diff --cached'
 alias g='git'
 alias st='git status'
 alias gst='git status'
+om() { export om=$1; termtab $1 }
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
 [[ -d ~/.rbenv/bin ]] && export PATH="$HOME/.rbenv/bin:$PATH"
 
 [ -f "$HOME/.zshrc_$uname" ] && source "$HOME/.zshrc_$uname"
 [ -f "$HOME/.zshrc_local" ] && source "$HOME/.zshrc_local"
+
+PATH="/Users/kaoru.maeda/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/kaoru.maeda/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/kaoru.maeda/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/kaoru.maeda/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/kaoru.maeda/perl5"; export PERL_MM_OPT;

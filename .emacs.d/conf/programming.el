@@ -108,3 +108,25 @@
 (add-hook 'c++-mode-hook
           #'(lambda ()
               (define-key c++-mode-map "\eq" 'scroll-down)))
+
+;;
+;; Go
+;;
+
+(require 'auto-complete)
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+(ac-config-default)
+(let ((govet (flycheck-checker-get 'go-vet 'command)))
+  (when (equal (cadr govet) "tool")
+    (setf (cdr govet) (cddr govet))))
+(add-hook 'go-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          (setq gofmt-command "goimports")
+                          (add-hook 'before-save-hook 'gofmt-before-save)
+                          (set (make-local-variable 'compile-command)
+                               "go build -v && go test -v && go vet")
+                          (local-set-key (kbd "M-.") 'godef-jump))
+                          (go-eldoc-setup)
+          )
+;; (add-hook 'go-mode-hook 'lsp-ui-mode)
