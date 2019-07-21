@@ -1,6 +1,6 @@
 [user]
 name = Kaoru Maeda
-email = kaoru.maeda@dena.com
+email = kaoru.maeda@gmail.com
 
 [github]
 user = mad-p
@@ -70,7 +70,3 @@ autosetupmerge = true
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[commit]
-	template = ~/.commit_template
-[hub]
-	host = github.dena.jp

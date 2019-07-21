@@ -6,7 +6,7 @@
 cd ~/dotfiles
 
 git config user.name "Kaoru Maeda"
-git config user.email "kaoru.maeda@dena.com"
+git config user.email "kaoru.maeda@gmail.com"
 
 git submodule init
 git submodule update
