@@ -52,6 +52,7 @@ excludesfile = ~/.gitignore
 	precomposeunicode = true
 	quotepath = false
 	ignorecase = false
+	pager = less -FRSX
 
 [branch]
 autosetupmerge = true
@@ -63,14 +64,23 @@ autosetupmerge = true
 	default = simple
 
 [pager]
-	log = diff-highlight | less
-        show = diff-highlight | less
-        diff = diff-highlight | less
+	log = diff-highlight | less -FRSX
+        show = diff-highlight | less -FRSX
+        diff = diff-highlight | less -FRSX
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [commit]
 	template = ~/.commit_template
 [hub]
 	host = github.dena.jp
+[rerere]
+	enabled = true
+[submodule]
+	recurse = false
+[pull]
+	ff = only
+[lfs]
+	storage = /Users/kaoru.maeda/Work/ddd/kenya-lfs-storage-test/lfs-storage

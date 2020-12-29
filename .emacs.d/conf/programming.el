@@ -35,6 +35,7 @@
                (repeat . nil)
                (modes  . '(ruby-mode))))
 (setq flycheck-ruby-executable "/Users/kaoru.maeda/.rbenv/shims/ruby")
+(setq flycheck-python-pycompile-executable "python3")
 
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
@@ -56,6 +57,9 @@
 ;;
 (require 'java-mode-indent-annotations)
 (add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
+(add-hook 'java-mode-hook
+          #'(lambda ()
+              (define-key java-mode-map "\eq" 'scroll-down)))
 
 ;;
 ;; editor config

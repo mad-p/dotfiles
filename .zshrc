@@ -24,6 +24,8 @@ export CLICOLOR=1
 export LSCOLORS=exgxcxdxcxegedabagacad
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 setopt combining_chars
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY

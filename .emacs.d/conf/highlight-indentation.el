@@ -8,3 +8,5 @@
 (add-hook 'tuareg-mode-hook 'turn-on-highlight-indentation-mode)
 (add-hook 'emacs-lisp-mode-hook  'turn-on-highlight-indentation-mode)
 (add-hook 'js-mode-hook  'turn-on-highlight-indentation-mode)
+(add-hook 'yaml-mode-hook 'turn-on-highlight-indentation-mode)
+(add-hook 'groovy-mode-hook 'turn-on-highlight-indentation-mode)

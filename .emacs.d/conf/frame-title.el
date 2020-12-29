@@ -11,6 +11,5 @@
   (mapcar #'(lambda (frame) (delete-frame frame))
           (filtered-frame-list
            #'(lambda (frame)
-               (and (< (frame-parameter frame 'height) 2)
-                    (< (frame-parameter frame 'width) 30)
+               (and (< (frame-parameter frame 'height) 5)
                     (frame-parameter frame 'visibility))))))
