@@ -136,6 +136,7 @@ alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
 alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
 function d () { colordiff -u $@ | diff-highlight | less -R; }
+alias m=make
 
 alias g='git'
 alias gd='git diff'

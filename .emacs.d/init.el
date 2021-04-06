@@ -65,7 +65,9 @@
  '(cperl-continued-statement-offset 4)
  '(cperl-indent-level 4)
  '(cperl-regexp-indent-step 2)
- '(desktop-path (quote ("." ".." "../.." "../../.." "../../../.." "~/.emacs.d/" "~")))
+ '(desktop-path
+   (quote
+    ("." ".." "../.." "../../.." "../../../.." "~/.emacs.d/" "~")))
  '(desktop-save-mode t)
  '(diff-switches "-u")
  '(display-time-mode t)
@@ -103,7 +105,14 @@
  '(recentf-mode t)
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
- '(safe-local-variable-values (quote ((charset . utf-8) (encoding . utf-8))))
+ '(safe-local-variable-values
+   (quote
+    ((eval highlight-regexp "^[^	]+	[^	]+	[^	]+$\\|^[^	]+	[^	]+$"
+           (quote hi-yellow))
+     (eval local-set-key "	"
+           (quote self-insert-command))
+     (charset . utf-8)
+     (encoding . utf-8))))
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-paren-mode t)

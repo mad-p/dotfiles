@@ -76,6 +76,8 @@
 ;;
 ;; Typescript
 ;;
+(if t
+    ()
 (require 'typescript-mode)
 (require 'prettier-js)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
@@ -98,7 +100,7 @@
             source-inplace)
   :error-parser flycheck-parse-tslint
   :modes (typescript-mode))
-
+)
 ;;
 ;; C/C++
 ;;
