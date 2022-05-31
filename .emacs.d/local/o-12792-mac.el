@@ -11,6 +11,7 @@
         (highlight-regexp "[Aa]uthor\\|[Cc]opied\\|[Cc]reated\\|[Dd]erived\\|[Dd]eveloped\\|[Dd]evelopped\\|[Mm]odified" 'hi-green)
         (highlight-regexp "stackoverflow\\|github" 'hi-yellow)
         (highlight-regexp ":diff --git.*$" (quote hi-green))
+        (highlight-regexp "^diff .*$" (quote hi-green))
         ))))
 (defun occur-copyrights ()
   (interactive)

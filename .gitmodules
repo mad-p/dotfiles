@@ -1,0 +1,3 @@
+[submodule ".emacs.d/elisp/PG"]
+	path = .emacs.d/elisp/PG
+	url = git@github.com:ProofGeneral/PG.git

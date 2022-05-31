@@ -24,3 +24,5 @@ vendor/bundle
 elpa
 TAGS
 __pycache__
+.emacs.d/ac-comphist.dat
+.fonts/.uuid

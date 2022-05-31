@@ -84,3 +84,5 @@ autosetupmerge = true
 	ff = only
 [lfs]
 	storage = /Users/kaoru.maeda/Work/ddd/kenya-lfs-storage-test/lfs-storage
+[diff "lfstext"]
+	textconv = cat
