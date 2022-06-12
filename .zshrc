@@ -42,13 +42,13 @@ autoload -U colors
 colors
 
 bindkey -e
-bindkey "^[^B" vi-backward-blank-word
-bindkey "^[^L" vi-forward-blank-word
-bindkey "^[l" forward-word
-bindkey "^[f" down-case-word
-bindkey "^L" forward-char
-bindkey "^F" delete-char-or-list
-bindkey "^Z" clear-screen
+#bindkey "^[^B" vi-backward-blank-word
+#bindkey "^[^L" vi-forward-blank-word
+#bindkey "^[l" forward-word
+#bindkey "^[f" down-case-word
+#bindkey "^L" forward-char
+#bindkey "^F" delete-char-or-list
+#bindkey "^Z" clear-screen
 
 setopt auto_pushd
 setopt chase_links
@@ -137,6 +137,8 @@ alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
 alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
 function d () { colordiff -u $@ | diff-highlight | less -R; }
 alias m=make
+alias mg="make g "
+alias w=make
 
 alias g='git'
 alias gd='git diff'
