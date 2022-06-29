@@ -82,7 +82,7 @@ autosetupmerge = true
 	recurse = false
 [pull]
 	ff = only
-[lfs]
-	storage = /Users/kaoru.maeda/Work/ddd/kenya-lfs-storage-test/lfs-storage
+[include]
+	path = ~/.gitconfig.local
 [diff "lfstext"]
 	textconv = cat

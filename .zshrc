@@ -38,7 +38,7 @@ limit coredumpsize 20m
 
 ## shell interactions
 autoload -U compinit
-compinit
+compinit -u
 
 autoload -U colors
 colors
@@ -159,3 +159,9 @@ PERL5LIB="/Users/kaoru.maeda/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export P
 PERL_LOCAL_LIB_ROOT="/Users/kaoru.maeda/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/kaoru.maeda/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/kaoru.maeda/perl5"; export PERL_MM_OPT;
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kaoru.maeda/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kaoru.maeda/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kaoru.maeda/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kaoru.maeda/google-cloud-sdk/completion.zsh.inc'; fi
