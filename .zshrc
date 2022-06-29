@@ -44,13 +44,13 @@ autoload -U colors
 colors
 
 bindkey -e
-bindkey "^[^B" vi-backward-blank-word
-bindkey "^[^L" vi-forward-blank-word
-bindkey "^[l" forward-word
-bindkey "^[f" down-case-word
-bindkey "^L" forward-char
-bindkey "^F" delete-char-or-list
-bindkey "^Z" clear-screen
+#bindkey "^[^B" vi-backward-blank-word
+#bindkey "^[^L" vi-forward-blank-word
+#bindkey "^[l" forward-word
+#bindkey "^[f" down-case-word
+#bindkey "^L" forward-char
+#bindkey "^F" delete-char-or-list
+#bindkey "^Z" clear-screen
 
 setopt auto_pushd
 setopt chase_links
@@ -141,14 +141,11 @@ function d () { colordiff -u $@ | diff-highlight | less -R; }
 
 alias g='git'
 alias gd='git diff'
-alias gst='git status'
+alias gst='git status -uno --ignore-submodules'
 alias gl='git --no-pager log --oneline --decorate -8'
 alias gg='gl --graph'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias g='git'
-alias st='git status'
-alias gst='git status'
 om() { export om=$1; termtab $1 }
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
