@@ -1,5 +1,8 @@
 ; (setq ack-switches " --flush --nopager --nocolor --nogroup ")
-(setq ack-command "/usr/local/bin/rg")
+(setq ack-command
+      (cond ((file-executable-p "/usr/local/bin/rg") "/usr/local/bin/rg")
+            ((file-executable-p "/opt/homebrew/bin/rg") "/opt/homebrew/bin/rg")))
+
 (setq ack-switches " --no-heading ")
 (load (expand-file-name "~/share/emacs/site-lisp/ack"))
 (fset 'rg 'ack)

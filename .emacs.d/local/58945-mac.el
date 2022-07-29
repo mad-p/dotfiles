@@ -1,5 +1,5 @@
 (load "~/.emacs.d/conf/edit_with_emacs")
-(setq ispell-program-name "/usr/local/bin/aspell")
+(setq ispell-program-name "/opt/homebrew/bin/aspell")
 (defun highlight-copyrights ()
   (interactive)
   (save-excursion
