@@ -8,8 +8,14 @@ fi
 LANG=ja_JP.UTF-8
 LC_MESSAGES=en_US.UTF-8
 
-export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/git/bin:$PATH
-export MANPATH=$HOME/man:/usr/local/man:$MANPATH:/usr/local/git/share/man
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/Homebrew/bin/brew ]; then
+  eval "$(/usr/local/Homebrew/bin/brew shellenv)"
+fi
+export PATH=$HOME/bin:$PATH
+
+export MANPATH=$HOME/man:$MANPATH
 
 export EDITOR=emacsclient
 
