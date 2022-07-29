@@ -38,19 +38,19 @@ limit coredumpsize 20m
 
 ## shell interactions
 autoload -U compinit
-compinit
+compinit -u
 
 autoload -U colors
 colors
 
 bindkey -e
-bindkey "^[^B" vi-backward-blank-word
-bindkey "^[^L" vi-forward-blank-word
-bindkey "^[l" forward-word
-bindkey "^[f" down-case-word
-bindkey "^L" forward-char
-bindkey "^F" delete-char-or-list
-bindkey "^Z" clear-screen
+#bindkey "^[^B" vi-backward-blank-word
+#bindkey "^[^L" vi-forward-blank-word
+#bindkey "^[l" forward-word
+#bindkey "^[f" down-case-word
+#bindkey "^L" forward-char
+#bindkey "^F" delete-char-or-list
+#bindkey "^Z" clear-screen
 
 setopt auto_pushd
 setopt chase_links
@@ -141,14 +141,11 @@ function d () { colordiff -u $@ | diff-highlight | less -R; }
 
 alias g='git'
 alias gd='git diff'
-alias gst='git status'
+alias gst='git status -uno --ignore-submodules'
 alias gl='git --no-pager log --oneline --decorate -8'
 alias gg='gl --graph'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias g='git'
-alias st='git status'
-alias gst='git status'
 om() { export om=$1; termtab $1 }
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
@@ -162,3 +159,9 @@ PERL5LIB="/Users/kaoru.maeda/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export P
 PERL_LOCAL_LIB_ROOT="/Users/kaoru.maeda/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/kaoru.maeda/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/kaoru.maeda/perl5"; export PERL_MM_OPT;
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kaoru.maeda/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kaoru.maeda/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kaoru.maeda/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kaoru.maeda/google-cloud-sdk/completion.zsh.inc'; fi

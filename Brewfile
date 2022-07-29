@@ -44,7 +44,7 @@ brew "libsodium"
 brew "mecab"
 brew "mecab-ipadic"
 brew "mysql", restart_service: true
-brew "node"
+brew "nodenv"
 brew "python"
 brew "opencv@2", link: true
 brew "p7zip"
