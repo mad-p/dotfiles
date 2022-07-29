@@ -27,5 +27,7 @@
         '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control))))))
        )
       )
-(setq ispell-program-name "/usr/local/bin/aspell")
+(setq ispell-program-name
+      (cond ((file-executable-p "/usr/local/bin/aspell") "/usr/local/bin/aspell")
+            ((file-executable-p "/opt/homebrew/bin/aspell") "/opt/homebrew/bin/aspell")))
 (setenv "LANG" "C")
