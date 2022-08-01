@@ -1,6 +1,6 @@
-(setq browse-url-mosaic-program
-      (cond ((file-executable-p "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome") "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
-            (t "")))
+;(setq browse-url-mosaic-program
+;      (cond ((file-executable-p "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome") "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+;            (t "")))
 (setq helm-command-prefix-key "C-.")
 (require 'helm)
 (require 'helm-config)

@@ -96,7 +96,7 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
  '(package-selected-packages
-   '(helm go-eldoc go-autocomplete ggo-mode company-go go-mode typescript-mode markdown-mode+ counsel-dash company-lsp lsp-mode counsel ivy company scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck))
+   '(typescript-mode yaml-mode lsp-ui helm go-eldoc go-autocomplete ggo-mode company-go go-mode markdown-mode+ counsel-dash company-lsp counsel company groovy-mode editorconfig use-package flycheck))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(ruby-deep-arglist nil)

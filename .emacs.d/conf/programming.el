@@ -83,7 +83,7 @@
 (require 'typescript-mode)
 (require 'prettier-js)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
-;; (add-hook 'typescript-mode-hook 'lsp-ui-mode)
+(add-hook 'typescript-mode-hook 'lsp-ui-mode)
 (add-hook 'typescript-mode-hook
           #'(lambda ()
               (setq flycheck-checker 'typescript-tslint)
