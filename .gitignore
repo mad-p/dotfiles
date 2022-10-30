@@ -25,3 +25,7 @@ elpa
 TAGS
 __pycache__
 .emacs.d/ac-comphist.dat
+.emacs.d/url/cookies
+.fonts/.uuid
+Brewfile.lock.json
+flycheck_.tc.elc
