@@ -31,11 +31,6 @@ export LSCOLORS=exgxcxdxcxegedabagacad
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 setopt combining_chars
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-HISTFILE=$HOME/.zsh-history
-HISTSIZE=210000
-SAVEHIST=200000
 
 umask 022
 limit coredumpsize 20m
@@ -169,3 +164,7 @@ PERL5LIB="/Users/kaoru.maeda/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export P
 PERL_LOCAL_LIB_ROOT="/Users/kaoru.maeda/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/kaoru.maeda/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/kaoru.maeda/perl5"; export PERL_MM_OPT;
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/maeda/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
