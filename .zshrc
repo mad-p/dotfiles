@@ -33,11 +33,6 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 setopt combining_chars
-setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-HISTFILE=$HOME/.zsh-history
-HISTSIZE=210000
-SAVEHIST=200000
 
 umask 022
 limit coredumpsize 20m
