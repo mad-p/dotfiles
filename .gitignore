@@ -26,3 +26,5 @@ TAGS
 __pycache__
 .emacs.d/ac-comphist.dat
 .fonts/.uuid
+.emacs.d/.cache
+.emacs.d/.lsp-session*
