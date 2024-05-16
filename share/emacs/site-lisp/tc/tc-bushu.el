@@ -30,19 +30,19 @@
 (require 'tc)
 
 (defcustom tcode-bushu-sequence-sensitive t
-  "* nil¤Ç¤Ê¤¤¾ì¹ç¡¢Éô¼ó¤ÎÊÂ¤ÙÊı¤Ë¤è¤Ã¤Æ¹çÀ®¤µ¤ì¤ëÊ¸»ú¤ÎÍ¥ÀèÅÙ¤¬ÊÑ¤ï¤ë¡£"
+  "* nilã§ãªã„å ´åˆã€éƒ¨é¦–ã®ä¸¦ã¹æ–¹ã«ã‚ˆã£ã¦åˆæˆã•ã‚Œã‚‹æ–‡å­—ã®å„ªå…ˆåº¦ãŒå¤‰ã‚ã‚‹ã€‚"
   :type 'boolean :group 'tcode)
 
 (defcustom tcode-bushu-prioritized-chars nil
-  "* Í¥ÀèÅÙ¤¬Æ±¤¸¾ì¹ç¤ËÍ¥Àè¤µ¤ì¤ëÊ¸»ú¤Î¥ê¥¹¥È¡£
-Ê¸»úÎó¤Ç»ØÄê¤¹¤ë¡£"
+  "* å„ªå…ˆåº¦ãŒåŒã˜å ´åˆã«å„ªå…ˆã•ã‚Œã‚‹æ–‡å­—ã®ãƒªã‚¹ãƒˆã€‚
+æ–‡å­—åˆ—ã§æŒ‡å®šã™ã‚‹ã€‚"
   :type 'string :group 'tcode)
 
 (defvar tcode-bushu-inhibited-output-regexp
-  "^\\({.*}\\|[¤¨¤·¤Ø¥¢¥¤¥¦¥¨¥ª¥«¥¯¥±¥µ¥·¥¿¥Á¥Æ¥È¥Ë¥Ì¥Í¥Î¥Ï¥Ò¥Û¥à¥á¥è¥ê¥ë¥ì¥í¥ï¥ó]\\)$")
+  "^\\({.*}\\|[ãˆã—ã¸ã‚¢ã‚¤ã‚¦ã‚¨ã‚ªã‚«ã‚¯ã‚±ã‚µã‚·ã‚¿ãƒãƒ†ãƒˆãƒ‹ãƒŒãƒãƒãƒãƒ’ãƒ›ãƒ ãƒ¡ãƒ¨ãƒªãƒ«ãƒ¬ãƒ­ãƒ¯ãƒ³]\\)$")
 
 (defvar tcode-bushu-reverse-dictionary-name "bushu.rev"
-  "µÕ°ú¤­Éô¼ó¹çÀ®¼­½ñ¤Î¥Õ¥¡¥¤¥ëÌ¾")
+  "é€†å¼•ãéƒ¨é¦–åˆæˆè¾æ›¸ã®ãƒ•ã‚¡ã‚¤ãƒ«å")
 (defconst tcode-bushu-reverse-buffer-name " *tcode: bushu reverse dictionary*")
 
 (defvar tcode-bushu-expand-file-name "bushu.expand")
@@ -52,7 +52,7 @@
 (defconst tcode-bushu-index2-buffer-name " *tcode: bushu index2*")
 
 (defvar tcode-bushu-help-dictionary-name "bushu.help"
-  "Éô¼ó¹çÀ®ÊÑ´¹¥Ø¥ë¥×¼­½ñ¤Î¥Õ¥¡¥¤¥ëÌ¾")
+  "éƒ¨é¦–åˆæˆå¤‰æ›ãƒ˜ãƒ«ãƒ—è¾æ›¸ã®ãƒ•ã‚¡ã‚¤ãƒ«å")
 (defconst tcode-bushu-help-buffer-name " *tcode: bushu help dictionary*")
 
 (defvar tcode-bushu-functions
@@ -70,11 +70,11 @@
 (defvar tcode-bushu-use-cache t)
 
 ;;;
-;;; Éô¼ó¹çÀ®ÊÑ´¹¤¿¤á¤Î´ğËÜ¥Ç¡¼¥¿Áàºî
+;;; éƒ¨é¦–åˆæˆå¤‰æ›ãŸã‚ã®åŸºæœ¬ãƒ‡ãƒ¼ã‚¿æ“ä½œ
 ;;;
 
 (defun tcode-bushu-search (str)
-  "¸½ºß¤Î¥Ğ¥Ã¥Õ¥¡Ãæ¤Î¡¢ STR ¤Ç»Ï¤Ş¤ë¹Ô¤Î¤¦¤Á¡¢ºÇ½é¤Î¤â¤Î¤ò¸«¤Ä¤±¤ë¡£"
+  "ç¾åœ¨ã®ãƒãƒƒãƒ•ã‚¡ä¸­ã®ã€ STR ã§å§‹ã¾ã‚‹è¡Œã®ã†ã¡ã€æœ€åˆã®ã‚‚ã®ã‚’è¦‹ã¤ã‘ã‚‹ã€‚"
   (let ((min (point-min))
 	(max (point-max))
 	kouho)
@@ -100,8 +100,8 @@
 	  (looking-at (regexp-quote str))))))
 
 ;;; (defun tcode-bushu-parse-entry ()
-;;;   "¸½ºß¤Î¹Ô¤òÊ¸»ú¤Î¥ê¥¹¥È¤È¤·¤ÆÊÖ¤¹¡£
-;;; ¥İ¥¤¥ó¥È¤Ï¹ÔËö¤Ë°ÜÆ°¤¹¤ë¡£"
+;;;   "ç¾åœ¨ã®è¡Œã‚’æ–‡å­—ã®ãƒªã‚¹ãƒˆã¨ã—ã¦è¿”ã™ã€‚
+;;; ãƒã‚¤ãƒ³ãƒˆã¯è¡Œæœ«ã«ç§»å‹•ã™ã‚‹ã€‚"
 ;;;   (if (eobp)
 ;;;       nil
 ;;;     (string-to-list
@@ -109,17 +109,17 @@
 ;;; 			       (progn (end-of-line) (point))))))
 
 (defun tcode-bushu-b2s (x)
-  "´Á»ú¤Î¹½À®ÉôÉÊ(Éô¼ó)¤òÊ¸»úÎó¤ËÊÑ´¹¤¹¤ë¡£"
+  "æ¼¢å­—ã®æ§‹æˆéƒ¨å“(éƒ¨é¦–)ã‚’æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹ã€‚"
   (if (stringp x) x (char-to-string x)))
 
 (defun tcode-bushu-bl2s (l)
-  "´Á»ú¤Î¹½À®ÉôÉÊ(Éô¼ó)¤Î¥ê¥¹¥È¤òÊ¸»úÎó¤ËÊÑ´¹¤¹¤ë¡£"
+  "æ¼¢å­—ã®æ§‹æˆéƒ¨å“(éƒ¨é¦–)ã®ãƒªã‚¹ãƒˆã‚’æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹ã€‚"
   (mapconcat 'tcode-bushu-b2s l nil))
 
 (defun tcode-bushu-parse-entry ()
-  "¸½ºß¤Î¹Ô¤òÊ¸»ú¤Î¥ê¥¹¥È¤È¤·¤ÆÊÖ¤¹¡£
-¤¿¤À¤·{}¤Ç°Ï¤Ş¤ì¤¿ÉôÊ¬¤ÏÊ¸»úÎó¤È¤·¤ÆÊÖ¤¹¡£
-¥İ¥¤¥ó¥È¤Ï¹ÔËö¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®è¡Œã‚’æ–‡å­—ã®ãƒªã‚¹ãƒˆã¨ã—ã¦è¿”ã™ã€‚
+ãŸã ã—{}ã§å›²ã¾ã‚ŒãŸéƒ¨åˆ†ã¯æ–‡å­—åˆ—ã¨ã—ã¦è¿”ã™ã€‚
+ãƒã‚¤ãƒ³ãƒˆã¯è¡Œæœ«ã«ç§»å‹•ã™ã‚‹ã€‚"
   (if (eobp)
       nil
     (let (ret)
@@ -131,8 +131,8 @@
 				  (point) (progn (end-of-line) (point))))))))
 
 (defun tcode-bushu-for-char (char)
-  "CHAR¤ò¹½À®¤¹¤ëÉô¼ó¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£
-CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
+  "CHARã‚’æ§‹æˆã™ã‚‹éƒ¨é¦–ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚
+CHARã¨ã—ã¦æ–‡å­—åˆ—ã‚‚å—ã‘ä»˜ã‘ã‚‹ã€‚"
   (let* ((str (tcode-bushu-b2s char))
 	 (cache (get (intern-soft str tcode-stroke-table) 'bushu)))
     (if (and cache
@@ -142,8 +142,7 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
 	  (progn
 	    (put (intern str tcode-stroke-table) 'bushu (list char))
 	    (list char))
-	(save-excursion
-	  (set-buffer (get-buffer tcode-bushu-expand-buffer-name))
+	(with-current-buffer (get-buffer tcode-bushu-expand-buffer-name)
 	  (if (tcode-bushu-search str)
 	      (let ((bushu-list (cdr (tcode-bushu-parse-entry))))
 		(put (intern str tcode-stroke-table)
@@ -154,21 +153,20 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
 	    (list char)))))))
 
 (defun tcode-bushu-lookup-index2-entry-internal (str)
-  (save-excursion
-    (set-buffer (get-buffer tcode-bushu-index2-buffer-name))
+  (with-current-buffer (get-buffer tcode-bushu-index2-buffer-name)
     (when (tcode-bushu-search (concat str " "))
       (search-forward " ")
       (tcode-bushu-parse-entry))))
 
 (defun tcode-bushu-lookup-index2-entry-1 (char)
-  "CHAR¤òÉô¼ó¤È¤·¤Æ»ı¤ÄÊ¸»ú¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£
-ÊÖ¤¹¥ê¥¹¥È¤Ë¤ÏCHAR¤â´Ş¤Ş¤ì¤ë¡£
-CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
+  "CHARã‚’éƒ¨é¦–ã¨ã—ã¦æŒã¤æ–‡å­—ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚
+è¿”ã™ãƒªã‚¹ãƒˆã«ã¯CHARã‚‚å«ã¾ã‚Œã‚‹ã€‚
+CHARã¨ã—ã¦æ–‡å­—åˆ—ã‚‚å—ã‘ä»˜ã‘ã‚‹ã€‚"
   (cons char (tcode-bushu-lookup-index2-entry-internal (tcode-bushu-b2s char))))
 
 (defun tcode-bushu-< (char1 char2)
-  "Éô¼óCHAR1¤ÈCHAR2¤Î½ç½ø´Ø·¸¡£
-CHAR1, CHAR2¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
+  "éƒ¨é¦–CHAR1ã¨CHAR2ã®é †åºé–¢ä¿‚ã€‚
+CHAR1, CHAR2ã¨ã—ã¦æ–‡å­—åˆ—ã‚‚å—ã‘ä»˜ã‘ã‚‹ã€‚"
   (if (stringp char1)
       (if (stringp char2)
 	  (string< char1 char2)
@@ -178,15 +176,15 @@ CHAR1, CHAR2¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
       (< char1 char2))))
 
 (defun tcode-bushu-lookup-index2-entry-2 (char char2)
-  "CHAR¤ÈCHAR2¤òÉô¼ó¤È¤·¤Æ»ı¤ÄÊ¸»ú¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£
-CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
+  "CHARã¨CHAR2ã‚’éƒ¨é¦–ã¨ã—ã¦æŒã¤æ–‡å­—ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚
+CHARã¨ã—ã¦æ–‡å­—åˆ—ã‚‚å—ã‘ä»˜ã‘ã‚‹ã€‚"
   (let ((str (if (tcode-bushu-< char char2)
 		 (concat (tcode-bushu-b2s char) (tcode-bushu-b2s char2))
 	       (concat (tcode-bushu-b2s char2) (tcode-bushu-b2s char)))))
     (tcode-bushu-lookup-index2-entry-internal str)))
 
 (defun tcode-bushu-lookup-index2-entry-many (char n)
-  "CHAR¤òN¸Ä°Ê¾åÉô¼ó¤È¤·¤Æ»ı¤ÄÊ¸»ú¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£"
+  "CHARã‚’Nå€‹ä»¥ä¸Šéƒ¨é¦–ã¨ã—ã¦æŒã¤æ–‡å­—ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚"
   (if (= n 1)
       (tcode-bushu-lookup-index2-entry-1 char)
     (tcode-bushu-lookup-index2-entry-internal
@@ -196,7 +194,7 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
      )))
 
 (defun tcode-count (elt list)
-  "LISTÃæ¤ÎELT¤Î¿ô¤òÊÖ¤¹¡£"
+  "LISTä¸­ã®ELTã®æ•°ã‚’è¿”ã™ã€‚"
   (let ((n 0))
     (while list
       (if (equal elt (car list))
@@ -205,12 +203,12 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     n))
 
 (defun tcode-bushu-included-char-list (bushu &optional n)
-  "BUSHU ¤ò N ¸Ä°Ê¾å´Ş¤àÊ¸»ú¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£N¾ÊÎ¬»ş¤Ï N = 1 ¤È¤ß¤Ê¤¹¡£"
+  "BUSHU ã‚’ N å€‹ä»¥ä¸Šå«ã‚€æ–‡å­—ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚Nçœç•¥æ™‚ã¯ N = 1 ã¨ã¿ãªã™ã€‚"
   (tcode-bushu-lookup-index2-entry-many bushu (or n 1)))
 
 (defun tcode-bushu-included-set-p (list1 list2)
-  "LIST1¤¬LIST2¤Ë´Ş¤Ş¤ì¤ë½¸¹ç¤«¤É¤¦¤«¤òÉ½¤¹½Ò¸ì¡£
-Æ±¤¸Í×ÁÇ¤¬Ê£¿ô¤¢¤ë¾ì¹ç¤Ï¡¢LIST2¤Ë´Ş¤Ş¤ì¤ë¿ô¤ÎÊı¤¬¾¯¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
+  "LIST1ãŒLIST2ã«å«ã¾ã‚Œã‚‹é›†åˆã‹ã©ã†ã‹ã‚’è¡¨ã™è¿°èªã€‚
+åŒã˜è¦ç´ ãŒè¤‡æ•°ã‚ã‚‹å ´åˆã¯ã€LIST2ã«å«ã¾ã‚Œã‚‹æ•°ã®æ–¹ãŒå°‘ãªã‘ã‚Œã°nilã‚’è¿”ã™ã€‚"
   (let (x n (ret t))
     (while list1
       (setq x (car list1)
@@ -222,14 +220,14 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     ret))
 
 (defun tcode-bushu-same-set-p (list1 list2)
-  "LIST1¤ÈLIST2¤¬Æ±¤¸½¸¹ç¤«¤É¤¦¤«¤òÉ½¤¹½Ò¸ì¡£
-Æ±¤¸Í×ÁÇ¤¬Ê£¿ô¤¢¤ë¾ì¹ç¤Ï¡¢Æ±¤¸¿ô¤À¤±´Ş¤Ş¤ì¤Æ¤¤¤Ê¤¤¤ÈÅù¤·¤¤¤È¤Ï¤ß¤Ê¤µ¤Ê¤¤¡£"
+  "LIST1ã¨LIST2ãŒåŒã˜é›†åˆã‹ã©ã†ã‹ã‚’è¡¨ã™è¿°èªã€‚
+åŒã˜è¦ç´ ãŒè¤‡æ•°ã‚ã‚‹å ´åˆã¯ã€åŒã˜æ•°ã ã‘å«ã¾ã‚Œã¦ã„ãªã„ã¨ç­‰ã—ã„ã¨ã¯ã¿ãªã•ãªã„ã€‚"
   (and (eq (length list1) (length list2))
        (tcode-bushu-included-set-p list1 list2)))
 
 (defun tcode-char-list-for-bushu (bushu-list)
-  "BUSHU-LIST¤Ç¹½À®¤µ¤ì¤ë»ú¤Î½¸¹ç¤òµá¤á¤ë¡£"
-  ;; Ä¹¤µ2°Ê²¼¤Î¾ì¹ç¤òÆÃÊÌ°·¤¤¤¹¤ë¡£
+  "BUSHU-LISTã§æ§‹æˆã•ã‚Œã‚‹å­—ã®é›†åˆã‚’æ±‚ã‚ã‚‹ã€‚"
+  ;; é•·ã•2ä»¥ä¸‹ã®å ´åˆã‚’ç‰¹åˆ¥æ‰±ã„ã™ã‚‹ã€‚
   (cond ((null bushu-list) nil)
 	((null (cdr bushu-list))
 	 (let* ((bushu (car bushu-list))
@@ -278,12 +276,11 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     ret))
 
 ;;;
-;;; Éô¼ó¹çÀ®ÊÑ´¹ÍÑ¥Ç¡¼¥¿¤ÎºîÀ®¡¦¥Õ¥¡¥¤¥ëÁàºî
+;;; éƒ¨é¦–åˆæˆå¤‰æ›ç”¨ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆãƒ»ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œ
 ;;;
 
 (defun tcode-bushu-add-to-index2 (char component)
-  (save-excursion
-    (set-buffer (get-buffer tcode-bushu-index2-buffer-name))
+  (with-current-buffer (get-buffer tcode-bushu-index2-buffer-name)
     (setq component (sort component 'tcode-bushu-<))
     (let ((l nil) bushu)
       (while component
@@ -325,8 +322,7 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
 	(noe (count-lines (point-min) (point-max)))
 	(count 0)
 	(percent -1))
-    (save-excursion
-      (set-buffer (get-buffer-create tcode-bushu-index2-buffer-name))
+    (with-current-buffer (get-buffer-create tcode-bushu-index2-buffer-name)
       (erase-buffer)
       (or (not (boundp 'buffer-file-coding-system))
 	  (set-buffer-file-coding-system coding-system)))
@@ -334,7 +330,7 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     (while (not (eobp))
       (when (and tcode-verbose-message
 		 (/= percent (setq percent (/ (* 100 count) noe))))
-	(message "Éô¼ó¹çÀ®¼­½ñ¤Î³ÈÄ¥º÷°ú¤òºîÀ®Ãæ(%d%%)..." percent))
+	(message "éƒ¨é¦–åˆæˆè¾æ›¸ã®æ‹¡å¼µç´¢å¼•ã‚’ä½œæˆä¸­(%d%%)..." percent))
       (let ((entry (tcode-bushu-parse-entry)))
 	(setq count (1+ count))
 	(if entry
@@ -343,11 +339,10 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     (tcode-save-buffer tcode-bushu-index2-buffer-name
 		       tcode-bushu-index2-file-name t)
     (when tcode-verbose-message
-      (message "Éô¼ó¹çÀ®¼­½ñ¤Î³ÈÄ¥º÷°ú¤òºîÀ®Ãæ(100%%)...´°Î»"))))
+      (message "éƒ¨é¦–åˆæˆè¾æ›¸ã®æ‹¡å¼µç´¢å¼•ã‚’ä½œæˆä¸­(100%%)...å®Œäº†"))))
 
 (defun tcode-bushu-expand-add-entry (char component)
-  (save-excursion
-    (set-buffer (get-buffer tcode-bushu-expand-buffer-name))
+  (with-current-buffer (get-buffer tcode-bushu-expand-buffer-name)
     (if (not (tcode-bushu-search (tcode-bushu-b2s char)))
 	(insert char (tcode-bushu-bl2s component) ?\n)
       (end-of-line)
@@ -357,41 +352,40 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
   (if (member char tcode-bushu-list)
       (list char)
     (let ((str (tcode-bushu-b2s char)))
-      (save-excursion
-	(set-buffer (get-buffer tcode-bushu-expand-buffer-name))
+      (with-current-buffer (get-buffer tcode-bushu-expand-buffer-name)
 	(tcode-bushu-search str)
 	(let ((entry (tcode-bushu-parse-entry)))
 	  (if (and entry (equal char (car entry)))
-	      ;; ¤¹¤Ç¤ËÅ¸³«ºÑ¤ß
+	      ;; ã™ã§ã«å±•é–‹æ¸ˆã¿
 	      (cdr entry)
-	    ;; Å¸³«¤Ï¤Ş¤À¡£
+	    ;; å±•é–‹ã¯ã¾ã ã€‚
 	    (set-buffer (get-buffer tcode-bushu-reverse-buffer-name))
 	    (if trace
 		(tcode-bushu-search str)
 	      (beginning-of-line))
 	    (let ((entry (tcode-bushu-parse-entry)))
 	      (if (and entry (cdr entry) (equal char (car entry)))
-		  ;; Å¸³«¤Ç¤­¤ë
+		  ;; å±•é–‹ã§ãã‚‹
 		  (let ((component
 			 (apply 'nconc
 				(mapcar
 				 (lambda (bushu)
 				   (if (member bushu trace)
-				       ;; ½Û´Ä¤·¤Æ¤¤¤ë
-				       (list ?¢İ bushu)
+				       ;; å¾ªç’°ã—ã¦ã„ã‚‹
+				       (list ?âŠ¥ bushu)
 				     (tcode-bushu-expand-char
 				      bushu
 				      (cons bushu trace))))
 				 (cdr entry)))))
 		    (tcode-bushu-expand-add-entry char component)
 		    component)
-		;; Å¸³«¤Ç¤­¤Ê¤¤ = Éô¼ó
+		;; å±•é–‹ã§ããªã„ = éƒ¨é¦–
 		(setq tcode-bushu-list (cons char tcode-bushu-list))
 		(list char)))))))))
 
 ;;; obsolete
 (defun tcode-bushu-expand-all ()
-  "³ÆÊ¸»ú¤Ë¤Ä¤¤¤Æ¡¢Éô¼ó¤Î½¸¹ç¤òµá¤á¤ë¡£"
+  "å„æ–‡å­—ã«ã¤ã„ã¦ã€éƒ¨é¦–ã®é›†åˆã‚’æ±‚ã‚ã‚‹ã€‚"
   (tcode-set-work-buffer tcode-bushu-reverse-buffer-name
 			 tcode-bushu-reverse-dictionary-name
 			 t)
@@ -412,8 +406,7 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
 			    buffer-file-coding-system))
 	(noe (count-lines (point-min) (point-max)))
 	(count 0))
-    (save-excursion
-      (set-buffer bushu-expand-buf)
+    (with-current-buffer bushu-expand-buf
       (erase-buffer)
       (or (not (boundp 'buffer-file-coding-system))
 	  (set-buffer-file-coding-system coding-system)))
@@ -421,7 +414,7 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     (setq tcode-bushu-list nil)
     (while (not (eobp))
       (when tcode-verbose-message
-	(message "Éô¼ó¹çÀ®¼­½ñ¤òÅ¸³«Ãæ(%d%%)..." (/ (* 100 count) noe)))
+	(message "éƒ¨é¦–åˆæˆè¾æ›¸ã‚’å±•é–‹ä¸­(%d%%)..." (/ (* 100 count) noe)))
       (let ((entry (tcode-bushu-parse-entry)))
 	(setq count (1+ count))
 	(if entry
@@ -430,20 +423,14 @@ CHAR¤È¤·¤ÆÊ¸»úÎó¤â¼õ¤±ÉÕ¤±¤ë¡£"
     (tcode-save-buffer tcode-bushu-expand-buffer-name
 		       tcode-bushu-expand-file-name t)
     (when tcode-verbose-message
-      (message "Éô¼ó¹çÀ®¼­½ñ¤òÅ¸³«Ãæ(100%%)...´°Î»"))))
+      (message "éƒ¨é¦–åˆæˆè¾æ›¸ã‚’å±•é–‹ä¸­(100%%)...å®Œäº†"))))
 
 (defun tcode-bushu-load-dictionary (&optional force)
-  "Éô¼ó¹çÀ®ÊÑ´¹¼­½ñ¤òÆÉ¤ß¹ş¤à¡£
-¤¹¤Ç¤ËÆÉ¤ß¹ş¤Ş¤ì¤Æ¤¤¤ë¾ì¹ç¤Ï²¿¤â¤·¤Ê¤¤¡£
-FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
+  "éƒ¨é¦–åˆæˆå¤‰æ›è¾æ›¸ã‚’èª­ã¿è¾¼ã‚€ã€‚
+ã™ã§ã«èª­ã¿è¾¼ã¾ã‚Œã¦ã„ã‚‹å ´åˆã¯ä½•ã‚‚ã—ãªã„ã€‚
+FORCEãŒnilã§ãªã„å ´åˆã¯å†èª­ã¿è¾¼ã¿ã™ã‚‹ã€‚"
   (interactive "P")
   (save-excursion
-    ;; expand if need
-    (if (file-newer-than-file-p (tcode-path-for-read
-				 tcode-bushu-reverse-dictionary-name)
- 				(tcode-path-for-read
-				 tcode-bushu-expand-file-name))
- 	(tcode-bushu-expand-all))
     ;; load dictionaries
     (tcode-set-work-buffer tcode-bushu-expand-buffer-name
 			   tcode-bushu-expand-file-name)
@@ -468,15 +455,14 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
 
 ;;; obsolete
 (defun tcode-bushu-convert-dic-to-rev ()
-  "¸½ºß¤Î¥Ğ¥Ã¥Õ¥¡¤Ë¤¢¤ëdic·Á¼°Éô¼ó¹çÀ®¼­½ñ¥Ç¡¼¥¿¤òrev·Á¼°¤ËÊÑ´¹¤¹¤ë¡£"
+  "ç¾åœ¨ã®ãƒãƒƒãƒ•ã‚¡ã«ã‚ã‚‹dicå½¢å¼éƒ¨é¦–åˆæˆè¾æ›¸ãƒ‡ãƒ¼ã‚¿ã‚’revå½¢å¼ã«å¤‰æ›ã™ã‚‹ã€‚"
   (interactive)
   (let ((buf (get-buffer-create "*tcode: dic to rev*")))
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (erase-buffer))
     (goto-char (point-min))
     (setq tcode-bushu-list nil)
-    (message "Éô¼ó¹çÀ®¼­½ñ¤òÊÑ´¹Ãæ...")
+    (message "éƒ¨é¦–åˆæˆè¾æ›¸ã‚’å¤‰æ›ä¸­...")
     (while (not (eobp))
       (let ((entry (tcode-bushu-parse-entry)))
 	(if entry
@@ -490,11 +476,11 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
 		(tcode-bushu-search str)
 		(insert str ?\n)))))
       (forward-line 1))
-    (message "Éô¼ó¹çÀ®¼­½ñ¤òÊÑ´¹Ãæ...´°Î»")
+    (message "éƒ¨é¦–åˆæˆè¾æ›¸ã‚’å¤‰æ›ä¸­...å®Œäº†")
     (pop-to-buffer buf)))
 
 ;;;
-;;; Éô¼ó¹çÀ®ÊÑ´¹ÍÑ´ğËÜ±é»»
+;;; éƒ¨é¦–åˆæˆå¤‰æ›ç”¨åŸºæœ¬æ¼”ç®—
 ;;;
 
 (defun tcode-delete-first-element (elt list)
@@ -512,9 +498,9 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
 	  list))))
 
 (defun tcode-intersection (list1 list2)
-  "LIST1¤ÈLIST2¤È¤Î½¸¹çÀÑ¤òÊÖ¤¹¡£
-Æ±¤¸Í×ÁÇ¤¬Ê£¿ô¤¢¤ë¾ì¹ç¤Ï¶èÊÌ¤¹¤ë¡£
-ÊÖ¤êÃÍ¤Ë¤ª¤±¤ëÍ×ÁÇ¤ÎÊÂ¤ÓÊı¤ÏLIST1¤ÎÊı¤Ë´ğ¤Å¤¯¡£"
+  "LIST1ã¨LIST2ã¨ã®é›†åˆç©ã‚’è¿”ã™ã€‚
+åŒã˜è¦ç´ ãŒè¤‡æ•°ã‚ã‚‹å ´åˆã¯åŒºåˆ¥ã™ã‚‹ã€‚
+è¿”ã‚Šå€¤ã«ãŠã‘ã‚‹è¦ç´ ã®ä¸¦ã³æ–¹ã¯LIST1ã®æ–¹ã«åŸºã¥ãã€‚"
   (let ((l2 (copy-sequence list2))
 	intersection)
     (while (and list1 l2)
@@ -560,8 +546,8 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
     list1))
 
 (defun tcode-bushu-superset (bushu-list)
-  "Éô¼ó¤ÎÉôÊ¬½¸¹ç¤¬BUSHU-LIST¤Ç¤¢¤ë»ú¤Î½¸¹ç¤òµá¤á¤ë¡£"
-  ;; Ä¹¤µ2°Ê²¼¤Î¾ì¹ç¤òÆÃÊÌ°·¤¤¤¹¤ë¡£
+  "éƒ¨é¦–ã®éƒ¨åˆ†é›†åˆãŒBUSHU-LISTã§ã‚ã‚‹å­—ã®é›†åˆã‚’æ±‚ã‚ã‚‹ã€‚"
+  ;; é•·ã•2ä»¥ä¸‹ã®å ´åˆã‚’ç‰¹åˆ¥æ‰±ã„ã™ã‚‹ã€‚
   (cond ((null bushu-list) nil) ;; ?
 	((null (cdr bushu-list))
 	 (tcode-bushu-included-char-list (car bushu-list)))
@@ -588,8 +574,8 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
 	   (nreverse ret)))))
 
 (defun tcode-bushu-higher-priority-p (bushu1 bushu2 ref default)
-  "REF¤ò´ğ½à¤È¤·¤Æ¡¢BUSHU1¤ÎÊı¤¬BUSHU2¤è¤ê¤âÊÂ¤ÓÊı¤¬´ğ½à¤Ë¶á¤¤¤«¤É¤¦¤«¡£
-È½ÃÇ¤Ç¤­¤Ê¤«¤Ã¤¿¤ê¡¢¤¹¤ëÉ¬Í×¤¬¤Ê¤¤¾ì¹ç¤ÏDEFAULT¤òÊÖ¤¹¡£"
+  "REFã‚’åŸºæº–ã¨ã—ã¦ã€BUSHU1ã®æ–¹ãŒBUSHU2ã‚ˆã‚Šã‚‚ä¸¦ã³æ–¹ãŒåŸºæº–ã«è¿‘ã„ã‹ã©ã†ã‹ã€‚
+åˆ¤æ–­ã§ããªã‹ã£ãŸã‚Šã€ã™ã‚‹å¿…è¦ãŒãªã„å ´åˆã¯DEFAULTã‚’è¿”ã™ã€‚"
   (if tcode-bushu-sequence-sensitive
       (catch 'done
 	(while (and ref bushu1 bushu2)
@@ -612,8 +598,8 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
     default))
 
 (defun tcode-bushu-priority-level (char)
-  "CHAR¤¬ÊÑ¿ô`tcode-bushu-prioritized-chars'¤Î²¿ÈÖÌÜ¤Ë¤¢¤ë¤«¤òÊÖ¤¹¡£
-¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£"
+  "CHARãŒå¤‰æ•°`tcode-bushu-prioritized-chars'ã®ä½•ç•ªç›®ã«ã‚ã‚‹ã‹ã‚’è¿”ã™ã€‚
+ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚"
   (if (and tcode-bushu-prioritized-chars
 	   (not (stringp char)))
       (let* ((priority-list
@@ -624,8 +610,8 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
 
 (defun tcode-easier-stroke-p (s1 s2)
   (if (= (length s1) (length s2))
-      ;; ¤È¤ê¤¢¤¨¤ºÃÊ¤À¤±¹ÍÎ¸¡£
-      ;; ¥Û¡¼¥à¥İ¥¸¥·¥ç¥ó¤äÂÇ¤Á¤ä¤¹¤µ¤Ê¤É¹ÍÎ¸¤¹¤ë¤Ù¤­¡£
+      ;; ã¨ã‚Šã‚ãˆãšæ®µã ã‘è€ƒæ…®ã€‚
+      ;; ãƒ›ãƒ¼ãƒ ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚„æ‰“ã¡ã‚„ã™ã•ãªã©è€ƒæ…®ã™ã‚‹ã¹ãã€‚
       (let ((evfunc (lambda (a)
 		      (let ((v (/ a 10)))
 			(if (>= v 3)
@@ -637,11 +623,11 @@ FORCE¤¬nil¤Ç¤Ê¤¤¾ì¹ç¤ÏºÆÆÉ¤ß¹ş¤ß¤¹¤ë¡£"
 
 (defvar bushu-list)
 (defun tcode-bushu-less-p (char1 char2 &optional many)
-  "CHAR1¤¬CHAR2¤è¤êÍ¥ÀèÅÙ¤¬¹â¤¤¤«?
-¼«Í³ÊÑ¿ôBUSHU-LIST¤Ç»ØÄê¤µ¤ì¤¿Éô¼ó¥ê¥¹¥È¤ò´ğ½à¤È¤¹¤ë¡£
-MANY¤¬nil¤Î¾ì¹ç¡¢Æ±¤¸Í¥ÀèÅÙ¤Ç¤Ï¡¢BUSHU-LIST¤Ë´Ş¤Ş¤ì¤Ê¤¤
-Éô¼ó¤Î¿ô¤¬¾¯¤Ê¤¤Êı¤¬Í¥Àè¤µ¤ì¤ë¡£
-nil¤Ç¤Ê¤¤¾ì¹ç¤ÏÂ¿¤¤Êı¤¬Í¥Àè¤µ¤ì¤ë¡£"
+  "CHAR1ãŒCHAR2ã‚ˆã‚Šå„ªå…ˆåº¦ãŒé«˜ã„ã‹?
+è‡ªç”±å¤‰æ•°BUSHU-LISTã§æŒ‡å®šã•ã‚ŒãŸéƒ¨é¦–ãƒªã‚¹ãƒˆã‚’åŸºæº–ã¨ã™ã‚‹ã€‚
+MANYãŒnilã®å ´åˆã€åŒã˜å„ªå…ˆåº¦ã§ã¯ã€BUSHU-LISTã«å«ã¾ã‚Œãªã„
+éƒ¨é¦–ã®æ•°ãŒå°‘ãªã„æ–¹ãŒå„ªå…ˆã•ã‚Œã‚‹ã€‚
+nilã§ãªã„å ´åˆã¯å¤šã„æ–¹ãŒå„ªå…ˆã•ã‚Œã‚‹ã€‚"
   (let* ((bushu1 (tcode-bushu-for-char char1))
 	 (bushu2 (tcode-bushu-for-char char2))
 	 (i1 (tcode-intersection bushu1 bushu-list))
@@ -759,7 +745,7 @@ nil¤Ç¤Ê¤¤¾ì¹ç¤ÏÂ¿¤¤Êı¤¬Í¥Àè¤µ¤ì¤ë¡£"
 		  all-list))))
 
 (defun tcode-bushu-weak-compose-set (char-list)
-  (when (cdr char-list) ;; char-list ¤¬°ìÊ¸»ú¤À¤±¤Î»ş¤Ï²¿¤â¤·¤Ê¤¤
+  (when (cdr char-list) ;; char-list ãŒä¸€æ–‡å­—ã ã‘ã®æ™‚ã¯ä½•ã‚‚ã—ãªã„
     (let ((bushu-list (apply 'nconc (mapcar 'tcode-bushu-for-char char-list))))
       (sort (tcode-subtract-set (tcode-bushu-all-compose-set char-list)
 				(tcode-bushu-strong-compose-set char-list))
@@ -893,12 +879,12 @@ nil¤Ç¤Ê¤¤¾ì¹ç¤ÏÂ¿¤¤Êı¤¬Í¥Àè¤µ¤ì¤ë¡£"
 	    (list (tcode-following-char)))))))
 
 ;;;
-;;; Éô¼ó¹çÀ®ÊÑ´¹ÍÑ¥¤¥ó¥¿¥Õ¥§¡¼¥¹
+;;; éƒ¨é¦–åˆæˆå¤‰æ›ç”¨ã‚¤ãƒ³ã‚¿ãƒ•ã‚§ãƒ¼ã‚¹
 ;;;
 
 ;;;###autoload
 (defun tcode-bushu-compose-two-chars (char1 char2)
-  "CHAR1¤ÈCHAR2¤ò¹çÀ®¤¹¤ë¡£"
+  "CHAR1ã¨CHAR2ã‚’åˆæˆã™ã‚‹ã€‚"
   (tcode-bushu-load-dictionary)
   (let* ((str (concat (char-to-string char1)
 		      (char-to-string char2)))
@@ -935,7 +921,7 @@ See also `tcode-bushu-functions'."
     nil))
 
 (defun tcode-bushu-compose-interactively (char-list)
-  "CHAR-LIST¤ò¤â¤È¤ËÂĞÏÃÅª¤Ë¹çÀ®¤¹¤ë¡£"
+  "CHAR-LISTã‚’ã‚‚ã¨ã«å¯¾è©±çš„ã«åˆæˆã™ã‚‹ã€‚"
   (tcode-bushu-load-dictionary)
   (let ((kouho-list (apply 'nconc (mapcar (lambda (function)
 					    (tcode-bushu-funcall
@@ -946,11 +932,11 @@ See also `tcode-bushu-functions'."
       (ding))))
 
 (defun tcode-bushu-scan-backward (max)
-  "¸½ point ¤è¤êÀèÆ¬Êı¸ş¤Ë¤¢¤ëÆüËÜ¸ìÎó¤Ş¤¿¤Ï±ÑÃ±¸ì°ì¤Ä¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£
-¥ê¥¹¥È¤ÎÍ×ÁÇ¤Ï(POINT . \"Ê¸»úÎó\")¤Ç¤¢¤ë¡£
-`tcode-scan-backward' ¤È°ã¤¤¡¢±ÑÊ¸»ú¤Ç¤â°ìÊ¸»ú¤ÎÊ¸»úÎó¤ÇÊÖ¤¹¡£
-¥ê¥¹¥È¤Î½çÈÖ¤È¤·¤Æ¤Ï¡¢¥Ğ¥Ã¥Õ¥¡¤ÎÀèÆ¬¤Ë¶á¤¤Ê¸»úÎó¤¬ÀèÆ¬¤ÎÂ¦¤Ë¤Ê¤ë¡£
-¥ê¥¹¥È¤ÎÄ¹¤µ¤ÏºÇÂç MAX Ê¸»ú¤Ç¤¢¤ë¡£"
+  "ç¾ point ã‚ˆã‚Šå…ˆé ­æ–¹å‘ã«ã‚ã‚‹æ—¥æœ¬èªåˆ—ã¾ãŸã¯è‹±å˜èªä¸€ã¤ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚
+ãƒªã‚¹ãƒˆã®è¦ç´ ã¯(POINT . \"æ–‡å­—åˆ—\")ã§ã‚ã‚‹ã€‚
+`tcode-scan-backward' ã¨é•ã„ã€è‹±æ–‡å­—ã§ã‚‚ä¸€æ–‡å­—ã®æ–‡å­—åˆ—ã§è¿”ã™ã€‚
+ãƒªã‚¹ãƒˆã®é †ç•ªã¨ã—ã¦ã¯ã€ãƒãƒƒãƒ•ã‚¡ã®å…ˆé ­ã«è¿‘ã„æ–‡å­—åˆ—ãŒå…ˆé ­ã®å´ã«ãªã‚‹ã€‚
+ãƒªã‚¹ãƒˆã®é•·ã•ã¯æœ€å¤§ MAX æ–‡å­—ã§ã‚ã‚‹ã€‚"
   (save-excursion
     (let (ch context)
       (while (and (< (length context) max)
@@ -964,7 +950,7 @@ See also `tcode-bushu-functions'."
       context)))
 
 (defun tcode-bushu-convert-preceding-chars (&optional arg)
-  "¥İ¥¤¥ó¥È¤ÎÁ°¤Î2Ê¸»ú¤ò¹çÀ®¤¹¤ë¡£"
+  "ãƒã‚¤ãƒ³ãƒˆã®å‰ã®2æ–‡å­—ã‚’åˆæˆã™ã‚‹ã€‚"
   (interactive "*P")
   (tcode-bushu-init 2)
   (let ((context (tcode-bushu-scan-backward 2)))
@@ -1029,7 +1015,7 @@ See also `tcode-bushu-functions'."
 	(current-kouho 0))
     (catch 'done
       (while (cond ((>= (tcode-char-to-key char) 0)
-		    ;; ¥¤¥ó¥¯¥ê¥á¥ó¥¿¥ëÊÑ´¹
+		    ;; ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ã‚¿ãƒ«å¤‰æ›
 		    (let* ((next-chars (tcode-input-method char))
 			   (kouho (tcode-bushu-compose-interactively
 				   (append char-list
@@ -1039,18 +1025,18 @@ See also `tcode-bushu-functions'."
 			  (throw 'done kouho))
 		      t))
 		   ((= char ?\r)
-		    ;; ³ÎÄê
+		    ;; ç¢ºå®š
 		    (throw 'done (nth current-kouho kouho-list)))
 		   ((or (= char ?\C-?)
 			(= char ?\C-h))
-		    ;; °ì¤ÄÌá¤ë
+		    ;; ä¸€ã¤æˆ»ã‚‹
 		    (throw 'done nil))
 		   ((or (= char ? )
 			(= char ?>))
-		    ;; ¼¡¸õÊä
+		    ;; æ¬¡å€™è£œ
 		    (setq current-kouho (% (1+ current-kouho) nok)))
 		   ((= char ?<)
-		    ;; Á°¸õÊä
+		    ;; å‰å€™è£œ
 		    (setq current-kouho (1- (if (<= current-kouho 0)
 						nok
 					      current-kouho))))
@@ -1060,37 +1046,37 @@ See also `tcode-bushu-functions'."
 	(setq char (read-char))))))
 
 ;;;
-;;; Á°ÃÖ·¿Éô¼ó¹çÀ®ÊÑ´¹
+;;; å‰ç½®å‹éƒ¨é¦–åˆæˆå¤‰æ›
 ;;;
 
 (defvar tcode-bushu-prefix-list nil
-  "Á°ÃÖ·¿Éô¼ó¹çÀ®ÊÑ´¹¤Î³«»ÏÃÏÅÀ¤Î°õ¤Î¥ê¥¹¥È¡£")
+  "å‰ç½®å‹éƒ¨é¦–åˆæˆå¤‰æ›ã®é–‹å§‹åœ°ç‚¹ã®å°ã®ãƒªã‚¹ãƒˆã€‚")
 (make-variable-buffer-local 'tcode-bushu-prefix-list)
 
 (defun tcode-bushu-put-prefix ()
-  "Á°ÃÖ·¿Éô¼ó¹çÀ®ÊÑ´¹¤Î³«»ÏÃÏÅÀ¤È¤·¤Æ°õ¤òÉÕ¤±¤ë¡£"
+  "å‰ç½®å‹éƒ¨é¦–åˆæˆå¤‰æ›ã®é–‹å§‹åœ°ç‚¹ã¨ã—ã¦å°ã‚’ä»˜ã‘ã‚‹ã€‚"
   (tcode-bushu-init 2)
   (unless (get-buffer tcode-bushu-expand-buffer-name)
     (error "Bushu dictionary not ready."))
   (setq tcode-bushu-prefix-list (cons (set-marker (make-marker) (point))
 				      tcode-bushu-prefix-list))
-  (insert "¢¥")
+  (insert "â–²")
   (cancel-undo-boundary)
   (setq this-command 'self-insert-command
 	tcode-self-insert-non-undo-count 0))
 
 (defun tcode-bushu-delete-prefix ()
-  "Á°ÃÖ·¿Éô¼ó¹çÀ®ÊÑ´¹ÍÑ¤Î°ìÈÖÆâÂ¦¤Î°õ¤òºï½ü¤¹¤ë¡£"
+  "å‰ç½®å‹éƒ¨é¦–åˆæˆå¤‰æ›ç”¨ã®ä¸€ç•ªå†…å´ã®å°ã‚’å‰Šé™¤ã™ã‚‹ã€‚"
   (when tcode-bushu-prefix-list
     (let ((p (car tcode-bushu-prefix-list)))
       (setq tcode-bushu-prefix-list (cdr tcode-bushu-prefix-list))
       (save-excursion
 	(goto-char p)
-	(when (looking-at "¢¥")
+	(when (looking-at "â–²")
 	  (delete-char 1))))))
 
 (defun tcode-bushu-clear-prefix ()
-  "Á°ÃÖ·¿Éô¼ó¹çÀ®ÊÑ´¹ÍÑ¤Î°õ¤ò¤¹¤Ù¤Æºï½ü¤¹¤ë¡£"
+  "å‰ç½®å‹éƒ¨é¦–åˆæˆå¤‰æ›ç”¨ã®å°ã‚’ã™ã¹ã¦å‰Šé™¤ã™ã‚‹ã€‚"
   (while tcode-bushu-prefix-list
     (tcode-bushu-delete-prefix)))
 
@@ -1120,15 +1106,15 @@ See also `tcode-bushu-functions'."
 	   (p (car car-context)))
       (if (and prev-char
 	       prev-prev-char
-	       (string= "¢¥" prev-prev-char)
+	       (string= "â–²" prev-prev-char)
 	       (memq p (mapcar 'marker-position tcode-bushu-prefix-list))
-	       (not (string= prev-char "¢¥")))
+	       (not (string= prev-char "â–²")))
 	  (let ((kanji (tcode-bushu-compose-two-chars
 			(tcode-string-to-char prev-char)
 			char)))
 	    (if kanji
 		(progn
-		  ;; Éô¼ó¹çÀ®ÊÑ´¹¤·¤ÆÆşÎÏ
+		  ;; éƒ¨é¦–åˆæˆå¤‰æ›ã—ã¦å…¥åŠ›
 		  (delete-region p (point))
 		  (while (and tcode-bushu-prefix-list
 			      (/= p (marker-position
@@ -1145,19 +1131,19 @@ See also `tcode-bushu-functions'."
 							kanji
 						      (char-to-string kanji))))
 		  (tcode-bushu-prefix-convert-char kanji))
-	      ;; ÊÑ´¹¤Ç¤­¤Ê¤¤¡£
+	      ;; å¤‰æ›ã§ããªã„ã€‚
 	      (ding)
 	      nil))
-	;; Éô¼ó¹çÀ®ÊÑ´¹¤ÎºàÎÁ
+	;; éƒ¨é¦–åˆæˆå¤‰æ›ã®ææ–™
 	char))))
 
 ;;;
-;;; Éô¼ó¹çÀ®ÊÑ´¹³«»Ï¥³¥Ş¥ó¥É
+;;; éƒ¨é¦–åˆæˆå¤‰æ›é–‹å§‹ã‚³ãƒãƒ³ãƒ‰
 ;;;
 
 ;;;###autoload
 (defun tcode-bushu-begin-conversion (&optional interactive)
-  "Éô¼ó¹çÀ®ÊÑ´¹¤ò³«»Ï¤¹¤ë¡£"
+  "éƒ¨é¦–åˆæˆå¤‰æ›ã‚’é–‹å§‹ã™ã‚‹ã€‚"
   (interactive "*P")
   (if interactive
       (tcode-bushu-convert-interactively)
@@ -1172,7 +1158,7 @@ See also `tcode-bushu-functions'."
 
 ;;;###autoload
 (defun tcode-bushu-begin-alternate-conversion (&optional interactive)
-  "`tcode-use-postfix-bushu-as-default' ¤È¤ÏµÕ¤ÎÉô¼ó¹çÀ®ÊÑ´¹¤ò³«»Ï¤¹¤ë¡£"
+  "`tcode-use-postfix-bushu-as-default' ã¨ã¯é€†ã®éƒ¨é¦–åˆæˆå¤‰æ›ã‚’é–‹å§‹ã™ã‚‹ã€‚"
   (interactive "*P")
   (if interactive
       (tcode-bushu-convert-interactively)
@@ -1182,7 +1168,7 @@ See also `tcode-bushu-functions'."
 
 ;;;###autoload
 (defun tcode-bushu-convert-preceding-char-interactively ()
-  "¥İ¥¤¥ó¥È¤ÎÁ°¤Î1Ê¸»ú¤ò¤â¤È¤ËÂĞÏÃÅª¤ËÉô¼ó¹çÀ®¤¹¤ë¡£"
+  "ãƒã‚¤ãƒ³ãƒˆã®å‰ã®1æ–‡å­—ã‚’ã‚‚ã¨ã«å¯¾è©±çš„ã«éƒ¨é¦–åˆæˆã™ã‚‹ã€‚"
   (interactive "*")
   (tcode-bushu-init 2)
   (let ((context (tcode-bushu-scan-backward 1)))

@@ -29,77 +29,75 @@
 (require 'tc)
 
 (defgroup mazegaki-conversion nil
-  "¸ò¤¼½ñ¤­ÊÑ´¹"
+  "äº¤ãœæ›¸ãå¤‰æ›"
   :group 'tcode)
 
-;;; ¥«¥¹¥¿¥Ş¥¤¥º¤Ç¤­¤ëÊÑ¿ô
+;;; ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã§ãã‚‹å¤‰æ•°
 
 (defvar tcode-mazegaki-selected-candidate-register ?\[
-  "* ¸ò¤¼½ñ¤­ÊÑ´¹¤ÇºÇ¸å¤Ë³ÎÄê¤·¤¿Ê¸»úÎó¤òÊİÂ¸¤·¤Æ¤ª¤¯¥ì¥¸¥¹¥¿¡£
-nil ¤Î¾ì¹ç¤Ë¤ÏÊİÂ¸¤µ¤ì¤Ê¤¤¡£")
+  "* äº¤ãœæ›¸ãå¤‰æ›ã§æœ€å¾Œã«ç¢ºå®šã—ãŸæ–‡å­—åˆ—ã‚’ä¿å­˜ã—ã¦ãŠããƒ¬ã‚¸ã‚¹ã‚¿ã€‚
+nil ã®å ´åˆã«ã¯ä¿å­˜ã•ã‚Œãªã„ã€‚")
 
 (defvar tcode-mazegaki-dictionary-name "mazegaki.dic"
-  "¸ò¤¼½ñ¤­ÊÑ´¹¼­½ñ¤Î¥Õ¥¡¥¤¥ëÌ¾¡£")
+  "äº¤ãœæ›¸ãå¤‰æ›è¾æ›¸ã®ãƒ•ã‚¡ã‚¤ãƒ«åã€‚")
 
 (defconst tcode-mazegaki-buffer-name " *tcode: mazegaki dictionary*")
-;; ¸ò¤¼½ñ¤­¼­½ñ¤Î¥Ğ¥Ã¥Õ¥¡Ì¾
+;; äº¤ãœæ›¸ãè¾æ›¸ã®ãƒãƒƒãƒ•ã‚¡å
 
 (unless (assq tcode-mazegaki-buffer-name tcode-dictionaries)
   (setq tcode-dictionaries (cons (cons tcode-mazegaki-buffer-name
 				       tcode-mazegaki-dictionary-name)
 				 tcode-dictionaries)))
 
-(defcustom tcode-mazegaki-yomi-max 10 "* ¸ò¤¼½ñ¤­ÊÑ´¹¤ÎÆÉ¤ß¤ÎºÇÂçÊ¸»ú¿ô¡£"
+(defcustom tcode-mazegaki-yomi-max 10 "* äº¤ãœæ›¸ãå¤‰æ›ã®èª­ã¿ã®æœ€å¤§æ–‡å­—æ•°ã€‚"
   :group 'mazegaki-conversion)
 
 (defvar tcode-mazegaki-terminate-char-list
   (mapcar (lambda (ch) (tcode-string-to-char ch))
-	  '("¡¢" "¡£" "¡¤" "¡¥" "¡¦" "¡Ö" "¡×" "¡Ê" "¡Ë"))
-  "* ¸ò¤¼½ñ¤­ÊÑ´¹¤ÎÆÉ¤ß¤Ë´Ş¤Ş¤ì¤Ê¤¤2¥Ğ¥¤¥ÈÊ¸»ú¤Î¥ê¥¹¥È¡£")
+	  '("ã€" "ã€‚" "ï¼Œ" "ï¼" "ãƒ»" "ã€Œ" "ã€" "ï¼ˆ" "ï¼‰"))
+  "* äº¤ãœæ›¸ãå¤‰æ›ã®èª­ã¿ã«å«ã¾ã‚Œãªã„2ãƒã‚¤ãƒˆæ–‡å­—ã®ãƒªã‚¹ãƒˆã€‚")
 
 (defcustom tcode-mazegaki-init-hook nil
-  "* ºÇ½é¤Ë tc-mazegaki.el ¤ò¥í¡¼¥É¤¹¤ë¤È¤­¤Ë¸Æ¤Ğ¤ì¤ë hook¡£"
+  "* æœ€åˆã« tc-mazegaki.el ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã¨ãã«å‘¼ã°ã‚Œã‚‹ hookã€‚"
   :type 'hook :group 'mazegaki-conversion)
 
 (defvar tcode-mazegaki-command-summary-alist
-  '(("½Ì¤á¤ë" . tcode-mazegaki-relimit-left)
-    ("¿­¤Ğ¤¹" . tcode-mazegaki-relimit-right)
-    ("³ÎÄê"   . tcode-mazegaki-finish)
-    ("Ìá¤¹"   . tcode-mazegaki-restore-yomi-and-quit)
-    ("°ìÍ÷"   . tcode-mazegaki-table-mode)
-    ("¼¡É½¤Ş¤¿¤Ï½Ì¤á" . tcode-mazegaki-select-candidate-or-relimit)
-    ("ÅĞÏ¿&³ÎÄê" . tcode-mazegaki-make-entry-and-finish))
-  "* `tcode-mazegaki-command-summary' ¤ÇÉ½¼¨¤µ¤ì¤ëµ¡Ç½¤Î alist¡£")
+  '(("ç¸®ã‚ã‚‹" . tcode-mazegaki-relimit-left)
+    ("ä¼¸ã°ã™" . tcode-mazegaki-relimit-right)
+    ("ç¢ºå®š"   . tcode-mazegaki-finish)
+    ("æˆ»ã™"   . tcode-mazegaki-restore-yomi-and-quit)
+    ("ä¸€è¦§"   . tcode-mazegaki-table-mode)
+    ("æ¬¡è¡¨ã¾ãŸã¯ç¸®ã‚" . tcode-mazegaki-select-candidate-or-relimit)
+    ("ç™»éŒ²&ç¢ºå®š" . tcode-mazegaki-make-entry-and-finish))
+  "* `tcode-mazegaki-command-summary' ã§è¡¨ç¤ºã•ã‚Œã‚‹æ©Ÿèƒ½ã® alistã€‚")
 
 (defvar tcode-mazegaki-enable-inflection t
-  "* nil ¤Ç¤Ê¤¤¤È¤­¡¢²ÄÊÑ¸ìÈøÊÑ´¹¤¬¤Ç¤­¤ë¡£")
+  "* nil ã§ãªã„ã¨ãã€å¯å¤‰èªå°¾å¤‰æ›ãŒã§ãã‚‹ã€‚")
 
 (defvar tcode-mazegaki-prefix-mark
-  (if (or (tcode-nemacs-p)
-	  (tcode-mule-1-p)
+  (if (or (tcode-mule-1-p)
 	  (and (boundp 'window-system)
 	       (not window-system)))
       (if (fboundp 'make-glyph)
-	  (make-glyph "¢¤")
-	"¢¤")
+	  (make-glyph "â–³")
+	"â–³")
     nil)
-  "* ¸ò¤¼½ñ¤­ÊÑ´¹¤Î»ÏÅÀ¤òÉ½¤¹¤·¤ë¤·¡£")
+  "* äº¤ãœæ›¸ãå¤‰æ›ã®å§‹ç‚¹ã‚’è¡¨ã™ã—ã‚‹ã—ã€‚")
 
 (defvar tcode-mazegaki-face
-  (if (or (tcode-nemacs-p)
-	  (tcode-mule-1-p)
+  (if (or (tcode-mule-1-p)
 	  (and (boundp 'window-system)
 	       (not window-system)))
       nil
     (prog1
 	(make-face 'mazegaki-conversion)
-      (set-face-underline-p 'mazegaki-conversion t)))
-  "* ¸ò¤¼½ñ¤­ÊÑ´¹¤ÎÊÑ´¹ÂĞ¾İ¤òÉ½¤¹Ê¸»úÎó¤ËÍÑ¤¤¤ëface¡£
-mule2 °Ê¾å¤Ş¤¿¤Ï XEmacs ¤Î¾ì¹ç¤Î¤ßÍ­¸ú¡£")
+      (set-face-underline 'mazegaki-conversion t)))
+  "* äº¤ãœæ›¸ãå¤‰æ›ã®å¤‰æ›å¯¾è±¡ã‚’è¡¨ã™æ–‡å­—åˆ—ã«ç”¨ã„ã‚‹faceã€‚
+mule2 ä»¥ä¸Šã¾ãŸã¯ XEmacs ã®å ´åˆã®ã¿æœ‰åŠ¹ã€‚")
 (defvar tcode-mazegaki-prefix-overlay nil)
 
 (defvar tcode-mazegaki-stroke-priority-list
-; ¥­¡¼ÇÛÃÖ
+; ã‚­ãƒ¼é…ç½®
 ;  0  1  2  3  4    5  6  7  8  9
 ; 10 11 12 13 14   15 16 17 18 19
 ; 20 21 22 23 24   25 26 27 28 29
@@ -108,122 +106,122 @@ mule2 °Ê¾å¤Ş¤¿¤Ï XEmacs ¤Î¾ì¹ç¤Î¤ßÍ­¸ú¡£")
     12 13 11 14 10
     27 26 28 25 29
     17 16 18 15 19)
-  "* ¸õÊä¤òÊÂ¤Ù¤ë¤È¤­¤Î°ÌÃÖ¡£
-¤³¤Î¥ê¥¹¥È¤Ë¤Ê¤¤¥­¡¼¤Ï»ÈÍÑ¤µ¤ì¤Ê¤¤¡£")
+  "* å€™è£œã‚’ä¸¦ã¹ã‚‹ã¨ãã®ä½ç½®ã€‚
+ã“ã®ãƒªã‚¹ãƒˆã«ãªã„ã‚­ãƒ¼ã¯ä½¿ç”¨ã•ã‚Œãªã„ã€‚")
 
 (defvar tcode-mazegaki-alternative-select-first-keys
   '(22)
-  "* ¸õÊä¤òÆó¤Ä¤ÎÃæ¤«¤é°ì¤ÄÁª¤Ö¾ì¹ç¤Î¡¢º¸Â¦(Âè1¸õÊä)¤òÁª¤Ö¥­¡¼¤Î¥ê¥¹¥È¡£")
+  "* å€™è£œã‚’äºŒã¤ã®ä¸­ã‹ã‚‰ä¸€ã¤é¸ã¶å ´åˆã®ã€å·¦å´(ç¬¬1å€™è£œ)ã‚’é¸ã¶ã‚­ãƒ¼ã®ãƒªã‚¹ãƒˆã€‚")
 (defvar tcode-mazegaki-alternative-select-second-keys
   '(23)
-  "* ¸õÊä¤òÆó¤Ä¤ÎÃæ¤«¤é°ì¤ÄÁª¤Ö¾ì¹ç¤Î¡¢±¦Â¦(Âè2¸õÊä)¤òÁª¤Ö¥­¡¼¤Î¥ê¥¹¥È¡£")
+  "* å€™è£œã‚’äºŒã¤ã®ä¸­ã‹ã‚‰ä¸€ã¤é¸ã¶å ´åˆã®ã€å³å´(ç¬¬2å€™è£œ)ã‚’é¸ã¶ã‚­ãƒ¼ã®ãƒªã‚¹ãƒˆã€‚")
 
 (defvar tcode-mazegaki-complete-max 10
-  "* Êä´°¤Îºİ¤Ë°·¤¦¸õÊä¤Î¿ô¤ÎºÇÂçÃÍ¡£
-¸õÊä¤¬¤³¤ÎÃÍ°Ê¾å¤Ê¤éÊä´°¤Ï¹Ô¤ï¤Ê¤¤¡£")
+  "* è£œå®Œã®éš›ã«æ‰±ã†å€™è£œã®æ•°ã®æœ€å¤§å€¤ã€‚
+å€™è£œãŒã“ã®å€¤ä»¥ä¸Šãªã‚‰è£œå®Œã¯è¡Œã‚ãªã„ã€‚")
 
-(defconst tcode-mazegaki-inflection-mark "¡½"
-  "ÆÉ¤ß¤¬³èÍÑ¤¹¤ë¾ì¹ç¤Ë¡¢³èÍÑ¸ìÈø¤òÉ½¤¹¤¿¤á¤Ë¤Ä¤±¤ëÊ¸»úÎó¡£")
+(defconst tcode-mazegaki-inflection-mark "â€”"
+  "èª­ã¿ãŒæ´»ç”¨ã™ã‚‹å ´åˆã«ã€æ´»ç”¨èªå°¾ã‚’è¡¨ã™ãŸã‚ã«ã¤ã‘ã‚‹æ–‡å­—åˆ—ã€‚")
 
 (defvar tcode-mazegaki-max-suffix-length 4
-  "* ÆÉ¤ß¤ÎÃæ¤Î³èÍÑ¸ìÈø¤ÎºÇÂçÊ¸»ú¿ô¡£")
+  "* èª­ã¿ã®ä¸­ã®æ´»ç”¨èªå°¾ã®æœ€å¤§æ–‡å­—æ•°ã€‚")
 
 (defcustom tcode-mazegaki-fixed-priority-count 4
-  "* ³Ø½¬¤¹¤ë¤È¤­¤Ë¡¢³Ø½¬¤ÎÂĞ¾İ³°¤È¤Ê¤ë¸õÊä¤Î¿ô¡£
-¸½ºß¤ÎÆÉ¤ß¤Ë¤Ä¤¤¤Æ¡¢ÁªÂò¤µ¤ì¤¿¸õÊä¤Î½çÈÖ¤¬¤³¤Î¿ô°Ê²¼¤Ê¤é¤Ğ¡¢³Ø½¬¤µ¤ì¤Ê¤¤¡£"
+  "* å­¦ç¿’ã™ã‚‹ã¨ãã«ã€å­¦ç¿’ã®å¯¾è±¡å¤–ã¨ãªã‚‹å€™è£œã®æ•°ã€‚
+ç¾åœ¨ã®èª­ã¿ã«ã¤ã„ã¦ã€é¸æŠã•ã‚ŒãŸå€™è£œã®é †ç•ªãŒã“ã®æ•°ä»¥ä¸‹ãªã‚‰ã°ã€å­¦ç¿’ã•ã‚Œãªã„ã€‚"
   :group 'mazegaki-conversion)
 
 (defcustom tcode-mazegaki-inline-candidate-count 0
-  "* ¸õÊä¤¬Ê£¿ô¤¢¤Ã¤Æ¤â¡¢Âè1¸õÊä¤ò¥¤¥ó¥é¥¤¥óÉ½¼¨¤¹¤ë²ó¿ô"
+  "* å€™è£œãŒè¤‡æ•°ã‚ã£ã¦ã‚‚ã€ç¬¬1å€™è£œã‚’ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³è¡¨ç¤ºã™ã‚‹å›æ•°"
   :group 'mazegaki-conversion)
 
 (defvar tcode-mazegaki-splitter "|"
-  "* ÅĞÏ¿¤Îºİ¤Î¡¢ÆÉ¤ß¤ª¤è¤Ó´Á»ú¤Î¶èÀÚ¤ê¤òÉ½¤¹Àµµ¬É½¸½")
+  "* ç™»éŒ²ã®éš›ã®ã€èª­ã¿ãŠã‚ˆã³æ¼¢å­—ã®åŒºåˆ‡ã‚Šã‚’è¡¨ã™æ­£è¦è¡¨ç¾")
 
-;;; ¤½¤ÎÂ¾¤ÎÊÑ¿ô
+;;; ãã®ä»–ã®å¤‰æ•°
 
 (defvar tcode-mazegaki-yomi-list nil
-  "ÊÑ´¹³«»Ï»şÅÀ¤Ç¥«¡¼¥½¥ë¤è¤êÁ°¤Ë¤¢¤Ã¤¿Ê¸»ú¤Î¥ê¥¹¥È¡£
-¥«¡¼¥½¥ë¤ÎÄ¾Á°¤ÎÊ¸»ú¤¬ car¡¢¤½¤ÎÁ°¤¬ cadr¡¢°Ê²¼Æ±ÍÍ¡£
-ºÇÂç `tcode-mazegaki-yomi-max' Ê¸»ú¤Ş¤Ç¡£")
+  "å¤‰æ›é–‹å§‹æ™‚ç‚¹ã§ã‚«ãƒ¼ã‚½ãƒ«ã‚ˆã‚Šå‰ã«ã‚ã£ãŸæ–‡å­—ã®ãƒªã‚¹ãƒˆã€‚
+ã‚«ãƒ¼ã‚½ãƒ«ã®ç›´å‰ã®æ–‡å­—ãŒ carã€ãã®å‰ãŒ cadrã€ä»¥ä¸‹åŒæ§˜ã€‚
+æœ€å¤§ `tcode-mazegaki-yomi-max' æ–‡å­—ã¾ã§ã€‚")
 
 (defvar tcode-mazegaki-current-yomi-length 0
-  "¸½ºßÊÑ´¹ÂĞ¾İ¤È¤Ê¤Ã¤Æ¤¤¤ëÊ¸»úÎó¤ÎÄ¹¤µ¡£
-\(length tcode-mazegaki-yomi-list\)°Ê²¼¤Ç¤¢¤ë¡£")
+  "ç¾åœ¨å¤‰æ›å¯¾è±¡ã¨ãªã£ã¦ã„ã‚‹æ–‡å­—åˆ—ã®é•·ã•ã€‚
+\(length tcode-mazegaki-yomi-list\)ä»¥ä¸‹ã§ã‚ã‚‹ã€‚")
 (defvar tcode-mazegaki-current-offset 0
-  "`tcode-mazegaki-yomi-list' ¤Î²¿ÈÖÌÜ¤ÎÊ¸»ú¤«¤éÆÉ¤ß¤È¤ß¤Ê¤¹¤«¡£")
+  "`tcode-mazegaki-yomi-list' ã®ä½•ç•ªç›®ã®æ–‡å­—ã‹ã‚‰èª­ã¿ã¨ã¿ãªã™ã‹ã€‚")
 (defvar tcode-mazegaki-current-yomi-point nil)
 
 (defvar tcode-mazegaki-yomi-fixed nil
-  "²ÄÊÑÄ¹ÆÉ¤ßÊÑ´¹Ãæ¤Ê¤é¤Ğ nil¡¢¤½¤¦¤Ç¤Ê¤¤¤Ê¤é t¡£
-¤Ä¤Ş¤ê¡¢¡Öfj¡×¤òÁ°ÃÖ¤·¤ÆÆÉ¤ß¤¬ÆşÎÏ¤µ¤ì¤¿¾ì¹ç¤Ë¤Ï¤³¤ÎÊÑ¿ô¤ÎÃÍ¤Ï t ¤Ç¤¢¤ê¡¢
-¤½¤ì°Ê³°¤Î¾ì¹ç¤Ï nil ¤Ç¤¢¤ë¡£")
+  "å¯å¤‰é•·èª­ã¿å¤‰æ›ä¸­ãªã‚‰ã° nilã€ãã†ã§ãªã„ãªã‚‰ tã€‚
+ã¤ã¾ã‚Šã€ã€Œfjã€ã‚’å‰ç½®ã—ã¦èª­ã¿ãŒå…¥åŠ›ã•ã‚ŒãŸå ´åˆã«ã¯ã“ã®å¤‰æ•°ã®å€¤ã¯ t ã§ã‚ã‚Šã€
+ãã‚Œä»¥å¤–ã®å ´åˆã¯ nil ã§ã‚ã‚‹ã€‚")
 
-(defvar tcode-mazegaki-map nil "¸ò¤¼½ñ¤­ÊÑ´¹Ãæ¤Î¥­¡¼¥Ş¥Ã¥×¡£")
-(defvar tcode-mazegaki-mode nil "¸ò¤¼½ñ¤­ÊÑ´¹Ãæ¤«¤É¤¦¤«¤òÉ½¤¹ÊÑ¿ô¡£
-¼Âºİ¤Ë¤Ï¡¢¸ò¤¼½ñ¤­ÊÑ´¹ÂĞ¾İ¤ÎÀèÆ¬¤Î¥İ¥¤¥ó¥È¤òÊİ»ı¤·¤Æ¤¤¤ë¡£")
+(defvar tcode-mazegaki-map nil "äº¤ãœæ›¸ãå¤‰æ›ä¸­ã®ã‚­ãƒ¼ãƒãƒƒãƒ—ã€‚")
+(defvar tcode-mazegaki-mode nil "äº¤ãœæ›¸ãå¤‰æ›ä¸­ã‹ã©ã†ã‹ã‚’è¡¨ã™å¤‰æ•°ã€‚
+å®Ÿéš›ã«ã¯ã€äº¤ãœæ›¸ãå¤‰æ›å¯¾è±¡ã®å…ˆé ­ã®ãƒã‚¤ãƒ³ãƒˆã‚’ä¿æŒã—ã¦ã„ã‚‹ã€‚")
 (make-variable-buffer-local 'tcode-mazegaki-mode)
 
 (defvar tcode-mazegaki-prefix nil)
 (make-variable-buffer-local 'tcode-mazegaki-prefix)
 
 (defvar tcode-mazegaki-suffix ""
-  "ÊÑ´¹¤ÎÂĞ¾İ³°¤È¤Ê¤ëÀÜÈø¸ì¡£")
+  "å¤‰æ›ã®å¯¾è±¡å¤–ã¨ãªã‚‹æ¥å°¾èªã€‚")
 
 (defvar tcode-mazegaki-conversion-overlay nil
-  "¸ò¤¼½ñ¤­ÊÑ´¹¤ÎÊÑ´¹ÂĞ¾İ¤òÉ½¤¹ overlay¡£")
+  "äº¤ãœæ›¸ãå¤‰æ›ã®å¤‰æ›å¯¾è±¡ã‚’è¡¨ã™ overlayã€‚")
 (make-variable-buffer-local 'tcode-mazegaki-conversion-overlay)
 
 (defvar tcode-mazegaki-inflection-only nil
-  "³èÍÑÊÑ´¹Ãæ¤«¤É¤¦¤«¡£")
+  "æ´»ç”¨å¤‰æ›ä¸­ã‹ã©ã†ã‹ã€‚")
 
 (defvar tcode-mazegaki-with-inflection nil
-  "³èÍÑ¤¹¤ëÆÉ¤ß¤òÊÑ´¹ÂĞ¾İ¤È¤·¤Æ¤¤¤ë¤«¤É¤¦¤«¡£")
+  "æ´»ç”¨ã™ã‚‹èª­ã¿ã‚’å¤‰æ›å¯¾è±¡ã¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã€‚")
 
 (defvar tcode-mazegaki-candidate-state nil
-  "¸ò¤¼½ñ¤­¸õÊäÉ½¼¨¥¹¥Æ¡¼¥È¡£
-'next     ¼¡¸õÊäÉ½¼¨¤Î¤¿¤á¤ÎÃæ´Ö¾õÂÖ
-'one      ¸õÊä¤¬¤Ò¤È¤Ä¤·¤«¤Ê¤¯¥¤¥ó¥é¥¤¥óÉ½¼¨Ãæ
-'priority Ê£¿ô¸õÊä¤ÎºÇ½é¤ÎÊı¤ò¥¤¥ó¥é¥¤¥óÉ½¼¨Ãæ
-'table    É½·Á¼°¤ÇÁªÂòÃæ
+  "äº¤ãœæ›¸ãå€™è£œè¡¨ç¤ºã‚¹ãƒ†ãƒ¼ãƒˆã€‚
+'next     æ¬¡å€™è£œè¡¨ç¤ºã®ãŸã‚ã®ä¸­é–“çŠ¶æ…‹
+'one      å€™è£œãŒã²ã¨ã¤ã—ã‹ãªãã‚¤ãƒ³ãƒ©ã‚¤ãƒ³è¡¨ç¤ºä¸­
+'priority è¤‡æ•°å€™è£œã®æœ€åˆã®æ–¹ã‚’ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³è¡¨ç¤ºä¸­
+'table    è¡¨å½¢å¼ã§é¸æŠä¸­
 
-ÊÑ´¹³«»Ï(ÊÑ´¹Ä¾¸å¤Ş¤¿¤ÏÆÉ¤ßÄ¹¤µÊÑ¹¹Ä¾¸å)
-  ¢ª ¸õÊä¿ô¤Ë¤è¤Ã¤Æone¤Ş¤¿¤Ïnext
+å¤‰æ›é–‹å§‹(å¤‰æ›ç›´å¾Œã¾ãŸã¯èª­ã¿é•·ã•å¤‰æ›´ç›´å¾Œ)
+  â†’ å€™è£œæ•°ã«ã‚ˆã£ã¦oneã¾ãŸã¯next
 
 next
-  candidate-index¤¬¸õÊä¿ô¤è¤ê¾®¤µ¤¯¤«¤Ä
-  inline-candidate-count¤è¤ê¾®¤µ¤¤
-    ¢ª priority
+  candidate-indexãŒå€™è£œæ•°ã‚ˆã‚Šå°ã•ãã‹ã¤
+  inline-candidate-countã‚ˆã‚Šå°ã•ã„
+    â†’ priority
   else
-    ¢ª table
+    â†’ table
 
 one
-  SPCÆşÎÏ
-    ¢ª ½Ì¤á
-  = ÆşÎÏ
-    ¢ª one
+  SPCå…¥åŠ›
+    â†’ ç¸®ã‚
+  = å…¥åŠ›
+    â†’ one
 
 priority
-  SPCÆşÎÏ
-    ¢ª candidate-index++¤·¡¢next
-  = ÆşÎÏ
-    ¢ª table
+  SPCå…¥åŠ›
+    â†’ candidate-index++ã—ã€next
+  = å…¥åŠ›
+    â†’ table
 
 table
-  SPCÆşÎÏ
-    ¢ª ¼¡¥Ú¡¼¥¸
+  SPCå…¥åŠ›
+    â†’ æ¬¡ãƒšãƒ¼ã‚¸
 ")
 
 (defvar tcode-mazegaki-candidate-index nil
-  "priority¥¹¥Æ¡¼¥È¤Ç¥¤¥ó¥é¥¤¥óÉ½¼¨Ãæ¤Î¸õÊä¤Ï²¿ÈÖÌÜ¤«(0¥ª¥ê¥¸¥ó)¡£
+  "priorityã‚¹ãƒ†ãƒ¼ãƒˆã§ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³è¡¨ç¤ºä¸­ã®å€™è£œã¯ä½•ç•ªç›®ã‹(0ã‚ªãƒªã‚¸ãƒ³)ã€‚
 See also variable `tcode-mazegaki-candidate-state'.")
 
 (defvar tcode-mazegaki-start-marker nil)
 (make-variable-buffer-local 'tcode-mazegaki-start-marker)
 
-;;;; ¼­½ñ¤Î¸¡º÷¤ÈÊÑ´¹
+;;;; è¾æ›¸ã®æ¤œç´¢ã¨å¤‰æ›
 
-(cond ((or (tcode-nemacs-p) (tcode-mule-1-p))
+(cond ((tcode-mule-1-p)
        (defun tcode-mazegaki-delete-conversion-face ()
 	 (if tcode-mazegaki-prefix-overlay
 	     (save-excursion
@@ -242,8 +240,8 @@ See also variable `tcode-mazegaki-candidate-state'.")
 	       (insert tcode-mazegaki-prefix-mark))))))
       ((tcode-xemacs-p)
        (defun tcode-mazegaki-put-conversion-face ()
-	 "ÊÑ´¹³«»Ï°ÌÃÖ¤«¤é point ¤Ş¤Ç¤ò»ØÄê¤µ¤ì¤¿ face ¤Ë¤¹¤ë¡£
-face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-prefix-mark' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£"
+	 "å¤‰æ›é–‹å§‹ä½ç½®ã‹ã‚‰ point ã¾ã§ã‚’æŒ‡å®šã•ã‚ŒãŸ face ã«ã™ã‚‹ã€‚
+face ã®æŒ‡å®šã¯å¤‰æ•° `tcode-mazegaki-prefix-mark' ã‚’è¨­å®šã™ã‚‹ã“ã¨ã«ã‚ˆã‚Šè¡Œã†ã€‚"
 	 (let ((point (or tcode-mazegaki-mode
 			  tcode-mazegaki-prefix)))
 	   (when point
@@ -265,7 +263,7 @@ face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-prefix-mark' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£"
 	       (set-extent-face tcode-mazegaki-conversion-overlay
 				tcode-mazegaki-face)))))
        (defun tcode-mazegaki-delete-conversion-face ()
-	 "¸ò¤¼½ñ¤­ÊÑ´¹ÍÑ¤Î face ¤È prefix ¤ò½ü¤¯¡£"
+	 "äº¤ãœæ›¸ãå¤‰æ›ç”¨ã® face ã¨ prefix ã‚’é™¤ãã€‚"
 	 (if (extentp tcode-mazegaki-prefix-overlay)
 	     (detach-extent tcode-mazegaki-prefix-overlay))
 	 (if (extentp tcode-mazegaki-conversion-overlay)
@@ -273,16 +271,16 @@ face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-prefix-mark' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£"
       (t
        (unless (fboundp 'make-overlay)
 	 (require 'overlay))
-       ;; face ¤Ë¤è¤êÊÑ´¹ÂĞ¾İÎÎ°è¤òÉ½¼¨¤¹¤ë¤¿¤á¤Î´Ø¿ô¤ÎÄêµÁ
+       ;; face ã«ã‚ˆã‚Šå¤‰æ›å¯¾è±¡é ˜åŸŸã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã®é–¢æ•°ã®å®šç¾©
        (defun tcode-mazegaki-put-conversion-face ()
-	 "ÊÑ´¹³«»Ï°ÌÃÖ¤«¤é point ¤Ş¤Ç¤ò»ØÄê¤µ¤ì¤¿ face ¤Ë¤¹¤ë¡£
-face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-face' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£
-ÊÑ¿ô `tcode-mazegaki-prefix-mark' ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ì¤Ğ¡¢¤½¤ÎÊ¸»úÎó¤ò
-ÀèÆ¬¤ËÃÖ¤¯¡£"
+	 "å¤‰æ›é–‹å§‹ä½ç½®ã‹ã‚‰ point ã¾ã§ã‚’æŒ‡å®šã•ã‚ŒãŸ face ã«ã™ã‚‹ã€‚
+face ã®æŒ‡å®šã¯å¤‰æ•° `tcode-mazegaki-face' ã‚’è¨­å®šã™ã‚‹ã“ã¨ã«ã‚ˆã‚Šè¡Œã†ã€‚
+å¤‰æ•° `tcode-mazegaki-prefix-mark' ãŒè¨­å®šã•ã‚Œã¦ã„ã‚Œã°ã€ãã®æ–‡å­—åˆ—ã‚’
+å…ˆé ­ã«ç½®ãã€‚"
 	 (let ((point (or tcode-mazegaki-mode
 			  tcode-mazegaki-prefix)))
 	   (when point
-	     ;; prefix ¤òÃÖ¤¯¡£
+	     ;; prefix ã‚’ç½®ãã€‚
 	     (when tcode-mazegaki-prefix-mark
 	       (setq tcode-mazegaki-prefix-overlay
 		     (if (overlayp tcode-mazegaki-prefix-overlay)
@@ -293,7 +291,7 @@ face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-face' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£
 	       (overlay-put tcode-mazegaki-prefix-overlay
 			    'before-string
 			    tcode-mazegaki-prefix-mark))
-	     ;; face ¤òÀßÄê¤¹¤ë¡£
+	     ;; face ã‚’è¨­å®šã™ã‚‹ã€‚
 	     (if (overlayp tcode-mazegaki-conversion-overlay)
 		 (move-overlay tcode-mazegaki-conversion-overlay point (point))
 	       (setq tcode-mazegaki-conversion-overlay
@@ -302,7 +300,7 @@ face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-face' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£
 			    'face
 			    tcode-mazegaki-face)))))
        (defun tcode-mazegaki-delete-conversion-face ()
-	 "¸ò¤¼½ñ¤­ÊÑ´¹ÍÑ¤Î face ¤È prefix ¤ò½ü¤¯¡£"
+	 "äº¤ãœæ›¸ãå¤‰æ›ç”¨ã® face ã¨ prefix ã‚’é™¤ãã€‚"
 	 (if (overlayp tcode-mazegaki-prefix-overlay)
 	     (delete-overlay tcode-mazegaki-prefix-overlay))
 	 (if (overlayp tcode-mazegaki-conversion-overlay)
@@ -310,18 +308,18 @@ face ¤Î»ØÄê¤ÏÊÑ¿ô `tcode-mazegaki-face' ¤òÀßÄê¤¹¤ë¤³¤È¤Ë¤è¤ê¹Ô¤¦¡£
 
 ;;;###autoload
 (defun tcode-mazegaki-switch-to-dictionary ()
-  "current-buffer ¤ò¸ò¤¼½ñ¤­¼­½ñ¤ËÀÚ¤êÂØ¤¨¤ë¡£
-¸ò¤¼½ñ¤­¼­½ñ¤¬¤Ş¤ÀÆÉ¤ß¹ş¤Ş¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ë¤ÏÆÉ¤ß¹ş¤à¡£"
+  "current-buffer ã‚’äº¤ãœæ›¸ãè¾æ›¸ã«åˆ‡ã‚Šæ›¿ãˆã‚‹ã€‚
+äº¤ãœæ›¸ãè¾æ›¸ãŒã¾ã èª­ã¿è¾¼ã¾ã‚Œã¦ã„ãªã„å ´åˆã«ã¯èª­ã¿è¾¼ã‚€ã€‚"
   (interactive)
   (let ((buffer (tcode-set-work-buffer tcode-mazegaki-buffer-name
 				       tcode-mazegaki-dictionary-name)))
-    (if (interactive-p)
+    (if (called-interactively-p 'interactive)
 	(switch-to-buffer buffer))))
 
 (defun tcode-mazegaki-construct-yomi (len &optional offset inflection)
-  "`tcode-mazegaki-yomi-list' ¤«¤é¡¢Ä¹¤µ LEN ¤ÎÆÉ¤ß¤òºî¤ë¡£
-OFFSET ¤¬»ØÄê¤µ¤ì¤Æ¤¤¤ë¾ì¹ç¤Ï¡¢OFFSET Ê¸»ú¤Ï³èÍÑ¸ìÈø¤È¤·¡¢ÆÉ¤ß¤Ë¤Ï´Ş¤á¤º¡¢
-INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ `tcode-mazegaki-inflection-mark' ¤ÇÃÖ¤­´¹¤¨¤ë¡£"
+  "`tcode-mazegaki-yomi-list' ã‹ã‚‰ã€é•·ã• LEN ã®èª­ã¿ã‚’ä½œã‚‹ã€‚
+OFFSET ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€OFFSET æ–‡å­—ã¯æ´»ç”¨èªå°¾ã¨ã—ã€èª­ã¿ã«ã¯å«ã‚ãšã€
+INFLECTION ãŒ nil ã§ãªã‘ã‚Œã° `tcode-mazegaki-inflection-mark' ã§ç½®ãæ›ãˆã‚‹ã€‚"
   (let ((list (mapcar 'cdr
 		      (if offset
 			  (nthcdr offset tcode-mazegaki-yomi-list)
@@ -336,7 +334,7 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ `tcode-mazegaki-inflection-mark' ¤ÇÃÖ¤­´¹¤¨¤ë¡£"
       str)))
 
 (defun tcode-mazegaki-list-to-string (list from len)
-  "Ê¸»ú¤Î LIST ¤Î FROM ¤«¤é LEN Ê¸»úÊ¬¤ÎÊ¸»úÎó¤òºî¤ë¡£"
+  "æ–‡å­—ã® LIST ã® FROM ã‹ã‚‰ LEN æ–‡å­—åˆ†ã®æ–‡å­—åˆ—ã‚’ä½œã‚‹ã€‚"
   (let ((str ""))
     (setq list (nthcdr from list))
     (while (> len 0)
@@ -346,8 +344,8 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ `tcode-mazegaki-inflection-mark' ¤ÇÃÖ¤­´¹¤¨¤ë¡£"
     str))
 
 (defun tcode-mazegaki-get-reverse-yomi-list ()
-  "¸½ point ¤è¤ê¸åÊı¤Ë¤¢¤ëÆüËÜ¸ìÎó¤Ş¤¿¤Ï±ÑÃ±¸ì°ì¤Ä¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£
-¥ê¥¹¥È¤ÎÄ¹¤µ¤ÏºÇÂç `tcode-mazegaki-yomi-max' Ê¸»ú¡£"
+  "ç¾ point ã‚ˆã‚Šå¾Œæ–¹ã«ã‚ã‚‹æ—¥æœ¬èªåˆ—ã¾ãŸã¯è‹±å˜èªä¸€ã¤ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚
+ãƒªã‚¹ãƒˆã®é•·ã•ã¯æœ€å¤§ `tcode-mazegaki-yomi-max' æ–‡å­—ã€‚"
   (setq tcode-mazegaki-suffix ""
 	tcode-mazegaki-yomi-fixed tcode-mazegaki-mode)
   (save-excursion
@@ -367,10 +365,10 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ `tcode-mazegaki-inflection-mark' ¤ÇÃÖ¤­´¹¤¨¤ë¡£"
 	    (if (and (null reverse-list)
 		     (memq (tcode-string-to-char ch)
 			   tcode-mazegaki-terminate-char-list))
-;; `tcode-mazegaki-terminate-char-list' ¤Ë¤¢¤ëÊ¸»ú¤ò¤È¤Ğ¤¹¡£
+;; `tcode-mazegaki-terminate-char-list' ã«ã‚ã‚‹æ–‡å­—ã‚’ã¨ã°ã™ã€‚
 		(setq tcode-mazegaki-suffix
 		      (concat ch tcode-mazegaki-suffix))
-	      ;; ÆÉ¤ß¤ò1»úÆÀ¤ë
+	      ;; èª­ã¿ã‚’1å­—å¾—ã‚‹
 	      (setq reverse-list (cons (car context) reverse-list))
 	      (if (and tcode-mazegaki-prefix
 		       (= point tcode-mazegaki-prefix))
@@ -379,8 +377,8 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ `tcode-mazegaki-inflection-mark' ¤ÇÃÖ¤­´¹¤¨¤ë¡£"
       (nreverse reverse-list))))
 
 (defun tcode-mazegaki-search-yomi (yomi)
-  "¸½ºß¤Î¥Ğ¥Ã¥Õ¥¡¤«¤é YOMI ¤ò¸«¤Ä¤±¡¢ point ¤ò°ÜÆ°¤¹¤ë¡£
-¸«¤Ä¤«¤é¤Ê¤¤¾ì¹ç¤Ï¡¢ point ¤Ï¤½¤Î YOMI ¤¬¤¢¤ë¤Ù¤­¾ì½ê¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®ãƒãƒƒãƒ•ã‚¡ã‹ã‚‰ YOMI ã‚’è¦‹ã¤ã‘ã€ point ã‚’ç§»å‹•ã™ã‚‹ã€‚
+è¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€ point ã¯ãã® YOMI ãŒã‚ã‚‹ã¹ãå ´æ‰€ã«ç§»å‹•ã™ã‚‹ã€‚"
   (let ((min (point-min))
 	(max (point-max))
 	str)
@@ -396,23 +394,23 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ `tcode-mazegaki-inflection-mark' ¤ÇÃÖ¤­´¹¤¨¤ë¡£"
 					 (tcode-forward-char 1))
 				       (1- (point)))))
 			yomi)
-	       ;; ¤â¤Ã¤ÈÂç¤­¤¤
+	       ;; ã‚‚ã£ã¨å¤§ãã„
 	       (forward-line 1)
 	       (goto-char (ash (+ (setq min (point)) max) -1)))
 	      ((string< yomi str)
-	       ;; ¤â¤Ã¤È¾®¤µ¤¤
+	       ;; ã‚‚ã£ã¨å°ã•ã„
 	       (beginning-of-line)
 	       (goto-char (ash (+ min (setq max (point))) -1)))
-	      ;; ¸«¤Ä¤±¤¿
+	      ;; è¦‹ã¤ã‘ãŸ
 	      (t
 	       (beginning-of-line)
 	       (throw 'found (point))))))))
 
 (defun tcode-mazegaki-lookup (new)
-  "¸½ºß¤ÎÆÉ¤ß¤è¤êÃ»¤¤ºÇÄ¹¤ÎÆÉ¤ß¤òÃµ¤¹¡£
-NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
-¸«¤Ä¤«¤ì¤Ğ¤½¤ÎÆÉ¤ß¤ÎÄ¹¤µ¤ª¤è¤Ó offset (¾ï¤Ë 0) ¤ò¡¢¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£
-¸ò¤¼½ñ¤­¼­½ñ¤Î¥İ¥¤¥ó¥È¤Ï¤½¤ÎÆÉ¤ß¤Î¤È¤³¤í¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‚ˆã‚ŠçŸ­ã„æœ€é•·ã®èª­ã¿ã‚’æ¢ã™ã€‚
+NEW ãŒ nil ã§ãªã‘ã‚Œã°ã€æ–°ã—ãæ¢ã—å§‹ã‚ã‚‹ã€‚
+è¦‹ã¤ã‹ã‚Œã°ãã®èª­ã¿ã®é•·ã•ãŠã‚ˆã³ offset (å¸¸ã« 0) ã‚’ã€ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚
+äº¤ãœæ›¸ãè¾æ›¸ã®ãƒã‚¤ãƒ³ãƒˆã¯ãã®èª­ã¿ã®ã¨ã“ã‚ã«ç§»å‹•ã™ã‚‹ã€‚"
   (save-excursion
     (setq tcode-mazegaki-with-inflection nil)
     (tcode-mazegaki-switch-to-dictionary)
@@ -428,10 +426,10 @@ NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
 	  (setq i (1- i)))))))
 
 (defun tcode-mazegaki-lookup-with-inflection (new)
-  "¸½ºß¤ÎÆÉ¤ß¤è¤êÃ»¤¤¡¢³èÍÑ¤¹¤ëºÇÄ¹¤ÎÆÉ¤ß¤òÃµ¤¹¡£
-NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
-¸«¤Ä¤«¤ì¤Ğ¤½¤ÎÆÉ¤ß¤ÎÄ¹¤µ¤ª¤è¤Ó offset ¤ò¡¢¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£
-¸ò¤¼½ñ¤­¼­½ñ¤Î¥İ¥¤¥ó¥È¤Ï¤½¤ÎÆÉ¤ß¤Î¤È¤³¤í¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‚ˆã‚ŠçŸ­ã„ã€æ´»ç”¨ã™ã‚‹æœ€é•·ã®èª­ã¿ã‚’æ¢ã™ã€‚
+NEW ãŒ nil ã§ãªã‘ã‚Œã°ã€æ–°ã—ãæ¢ã—å§‹ã‚ã‚‹ã€‚
+è¦‹ã¤ã‹ã‚Œã°ãã®èª­ã¿ã®é•·ã•ãŠã‚ˆã³ offset ã‚’ã€ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚
+äº¤ãœæ›¸ãè¾æ›¸ã®ãƒã‚¤ãƒ³ãƒˆã¯ãã®èª­ã¿ã®ã¨ã“ã‚ã«ç§»å‹•ã™ã‚‹ã€‚"
   (save-excursion
     (setq tcode-mazegaki-with-inflection t)
     (tcode-mazegaki-switch-to-dictionary)
@@ -453,7 +451,7 @@ NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
       (catch 'found
 	(while (> i min)
 	  (while (>= offset 0)
-	    (and (string-match "^[¤¡-¥ó]*$"
+	    (and (string-match "^[ã-ãƒ³]*$"
 			       (tcode-mazegaki-construct-yomi offset))
 		 (tcode-mazegaki-search-yomi
 		  (tcode-mazegaki-construct-yomi i offset t))
@@ -472,9 +470,9 @@ NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
 			      tcode-mazegaki-max-suffix-length))))))))
 
 (defun tcode-mazegaki-lookup-reverse (new)
-  "¸½ºß¤ÎÆÉ¤ß¤è¤ê¤âÄ¹¤¤ºÇÃ»¤ÎÆÉ¤ß¤ò¸«¤Ä¤±¤ë¡£
-¸«¤Ä¤«¤ì¤Ğ¤½¤ÎÆÉ¤ß¤ÎÄ¹¤µ¤ª¤è¤Ó offset (¾ï¤Ë 0) ¤ò¡¢¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£
-¸ò¤¼½ñ¤­¼­½ñ¤Î¥İ¥¤¥ó¥È¤Ï¤½¤ÎÆÉ¤ß¤Î¤È¤³¤í¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‚ˆã‚Šã‚‚é•·ã„æœ€çŸ­ã®èª­ã¿ã‚’è¦‹ã¤ã‘ã‚‹ã€‚
+è¦‹ã¤ã‹ã‚Œã°ãã®èª­ã¿ã®é•·ã•ãŠã‚ˆã³ offset (å¸¸ã« 0) ã‚’ã€ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚
+äº¤ãœæ›¸ãè¾æ›¸ã®ãƒã‚¤ãƒ³ãƒˆã¯ãã®èª­ã¿ã®ã¨ã“ã‚ã«ç§»å‹•ã™ã‚‹ã€‚"
   (save-excursion
     (setq tcode-mazegaki-with-inflection nil)
     (tcode-mazegaki-switch-to-dictionary)
@@ -491,9 +489,9 @@ NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
 	  (setq i (1+ i)))))))
 
 (defun tcode-mazegaki-lookup-with-inflection-reverse (new)
-  "¸½ºß¤ÎÆÉ¤ß¤è¤ê¤âÄ¹¤¤ºÇÃ»¤Î³èÍÑ¤¹¤ëÆÉ¤ß¤ò¸«¤Ä¤±¤ë¡£
-¸«¤Ä¤«¤ì¤Ğ¤½¤ÎÆÉ¤ß¤ÎÄ¹¤µ¤ª¤è¤Ó offset ¤ò¡¢¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£
-¸ò¤¼½ñ¤­¼­½ñ¤Î¥İ¥¤¥ó¥È¤Ï¤½¤ÎÆÉ¤ß¤Î¤È¤³¤í¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‚ˆã‚Šã‚‚é•·ã„æœ€çŸ­ã®æ´»ç”¨ã™ã‚‹èª­ã¿ã‚’è¦‹ã¤ã‘ã‚‹ã€‚
+è¦‹ã¤ã‹ã‚Œã°ãã®èª­ã¿ã®é•·ã•ãŠã‚ˆã³ offset ã‚’ã€ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚
+äº¤ãœæ›¸ãè¾æ›¸ã®ãƒã‚¤ãƒ³ãƒˆã¯ãã®èª­ã¿ã®ã¨ã“ã‚ã«ç§»å‹•ã™ã‚‹ã€‚"
   (save-excursion
     (setq tcode-mazegaki-with-inflection t)
     (tcode-mazegaki-switch-to-dictionary)
@@ -514,7 +512,7 @@ NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
       (catch 'found
 	(while (<= i max)
 	  (while (<= (+ i offset) max)
-	    (and (string-match "^[¤¡-¥ó]*$"
+	    (and (string-match "^[ã-ãƒ³]*$"
 			       (tcode-mazegaki-construct-yomi offset))
 		 (tcode-mazegaki-search-yomi
 		  (tcode-mazegaki-construct-yomi i offset t))
@@ -535,23 +533,23 @@ NEW ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢¿·¤·¤¯Ãµ¤·»Ï¤á¤ë¡£
 			     (t max))))))))
 
 (defun tcode-mazegaki-erase-previous-candidate ()
-  "¸½ºß¥Ğ¥Ã¥Õ¥¡¤ËÉ½¼¨¤µ¤ì¤Æ¤¤¤ëÊÑ´¹¸õÊä¤ò¾Ãµî¤¹¤ë¡£"
+  "ç¾åœ¨ãƒãƒƒãƒ•ã‚¡ã«è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹å¤‰æ›å€™è£œã‚’æ¶ˆå»ã™ã‚‹ã€‚"
   (if tcode-mazegaki-mode
       (delete-region tcode-mazegaki-mode (point))))
 
 ;;;###autoload
 (defun tcode-mazegaki-convert (arg &optional inflection)
-  "¸½ point ¤è¤ê¸åÊı¤Ë¤¢¤ëÆüËÜ¸ìÎó¤ò¡ÖÆÉ¤ß¡×¤È¤·¤Æ¸ò¤¼½ñ¤­ÊÑ´¹¤ò»î¤ë¡£
+  "ç¾ point ã‚ˆã‚Šå¾Œæ–¹ã«ã‚ã‚‹æ—¥æœ¬èªåˆ—ã‚’ã€Œèª­ã¿ã€ã¨ã—ã¦äº¤ãœæ›¸ãå¤‰æ›ã‚’è©¦ã‚‹ã€‚
 
-ARG ¤Ï¼¡¤ò°ÕÌ£¤¹¤ë¡£
- * C-u ¤Î¤ß¤Ş¤¿¤Ï - ¤Î¤ß
-   ³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹(ÆÉ¤ß¤ÎÄ¹¤µ¤ÏºÇÄ¹°ìÃ×)
- * À°¿ô
-   ¤½¤ÎÀäÂĞÃÍ¤òÆÉ¤ß¤ÎÄ¹¤µ¤È¤·¤ÆÊÑ´¹
-   ¤¿¤À¤·¡¢ÊÑ´¹¤¹¤ë¤Î¤Ï¡¢Àµ¤Î¾ì¹ç¤Ï³èÍÑ¤·¤Ê¤¤¸ì¡¢
-   Éé¤Î¾ì¹ç¤Ï³èÍÑ¤¹¤ë¸ì¤È¤¹¤ë¡£
+ARG ã¯æ¬¡ã‚’æ„å‘³ã™ã‚‹ã€‚
+ * C-u ã®ã¿ã¾ãŸã¯ - ã®ã¿
+   æ´»ç”¨ã™ã‚‹èªã¨ã—ã¦å¤‰æ›(èª­ã¿ã®é•·ã•ã¯æœ€é•·ä¸€è‡´)
+ * æ•´æ•°
+   ãã®çµ¶å¯¾å€¤ã‚’èª­ã¿ã®é•·ã•ã¨ã—ã¦å¤‰æ›
+   ãŸã ã—ã€å¤‰æ›ã™ã‚‹ã®ã¯ã€æ­£ã®å ´åˆã¯æ´»ç”¨ã—ãªã„èªã€
+   è² ã®å ´åˆã¯æ´»ç”¨ã™ã‚‹èªã¨ã™ã‚‹ã€‚
 
-INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
+INFLECTION ãŒ nil ã§ãªã‘ã‚Œã°ã€ARG ã®å€¤ã«ã‚ˆã‚‰ãšã€æ´»ç”¨ã™ã‚‹èªã¨ã—ã¦å¤‰æ›ã‚’è¡Œã†ã€‚"
   (interactive "*P")
   (tcode-mazegaki-candidate-select-init)
   (setq tcode-mazegaki-inflection-only (or (eq arg '-)
@@ -567,14 +565,14 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 		  (tcode-mazegaki-get-reverse-yomi-list))
       (let (tcode-auto-help)
 	(tcode-mazegaki-finish)
-	(error "ÆÉ¤ß¤¬¤¢¤ê¤Ş¤»¤ó¡£"))))
+	(error "èª­ã¿ãŒã‚ã‚Šã¾ã›ã‚“ã€‚"))))
   (and (integerp arg)
        (or tcode-mazegaki-yomi-fixed
 	   (= (length tcode-mazegaki-yomi-list)
 	      (if (>= arg 0) arg (- arg)))
-	   (error "ÆÉ¤ß¤¬Ã»¤«¤¹¤®¤Ş¤¹¡£"))
+	   (error "èª­ã¿ãŒçŸ­ã‹ã™ãã¾ã™ã€‚"))
        (setq tcode-mazegaki-yomi-fixed t))
-  ;; ¼­½ñ¤ËÆÉ¤ß¤¬¤¢¤ë¤«Ä´¤Ù¡¢¤¢¤ì¤ĞÊÑ´¹¤¹¤ë¡£
+  ;; è¾æ›¸ã«èª­ã¿ãŒã‚ã‚‹ã‹èª¿ã¹ã€ã‚ã‚Œã°å¤‰æ›ã™ã‚‹ã€‚
   (let ((with-inflection (and tcode-mazegaki-enable-inflection
 			      (or inflection
 				  (not (and (integerp arg)
@@ -586,18 +584,18 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 				   tcode-mazegaki-inflection-only)
 			       (tcode-mazegaki-lookup-with-inflection t)))))
       (if yomi-info
-	  ;; ¸õÊä¤¬¸«¤Ä¤«¤Ã¤¿¡£
+	  ;; å€™è£œãŒè¦‹ã¤ã‹ã£ãŸã€‚
 	  (prog1
 	      (setq tcode-mazegaki-current-yomi-length (car (cdr yomi-info))
 		    tcode-mazegaki-current-offset (cdr (cdr yomi-info)))
-	    ;; i Ê¸»ú¤Î¸õÊä¤ÎÀèÆ¬¤Ë°õ(¢¤)¤ò¤Ä¤±¤ë¡£
+	    ;; i æ–‡å­—ã®å€™è£œã®å…ˆé ­ã«å°(â–³)ã‚’ã¤ã‘ã‚‹ã€‚
 	    (save-excursion
 	      (goto-char (car yomi-info))
 	      (if tcode-mazegaki-mode
 		  (if (/= tcode-mazegaki-mode (point))
 		      (let (tcode-auto-help)
 			(tcode-mazegaki-finish)
-			(error "ÆÉ¤ß¤¬Ä¹¤¹¤®¤Ş¤¹¡£")))
+			(error "èª­ã¿ãŒé•·ã™ãã¾ã™ã€‚")))
 		(setq tcode-mazegaki-mode (point))))
 	    (condition-case nil
 		(let ((echo-keystrokes 0))
@@ -618,19 +616,19 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 	      (quit
 	       (ding)
 	       (tcode-mazegaki-restore-yomi-and-quit))))
-	;; ¸õÊä¤¬Ìµ¤«¤Ã¤¿¡£
+	;; å€™è£œãŒç„¡ã‹ã£ãŸã€‚
 	(setq this-command 'tcode-mazegaki-begin-conversion)
-					; ÅĞÏ¿¤ò¹Ô¤¦¤È¤­¤ËÍÑ¤¤¤ëºÙ¹©
+					; ç™»éŒ²ã‚’è¡Œã†ã¨ãã«ç”¨ã„ã‚‹ç´°å·¥
 	(ding)
 	(tcode-verbose-message
 	 (tcode-substitute-command-keys
-	  (concat "Å¬Åö¤Ê´Á»ú¤Ï¤¢¤ê¤Ş¤»¤ó"
-		  " (¡Ö\\[tcode-mazegaki-make-entry-and-finish]¡×¤ÇÅĞÏ¿)")))
+	  (concat "é©å½“ãªæ¼¢å­—ã¯ã‚ã‚Šã¾ã›ã‚“"
+		  " (ã€Œ\\[tcode-mazegaki-make-entry-and-finish]ã€ã§ç™»éŒ²)")))
 	nil))))
 
 ;;;###autoload
 (defun tcode-mazegaki-begin-conversion (arg)
-  "¸ò¤¼½ñ¤­ÊÑ´¹¤ò³«»Ï¤¹¤ë¡£"
+  "äº¤ãœæ›¸ãå¤‰æ›ã‚’é–‹å§‹ã™ã‚‹ã€‚"
   (interactive "*P")
   (undo-boundary)
   (cond (tcode-mazegaki-mode
@@ -644,7 +642,7 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-begin-alternate-conversion (arg)
-  "¸ò¤¼½ñ¤­ÊÑ´¹¤ò³«»Ï¤¹¤ë¡£¤¿¤À¤·¡¢Á°ÃÖ·¿¡¦¸åÃÖ·¿¤¬µÕ¡£"
+  "äº¤ãœæ›¸ãå¤‰æ›ã‚’é–‹å§‹ã™ã‚‹ã€‚ãŸã ã—ã€å‰ç½®å‹ãƒ»å¾Œç½®å‹ãŒé€†ã€‚"
   (interactive "*P")
   (call-interactively (if tcode-use-prefix-mazegaki
 			  'tcode-mazegaki-convert
@@ -652,7 +650,7 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-lookup-with-prefix (char-list)
-  "CHAR-LIST¤¬ÆÉ¤ß¤ÎÀèÆ¬¤Ë¤Ê¤Ã¤Æ¤¤¤ë¸õÊä¤Î¥ê¥¹¥È¤òÊÖ¤¹¡£"
+  "CHAR-LISTãŒèª­ã¿ã®å…ˆé ­ã«ãªã£ã¦ã„ã‚‹å€™è£œã®ãƒªã‚¹ãƒˆã‚’è¿”ã™ã€‚"
   (let ((tcode-mazegaki-yomi-list 
 	 (mapcar (lambda (e)
 		   (cons 0 (char-to-string e)))
@@ -668,29 +666,29 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 	      candidate-list (nconc candidate-list 
 				    (tcode-mazegaki-get-candidate-list)))
 	(forward-line 1))
-      ;; ½ÅÊ£¤Îºï½ü
+      ;; é‡è¤‡ã®å‰Šé™¤
       (while candidate-list
 	(let ((candidate (car candidate-list)))
 	  (setq result (nconc result (list candidate))
 		candidate-list (delete candidate candidate-list)))))
     result))
 
-;;;; ¸õÊä¤ÎÁªÂò
+;;;; å€™è£œã®é¸æŠ
 (defun tcode-mazegaki-candidate-select-init ()
-  "¥¹¥Æ¡¼¥È¾ğÊó¤ò½é´üÃÍ¤ËÌá¤¹¡£"
+  "ã‚¹ãƒ†ãƒ¼ãƒˆæƒ…å ±ã‚’åˆæœŸå€¤ã«æˆ»ã™ã€‚"
   (setq tcode-mazegaki-candidate-state nil
 	tcode-mazegaki-candidate-index 0))
 
 (defun tcode-mazegaki-find-kanji-entry ()
-  "¸½ºß¤ÎÆÉ¤ß¤Î(ºÇ½é¤Î)¥¨¥ó¥È¥ê¤Ş¤Ç¸ò¤¼½ñ¤­¼­½ñ¤Î point ¤ò°ÜÆ°¤¹¤ë¡£
-Àµ³Î¤Ë¤Ï¡¢point ¤ÏºÇ½é¤Î¥¨¥ó¥È¥ê¤ÎÀèÆ¬¤Ë¤¢¤ë\"/\"¤ÎÄ¾¸å¤Ë°ÜÆ°¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã®(æœ€åˆã®)ã‚¨ãƒ³ãƒˆãƒªã¾ã§äº¤ãœæ›¸ãè¾æ›¸ã® point ã‚’ç§»å‹•ã™ã‚‹ã€‚
+æ­£ç¢ºã«ã¯ã€point ã¯æœ€åˆã®ã‚¨ãƒ³ãƒˆãƒªã®å…ˆé ­ã«ã‚ã‚‹\"/\"ã®ç›´å¾Œã«ç§»å‹•ã™ã‚‹ã€‚"
   (tcode-mazegaki-switch-to-dictionary)
   (goto-char tcode-mazegaki-current-yomi-point)
   (beginning-of-line)
   (search-forward " /" nil t))
 
 (defun tcode-mazegaki-get-number-of-candidate ()
-  "¸½ºß¤ÎÆÉ¤ß¤Î¸õÊä¤Î¿ô¤òÆÀ¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã®å€™è£œã®æ•°ã‚’å¾—ã‚‹ã€‚"
   (save-excursion
     (tcode-mazegaki-find-kanji-entry)
     (let ((noc 0)
@@ -702,7 +700,7 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
       noc)))
 
 (defun tcode-mazegaki-get-candidate-list ()
-  "¸½ºß¤ÎÆÉ¤ß¤«¤é¸õÊä¤Î¥ê¥¹¥È¤òºî¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‹ã‚‰å€™è£œã®ãƒªã‚¹ãƒˆã‚’ä½œã‚‹ã€‚"
   (save-excursion
     (tcode-mazegaki-find-kanji-entry)
     (let (list)
@@ -716,8 +714,8 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
       list)))
 
 (defun tcode-mazegaki-make-candidate-table (candidate-list)
-  " CANDIDATE-LIST ¤«¤é¸õÊä¤ÎÉ½¤òºî¤ë¡£
-¸õÊä¤ÎÉ½¤Ë¤ª¤±¤ë°ÌÃÖ¤Ï¡¢ÊÑ¿ô `tcode-mazegaki-stroke-priority-list' ¤Ë½¾¤¦¡£"
+  " CANDIDATE-LIST ã‹ã‚‰å€™è£œã®è¡¨ã‚’ä½œã‚‹ã€‚
+å€™è£œã®è¡¨ã«ãŠã‘ã‚‹ä½ç½®ã¯ã€å¤‰æ•° `tcode-mazegaki-stroke-priority-list' ã«å¾“ã†ã€‚"
   (let ((plist tcode-mazegaki-stroke-priority-list)
 	(table (make-vector 40 nil)))
     (while (and candidate-list plist)
@@ -728,21 +726,21 @@ INFLECTION ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ğ¡¢ARG ¤ÎÃÍ¤Ë¤è¤é¤º¡¢³èÍÑ¤¹¤ë¸ì¤È¤·¤ÆÊÑ´¹¤ò¹Ô¤¦¡£"
 
 (defun tcode-mazegaki-select (candidate-table noc current-offset
 					  &optional msg suffix)
-  "CANDIDATE-TABLE ¤«¤é¸õÊä¤òÁªÂò¤µ¤»¤ë¡£
-NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
+  "CANDIDATE-TABLE ã‹ã‚‰å€™è£œã‚’é¸æŠã•ã›ã‚‹ã€‚
+NOC (å€™è£œã®æ•°)ã¨ CURRENT-OFFSET ã‹ã‚‰ç¾åœ¨ä½•ç•ªç›®ã®è¡¨ã‚’è¡¨ç¤ºã—ã¦ã„ã‚‹ã‹è¨ˆç®—ã™ã‚‹ã€‚"
   (let* ((plist-size (length tcode-mazegaki-stroke-priority-list))
 	 (whole-page (/ (+ noc (1- plist-size)) plist-size))
 	 (page (- (1+ whole-page)
 		  (/ (+ (- noc current-offset) (1- plist-size)) plist-size)))
 	 (whole-table (or (and (catch 'found
-				 ;; 3ÃÊÌÜ°Ê³°¤ò»È¤¦¤³¤È¤ò³Î¤«¤á¤ë¡£
+				 ;; 3æ®µç›®ä»¥å¤–ã‚’ä½¿ã†ã“ã¨ã‚’ç¢ºã‹ã‚ã‚‹ã€‚
 				 (mapcar (lambda (e) (if (or (< e 20)
 							(>= e 30))
 						    (throw 'found t)))
 					 tcode-mazegaki-stroke-priority-list)
 				 nil)
 			       (> whole-page 1))
-			  ;; 3ÃÊÌÜ°Ê³°¤Ë¸õÊä¤¬¤¢¤ë¤«Ä´¤Ù¤ë
+			  ;; 3æ®µç›®ä»¥å¤–ã«å€™è£œãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 			  (catch 'found
 			    (let ((i 0))
 			      (while (< i 40)
@@ -783,7 +781,7 @@ NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
 
 (defun tcode-mazegaki-make-table-and-select (&optional
 					     msg candidate-list inline)
-  "¸½ºß¤ÎÆÉ¤ß¤«¤é¸õÊä¤òÁªÂò¤µ¤»¡¢¤½¤ÎÊ¸»úÎó¤Ş¤¿¤ÏÊ¸»ú(¥­¡¼)¤òÊÖ¤¹¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‹ã‚‰å€™è£œã‚’é¸æŠã•ã›ã€ãã®æ–‡å­—åˆ—ã¾ãŸã¯æ–‡å­—(ã‚­ãƒ¼)ã‚’è¿”ã™ã€‚"
   (or candidate-list
       (setq candidate-list (tcode-mazegaki-get-candidate-list)))
   (let* ((noc (length candidate-list))
@@ -851,7 +849,7 @@ NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
 	    candidate))))))
 
 (defun tcode-mazegaki-show-candidate-inline (candidate)
-  "¸õÊä¤ò¥¤¥ó¥é¥¤¥óÉ½¼¨¤¹¤ë¡£"
+  "å€™è£œã‚’ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³è¡¨ç¤ºã™ã‚‹ã€‚"
   (tcode-mazegaki-erase-previous-candidate)
   (insert candidate
 	  (tcode-mazegaki-list-to-string
@@ -862,11 +860,11 @@ NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
   (tcode-mazegaki-put-conversion-face))
 
 (defun tcode-mazegaki-select-candidate ()
-  "¸½ºß¤ÎÆÉ¤ß¤«¤é¸õÊä¤òÁªÂò¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‹ã‚‰å€™è£œã‚’é¸æŠã™ã‚‹ã€‚"
   (let* ((candidate-list (tcode-mazegaki-get-candidate-list))
 	 (noc (length candidate-list))
 	 (msg (and (not (window-minibuffer-p (selected-window)))
-		   (tcode-verbose-message "(? ¤Ç¥Ø¥ë¥×)"))))
+		   (tcode-verbose-message "(? ã§ãƒ˜ãƒ«ãƒ—)"))))
     (if (eq tcode-mazegaki-candidate-state 'priority)
 	(setq tcode-mazegaki-candidate-index 
 	      (1+ tcode-mazegaki-candidate-index)
@@ -909,7 +907,7 @@ NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
 	      tcode-no-wait-display-help-command-list)))
 
 (defun tcode-mazegaki-table-mode ()
-  "¸õÊä°ìÍ÷É½¼¨¤ËÀÚ¤ê´¹¤¨¤ë¡£"
+  "å€™è£œä¸€è¦§è¡¨ç¤ºã«åˆ‡ã‚Šæ›ãˆã‚‹ã€‚"
   (interactive)
   (cond ((eq tcode-mazegaki-candidate-state 'one)
 	 ;; nop
@@ -924,11 +922,11 @@ NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
 	 )))
 
 (defun tcode-mazegaki-select-candidate-from-table ()
-  "¸½ºß¤ÎÆÉ¤ß¤«¤é¸õÊä°ìÍ÷É½¤òºîÀ®¤·¡¢¤½¤³¤«¤é¸õÊä¤òÁªÂò¤¹¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‹ã‚‰å€™è£œä¸€è¦§è¡¨ã‚’ä½œæˆã—ã€ãã“ã‹ã‚‰å€™è£œã‚’é¸æŠã™ã‚‹ã€‚"
   (interactive "*")
   (let ((selected-candidate (tcode-mazegaki-make-table-and-select
 			 (and (not (window-minibuffer-p (selected-window)))
-			      (tcode-verbose-message "(? ¤Ç¥Ø¥ë¥×)"))
+			      (tcode-verbose-message "(? ã§ãƒ˜ãƒ«ãƒ—)"))
 			 nil t))
 	(noc (tcode-mazegaki-get-number-of-candidate)))
     (cond ((stringp selected-candidate)
@@ -940,14 +938,14 @@ NOC (¸õÊä¤Î¿ô)¤È CURRENT-OFFSET ¤«¤é¸½ºß²¿ÈÖÌÜ¤ÎÉ½¤òÉ½¼¨¤·¤Æ¤¤¤ë¤«·×»»¤¹¤ë¡£"
 	  ((char-or-string-p selected-candidate)
 	   (tcode-redo-command selected-candidate)))))
 
-;;;; ÆÉ¤ß¤Î¶èÀÚ¤êÄ¾¤·¡¦¸õÊä¤Î³ÎÄê
+;;;; èª­ã¿ã®åŒºåˆ‡ã‚Šç›´ã—ãƒ»å€™è£œã®ç¢ºå®š
 
 (defun tcode-mazegaki-restore-yomi-and-quit (&optional not-quit)
-  "ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤·¤Æ¡¢¸ò¤¼½ñ¤­ÊÑ´¹¤ò½ªÎ»¤¹¤ë¡£
-NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
+  "èª­ã¿ã®çŠ¶æ…‹ã«æˆ»ã—ã¦ã€äº¤ãœæ›¸ãå¤‰æ›ã‚’çµ‚äº†ã™ã‚‹ã€‚
+NOT-QUIT ãŒ nil ã§ãªã„ã¨ãã¯ã€èª­ã¿ã®çŠ¶æ…‹ã«æˆ»ã™ã ã‘ã§ã€çµ‚äº†ã¯ã—ãªã„ã€‚"
   (interactive "P")
   (tcode-mazegaki-erase-previous-candidate)
-  (tcode-mazegaki-candidate-select-init)	; Ç°¤Î¤¿¤á
+  (tcode-mazegaki-candidate-select-init)	; å¿µã®ãŸã‚
   (insert (tcode-mazegaki-list-to-string
 	   tcode-mazegaki-yomi-list 0
 	   (+ tcode-mazegaki-current-yomi-length
@@ -966,8 +964,8 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
       (setq tcode-mazegaki-start-marker (cdr tcode-mazegaki-start-marker)))))
 
 (defun tcode-mazegaki-relimit (length offset)
-  "¸½ºß¤ÎÆÉ¤ß¤ò¶èÀÚ¤êÄ¾¤·¡¢¸õÊä¤òÁªÂò¤µ¤»¤ë¡£
-¶èÀÚ¤êÄ¾¤¹ÆÉ¤ß¤Ï¡¢Ä¹¤µ LENGTH ¤È OFFSET ¤È¤ÇÉ½¤µ¤ì¤ë¡£"
+  "ç¾åœ¨ã®èª­ã¿ã‚’åŒºåˆ‡ã‚Šç›´ã—ã€å€™è£œã‚’é¸æŠã•ã›ã‚‹ã€‚
+åŒºåˆ‡ã‚Šç›´ã™èª­ã¿ã¯ã€é•·ã• LENGTH ã¨ OFFSET ã¨ã§è¡¨ã•ã‚Œã‚‹ã€‚"
   (tcode-mazegaki-candidate-select-init)
   (save-excursion
     (goto-char tcode-mazegaki-mode)
@@ -975,12 +973,12 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 			     tcode-mazegaki-current-offset))
 	  (new-yomi-total (+ length offset)))
       (if (<= old-yomi-total new-yomi-total)
-	  ;; ¥Ş¡¼¥¯¤ÎÁ°¤ÎÆÉ¤ß¤ò¾Ã¤¹
+	  ;; ãƒãƒ¼ã‚¯ã®å‰ã®èª­ã¿ã‚’æ¶ˆã™
 	  (delete-region
 	   (car (nth (- new-yomi-total old-yomi-total)
 		     (nthcdr (1- old-yomi-total) tcode-mazegaki-yomi-list)))
 	   (point))
-	;; ¥Ş¡¼¥¯¤ÎÁ°¤ËÆÉ¤ß¤òÆş¤ì¤ë
+	;; ãƒãƒ¼ã‚¯ã®å‰ã«èª­ã¿ã‚’å…¥ã‚Œã‚‹
 	(insert (tcode-mazegaki-list-to-string
 		 tcode-mazegaki-yomi-list
 		 new-yomi-total
@@ -993,7 +991,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
   (tcode-mazegaki-select-candidate))
 
 (defun tcode-mazegaki-relimit-right ()
-  "ÆÉ¤ß¤ò½Ì¤á¤ë¡£"
+  "èª­ã¿ã‚’ç¸®ã‚ã‚‹ã€‚"
   (interactive)
   (let ((p (save-excursion
 	     (tcode-mazegaki-switch-to-dictionary)
@@ -1013,10 +1011,10 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 	(goto-char p))
       (setq tcode-mazegaki-with-inflection orig-with-inflection)
       (ding)
-      (tcode-verbose-message "¤³¤ì°Ê¾åÆÉ¤ß¤Ï½Ì¤á¤é¤ì¤Ş¤»¤ó¡£"))))
+      (tcode-verbose-message "ã“ã‚Œä»¥ä¸Šèª­ã¿ã¯ç¸®ã‚ã‚‰ã‚Œã¾ã›ã‚“ã€‚"))))
 
 (defun tcode-mazegaki-relimit-left ()
-  "ÆÉ¤ß¤ò¿­¤Ğ¤¹¡£"
+  "èª­ã¿ã‚’ä¼¸ã°ã™ã€‚"
   (interactive)
   (let ((p (save-excursion
 	     (tcode-mazegaki-switch-to-dictionary)
@@ -1037,11 +1035,11 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 	(goto-char p))
       (setq tcode-mazegaki-with-inflection orig-with-inflection)
       (ding)
-      (tcode-verbose-message "¤³¤ì°Ê¾åÆÉ¤ß¤Ï¿­¤Ğ¤»¤Ş¤»¤ó¡£"))))
+      (tcode-verbose-message "ã“ã‚Œä»¥ä¸Šèª­ã¿ã¯ä¼¸ã°ã›ã¾ã›ã‚“ã€‚"))))
 
 (defun tcode-mazegaki-select-candidate-or-relimit ()
-  "ÆÉ¤ß¤ò½Ì¤á¤ë¤«¡¢´Á»ú¤Î°ìÍ÷¤«¤é¸õÊä¤òÁªÂò¤¹¤ë¡£
-ÆÉ¤ß¤ò½Ì¤á¤ë¤Î¤Ï¡¢¸½ºß¤Î¸õÊä¤Î¿ô¤¬°ì¤Ä¤Î¾ì¹ç¤Î¤ß¡£"
+  "èª­ã¿ã‚’ç¸®ã‚ã‚‹ã‹ã€æ¼¢å­—ã®ä¸€è¦§ã‹ã‚‰å€™è£œã‚’é¸æŠã™ã‚‹ã€‚
+èª­ã¿ã‚’ç¸®ã‚ã‚‹ã®ã¯ã€ç¾åœ¨ã®å€™è£œã®æ•°ãŒä¸€ã¤ã®å ´åˆã®ã¿ã€‚"
   (interactive)
   (if (/= (tcode-mazegaki-get-number-of-candidate) 1)
       (tcode-mazegaki-select-candidate)
@@ -1049,9 +1047,9 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
     (tcode-mazegaki-relimit-right)))
 
 (defun tcode-mazegaki-prioritize (candidate)
-  "¸½ºß¤ÎÆÉ¤ß¤Î CANDIDATE ¤ò³Ø½¬¤¹¤ë¡£
-¤¿¤À¤·¡¢³Ø½¬¤¹¤ë¸õÊä¤Ï¡¢ÊÑ¿ô `tcode-mazegaki-fixed-priority-count' ¤Ç
-»ØÄê¤·¤¿¿ô¤è¤ê¤â½ç½ø¤¬¸å¤Î¤â¤Î¤Î¤ß¡£"
+  "ç¾åœ¨ã®èª­ã¿ã® CANDIDATE ã‚’å­¦ç¿’ã™ã‚‹ã€‚
+ãŸã ã—ã€å­¦ç¿’ã™ã‚‹å€™è£œã¯ã€å¤‰æ•° `tcode-mazegaki-fixed-priority-count' ã§
+æŒ‡å®šã—ãŸæ•°ã‚ˆã‚Šã‚‚é †åºãŒå¾Œã®ã‚‚ã®ã®ã¿ã€‚"
   (save-excursion
     (tcode-mazegaki-find-kanji-entry)
     (if tcode-mazegaki-with-inflection
@@ -1080,7 +1078,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 		i (1+ i)))))))
 
 (defun tcode-mazegaki-finish ()
-  "¸ò¤¼½ñ¤­ÊÑ´¹¤ò³ÎÄê¤·¤Æ¡¢¸ò¤¼½ñ¤­ÊÑ´¹¥â¡¼¥É¤òÈ´¤±¤ë¡£"
+  "äº¤ãœæ›¸ãå¤‰æ›ã‚’ç¢ºå®šã—ã¦ã€äº¤ãœæ›¸ãå¤‰æ›ãƒ¢ãƒ¼ãƒ‰ã‚’æŠœã‘ã‚‹ã€‚"
   (interactive)
   (tcode-mazegaki-candidate-select-init)
   (when tcode-mazegaki-prefix
@@ -1165,17 +1163,17 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
     (setq tcode-mazegaki-start-marker (cdr tcode-mazegaki-start-marker))
     (tcode-mazegaki-convert nil)))
 
-;;;; ÅĞÏ¿¤Èºï½ü
+;;;; ç™»éŒ²ã¨å‰Šé™¤
 
 (defun tcode-mazegaki-get-yomi-and-kanji (prompt &optional str)
-  "¸ò¤¼½ñ¤­ÅĞÏ¿»ş¤Î¡ÖÆÉ¤ß¡×¤È¡Ö´Á»ú¡×¤òÅ¬Åö¤ËÆÀ¤ë¡£"
+  "äº¤ãœæ›¸ãç™»éŒ²æ™‚ã®ã€Œèª­ã¿ã€ã¨ã€Œæ¼¢å­—ã€ã‚’é©å½“ã«å¾—ã‚‹ã€‚"
   (let* ((minibuffer-setup-hook
 	  ;; avoid referencing undefined variables in NEmacs.
 	  (and (boundp 'minibuffer-setup-hook)
 	       (cons 'toggle-input-method minibuffer-setup-hook)))
 	 (yomi (if tcode-mazegaki-mode
 		   (buffer-substring tcode-mazegaki-mode (point))
-		 (read-from-minibuffer (concat prompt "ÆÉ¤ß ")
+		 (read-from-minibuffer (concat prompt "èª­ã¿ ")
 				       (if (and str
 						(or (tcode-mule-2-p)
 						    (tcode-mule-3-p)
@@ -1183,7 +1181,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 					   (cons str 1)
 					 str))))
 	 (kanji (read-from-minibuffer
-		 (format "%s´Á»ú(ÆÉ¤ß=%s) " prompt yomi))))
+		 (format "%sæ¼¢å­—(èª­ã¿=%s) " prompt yomi))))
     (list (mapconcat 'char-to-string
 		     (delq ?\n (string-to-list yomi))
 		     nil)
@@ -1192,7 +1190,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 		     nil))))
 
 (defun tcode-split-string-by-regexp (string splitter)
-  "Ê¸»úÎó STRING ¤ò¡¢Àµµ¬É½¸½ SPLITTER ¤ò¶èÀÚ¤ê¤È¤·¤ÆÊ¬³ä¤¹¤ë¡£"
+  "æ–‡å­—åˆ— STRING ã‚’ã€æ­£è¦è¡¨ç¾ SPLITTER ã‚’åŒºåˆ‡ã‚Šã¨ã—ã¦åˆ†å‰²ã™ã‚‹ã€‚"
   (let (l)
     (while (string-match splitter string)
       (setq l (nconc l (list (substring string 0 (match-beginning 0))))
@@ -1200,7 +1198,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
     (nconc l (list string))))
 
 (defun tcode-mazegaki-yomi-combination (yomi-list kanji-list)
-  "ÆÉ¤ß¤È´Á»ú¤È¤Î¼è¤êÆÀ¤ëÁÈ¤ß¹ç¤ï¤»¤ò¤¹¤Ù¤ÆÎóµó¤¹¤ë¡£"
+  "èª­ã¿ã¨æ¼¢å­—ã¨ã®å–ã‚Šå¾—ã‚‹çµ„ã¿åˆã‚ã›ã‚’ã™ã¹ã¦åˆ—æŒ™ã™ã‚‹ã€‚"
   (if (<= (length yomi-list) 1)
       (append kanji-list yomi-list)
     (let ((yomi-car (car yomi-list))
@@ -1218,15 +1216,15 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-make-entry (yomi kanji)
-  "ÆÉ¤ß YOMI¡¢´Á»ú KANJI ¤Ç¡¢¿·¤¿¤Ê¥¨¥ó¥È¥ê¤ò¸ò¤¼½ñ¤­¼­½ñ¤ËÅĞÏ¿¤¹¤ë¡£
-Àµ¤·¤¯ÅĞÏ¿¤µ¤ì¤ì¤Ğ t¡¢¤½¤¦¤Ç¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£
-ÆÉ¤ß¤ª¤è¤Ó´Á»ú¤¬ `tcode-mazegaki-splitter' ¤Ç¶èÀÚ¤Ã¤Æ¤¢¤ë¾ì¹ç¤Ë¤Ï¡¢
-¤½¤ì¤é¤òÁÈ¤ß¹ç¤ï¤»¤¿ÆÉ¤ß¤¹¤Ù¤Æ¤Ë¤Ä¤¤¤ÆÅĞÏ¿¤¹¤ë¡£"
-  (interactive (tcode-mazegaki-get-yomi-and-kanji "ÅĞÏ¿¢£"))
-  (and (interactive-p)
+  "èª­ã¿ YOMIã€æ¼¢å­— KANJI ã§ã€æ–°ãŸãªã‚¨ãƒ³ãƒˆãƒªã‚’äº¤ãœæ›¸ãè¾æ›¸ã«ç™»éŒ²ã™ã‚‹ã€‚
+æ­£ã—ãç™»éŒ²ã•ã‚Œã‚Œã° tã€ãã†ã§ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚
+èª­ã¿ãŠã‚ˆã³æ¼¢å­—ãŒ `tcode-mazegaki-splitter' ã§åŒºåˆ‡ã£ã¦ã‚ã‚‹å ´åˆã«ã¯ã€
+ãã‚Œã‚‰ã‚’çµ„ã¿åˆã‚ã›ãŸèª­ã¿ã™ã¹ã¦ã«ã¤ã„ã¦ç™»éŒ²ã™ã‚‹ã€‚"
+  (interactive (tcode-mazegaki-get-yomi-and-kanji "ç™»éŒ²â– "))
+  (and (called-interactively-p 'interactive)
        (> (string-width yomi) tcode-mazegaki-yomi-max)
-       (message (concat "ÆÉ¤ß¡Ö%s¡×¤ÎÄ¹¤µ(%d)¤Ï `tcode-mazegaki-yomi-max' "
-			"¤ÎÃÍ¤òÄ¶¤¨¤Æ¤¤¤Ş¤¹¡£")
+       (message (concat "èª­ã¿ã€Œ%sã€ã®é•·ã•(%d)ã¯ `tcode-mazegaki-yomi-max' "
+			"ã®å€¤ã‚’è¶…ãˆã¦ã„ã¾ã™ã€‚")
 		yomi (string-width yomi))
        (setq tcode-mazegaki-yomi-max (string-width yomi)))
   (let ((yomi-list (tcode-split-string-by-regexp yomi
@@ -1237,7 +1235,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 	       (tcode-split-string-by-regexp kanji
 					     tcode-mazegaki-splitter)))
 	  (unless (= (length yomi-list) (length kanji-list))
-	    (error "¶èÀÚ¤êÊı¤¬´Ö°ã¤Ã¤Æ¤¤¤Ş¤¹¡£"))
+	    (error "åŒºåˆ‡ã‚Šæ–¹ãŒé–“é•ã£ã¦ã„ã¾ã™ã€‚"))
 	  (setq yomi-list (tcode-mazegaki-yomi-combination
 			   yomi-list kanji-list)
 		kanji (car yomi-list)
@@ -1249,25 +1247,25 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 	(tcode-mazegaki-switch-to-dictionary)
 	(tcode-mazegaki-search-yomi yomi)
 	(setq tcode-mazegaki-current-yomi-point (point))
-	;; ´û¤ËÆÉ¤ß¤¬ÅĞÏ¿¤µ¤ì¤Æ¤¤¤ì¤Ğ¡¢¤½¤³¤ËÄÉ²Ã¤·¡¢
-	;; ÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤Ğ¡¢¿·¤¿¤Ë¥¨¥ó¥È¥ê¤òºî¤ë¡£
+	;; æ—¢ã«èª­ã¿ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚Œã°ã€ãã“ã«è¿½åŠ ã—ã€
+	;; ç™»éŒ²ã•ã‚Œã¦ã„ãªã‘ã‚Œã°ã€æ–°ãŸã«ã‚¨ãƒ³ãƒˆãƒªã‚’ä½œã‚‹ã€‚
 	(cond ((not (looking-at (concat yomi " /")))
 	       (insert yomi " /" kanji "/\n")
 	       t)
 	      ((re-search-forward (concat "/" kanji "/")
 				  (save-excursion (end-of-line) (point))
 				  t)
-	       (and (interactive-p)
+	       (and (called-interactively-p 'interactive)
 		    (progn
 		      (ding)
-		      (message "¡Ö%s¡×¤Ï¤¹¤Ç¤ËÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ş¤¹¡£" kanji)))
+		      (message "ã€Œ%sã€ã¯ã™ã§ã«ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™ã€‚" kanji)))
 	       nil)
 	      (t
 	       (tcode-mazegaki-find-kanji-entry)
 	       (insert kanji "/")))))))
 
 (defun tcode-mazegaki-inflection-p (yomi)
-  "ÆÉ¤ß¤¬³èÍÑ¤¹¤ë¤â¤Î¤«¤É¤¦¤«¤òÉ½¤¹½Ò¸ì¡£"
+  "èª­ã¿ãŒæ´»ç”¨ã™ã‚‹ã‚‚ã®ã‹ã©ã†ã‹ã‚’è¡¨ã™è¿°èªã€‚"
   (let ((length (length tcode-mazegaki-inflection-mark)))
     (and (stringp yomi)
 	 (> (length yomi) length)
@@ -1276,17 +1274,17 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-make-entry-and-finish ()
-  "¿·¤¿¤Ê¥¨¥ó¥È¥ê¤ò¸ò¤¼½ñ¤­¼­½ñ¤ËÅĞÏ¿¤·¡¢³ÎÄê¤¹¤ë¡£
-ÆÉ¤ß¤Ï¡¢¸ò¤¼½ñ¤­ÊÑ´¹Ãæ¤¢¤ë¤¤¤ÏÄ¾Á°¤ËÊÑ´¹¤Ë¼ºÇÔ¤·¤Æ¤¤¤¿¾ì¹ç¤Ï¡¢¤½¤³¤«¤éÆÀ¤ë¡£
-¤½¤·¤Æ¡¢ÅĞÏ¿¸å¤ËÅĞÏ¿¤·¤¿´Á»ú¤ò³ÎÄê¤¹¤ë¡£
-¸ò¤¼½ñ¤­ÊÑ´¹Ãæ¤¢¤ë¤¤¤ÏÊÑ´¹¤Ë¼ºÇÔ¤·¤¿Ä¾¸å°Ê³°¤Î¾ì¹ç¤Ï¡¢³ÎÄê¤Ï¹Ô¤ï¤Ê¤¤¡£"
+  "æ–°ãŸãªã‚¨ãƒ³ãƒˆãƒªã‚’äº¤ãœæ›¸ãè¾æ›¸ã«ç™»éŒ²ã—ã€ç¢ºå®šã™ã‚‹ã€‚
+èª­ã¿ã¯ã€äº¤ãœæ›¸ãå¤‰æ›ä¸­ã‚ã‚‹ã„ã¯ç›´å‰ã«å¤‰æ›ã«å¤±æ•—ã—ã¦ã„ãŸå ´åˆã¯ã€ãã“ã‹ã‚‰å¾—ã‚‹ã€‚
+ãã—ã¦ã€ç™»éŒ²å¾Œã«ç™»éŒ²ã—ãŸæ¼¢å­—ã‚’ç¢ºå®šã™ã‚‹ã€‚
+äº¤ãœæ›¸ãå¤‰æ›ä¸­ã‚ã‚‹ã„ã¯å¤‰æ›ã«å¤±æ•—ã—ãŸç›´å¾Œä»¥å¤–ã®å ´åˆã¯ã€ç¢ºå®šã¯è¡Œã‚ãªã„ã€‚"
   (interactive)
   (let ((yomi-exists (or tcode-mazegaki-mode
 			 (eq last-command 'tcode-mazegaki-begin-conversion))))
     (if tcode-mazegaki-mode
 	(tcode-mazegaki-restore-yomi-and-quit))
     (let* ((yomi-kanji (tcode-mazegaki-get-yomi-and-kanji
-			"ÅĞÏ¿¢£" (if yomi-exists
+			"ç™»éŒ²â– " (if yomi-exists
 				     (tcode-mazegaki-list-to-string
 				      tcode-mazegaki-yomi-list 0
 				      (length tcode-mazegaki-yomi-list))
@@ -1294,7 +1292,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 	   (yomi (car yomi-kanji)))
       (tcode-mazegaki-make-entry yomi (car (cdr yomi-kanji)))
       (if yomi-exists
-	  ;; ³ÎÄê¤¹¤ë
+	  ;; ç¢ºå®šã™ã‚‹
 	  (let* ((split-yomi
 		  (tcode-split-string-by-regexp yomi
 						tcode-mazegaki-splitter))
@@ -1312,7 +1310,7 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-delete-entry (yomi kanji)
-  "ÆÉ¤ß YOMI¡¢´Á»ú KANJI ¤Î¥¨¥ó¥È¥ê¤ò¸ò¤¼½ñ¤­¼­½ñ¤«¤éºï½ü¤¹¤ë¡£"
+  "èª­ã¿ YOMIã€æ¼¢å­— KANJI ã®ã‚¨ãƒ³ãƒˆãƒªã‚’äº¤ãœæ›¸ãè¾æ›¸ã‹ã‚‰å‰Šé™¤ã™ã‚‹ã€‚"
   (interactive
    (let* ((minibuffer-setup-hook
 	   ;; avoid referencing undefined variables in NEmacs.
@@ -1320,23 +1318,23 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 		(cons 'toggle-input-method minibuffer-setup-hook)))
 	  (yomi (if tcode-mazegaki-mode
 		    (buffer-substring tcode-mazegaki-mode (point))
-		  (read-from-minibuffer "ºï½ü¢£ÆÉ¤ß ")))
+		  (read-from-minibuffer "å‰Šé™¤â– èª­ã¿ ")))
 	  (found (save-excursion
 		   (tcode-mazegaki-switch-to-dictionary)
 		   (tcode-mazegaki-search-yomi yomi)))
 	  (candidate (and found
 		      (tcode-mazegaki-make-table-and-select
-		       (format "ºï½ü¢£ÆÉ¤ß %s " yomi))))
+		       (format "å‰Šé™¤â– èª­ã¿ %s " yomi))))
 	  (yes (and (stringp candidate)
 		    (y-or-n-p
 		     (format
-		      "ÆÉ¤ß¡Ö%s¡×´Á»ú¡Ö%s¡×¤òºï½ü¤·¤Ş¤¹¤«? "
+		      "èª­ã¿ã€Œ%sã€æ¼¢å­—ã€Œ%sã€ã‚’å‰Šé™¤ã—ã¾ã™ã‹? "
 		      yomi candidate))))
 	  (kanji (cond (yes
 			candidate)
 		       ((not found)
-			(error "ÆÉ¤ß¡Ö%s¡×¤ÏÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£" yomi))
-		       ((error "ºï½üÃæ»ß")))))
+			(error "èª­ã¿ã€Œ%sã€ã¯ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚" yomi))
+		       ((error "å‰Šé™¤ä¸­æ­¢")))))
      (list yomi kanji)))
   (save-excursion
     (tcode-mazegaki-switch-to-dictionary)
@@ -1345,33 +1343,33 @@ NOT-QUIT ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤Î¾õÂÖ¤ËÌá¤¹¤À¤±¤Ç¡¢½ªÎ»¤Ï¤·¤Ê¤¤¡£"
 	     (re-search-forward (concat "\\(/" kanji "\\)/")
 				(save-excursion (end-of-line) (point))
 				t))
-	(prog2		  ; 1¹ÔÁ´ÂÎ¤òºï½ü¤·¤¿¤È¤­ t ¤½¤ì
-				     ; °Ê³°¤Ï nil ¤òÊÖ¤¹
+	(prog2		  ; 1è¡Œå…¨ä½“ã‚’å‰Šé™¤ã—ãŸã¨ã t ãã‚Œ
+				     ; ä»¥å¤–ã¯ nil ã‚’è¿”ã™
 	    (progn
 	      (delete-region (match-beginning 1) (match-end 1))
 	      (tcode-mazegaki-find-kanji-entry))
 	    (and (looking-at "$")
-		 (prog1 t		; 1¹ÔÁ´ÂÎ¤òºï½ü
+		 (prog1 t		; 1è¡Œå…¨ä½“ã‚’å‰Šé™¤
 		   (beginning-of-line)
 		   (delete-region (point) (progn (forward-line 1) (point)))))
-	  (and (interactive-p)
-	       (message "ÆÉ¤ß¡Ö%s¡×´Á»ú¡Ö%s¡×¤òºï½ü¤·¤Ş¤·¤¿¡£" yomi kanji)))
-      (when (interactive-p)
+	  (and (called-interactively-p 'interactive)
+	       (message "èª­ã¿ã€Œ%sã€æ¼¢å­—ã€Œ%sã€ã‚’å‰Šé™¤ã—ã¾ã—ãŸã€‚" yomi kanji)))
+      (when (called-interactively-p 'interactive)
 	(ding)
-	(message "ÆÉ¤ß¡Ö%s¡×´Á»ú¡Ö%s¡×¤ÏÅĞÏ¿¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£"
+	(message "èª­ã¿ã€Œ%sã€æ¼¢å­—ã€Œ%sã€ã¯ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"
 		 yomi kanji)))))
 
 (defun tcode-mazegaki-apply-entries-region (beg end func msg)
-  "¥ê¡¼¥¸¥ç¥óÃæ¤Î¼­½ñ¤Î¹àÌÜ¤½¤ì¤¾¤ì¤ËÂĞ¤·¤Æ FUNC ¤òÅ¬ÍÑ¤¹¤ë¡£
-FUNC ¤Ø¤Ï¡¢Âè1°ú¿ô¤ËÆÉ¤ß¡¢Âè2°ú¿ô¤Ë´Á»ú¤¬½ç¼¡ÅÏ¤µ¤ì¤ë¡£
+  "ãƒªãƒ¼ã‚¸ãƒ§ãƒ³ä¸­ã®è¾æ›¸ã®é …ç›®ãã‚Œãã‚Œã«å¯¾ã—ã¦ FUNC ã‚’é©ç”¨ã™ã‚‹ã€‚
+FUNC ã¸ã¯ã€ç¬¬1å¼•æ•°ã«èª­ã¿ã€ç¬¬2å¼•æ•°ã«æ¼¢å­—ãŒé †æ¬¡æ¸¡ã•ã‚Œã‚‹ã€‚
 
-¼­½ñ¤Î¹àÌÜ¤Ï1¹Ô¤º¤Ä»ØÄê¤¹¤ë¡£³Æ¹Ô¤Î½ñ¼°¤Ï
+è¾æ›¸ã®é …ç›®ã¯1è¡Œãšã¤æŒ‡å®šã™ã‚‹ã€‚å„è¡Œã®æ›¸å¼ã¯
 
-ÆÉ¤ß /´Á»ú/[´Á»ú/]*\\n"
+èª­ã¿ /æ¼¢å­—/[æ¼¢å­—/]*\\n"
   (interactive "r")
   (save-excursion
     (save-restriction
-      (message "°ì³ç%sÃæ..." msg)
+      (message "ä¸€æ‹¬%sä¸­..." msg)
       (narrow-to-region beg end)
       (goto-char (point-min))
       (let ((line 1))
@@ -1394,22 +1392,22 @@ FUNC ¤Ø¤Ï¡¢Âè1°ú¿ô¤ËÆÉ¤ß¡¢Âè2°ú¿ô¤Ë´Á»ú¤¬½ç¼¡ÅÏ¤µ¤ì¤ë¡£
 		(forward-line 1)))
 	  (error
 	   (ding)
-	   (message "%d ¹ÔÌÜ¤Ç¼­½ñ¤Î½ñ¼°¤¬´Ö°ã¤Ã¤Æ¤¤¤Ş¤¹¡£" line)))
-	(message "°ì³ç%sÃæ...´°Î»" msg))
+	   (message "%d è¡Œç›®ã§è¾æ›¸ã®æ›¸å¼ãŒé–“é•ã£ã¦ã„ã¾ã™ã€‚" line)))
+	(message "ä¸€æ‹¬%sä¸­...å®Œäº†" msg))
       (widen))))
 
 ;;;###autoload
 (defun tcode-mazegaki-make-entries-region (beg end)
-  "¥ê¡¼¥¸¥ç¥óÃæ¤Î¼­½ñ¤Î¹àÌÜ¤ò°ì³ç¤·¤ÆÅĞÏ¿¤¹¤ë¡£
-¼­½ñ¤Î½ñ¼°¤Ï´Ø¿ô `tcode-mazegaki-apply-entries-region' ¤ò»²¾È¡£"
+  "ãƒªãƒ¼ã‚¸ãƒ§ãƒ³ä¸­ã®è¾æ›¸ã®é …ç›®ã‚’ä¸€æ‹¬ã—ã¦ç™»éŒ²ã™ã‚‹ã€‚
+è¾æ›¸ã®æ›¸å¼ã¯é–¢æ•° `tcode-mazegaki-apply-entries-region' ã‚’å‚ç…§ã€‚"
   (interactive "r")
   (tcode-mazegaki-apply-entries-region 
-   beg end 'tcode-mazegaki-make-entry "ÅĞÏ¿"))
+   beg end 'tcode-mazegaki-make-entry "ç™»éŒ²"))
 
 ;;;###autoload
 (defun tcode-mazegaki-make-entries-buffer (&optional buffer)
-  "¥Ğ¥Ã¥Õ¥¡Ãæ¤Î¼­½ñ¤Î¹àÌÜ¤ò°ì³ç¤·¤ÆÅĞÏ¿¤¹¤ë¡£
-¥³¥Ş¥ó¥É `tcode-mazegaki-make-entries-region' »²¾È¡£"
+  "ãƒãƒƒãƒ•ã‚¡ä¸­ã®è¾æ›¸ã®é …ç›®ã‚’ä¸€æ‹¬ã—ã¦ç™»éŒ²ã™ã‚‹ã€‚
+ã‚³ãƒãƒ³ãƒ‰ `tcode-mazegaki-make-entries-region' å‚ç…§ã€‚"
   (interactive)
   (save-excursion
     (if buffer
@@ -1418,16 +1416,16 @@ FUNC ¤Ø¤Ï¡¢Âè1°ú¿ô¤ËÆÉ¤ß¡¢Âè2°ú¿ô¤Ë´Á»ú¤¬½ç¼¡ÅÏ¤µ¤ì¤ë¡£
 
 ;;;###autoload
 (defun tcode-mazegaki-delete-entries-region (beg end)
-  "¥ê¡¼¥¸¥ç¥óÃæ¤Î¼­½ñ¤Î¹àÌÜ¤ò°ì³ç¤·¤Æºï½ü¤¹¤ë¡£
-¼­½ñ¤Î½ñ¼°¤Ï´Ø¿ô `tcode-mazegaki-apply-entries-region' ¤ò»²¾È¡£"
+  "ãƒªãƒ¼ã‚¸ãƒ§ãƒ³ä¸­ã®è¾æ›¸ã®é …ç›®ã‚’ä¸€æ‹¬ã—ã¦å‰Šé™¤ã™ã‚‹ã€‚
+è¾æ›¸ã®æ›¸å¼ã¯é–¢æ•° `tcode-mazegaki-apply-entries-region' ã‚’å‚ç…§ã€‚"
   (interactive "r")
   (tcode-mazegaki-apply-entries-region
-   beg end 'tcode-mazegaki-delete-entry "ºï½ü"))
+   beg end 'tcode-mazegaki-delete-entry "å‰Šé™¤"))
 
 ;;;###autoload
 (defun tcode-mazegaki-delete-entries-buffer (&optional buffer)
-  "¥Ğ¥Ã¥Õ¥¡Ãæ¤Î¼­½ñ¤Î¹àÌÜ¤ò°ì³ç¤·¤Æºï½ü¤¹¤ë¡£
-¥³¥Ş¥ó¥É `tcode-mazegaki-delete-entries-region' »²¾È¡£"
+  "ãƒãƒƒãƒ•ã‚¡ä¸­ã®è¾æ›¸ã®é …ç›®ã‚’ä¸€æ‹¬ã—ã¦å‰Šé™¤ã™ã‚‹ã€‚
+ã‚³ãƒãƒ³ãƒ‰ `tcode-mazegaki-delete-entries-region' å‚ç…§ã€‚"
   (interactive)
   (save-excursion
     (if buffer
@@ -1436,8 +1434,8 @@ FUNC ¤Ø¤Ï¡¢Âè1°ú¿ô¤ËÆÉ¤ß¡¢Âè2°ú¿ô¤Ë´Á»ú¤¬½ç¼¡ÅÏ¤µ¤ì¤ë¡£
 
 ;;;###autoload
 (defun tcode-mazegaki-delete-entry-by-last-yomi (arg)
-  "ºÇ¸å¤ËÆşÎÏ¤·¤¿ÆÉ¤ß¤«¤é´Á»ú¤òÁªÂò¤·¡¢¤½¤ì¤òºï½ü¤¹¤ë¡£
-°ú¿ô ARG ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¤Ï¡¢ÆÉ¤ß¤â¿·¤¿¤ËÆşÎÏ¤¹¤ë¡£"
+  "æœ€å¾Œã«å…¥åŠ›ã—ãŸèª­ã¿ã‹ã‚‰æ¼¢å­—ã‚’é¸æŠã—ã€ãã‚Œã‚’å‰Šé™¤ã™ã‚‹ã€‚
+å¼•æ•° ARG ãŒ nil ã§ãªã„ã¨ãã¯ã€èª­ã¿ã‚‚æ–°ãŸã«å…¥åŠ›ã™ã‚‹ã€‚"
   (interactive "P")
   (if (or (null tcode-mazegaki-yomi-list)
 	  arg)
@@ -1448,17 +1446,17 @@ FUNC ¤Ø¤Ï¡¢Âè1°ú¿ô¤ËÆÉ¤ß¡¢Âè2°ú¿ô¤Ë´Á»ú¤¬½ç¼¡ÅÏ¤µ¤ì¤ë¡£
 		   (looking-at "\\([^/]+\\) /")
 		   (buffer-substring (match-beginning 1) (match-end 1))))
 	   (kanji (tcode-mazegaki-make-table-and-select
-		   (format "ºï½ü¢£ÆÉ¤ß¡Ö%s¡×´Á»ú¤Ï? " yomi))))
+		   (format "å‰Šé™¤â– èª­ã¿ã€Œ%sã€æ¼¢å­—ã¯? " yomi))))
       (if (not (stringp kanji))
-	  (message "ºï½üÃæ»ß")
-	(if (y-or-n-p (format "ÆÉ¤ß¡Ö%s¡×´Á»ú¡Ö%s¡×¤òºï½ü¤·¤Ş¤¹¤« "
+	  (message "å‰Šé™¤ä¸­æ­¢")
+	(if (y-or-n-p (format "èª­ã¿ã€Œ%sã€æ¼¢å­—ã€Œ%sã€ã‚’å‰Šé™¤ã—ã¾ã™ã‹ "
 			      yomi kanji))
 	    (tcode-mazegaki-delete-entry yomi kanji))))))
 
-;;;; ÆÉ¤ß¤«¤é¤ÎÊä´°
+;;;; èª­ã¿ã‹ã‚‰ã®è£œå®Œ
 
 (defun tcode-mazegaki-make-completion-prompt (yomi comp-list)
-  "Êä´°¸õÊä¤¬Ê£¿ô¤¢¤ë¾ì¹ç¤Î¡¢ÁªÂò¤Î¤¿¤á¤Î¥×¥í¥ó¥×¥È¤ÎÊ¸»úÎó¤òºî¤ë¡£"
+  "è£œå®Œå€™è£œãŒè¤‡æ•°ã‚ã‚‹å ´åˆã®ã€é¸æŠã®ãŸã‚ã®ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã®æ–‡å­—åˆ—ã‚’ä½œã‚‹ã€‚"
   (let* ((prompt (concat yomi "{"
 			 (substring (car comp-list) (length yomi) nil)))
 	 (max-len (- (frame-width) 12)) ; 12 is for suffix
@@ -1478,25 +1476,25 @@ FUNC ¤Ø¤Ï¡¢Âè1°ú¿ô¤ËÆÉ¤ß¡¢Âè2°ú¿ô¤Ë´Á»ú¤¬½ç¼¡ÅÏ¤µ¤ì¤ë¡£
 	       new-prompt (concat prompt ", " diff)))
        prompt)
      (if comp-list
-	 (format ", ¡Ä (+%d)" (length comp-list))
+	 (format ", â€¦ (+%d)" (length comp-list))
        "}"))))
 
 ;;;###autoload
 (defun tcode-mazegaki-complete (&optional conversion)
-  "¸ò¤¼½ñ¤­¼­½ñ¤ÎÆÉ¤ß¤«¤éÊä´°¤ò¹Ô¤¦¡£
-¸õÊä¤¬Ê£¿ô¤¢¤ë¤È¤­¤Î¥­¡¼³ä¤êÅö¤Æ¤Ï¼¡¤Î¤È¤ª¤ê¡£
+  "äº¤ãœæ›¸ãè¾æ›¸ã®èª­ã¿ã‹ã‚‰è£œå®Œã‚’è¡Œã†ã€‚
+å€™è£œãŒè¤‡æ•°ã‚ã‚‹ã¨ãã®ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã¯æ¬¡ã®ã¨ãŠã‚Šã€‚
 
-    SPC		¼¡¤Î¸õÊä¤òÀèÆ¬¤Ë¤¹¤ë
-    DEL		ºÇ¸å¤Î¸õÊä¤òÀèÆ¬¤Ë¤¹¤ë
-    TAB		ÀèÆ¬¤Î¸õÊä¤òÊä´°¤·½ªÎ»¤¹¤ë
-    LFD		ÀèÆ¬¤Î¸õÊä¤òÊä´°¤·½ªÎ»¡¦¤½¤Î¸åÊÑ´¹¤¹¤ë
-    RET		ÁªÂò¤»¤º¤ËÊä´°¤ò½ªÎ»¤¹¤ë
+    SPC		æ¬¡ã®å€™è£œã‚’å…ˆé ­ã«ã™ã‚‹
+    DEL		æœ€å¾Œã®å€™è£œã‚’å…ˆé ­ã«ã™ã‚‹
+    TAB		å…ˆé ­ã®å€™è£œã‚’è£œå®Œã—çµ‚äº†ã™ã‚‹
+    LFD		å…ˆé ­ã®å€™è£œã‚’è£œå®Œã—çµ‚äº†ãƒ»ãã®å¾Œå¤‰æ›ã™ã‚‹
+    RET		é¸æŠã›ãšã«è£œå®Œã‚’çµ‚äº†ã™ã‚‹
 
-CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
+CONVERSION ãŒ nil ã§ãªã„ã¨ãã€è£œå®Œå¾Œ(è£œå®Œã‚’è¡Œã£ãŸå ´åˆã®ã¿)å¤‰æ›ã‚’è¡Œã†ã€‚"
   (interactive "*P")
   (setq tcode-mazegaki-yomi-list (tcode-mazegaki-get-reverse-yomi-list))
   (unless tcode-mazegaki-yomi-list
-    (error "Êä´°¤Ç¤­¤Ş¤»¤ó¡£"))
+    (error "è£œå®Œã§ãã¾ã›ã‚“ã€‚"))
   (let* ((yomi-len (length tcode-mazegaki-yomi-list))
 	 (yomi-prefix
 	  (catch 'found
@@ -1533,7 +1531,7 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 						    (- (point) 2)))
 			   i (1+ i))
 		     (if (> i tcode-mazegaki-complete-max)
-			 (error "¡Ö%s¡×¤Ï¸õÊä¤Î¿ô¤¬Â¿¤¹¤®¤Ş¤¹¡£"
+			 (error "ã€Œ%sã€ã¯å€™è£œã®æ•°ãŒå¤šã™ãã¾ã™ã€‚"
 				yomi-prefix))
 		     (unless (string= yomi yomi-prefix)
 		       (setq list (nconc list (list (cons yomi nil)))))
@@ -1543,7 +1541,7 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 		    (try-completion yomi-prefix completion-list)))
 	 comp)
     (or completion-list
-	(error "Êä´°¤Ç¤­¤Ş¤»¤ó¡£"))
+	(error "è£œå®Œã§ãã¾ã›ã‚“ã€‚"))
     ;; for NEmacs
     (and (stringp most)
 	 (let ((last-char (aref most (1- (length most)))))
@@ -1553,7 +1551,7 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 		(setq most (substring most 0 -1))
 		(string= yomi-prefix most)
 		(setq most nil))))
-    ;; Êä´°¤Ç¤­¤ëÉôÊ¬¤òÊä´°
+    ;; è£œå®Œã§ãã‚‹éƒ¨åˆ†ã‚’è£œå®Œ
     (when most
       (delete-region (car (nth (1- yomi-len) tcode-mazegaki-yomi-list))
 		     (point))
@@ -1566,16 +1564,16 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
     (setq comp (and completion-list
 		    (all-completions yomi-prefix completion-list)))
     (when (> (length comp) 1)
-      ;; ÁªÂò¥â¡¼¥É
+      ;; é¸æŠãƒ¢ãƒ¼ãƒ‰
       (catch 'quit
 	(while t
 	  (message (tcode-mazegaki-make-completion-prompt yomi-prefix comp))
 	  (let ((ch (read-char)))
 	    (cond ((= ch ? )
-		   ;; ¼¡¤Î¸õÊä¤òÀèÆ¬¤Ø
+		   ;; æ¬¡ã®å€™è£œã‚’å…ˆé ­ã¸
 		   (setq comp (nconc (cdr comp) (list (car comp)))))
 		  ((= ch ?\C-?)
-		   ;; ºÇ¸å¤Î¸õÊä¤òÀèÆ¬¤Ø
+		   ;; æœ€å¾Œã®å€™è£œã‚’å…ˆé ­ã¸
 		   (let ((list comp))
 		     (while (and (cdr list)
 				 (cdr (cdr list)))
@@ -1584,24 +1582,24 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 		     (rplacd list nil)))
 		  ((or (= ch ?\t)
 		       (= ch last-command-event))
-		   ;; ÀèÆ¬¤Î¸õÊä¤òÁªÂò¤·¤Æ½ªÎ»
+		   ;; å…ˆé ­ã®å€™è£œã‚’é¸æŠã—ã¦çµ‚äº†
 		   (insert (substring (car comp)
 				      (length yomi-prefix) nil))
 		   (tcode-do-auto-fill)
 		   (throw 'quit t))
 		  ((= ch ?\n)
-		   ;; ÀèÆ¬¤Î¸õÊä¤òÁªÂò¤·¤Æ½ªÎ»¡¦½ªÎ»¸å¤ËÊÑ´¹
+		   ;; å…ˆé ­ã®å€™è£œã‚’é¸æŠã—ã¦çµ‚äº†ãƒ»çµ‚äº†å¾Œã«å¤‰æ›
 		   (insert (substring (car comp)
 				      (length yomi-prefix) nil))
 		   (tcode-do-auto-fill)
 		   (setq conversion t)
 		   (throw 'quit t))
 		  ((= ch ?\r)
-		   ;; ¸õÊä¤òÁªÂò¤»¤º½ªÎ»
+		   ;; å€™è£œã‚’é¸æŠã›ãšçµ‚äº†
 		   (setq conversion nil)
 		   (throw 'quit t))
 		  (t
-		   ;; ½ªÎ»¤·¡¢¤½¤Î¥³¥Ş¥ó¥É¤ò¼Â¹Ô
+		   ;; çµ‚äº†ã—ã€ãã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œ
 		   (tcode-redo-command ch)
 		   (setq conversion nil)
 		   (throw 'quit t))))))
@@ -1612,24 +1610,24 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-complete-and-convert ()
-  "¸ò¤¼½ñ¤­¼­½ñ¤ÎÆÉ¤ß¤«¤éÊä´°¤ò¹Ô¤¤¡¢¤½¤Î¸åÊÑ´¹¤¹¤ë¡£
-¾ÜºÙ¤Ï¥³¥Ş¥ó¥É `tcode-mazegaki-complete' »²¾È¡£"
+  "äº¤ãœæ›¸ãè¾æ›¸ã®èª­ã¿ã‹ã‚‰è£œå®Œã‚’è¡Œã„ã€ãã®å¾Œå¤‰æ›ã™ã‚‹ã€‚
+è©³ç´°ã¯ã‚³ãƒãƒ³ãƒ‰ `tcode-mazegaki-complete' å‚ç…§ã€‚"
   (interactive "*")
   (tcode-mazegaki-complete t))
 
-;;;; ¤½¤ÎÂ¾(¥­¡¼³ä¤êÅö¤Æ¤ä¼­½ñ¤ÎÊİÂ¸¤Ê¤É)
+;;;; ãã®ä»–(ã‚­ãƒ¼å‰²ã‚Šå½“ã¦ã‚„è¾æ›¸ã®ä¿å­˜ãªã©)
 
 (defun tcode-mazegaki-backward-delete-char (arg)
-  "¥³¥Ş¥ó¥É `backward-delete-char' ¤ÈÆ±¤¸¤«¡¢¹¹¤Ë¸ò¤¼½ñ¤­ÊÑ´¹¤ò½ªÎ»¤¹¤ë¡£
-¸ò¤¼½ñ¤­ÊÑ´¹¤ò½ªÎ»¤¹¤ë¤Î¤Ï¡¢³«»ÏÅÀ¤ò¾Ã¤·¤¿¤È¤­¡£"
+  "ã‚³ãƒãƒ³ãƒ‰ `backward-delete-char' ã¨åŒã˜ã‹ã€æ›´ã«äº¤ãœæ›¸ãå¤‰æ›ã‚’çµ‚äº†ã™ã‚‹ã€‚
+äº¤ãœæ›¸ãå¤‰æ›ã‚’çµ‚äº†ã™ã‚‹ã®ã¯ã€é–‹å§‹ç‚¹ã‚’æ¶ˆã—ãŸã¨ãã€‚"
   (interactive "*p")
   (if (<= (point) tcode-mazegaki-mode)
       (tcode-mazegaki-finish)
     (backward-delete-char arg)))
 
 (defun tcode-mazegaki-command-summary ()
-  "¸ò¤¼½ñ¤­ÊÑ´¹»ş¤Î¥­¡¼¤Î³ä¤êÅö¤Æ°ìÍ÷¤òÉ½¼¨¤¹¤ë¡£
-É½¼¨¤¹¤ëÆâÍÆ¤Ï¡¢ÊÑ¿ô `tcode-mazegaki-command-summary-alist' ¤Ç»ØÄê¤¹¤ë¡£"
+  "äº¤ãœæ›¸ãå¤‰æ›æ™‚ã®ã‚­ãƒ¼ã®å‰²ã‚Šå½“ã¦ä¸€è¦§ã‚’è¡¨ç¤ºã™ã‚‹ã€‚
+è¡¨ç¤ºã™ã‚‹å†…å®¹ã¯ã€å¤‰æ•° `tcode-mazegaki-command-summary-alist' ã§æŒ‡å®šã™ã‚‹ã€‚"
   (interactive)
   (message
    (mapconcat
@@ -1638,7 +1636,7 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 	     (key-str (if (null key)
 			  (error
 			   (concat "`tcode-mazegaki-command-summary-alist' "
-				   "¤Î´Ø¿ôÌ¾¤Ë´Ö°ã¤¤¤¬¤¢¤ê¤Ş¤¹¡£"))
+				   "ã®é–¢æ•°åã«é–“é•ã„ãŒã‚ã‚Šã¾ã™ã€‚"))
 			(key-description key))))
 	(format "%s=%s" key-str (car elm))))
     tcode-mazegaki-command-summary-alist " "))
@@ -1646,29 +1644,29 @@ CONVERSION ¤¬ nil ¤Ç¤Ê¤¤¤È¤­¡¢Êä´°¸å(Êä´°¤ò¹Ô¤Ã¤¿¾ì¹ç¤Î¤ß)ÊÑ´¹¤ò¹Ô¤¦¡£"
 
 ;;;###autoload
 (defun tcode-mazegaki-put-prefix ()
-  "Á°ÃÖ·¿¸ò¤¼½ñ¤­ÊÑ´¹¤Î³«»ÏÃÏÅÀ¤Î°õ¤òÉÕ¤±¤ë¡£"
+  "å‰ç½®å‹äº¤ãœæ›¸ãå¤‰æ›ã®é–‹å§‹åœ°ç‚¹ã®å°ã‚’ä»˜ã‘ã‚‹ã€‚"
   (interactive)
   (setq tcode-mazegaki-prefix (point))
   (add-hook 'post-command-hook 'tcode-mazegaki-put-conversion-face))
 
 ;;;###autoload
 (defun tcode-mazegaki-add-prefix (char)
-  "Á°ÃÖ·¿¸ò¤¼½ñ¤­ÊÑ´¹¤ò»Ï¤á¤ë¤¿¤á¤Î¥Õ¥£¥ë¥¿¡£"
+  "å‰ç½®å‹äº¤ãœæ›¸ãå¤‰æ›ã‚’å§‹ã‚ã‚‹ãŸã‚ã®ãƒ•ã‚£ãƒ«ã‚¿ã€‚"
   (tcode-mazegaki-put-prefix)
   char)
 
 (defun tcode-mazegaki-self-insert-or-convert (arg)
-  "¥³¥Ş¥ó¥É `self-insert-command' ¤ÈÆ±¤¸¤«¡¢¸ò¤¼½ñ¤­ÊÑ´¹¤ò¹Ô¤¦¡£
-¸ò¤¼½ñ¤­ÊÑ´¹¤ò¹Ô¤¦¤Î¤Ï¡¢¡ÖÆÉ¤ß¡×¤¬ÆşÎÏ¤µ¤ì¤Æ¤¤¤ë¾ì¹ç¤Î¤ß¡£
-ÊÑ´¹¤ò¹Ô¤¨¤Ğ t¡¢¹Ô¤ï¤Ê¤±¤ì¤Ğ nil ¤òÊÖ¤¹¡£"
+  "ã‚³ãƒãƒ³ãƒ‰ `self-insert-command' ã¨åŒã˜ã‹ã€äº¤ãœæ›¸ãå¤‰æ›ã‚’è¡Œã†ã€‚
+äº¤ãœæ›¸ãå¤‰æ›ã‚’è¡Œã†ã®ã¯ã€ã€Œèª­ã¿ã€ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹å ´åˆã®ã¿ã€‚
+å¤‰æ›ã‚’è¡Œãˆã° tã€è¡Œã‚ãªã‘ã‚Œã° nil ã‚’è¿”ã™ã€‚"
   (interactive "*P")
   (if (not tcode-mazegaki-prefix)
       (self-insert-command (prefix-numeric-value arg))
-					; `self-insert-command' ¤Ï nil ¤òÊÖ¤¹¡£
+					; `self-insert-command' ã¯ nil ã‚’è¿”ã™ã€‚
     (setq tcode-mazegaki-yomi-list (tcode-mazegaki-get-reverse-yomi-list))
     (tcode-mazegaki-convert (length tcode-mazegaki-yomi-list)
 			    current-prefix-arg)
-    t))			       ; ÊÑ´¹¤·¤¿¤È¤­ t ¤òÊÖ¤¹¡£
+    t))			       ; å¤‰æ›ã—ãŸã¨ã t ã‚’è¿”ã™ã€‚
 
 (unless (featurep 'tc-mazegaki)
   (setq tcode-mazegaki-map (make-keymap))

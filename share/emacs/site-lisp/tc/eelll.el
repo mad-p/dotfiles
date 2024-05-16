@@ -32,9 +32,9 @@
 
 ;;  Version
 (defun eelll-version ()
-  "EELLL ¤Î¥Ğ¡¼¥¸¥ç¥ó¤òÉ½¼¨¤¹¤ë¡£"
+  "EELLL ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è¡¨ç¤ºã™ã‚‹ã€‚"
   (interactive)
-  (if (interactive-p)
+  (if (called-interactively-p 'interactive)
       (message "EELLL version %s" (eelll-version))
     (substring "$Revision: 1.29 $" 11 -2)))
 
@@ -47,55 +47,55 @@
   :group 'tcode)
 
 (defcustom eelll-expert nil
-  "T¥³¡¼¥É¤Î¾åµé¼Ô¤«¤É¤¦¤«¡£"
+  "Tã‚³ãƒ¼ãƒ‰ã®ä¸Šç´šè€…ã‹ã©ã†ã‹ã€‚"
   :type 'boolean :group 'eelll)
 
 (defcustom eelll-display-help-threshold 10
-  "¥Ø¥ë¥×¤ÎÉ½¼¨/ÈóÉ½¼¨¤òÀÚ¤êÂØ¤¨¤ë¥¨¥é¡¼Î¨¤Î¤·¤­¤¤ÃÍ(%)¡£"
+  "ãƒ˜ãƒ«ãƒ—ã®è¡¨ç¤º/éè¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã‚¨ãƒ©ãƒ¼ç‡ã®ã—ãã„å€¤(%)ã€‚"
   :type 'integer :group 'eelll)
 
 (defvar eelll-text "EELLLTXT"
-  "EELLL¤ÎÎı½¬¥Æ¥­¥¹¥È¥Õ¥¡¥¤¥ë")
+  "EELLLã®ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«")
 
 (defvar eelll-move-cursor nil
-  "*non-nil¤Ë¤¹¤ë¤È¥­¡¼ÆşÎÏ¤Î¤¿¤Ó¤Ë¥«¡¼¥½¥ë¤ò¿Ê¤á¤ë¡£")
+  "*non-nilã«ã™ã‚‹ã¨ã‚­ãƒ¼å…¥åŠ›ã®ãŸã³ã«ã‚«ãƒ¼ã‚½ãƒ«ã‚’é€²ã‚ã‚‹ã€‚")
 
 (defvar eelll-configuration-file-name (concat tcode-data-directory
 					      "eelll-conf.el")
-  "*EELLL¤ÎÀßÄê¥Õ¥¡¥¤¥ëÌ¾¡£
-¤³¤Î¥Õ¥¡¥¤¥ë¤Ï¼«Æ°Åª¤Ë½ñ¤­´¹¤¨¤é¤ì¤ë¤Î¤Ç¡¢
-¥æ¡¼¥¶¡¼¤ÏÆâÍÆ¤òÊÑ¹¹¤·¤Æ¤Ï¤¤¤±¤Ê¤¤¡£")
+  "*EELLLã®è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«åã€‚
+ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯è‡ªå‹•çš„ã«æ›¸ãæ›ãˆã‚‰ã‚Œã‚‹ã®ã§ã€
+ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯å†…å®¹ã‚’å¤‰æ›´ã—ã¦ã¯ã„ã‘ãªã„ã€‚")
 
 (defvar eelll-last-lesson nil
-  "ºÇ¸å¤ËÎı½¬¤·¤¿¥ì¥Ã¥¹¥óÈÖ¹æ¡£")
+  "æœ€å¾Œã«ç·´ç¿’ã—ãŸãƒ¬ãƒƒã‚¹ãƒ³ç•ªå·ã€‚")
 
 (defvar eelll-last-lesson-alist nil
-  "¥Æ¥­¥¹¥È¤Î¥Õ¥¡¥¤¥ëÌ¾¤ÈºÇ¸å¤ËÎı½¬¤·¤¿¥ì¥Ã¥¹¥óÈÖ¹æ¤Îalist¡£")
+  "ãƒ†ã‚­ã‚¹ãƒˆã®ãƒ•ã‚¡ã‚¤ãƒ«åã¨æœ€å¾Œã«ç·´ç¿’ã—ãŸãƒ¬ãƒƒã‚¹ãƒ³ç•ªå·ã®alistã€‚")
 
 (defconst eelll-buffer-name "*EELLL*"
-  "EELLL¤ÇÎı½¬¤¹¤ë¥Ğ¥Ã¥Õ¥¡Ì¾")
+  "EELLLã§ç·´ç¿’ã™ã‚‹ãƒãƒƒãƒ•ã‚¡å")
 
 (defconst eelll-text-buffer " *eelll: text*"
-  "EELLL¤ÎÎı½¬¥Æ¥­¥¹¥È¤òÆş¤ì¤Æ¤ª¤¯¥Ğ¥Ã¥Õ¥¡Ì¾")
+  "EELLLã®ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆã‚’å…¥ã‚Œã¦ãŠããƒãƒƒãƒ•ã‚¡å")
 
 (defconst eelll-current-text-buffer " *eelll: current text*"
-  "EELLL¤ÇÎı½¬Ãæ¤Î¥Æ¥­¥¹¥È¤òÆş¤ì¤Æ¤ª¤¯¥Ğ¥Ã¥Õ¥¡Ì¾")
+  "EELLLã§ç·´ç¿’ä¸­ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’å…¥ã‚Œã¦ãŠããƒãƒƒãƒ•ã‚¡å")
 
 (defvar eelll-help-remove-interval 25
-  "*EELLL¤ÎÀâÌÀ¤ò¾Ã¤¹¤Ş¤Ç¤Î»ş´Ö(ÉÃ)")
+  "*EELLLã®èª¬æ˜ã‚’æ¶ˆã™ã¾ã§ã®æ™‚é–“(ç§’)")
 
 (defconst eelll-help-buffer-name " *EELLL-Help*"
-  "EELLL¤ÇÂÇ¤ÁÊı¤òÉ½¼¨¤¹¤ë¥Ğ¥Ã¥Õ¥¡Ì¾")
+  "EELLLã§æ‰“ã¡æ–¹ã‚’è¡¨ç¤ºã™ã‚‹ãƒãƒƒãƒ•ã‚¡å")
 
 (defvar eelll-help-window-margin
   (if (and (>= emacs-major-version 21)
 	   window-system)
       3
     1)
-  "*EEELL¤ÎÂÇ¤ÁÊı¤òÉ½¼¨¤¹¤ë¤È¤­¤Î¥¦¥£¥ó¥É¥¦¤Î¹â¤µ¤Î¥Ş¡¼¥¸¥ó")
+  "*EEELLã®æ‰“ã¡æ–¹ã‚’è¡¨ç¤ºã™ã‚‹ã¨ãã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•ã®ãƒãƒ¼ã‚¸ãƒ³")
 
-(defvar eelll-by-text-dummy-char "¡¦"
-  "*Ä¾ÀÜÆşÎÏ¤Ç¤­¤Ê¤¤Ê¸»ú¤ÎÂå¤ï¤ê¤ËÆşÎÏ¤µ¤»¤ëÊ¸»úÎó")
+(defvar eelll-by-text-dummy-char "ãƒ»"
+  "*ç›´æ¥å…¥åŠ›ã§ããªã„æ–‡å­—ã®ä»£ã‚ã‚Šã«å…¥åŠ›ã•ã›ã‚‹æ–‡å­—åˆ—")
 
 (defvar eelll-by-text-max-line 30)
 (defvar eelll-by-text-fill-column 60)
@@ -110,7 +110,7 @@
 	'((t (:font "-*-fixed-medium-r-normal-*-16-*-*-*-*-*-*-*"
 		    :foreground "black"
 		    :background "white"))))
-      "*°ì¹Ô¥Ø¥ë¥×¤ò»È¤Ã¤¿ EELLL ¤Ç¤Î¥Ø¥ë¥×¤Î¥Õ¥§¥¤¥¹"
+      "*ä¸€è¡Œãƒ˜ãƒ«ãƒ—ã‚’ä½¿ã£ãŸ EELLL ã§ã®ãƒ˜ãƒ«ãƒ—ã®ãƒ•ã‚§ã‚¤ã‚¹"
       :group 'eelll))
 
 (defvar eelll-previous-error-rate 0)
@@ -136,7 +136,7 @@
 (defvar eelll-key-table nil)
 
 (defvar eelll-mode-hook nil
-  "*EELLL¤ò¼Â¹Ô¤¹¤ë¤È¤­¤Ë¼Â¹Ô¤µ¤ì¤ë¥Õ¥Ã¥¯¡£")
+  "*EELLLã‚’å®Ÿè¡Œã™ã‚‹ã¨ãã«å®Ÿè¡Œã•ã‚Œã‚‹ãƒ•ãƒƒã‚¯ã€‚")
 
 (defvar eelll-exit-hook (if (featurep 'frame)
 			    'eelll-remove-frame))
@@ -147,19 +147,19 @@
 	(font . "default"))
     '((name . "EELLL")
       (font . "-*-fixed-medium-r-normal-*-16-*-*-*-*-*-*-*")))
-  "*`eelll-other-frame'¤ÇÍÑ¤¤¤ë¥Õ¥ì¡¼¥à¤Î¥Ñ¥é¥á¡¼¥¿¡£")
+  "*`eelll-other-frame'ã§ç”¨ã„ã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã€‚")
 
 (defvar eelll-bushu-stroke-alist
   '((tutcode  20 28 20)
     (tcode    26 23))
-  "Éô¼ó¹çÀ®¤òÉ½¤¹¥¹¥È¥í¡¼¥¯")
+  "éƒ¨é¦–åˆæˆã‚’è¡¨ã™ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯")
 
 (defvar eelll-use-column-for-help
   (or (not window-system)
       (> 22 emacs-major-version))
-  "°ì¹Ô¥Ø¥ë¥×¤òÉ½¼¨¤¹¤ë»ş¤Ë·åÂ·¤¨¤ò¥«¥é¥àÃ±°Ì¤Ç¹Ô¤¦¤«Èİ¤«¡£
-¤³¤ÎÊÑ¿ô¤ÎÃÍ¤¬ non-nil ¤Ç emacs22 ¤ò window-system ¤Ç»È¤Ã¤Æ¤¤¤ë¾ì¹ç¤Ë
-¥Ô¥¯¥»¥ëÃ±°Ì¤Î·×»»¤ò¤¹¤ë¡£")
+  "ä¸€è¡Œãƒ˜ãƒ«ãƒ—ã‚’è¡¨ç¤ºã™ã‚‹æ™‚ã«æ¡æƒãˆã‚’ã‚«ãƒ©ãƒ å˜ä½ã§è¡Œã†ã‹å¦ã‹ã€‚
+ã“ã®å¤‰æ•°ã®å€¤ãŒ non-nil ã§ emacs22 ã‚’ window-system ã§ä½¿ã£ã¦ã„ã‚‹å ´åˆã«
+ãƒ”ã‚¯ã‚»ãƒ«å˜ä½ã®è¨ˆç®—ã‚’ã™ã‚‹ã€‚")
 
 (defvar eelll-frame nil)
 
@@ -167,15 +167,15 @@
 (defvar eelll-current-text nil)
 (defvar eelll-random-mode nil)
 (defvar eelll-random-max-line 4
-  "*EELLL¤Î¥é¥ó¥À¥à¥â¡¼¥É¤Ç1²ó¤ËÁªÂò¤µ¤ì¤ë¹Ô¿ô¤ÎºÇÂçÃÍ¡£")
+  "*EELLLã®ãƒ©ãƒ³ãƒ€ãƒ ãƒ¢ãƒ¼ãƒ‰ã§1å›ã«é¸æŠã•ã‚Œã‚‹è¡Œæ•°ã®æœ€å¤§å€¤ã€‚")
 
 ;;;
 ;;;  Text
 ;;;
 
 (defun eelll-random-text (max-line)
-  "¸½ºß¤Î¥Ğ¥Ã¥Õ¥¡¤Î¹Ô¤ò¥é¥ó¥À¥à¤ËÊÂ¤ÙÂØ¤¨¤ë¡£
-ºÇÂçMAX-LINE¤Ş¤Ç»Ä¤¹¡£"
+  "ç¾åœ¨ã®ãƒãƒƒãƒ•ã‚¡ã®è¡Œã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«ä¸¦ã¹æ›¿ãˆã‚‹ã€‚
+æœ€å¤§MAX-LINEã¾ã§æ®‹ã™ã€‚"
   (let ((lines (count-lines (point-min) (point-max)))
 	line-list)
     (goto-char (point-min))
@@ -206,7 +206,7 @@
     ))
 
 (defun eelll-prepare-text (num)
-  "Îı½¬¥Æ¥­¥¹¥ÈNUM¤òÍÑ°Õ¤¹¤ë¡£NUM¤¬nil¤Ê¤é¤Ğ¼¡¤Î¥ì¥Ã¥¹¥ó¤òÍÑ°Õ¤¹¤ë¡£"
+  "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆNUMã‚’ç”¨æ„ã™ã‚‹ã€‚NUMãŒnilãªã‚‰ã°æ¬¡ã®ãƒ¬ãƒƒã‚¹ãƒ³ã‚’ç”¨æ„ã™ã‚‹ã€‚"
   (save-excursion
     (tcode-set-work-buffer eelll-text-buffer eelll-text)
     (widen)
@@ -220,10 +220,10 @@
 					      "\\):")
 				      nil t))
 	       (re-search-forward "\f\nLesson \\([0-9]+\\):" nil t)))
-	(error "Îı½¬¥Æ¥­¥¹¥È%s¤Ï¤¢¤ê¤Ş¤»¤ó¡£" (if num (int-to-string num) "")))
+	(error "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆ%sã¯ã‚ã‚Šã¾ã›ã‚“ã€‚" (if num (int-to-string num) "")))
     (setq eelll-lesson-string (buffer-substring (match-beginning 1)
 						(match-end 1))
-	  eelll-lesson-no (string-to-int eelll-lesson-string))
+	  eelll-lesson-no (string-to-number eelll-lesson-string))
     (setq eelll-prefix-stroke
 	  (let ((l tcode-special-prefix-alist) ret)
 	    (while l
@@ -260,7 +260,7 @@
 
 (defun eelll-decompose-chars ()
   (goto-char (point-min))
-  (let (c stroke cell (str "¢¥"))
+  (let (c stroke cell (str "â–²"))
     (while (not (eobp))
       (if (looking-at "^;\\|$")
 	  (forward-line)
@@ -281,10 +281,9 @@
 	      (insert str (car cell) (cdr cell)))))))))
 
 (defun eelll-lesson-line ()
-  "Îı½¬¥Æ¥­¥¹¥È¤Î¼¡¤Î¹Ô¤ò¤È¤Ã¤Æ¤¯¤ë¡£½ª¤ï¤ê¤Ê¤énil¤òÊÖ¤¹¡£
-eelll-text-line:	°õ»ú¥¤¥á¡¼¥¸"
-  (save-excursion
-    (set-buffer eelll-current-text-buffer)
+  "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆã®æ¬¡ã®è¡Œã‚’ã¨ã£ã¦ãã‚‹ã€‚çµ‚ã‚ã‚Šãªã‚‰nilã‚’è¿”ã™ã€‚
+eelll-text-line:	å°å­—ã‚¤ãƒ¡ãƒ¼ã‚¸"
+  (with-current-buffer eelll-current-text-buffer
     (skip-chars-forward " \t\n\f" (point-max))
     (let ((p (point)))
       (while (looking-at "^;")
@@ -297,7 +296,7 @@ eelll-text-line:	°õ»ú¥¤¥á¡¼¥¸"
 	   eelll-text-line))))
 
 (defun eelll-tcode-encode (ch)
-  (if (eq ch (tcode-string-to-char "¢¥"))
+  (if (eq ch (tcode-string-to-char "â–²"))
       (or (cdr (assq tcode-input-method eelll-bushu-stroke-alist))
 	  '(26 23))
     (tcode-encode ch)))
@@ -314,7 +313,7 @@ eelll-text-line:	°õ»ú¥¤¥á¡¼¥¸"
 	(setq i (1- i))))))
 
 (defun eelll-stroke-for-char (ch)
-  "CH(Á´³Ñ°ìÊ¸»ú)¤ÎÂÇ¤ÁÊı¤òÊÖ¤¹¡£T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
+  "CH(å…¨è§’ä¸€æ–‡å­—)ã®æ‰“ã¡æ–¹ã‚’è¿”ã™ã€‚Tã‚³ãƒ¼ãƒ‰ã§å…¥åŠ›ã§ããªã‘ã‚Œã°nilã‚’è¿”ã™ã€‚"
   (let* ((char (tcode-string-to-char ch))
 	 (strokes (eelll-tcode-encode char))
 	 (dat (tcode-stroke-prefix-match strokes)))
@@ -328,8 +327,8 @@ eelll-text-line:	°õ»ú¥¤¥á¡¼¥¸"
       nil)))
 
 (defun eelll-inputs-for-char (ch)
-  "CH (Á´³Ñ1Ê¸»ú)¤ÎÂÇ¤ÁÊı(Ê¸»úÎó¤Î¥ê¥¹¥È)¤òÊÖ¤¹¡£
-T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
+  "CH (å…¨è§’1æ–‡å­—)ã®æ‰“ã¡æ–¹(æ–‡å­—åˆ—ã®ãƒªã‚¹ãƒˆ)ã‚’è¿”ã™ã€‚
+Tã‚³ãƒ¼ãƒ‰ã§å…¥åŠ›ã§ããªã‘ã‚Œã°nilã‚’è¿”ã™ã€‚"
   (let ((strokes (eelll-tcode-encode (tcode-string-to-char ch))))
     (cond (strokes
 	   (mapcar (lambda (key)
@@ -345,9 +344,8 @@ T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
 ;;;  Stroke chart
 ;;;
 (defun eelll-draw-chart ()
-  "Îı½¬¥Æ¥­¥¹¥È¤ÎÎı½¬ÂĞ¾İ¤È¤Ê¤ëÊ¸»ú¤Î¥¹¥È¥í¡¼¥¯É½¤òºî¤ë¡£"
-  (save-excursion
-    (set-buffer (get-buffer-create eelll-help-buffer-name))
+  "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆã®ç·´ç¿’å¯¾è±¡ã¨ãªã‚‹æ–‡å­—ã®ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯è¡¨ã‚’ä½œã‚‹ã€‚"
+  (with-current-buffer (get-buffer-create eelll-help-buffer-name)
     (widen)
     (erase-buffer)
     (goto-char (point-min))
@@ -361,7 +359,7 @@ T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
 	  (setq j (1+ j) k 0)
 	  (while (< k 5)
 	    (setq k (1+ k))
-	    (insert "¡¾¡¾¡¾¡¾¡¾  ")
+	    (insert "ï¼ï¼ï¼ï¼ï¼  ")
 	    (if (= k c) (insert "  ")))
 	  (delete-horizontal-space)
 	  (insert "\n"))
@@ -418,9 +416,9 @@ T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
       seq)))
 
 (defun eelll-match (string quest)
-  "QUEST¤ò¤ª¼êËÜ¤È¤·¤ÆÆşÎÏ¤µ¤ì¤¿Ê¸»úÎóSTRING¤ÎºÎÅÀ¤ò¤¹¤ë¡£
-2Í×ÁÇ¤Î¥ê¥¹¥È(RESULT ERROR)¤òÊÖ¤¹¡£"
-  (let* ( ;; template ¤Ï ((Ê¸»ú . ¥¹¥È¥í¡¼¥¯¿ô) . ¥¹¥È¥í¡¼¥¯) ¤Î¥ê¥¹¥È
+  "QUESTã‚’ãŠæ‰‹æœ¬ã¨ã—ã¦å…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—STRINGã®æ¡ç‚¹ã‚’ã™ã‚‹ã€‚
+2è¦ç´ ã®ãƒªã‚¹ãƒˆ(RESULT ERROR)ã‚’è¿”ã™ã€‚"
+  (let* ( ;; template ã¯ ((æ–‡å­— . ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯æ•°) . ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯) ã®ãƒªã‚¹ãƒˆ
 	 (template (delq nil
 			 (mapcar
 			  (lambda (c)
@@ -430,11 +428,11 @@ T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
 				   (cons (cons c (length stroke))
 					 stroke))))
 			  (string-to-list quest))))
-	 ;; template-length ¤Ï template ¤ÎÄ¹¤µ
+	 ;; template-length ã¯ template ã®é•·ã•
 	 (template-length (length template))
-	;; vtemplate ¤Ï (Ê¸»ú . ¥¹¥È¥í¡¼¥¯¿ô) ¤Î¥Ù¥¯¥¿¡¼
+	;; vtemplate ã¯ (æ–‡å­— . ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯æ•°) ã®ãƒ™ã‚¯ã‚¿ãƒ¼
 	 (vtemplate (vconcat (mapcar 'car template)))
-	 ;; key-list ¤ÏÆşÎÏ¤µ¤ì¤¿Ê¸»ú¤Î¥ê¥¹¥È
+	 ;; key-list ã¯å…¥åŠ›ã•ã‚ŒãŸæ–‡å­—ã®ãƒªã‚¹ãƒˆ
 	 (key-list (string-to-list string))
 	 (key-length (length string))
 	 (link (list '(0 . 0)))
@@ -502,7 +500,7 @@ T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
 ;;;
 
 (defvar eelll-mode-map nil
-  "EELLL ¥â¡¼¥É¤Ç»È¤¦¥­¡¼¥Ş¥Ã¥×")
+  "EELLL ãƒ¢ãƒ¼ãƒ‰ã§ä½¿ã†ã‚­ãƒ¼ãƒãƒƒãƒ—")
 (if eelll-mode-map
     ()
   (setq eelll-mode-map (make-keymap))
@@ -521,16 +519,16 @@ T¥³¡¼¥É¤ÇÆşÎÏ¤Ç¤­¤Ê¤±¤ì¤Ğnil¤òÊÖ¤¹¡£"
   (define-key eelll-mode-map " " 'eelll-key))
 
 (defun eelll-mode ()
-  "EELLL ¤Ï Emacs Lisp ¤Ç¼Â¸½¤µ¤ì¤¿T¥³¡¼¥ÉÎı½¬¥×¥í¥°¥é¥à¤Ç¤¹¡£
-²èÌÌ¤ËÉ½¼¨¤µ¤ì¤¿Ê¸»úÎó¤ò¤½¤Î¤Ş¤ŞÆşÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£
-1¹Ô¤ÎÆşÎÏ¤¬½ª¤ï¤Ã¤¿¤é¥ê¥¿¡¼¥ó¥­¡¼¤òÂÇ¤Ã¤Æ¤¯¤À¤µ¤¤¡£
+  "EELLL ã¯ Emacs Lisp ã§å®Ÿç¾ã•ã‚ŒãŸTã‚³ãƒ¼ãƒ‰ç·´ç¿’ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ã™ã€‚
+ç”»é¢ã«è¡¨ç¤ºã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’ãã®ã¾ã¾å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚
+1è¡Œã®å…¥åŠ›ãŒçµ‚ã‚ã£ãŸã‚‰ãƒªã‚¿ãƒ¼ãƒ³ã‚­ãƒ¼ã‚’æ‰“ã£ã¦ãã ã•ã„ã€‚
 
-²èÌÌ¤Î¾åÈ¾Ê¬¤Ë¤Ïº£¤Î¥ì¥Ã¥¹¥ó¤Ç½¬¤¦Ê¸»ú¤Î¥¹¥È¥í¡¼¥¯É½¤¬É½¼¨¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
+ç”»é¢ã®ä¸ŠåŠåˆ†ã«ã¯ä»Šã®ãƒ¬ãƒƒã‚¹ãƒ³ã§ç¿’ã†æ–‡å­—ã®ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯è¡¨ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã¾ã™ã€‚
 
-EELLL Æâ¤Ç¤Ï¤Û¤È¤ó¤É¤Î¥³¥Ş¥ó¥É¤¬¶Ø»ß¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
-¤Ş¤º \\[switch-to-buffer] ¤ÇÂ¾¤Î¥Ğ¥Ã¥Õ¥¡¤Ë°Ü¤Ã¤Æ¤«¤é\
-¥³¥Ş¥ó¥É¤ò¼Â¹Ô¤·¤Æ¤¯¤À¤µ¤¤¡£
-¤Ê¤ª¡¢\\[eelll-confirm-quit] ¤Ç EELLL ¤òÃæÃÇ¤·¤Ş¤¹¡£"
+EELLL å†…ã§ã¯ã»ã¨ã‚“ã©ã®ã‚³ãƒãƒ³ãƒ‰ãŒç¦æ­¢ã•ã‚Œã¦ã„ã¾ã™ã€‚
+ã¾ãš \\[switch-to-buffer] ã§ä»–ã®ãƒãƒƒãƒ•ã‚¡ã«ç§»ã£ã¦ã‹ã‚‰\
+ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚
+ãªãŠã€\\[eelll-confirm-quit] ã§ EELLL ã‚’ä¸­æ–­ã—ã¾ã™ã€‚"
   (use-local-map eelll-mode-map)
   (setq major-mode 'eelll-mode)
   (setq mode-name "EELLL")
@@ -561,8 +559,7 @@ EELLL Æâ¤Ç¤Ï¤Û¤È¤ó¤É¤Î¥³¥Ş¥ó¥É¤¬¶Ø»ß¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
       (eelll-draw-chart)
       (delete-other-windows)
       (split-window-vertically
-       (save-excursion
-	 (set-buffer eelll-help-buffer-name)
+       (with-current-buffer eelll-help-buffer-name
 	 (setq mode-line-format
 	       '("-----EELLL Help"
 		 (eelll-lesson-string
@@ -606,17 +603,17 @@ EELLL Æâ¤Ç¤Ï¤Û¤È¤ó¤É¤Î¥³¥Ş¥ó¥É¤¬¶Ø»ß¤µ¤ì¤Æ¤¤¤Ş¤¹¡£
 
 (defun eelll-delete-char ()
   (interactive)
-  (message "´Ö°ã¤¤¤òµ¤¤Ë¤»¤º¤É¤ó¤É¤óÆşÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£"))
+  (message "é–“é•ã„ã‚’æ°—ã«ã›ãšã©ã‚“ã©ã‚“å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚"))
 
 ;;;
-;;; ÀìÍÑ¤ÎÆşÎÏÊä´°ÉÕ¤­¤Îcompleting-read
+;;; å°‚ç”¨ã®å…¥åŠ›è£œå®Œä»˜ãã®completing-read
 ;;;
-;;; "?"¤Ç°ìÍ÷¤¬¸«¤ì¤Ş¤¹¡£
+;;; "?"ã§ä¸€è¦§ãŒè¦‹ã‚Œã¾ã™ã€‚
 
 (defun eelll-completing-read ()
-  "ÆşÎÏÊä´°ÉÕ¤­¤Ç¡¢Îı½¬¥Æ¥­¥¹¥ÈÈÖ¹æ¤ò¥ß¥Ë¥Ğ¥Ã¥Õ¥¡¤«¤éÆşÎÏ¤¹¤ë¡£
-EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
-ÆşÎÏ¤·¤¿»ş¤Ë¤·¤«°ìÍ÷¤Ï¸«¤¨¤Ê¤¤¡£"
+  "å…¥åŠ›è£œå®Œä»˜ãã§ã€ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆç•ªå·ã‚’ãƒŸãƒ‹ãƒãƒƒãƒ•ã‚¡ã‹ã‚‰å…¥åŠ›ã™ã‚‹ã€‚
+Emacså†…éƒ¨ã®completionã®å®Ÿè£…ä¸Šã®å•é¡Œã®ãŸã‚ã€ã€Œ?ã€ã‚’
+å…¥åŠ›ã—ãŸæ™‚ã«ã—ã‹ä¸€è¦§ã¯è¦‹ãˆãªã„ã€‚"
   (unless (featurep 'tcode-ready)
     (tcode-use-package (or tcode-current-package
 			   tcode-default-input-method))
@@ -666,16 +663,9 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 			     (length (member (format "%d" eelll-last-lesson)
 					     hist))
 			     -1)))
-		 (str (cond ((tcode-nemacs-p)
-			     (completing-read 
-			      "Îı½¬¥Æ¥­¥¹¥È[`?'¤Ç°ìÍ÷] "
-			      lesson-alist nil t
-			      (if eelll-last-lesson
-				  (format "%d" eelll-last-lesson)
-				"")))
-			    ((tcode-xemacs-p)
+		 (str (cond ((tcode-xemacs-p)
 			     (completing-read
-			      "Îı½¬¥Æ¥­¥¹¥È[`?'¤Ç°ìÍ÷] "
+			      "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆ[`?'ã§ä¸€è¦§] "
 			      lesson-alist nil t
 			      (if eelll-last-lesson
 				  (format "%d" eelll-last-lesson)
@@ -683,7 +673,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 			      (if pos (cons 'hist (list pos)) (list 'hist))))
 			    (t
 			     (completing-read 
-			      "Îı½¬¥Æ¥­¥¹¥È[`?'¤Ç°ìÍ÷] "
+			      "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆ[`?'ã§ä¸€è¦§] "
 			      lesson-alist nil t
 			      (if eelll-last-lesson
 				  (format "%d" eelll-last-lesson)
@@ -691,12 +681,12 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 			      (if pos (cons 'hist pos) 'hist))))))
 	    (if (string= str "")
 		nil
-	      (list (string-to-int str)))))
+	      (list (string-to-number str)))))
       (fset 'minibuffer-completion-help orig-minibuffer-completion-help))))
 
 (defun eelll-minibuffer-completion-help ()
-  "EELLLÍÑ¤ÎÊä´°¸õÊä¤òÉ½¼¨¤¹¤ë¡£
-`minibuffer-completion-help'¤òÃÖ¤­´¹¤¨¤ë¡£"
+  "EELLLç”¨ã®è£œå®Œå€™è£œã‚’è¡¨ç¤ºã™ã‚‹ã€‚
+`minibuffer-completion-help'ã‚’ç½®ãæ›ãˆã‚‹ã€‚"
   (interactive)
   (with-output-to-temp-buffer "*Completions*"
     (eelll-display-completion-list
@@ -706,11 +696,11 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 			minibuffer-completion-table))))
 
 (defun eelll-display-completion-list (x)
-  "Îı½¬¥Æ¥­¥¹¥È°ìÍ÷¤òÉ½¼¨¤¹¤ë¡£
-`display-completion-list'¤òÃÖ¤­´¹¤¨¤ë¡£"
-  (princ "    ---- Îı½¬¥Æ¥­¥¹¥È°ìÍ÷ ----\n")
+  "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆä¸€è¦§ã‚’è¡¨ç¤ºã™ã‚‹ã€‚
+`display-completion-list'ã‚’ç½®ãæ›ãˆã‚‹ã€‚"
+  (princ "    ---- ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆä¸€è¦§ ----\n")
   (setq x (sort x (lambda (x y)
-		    (< (string-to-int x) (string-to-int y)))))
+		    (< (string-to-number x) (string-to-number y)))))
   (while x
     (princ (car x))
     (princ ":")
@@ -718,14 +708,14 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
     (princ "\n")
     (setq x (cdr x))))
 
-;;;; °ì¹Ô¥Ø¥ë¥×¤ÎÉ½¼¨
+;;;; ä¸€è¡Œãƒ˜ãƒ«ãƒ—ã®è¡¨ç¤º
 
 (defun eelll-insert-with-face (str)
   (let ((beg (point)))
     (insert str)
     (when (and (fboundp 'put-text-property)
 	       window-system)
-      (put-text-property beg (point) 'face 'eelll))))
+      (put-text-property beg (point) 'face 'eelll-face))))
 
 (defun eelll-put-help-char (c)
   (if (or eelll-use-column-for-help
@@ -878,15 +868,14 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 	  eelll-lesson-string "Temporary"
 	  eelll-lesson-no 0
 	  eelll-lesson-chars "")
-    (save-excursion
-      (set-buffer (get-buffer-create eelll-current-text-buffer))
+    (with-current-buffer (get-buffer-create eelll-current-text-buffer)
       (erase-buffer)
       (insert lesson)
       (if eelll-random-mode
 	  (eelll-random-text eelll-random-max-line))
       (eelll-normalize-text-buffer)))
   (eelll-setup-lesson)
-  (message (substitute-command-keys "\\[eelll-help] ¤Ç¥Ø¥ë¥×")))
+  (message (substitute-command-keys "\\[eelll-help] ã§ãƒ˜ãƒ«ãƒ—")))
 
 (defun eelll-normalize-text-buffer ()
   ;; delete white space
@@ -898,13 +887,13 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
   (while (re-search-forward "\n\n+" nil t)
     (replace-match "\n"))
   (goto-char (point-min))
-  (let ((line 0) c stroke cell (str "¢¥")
+  (let ((line 0) c stroke cell (str "â–²")
 	(bol-kinsoku
-	 (string-to-list ")!?¡¢¡£¡¤¡¥¡¦¡§¡¨¡©¡ª¡«¡¬¡­¡®¡¯¡°\
-¡±¡²¡³¡´¡µ¡¶¡·¡¸¡¹¡º¡»¡¼¡½¡¾\
-¡¿¡À¡Á¡Â¡Ã¡Ä¡Å¡Ç¡É¡Ë¡Í¡Ï¡Ñ¡Ó¡Õ¡×¡Ù¡Û¡ë¡ì¡í¡î\
-¤¡¤£¤¥¤§¤©¤Ã¤ã¤å¤ç¤î¥¡¥£¥¥¥§¥©¥Ã¥ã¥å¥ç¥î¥õ¥ö"))
-	(eol-kinsoku (string-to-list "(¡Æ¡È¡Ê¡Ì¡Î¡Ğ¡Ò¡Ô¡Ö¡Ø¡Ú¡ë¡ì¡í¡î¡÷¡ø")))
+	 (string-to-list ")!?ã€ã€‚ï¼Œï¼ãƒ»ï¼šï¼›ï¼Ÿï¼ã‚›ã‚œÂ´ï½€Â¨ï¼¾\
+â€¾ï¼¿ãƒ½ãƒ¾ã‚ã‚ã€ƒä»ã€…ã€†ã€‡ãƒ¼â€”â€\
+ï¼ï¼¼ã€œâ€–ï½œâ€¦â€¥â€™â€ï¼‰ã€•ï¼½ï½ã€‰ã€‹ã€ã€ã€‘Â°â€²â€³â„ƒ\
+ããƒã…ã‡ã‰ã£ã‚ƒã‚…ã‚‡ã‚ã‚¡ã‚£ã‚¥ã‚§ã‚©ãƒƒãƒ£ãƒ¥ãƒ§ãƒ®ãƒµãƒ¶"))
+	(eol-kinsoku (string-to-list "(â€˜â€œï¼ˆã€”ï¼»ï½›ã€ˆã€Šã€Œã€ã€Â°â€²â€³â„ƒï¼ Â§")))
     (while (and (< line eelll-by-text-max-line)
 		(not (eobp)))
       (setq c (tcode-following-char)
@@ -935,7 +924,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 
 ;;;###autoload
 (defun eelll (&optional lesson text)
-  "EELLL ¤ò»Ï¤á¤ë¡£¾Ü¤·¤¯¤Ï `eelll-mode' ¤Î²òÀâ¤ò¸«¤è¡£"
+  "EELLL ã‚’å§‹ã‚ã‚‹ã€‚è©³ã—ãã¯ `eelll-mode' ã®è§£èª¬ã‚’è¦‹ã‚ˆã€‚"
   (interactive (eelll-completing-read))
   (if text (setq eelll-text text))
   (setq eelll-random-mode nil)
@@ -943,9 +932,9 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 
 ;;;###autoload
 (defun eelll-random (&optional lesson text)
-  "¥é¥ó¥À¥à¥â¡¼¥É¤Ç EELLL ¤ò»Ï¤á¤ë¡£
-»ØÄê¤·¤¿¥Æ¥­¥¹¥È¤ÎÃæ¤«¤é¥é¥ó¥À¥à¤Ë
-¿ô¹Ô(`eelll-random-max-line'¤Ç»ØÄê¤·¤¿¹Ô¿ô)ÁªÂò¤µ¤ì¤ë¡£"
+  "ãƒ©ãƒ³ãƒ€ãƒ ãƒ¢ãƒ¼ãƒ‰ã§ EELLL ã‚’å§‹ã‚ã‚‹ã€‚
+æŒ‡å®šã—ãŸãƒ†ã‚­ã‚¹ãƒˆã®ä¸­ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«
+æ•°è¡Œ(`eelll-random-max-line'ã§æŒ‡å®šã—ãŸè¡Œæ•°)é¸æŠã•ã‚Œã‚‹ã€‚"
   (interactive (eelll-completing-read))
   (if text (setq eelll-text text))
   (setq eelll-random-mode t)
@@ -953,7 +942,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 
 ;;;###autoload
 (defun eelll-region (beg end)
-  "¥ê¡¼¥¸¥ç¥óÆâ¤Î¥Æ¥­¥¹¥È¤Ç EELLL ¤ò»Ï¤á¤ë¡£"
+  "ãƒªãƒ¼ã‚¸ãƒ§ãƒ³å†…ã®ãƒ†ã‚­ã‚¹ãƒˆã§ EELLL ã‚’å§‹ã‚ã‚‹ã€‚"
   (interactive "r")
   (unless (featurep 'tcode-ready)
     (tcode-use-package (or tcode-current-package
@@ -976,8 +965,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
       nil
     (when (>= eelll-previous-error-rate eelll-display-help-threshold)
       (split-window-vertically
-       (save-excursion
-	 (set-buffer eelll-help-buffer-name)
+       (with-current-buffer eelll-help-buffer-name
 	 (setq mode-line-format
 	       '("-----EELLL Help"
 		 (eelll-lesson-string
@@ -994,12 +982,11 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
   (setq eelll-start-time nil
 	eelll-error-strokes 0
 	eelll-strokes 0)
-  (insert "¥ê¥¿¡¼¥ó¥­¡¼¤òÂÇ¤Æ¤Ğ»Ï¤Ş¤ê¤Ş¤¹¡£ "))
+  (insert "ãƒªã‚¿ãƒ¼ãƒ³ã‚­ãƒ¼ã‚’æ‰“ã¦ã°å§‹ã¾ã‚Šã¾ã™ã€‚ "))
 
 (defun eelll-key ()
   (interactive)
-  (save-excursion
-    (set-buffer " *eelll: strokes*")
+  (with-current-buffer " *eelll: strokes*"
     (insert (char-to-string last-command-event)))
   (if eelll-move-cursor
       (insert " ")))
@@ -1009,8 +996,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
   (if eelll-start-time
       (progn
 	(delete-region (point) (progn (beginning-of-line 1) (point)))
-	(let* ((str (save-excursion
-		      (set-buffer " *eelll: strokes*")
+	(let* ((str (with-current-buffer " *eelll: strokes*"
 		      (buffer-string)))
 	       (res (eelll-match str eelll-text-line))
 	       (err (car (cdr res))))
@@ -1020,7 +1006,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 			       (string-to-list eelll-text-line)
 			       (string-to-list (car res))))))
 	    (when wrong-chars
-	      (insert "\n[´Ö°ã¤¨¤¿»ú]")
+	      (insert "\n[é–“é•ãˆãŸå­—]")
 	      (if tcode-help-with-real-keys
 		  (eelll-insert-line-help
 		   (mapconcat 'char-to-string wrong-chars nil))
@@ -1031,8 +1017,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
     (setq eelll-start-time (eelll-current-time)))
   (if (null (eelll-lesson-line))
       (eelll-end-lesson)
-    (save-excursion
-      (set-buffer (get-buffer-create " *eelll: strokes*"))
+    (with-current-buffer (get-buffer-create " *eelll: strokes*")
       (widen) (erase-buffer))
     (when tcode-help-with-real-keys
       (insert "\n")
@@ -1042,7 +1027,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
     (eelll-redisplay)))
 
 (defun eelll-redisplay ()
-  "EELLL ¤Î²èÌÌ¤òÉ½¼¨¤·Ä¾¤¹¡£"
+  "EELLL ã®ç”»é¢ã‚’è¡¨ç¤ºã—ç›´ã™ã€‚"
   (interactive)
   (set-window-configuration eelll-window-configuration)
   (goto-char (point-max))
@@ -1051,33 +1036,33 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 (defun eelll-current-time ()
   (let ((str (current-time-string)))
     (string-match "\\([0-9][0-9]\\):\\([0-9][0-9]\\):\\([0-9][0-9]\\)" str)
-    (+ (* 3600 (string-to-int (substring str
+    (+ (* 3600 (string-to-number (substring str
 					 (match-beginning 1)
 					 (match-end 1))))
-       (* 60 (string-to-int (substring str (match-beginning 2) (match-end 2))))
-       (string-to-int (substring str (match-beginning 3) (match-end 3))))))
+       (* 60 (string-to-number (substring str (match-beginning 2) (match-end 2))))
+       (string-to-number (substring str (match-beginning 3) (match-end 3))))))
 
 (defun eelll-percentage (num den)
   (let ((res%  (min 9999 (/ num (max 1 den)))))
     (format "%d.%d" (/ res% 10) (% res% 10))))
 
 (defun eelll-stroke-per-min (stroke sec)
-  "1Ê¬¤¢¤¿¤ê¤Î¥¹¥È¥í¡¼¥¯¿ô¤òÉ½¤·¤¿Ê¸»úÎó¤òÊÖ¤¹¡£"
+  "1åˆ†ã‚ãŸã‚Šã®ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯æ•°ã‚’è¡¨ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™ã€‚"
   (let ((stroke-per-min (/ (* (float stroke) 60) sec)))
     (format (if (< stroke-per-min 10) "%.1f" "%.f") stroke-per-min)))
 
 (defun eelll-time-per-stroke (time stroke)
-  "1¥¹¥È¥í¡¼¥¯¤¢¤¿¤ê¤Î»ş´Ö¤òÉ½¤·¤¿Ê¸»úÎó¤òÊÖ¤¹¡£"
+  "1ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯ã‚ãŸã‚Šã®æ™‚é–“ã‚’è¡¨ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™ã€‚"
       (if (>= time stroke)
 	  (format "%.1f" (/ (float time) stroke))
-	(format "%.f ¥ß¥ê" (/ (* (float time) 1000) stroke))))
+	(format "%.f ãƒŸãƒª" (/ (* (float time) 1000) stroke))))
 
 (unless (fboundp 'float)
-  ;; float ¤Î°·¤¨¤Ê¤¤ Emacs (NEmacs) ¤Î¾ì¹ç
-  ;; ¥ª¡¼¥Ğ¡¼¥Õ¥í¡¼¤·¤Ê¤¤¤è¤¦¤Ë·å¤ò¤º¤é¤¹¡£
+  ;; float ã®æ‰±ãˆãªã„ Emacs (NEmacs) ã®å ´åˆ
+  ;; ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼ã—ãªã„ã‚ˆã†ã«æ¡ã‚’ãšã‚‰ã™ã€‚
 
   (defun eelll-stroke-per-min (stroke sec)
-    "1Ê¬¤¢¤¿¤ê¤Î¥¹¥È¥í¡¼¥¯¿ô¤òÉ½¤·¤¿Ê¸»úÎó¤òÊÖ¤¹¡£"
+    "1åˆ†ã‚ãŸã‚Šã®ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯æ•°ã‚’è¡¨ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™ã€‚"
     (while (>= stroke 10000)
       (setq sec (/ sec 2)
 	    stroke (/ stroke 2)))
@@ -1088,7 +1073,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 	(format "%d" (/ 10stroke-per-min 10)))))
 
   (defun eelll-time-per-stroke (time stroke)
-    "1¥¹¥È¥í¡¼¥¯¤¢¤¿¤ê¤Î»ş´Ö¤òÉ½¤·¤¿Ê¸»úÎó¤òÊÖ¤¹¡£"
+    "1ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯ã‚ãŸã‚Šã®æ™‚é–“ã‚’è¡¨ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™ã€‚"
     (if (>= time stroke)
 	(let ((10time-per-stroke (/ (* time 10) stroke)))
 	  (format "%d.%d " (/ 10time-per-stroke 10) (% 10time-per-stroke 10)))
@@ -1096,23 +1081,23 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 	(setq time (/ time 2)
 	      stroke (/ stroke 2)))
       (let ((1000time-per-stroke (/ (* time 1000) stroke)))
-	(format "%d ¥ß¥ê" 1000time-per-stroke)))))
+	(format "%d ãƒŸãƒª" 1000time-per-stroke)))))
 
 (defun eelll-display-score (time stroke err)
   (if (> stroke 0)
       (let ((cnt (- stroke err)))
 	(set-buffer eelll-buffer-name)
-	(insert "\n\n(ÁíÂÇ¸°À®ÀÓ)ËèÂÇ¸° "
-		(eelll-time-per-stroke time stroke) "ÉÃ  "
-		"ËèÊ¬ " (eelll-stroke-per-min stroke time) " ÂÇ¸°\n")
+	(insert "\n\n(ç·æ‰“éµæˆç¸¾)æ¯æ‰“éµ "
+		(eelll-time-per-stroke time stroke) "ç§’  "
+		"æ¯åˆ† " (eelll-stroke-per-min stroke time) " æ‰“éµ\n")
 	(if (> cnt 0)
-	    (insert "(¼ÂÂÇ¸°À®ÀÓ)ËèÂÇ¸° "
-		    (eelll-time-per-stroke time cnt) "ÉÃ  "
-		    "ËèÊ¬ " (eelll-stroke-per-min cnt time) " ÂÇ¸°\n"))
+	    (insert "(å®Ÿæ‰“éµæˆç¸¾)æ¯æ‰“éµ "
+		    (eelll-time-per-stroke time cnt) "ç§’  "
+		    "æ¯åˆ† " (eelll-stroke-per-min cnt time) " æ‰“éµ\n"))
 	(setq eelll-previous-error-rate (if (> stroke 0)
 					    (/ (* 100 err) stroke)
 					  100))
-	(insert "              ¥¨¥é¡¼¥ì¡¼¥È "
+	(insert "              ã‚¨ãƒ©ãƒ¼ãƒ¬ãƒ¼ãƒˆ "
 		(eelll-percentage (* 1000 err) stroke)
 		"%\n\n"))))
 
@@ -1125,18 +1110,17 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
     (delete-other-windows)
     (recenter -1)
     (if (equal eelll-lesson-string "Temporary")
-	(if (y-or-n-p "¤â¤¦°ìÅÙ¥È¥é¥¤¤·¤Ş¤¹¤«? ")
+	(if (y-or-n-p "ã‚‚ã†ä¸€åº¦ãƒˆãƒ©ã‚¤ã—ã¾ã™ã‹? ")
 	    (progn
-	      (save-excursion
-		(set-buffer eelll-current-text-buffer)
+	      (with-current-buffer eelll-current-text-buffer
 		(goto-char (point-min)))
 	      (eelll-setup-lesson))
 	  (eelll-end))
-    (if (y-or-n-p "¤â¤¦°ìÅÙ¥È¥é¥¤¤·¤Ş¤¹¤«? ")
+    (if (y-or-n-p "ã‚‚ã†ä¸€åº¦ãƒˆãƒ©ã‚¤ã—ã¾ã™ã‹? ")
 	(progn
 	  (eelll-prepare-text eelll-last-lesson)
 	  (eelll-setup-lesson))
-      (if (y-or-n-p "¼¡¤Î¥ì¥Ã¥¹¥ó¤Ë¿Ê¤ß¤Ş¤¹¤«? ")
+      (if (y-or-n-p "æ¬¡ã®ãƒ¬ãƒƒã‚¹ãƒ³ã«é€²ã¿ã¾ã™ã‹? ")
 	  (progn (eelll-prepare-text nil)
 		 (setq eelll-previous-error-rate (if eelll-expert 0 100))
 		 (eelll-setup-lesson))
@@ -1145,16 +1129,16 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
   (message ""))
 
 (defun eelll-save-configuration ()
-  "`eelll-last-lesson' ¤ÎÃÍ¤òÀßÄê¥Õ¥¡¥¤¥ë¤ËÊİÂ¸¤¹¤ë¡£
-ÀßÄê¥Õ¥¡¥¤¥ëÌ¾¤Ï `eelll-configuration-file-name' ¤Ç»ØÄê¤¹¤ë¡£"
-  ;; `eelll-last-lesson-alist'¤ò¹¹¿·¤¹¤ë¡£
+  "`eelll-last-lesson' ã®å€¤ã‚’è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜ã™ã‚‹ã€‚
+è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«åã¯ `eelll-configuration-file-name' ã§æŒ‡å®šã™ã‚‹ã€‚"
+  ;; `eelll-last-lesson-alist'ã‚’æ›´æ–°ã™ã‚‹ã€‚
   (let ((config (assoc eelll-text eelll-last-lesson-alist)))
     (if config
 	(setcdr config eelll-last-lesson)
       (setq eelll-last-lesson-alist (cons (cons eelll-text eelll-last-lesson)
 					  eelll-last-lesson-alist))))
-  ;; `eelll-last-lesson-alist'¤ÎÆâÍÆ¤ò`eelll-configuration-file-name'¤Ë
-  ;; ÊİÂ¸¤¹¤ë¡£
+  ;; `eelll-last-lesson-alist'ã®å†…å®¹ã‚’`eelll-configuration-file-name'ã«
+  ;; ä¿å­˜ã™ã‚‹ã€‚
   (and tcode-data-directory
        eelll-configuration-file-name
        (file-writable-p eelll-configuration-file-name)
@@ -1162,17 +1146,17 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
 	 (kill-buffer
 	  (prog1
 	      (set-buffer (get-buffer-create " *eelll: temp*"))
-	    (insert ";; ¤³¤Î¥Õ¥¡¥¤¥ë¤Ï¼«Æ°Åª¤Ë¹¹¿·¤µ¤ì¤Ş¤¹¡£"
-		    "ÊÔ½¸¤·¤Ê¤¤¤Ç¤¯¤À¤µ¤¤¡£\n")
+	    (insert ";; ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯è‡ªå‹•çš„ã«æ›´æ–°ã•ã‚Œã¾ã™ã€‚"
+		    "ç·¨é›†ã—ãªã„ã§ãã ã•ã„ã€‚\n")
 	    (insert (format "(setq eelll-last-lesson-alist '%s)\n" 
 			    (prin1-to-string eelll-last-lesson-alist)))
 	    (let ((backup-inhibited t))
 	      (write-file eelll-configuration-file-name)))))))
 
 (defun eelll-confirm-quit ()
-  "EELLL ¤ò½ªÎ»¤¹¤ë¤«¤É¤¦¤«³ÎÇ§¤·¡¢½ªÎ»¤¹¤ë¡£"
+  "EELLL ã‚’çµ‚äº†ã™ã‚‹ã‹ã©ã†ã‹ç¢ºèªã—ã€çµ‚äº†ã™ã‚‹ã€‚"
   (interactive)
-  (and (y-or-n-p "EELLL ¤ò½ªÎ»¤·¤Ş¤¹¤«? ")
+  (and (y-or-n-p "EELLL ã‚’çµ‚äº†ã—ã¾ã™ã‹? ")
        (eelll-end t)))
 
 (defun eelll-end (&optional abort)
@@ -1181,14 +1165,14 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
     (set-buffer eelll-buffer-name)
     (widen)
     (erase-buffer)
-    (insert "Áí¹çÀ®ÀÓ\n\n")
+    (insert "ç·åˆæˆç¸¾\n\n")
     (eelll-display-score eelll-total-time eelll-total-stroke eelll-total-error)
-    (insert "\n    ÆşÎÏÂÇ¸°¿ô " (int-to-string eelll-total-stroke) " ÂÇ¸°. ")
-    (insert "½êÍ×»ş´Ö " (int-to-string eelll-total-time) " ÉÃ.\n")
+    (insert "\n    å…¥åŠ›æ‰“éµæ•° " (int-to-string eelll-total-stroke) " æ‰“éµ. ")
+    (insert "æ‰€è¦æ™‚é–“ " (int-to-string eelll-total-time) " ç§’.\n")
     (recenter -1)
     (if eelll-current-text
 	(eelll-save-configuration))
-    (message "¤ª¤Ä¤«¤ì¤µ¤Ş¤Ç¤·¤¿¡£¤É¤ì¤«¥­¡¼¤ò¤ª¤·¤Æ¤¯¤À¤µ¤¤¡£")
+    (message "ãŠã¤ã‹ã‚Œã•ã¾ã§ã—ãŸã€‚ã©ã‚Œã‹ã‚­ãƒ¼ã‚’ãŠã—ã¦ãã ã•ã„ã€‚")
     (condition-case ()
 	(read-char)
       (error)))
@@ -1198,14 +1182,15 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
   (message ""))
 
 (defun eelll-remove-frame ()
-  "EELLLÍÑ¤Î¥Õ¥ì¡¼¥à¤¬¤¢¤ì¤Ğºï½ü¤¹¤ë¡£"
+  "EELLLç”¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ãŒã‚ã‚Œã°å‰Šé™¤ã™ã‚‹ã€‚"
   (interactive)
   (if (and eelll-frame
 	   (frame-live-p eelll-frame))
       (make-frame-invisible eelll-frame)))
 
+;;;###autoload
 (defun eelll-other-frame ()
-  "¥Õ¥ì¡¼¥à¤òºîÀ®¤·¤ÆEELLL¤ò»Ï¤á¤ë¡£"
+  "ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä½œæˆã—ã¦EELLLã‚’å§‹ã‚ã‚‹ã€‚"
   (interactive)
   (if (or (null eelll-frame)
 	  (not (frame-live-p eelll-frame)))
@@ -1217,7 +1202,7 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
   (call-interactively 'eelll))
 
 ;;;
-;;; Îı½¬¥Æ¥­¥¹¥È¥Ç¡¼¥¿¤ÎÀ°·Á
+;;; ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ã®æ•´å½¢
 ;;;
 
 (defun tcode-key-address-right-p (address)
@@ -1229,17 +1214,16 @@ EmacsÆâÉô¤Îcompletion¤Î¼ÂÁõ¾å¤ÎÌäÂê¤Î¤¿¤á¡¢¡Ö?¡×¤ò
     (< (cdr location) 6)))
 
 (defun eelll-compile-text (recompile-all)
-  "Îı½¬¥Æ¥­¥¹¥È¤ÎLesson-chars: ¹Ô¤òºî¤ë¡£
-RECOMPILE-ALL ¤¬ non-nil ¤Î¾ì¹ç¤Ë¤Ï¡¢
-´ûÂ¸¤ÎLesson-chars:¤ò¤¹¤Ù¤Æºï½ü¤·¤Æ¤«¤é¿·¤¿¤Ëºî¤êÄ¾¤¹¡£"
+  "ç·´ç¿’ãƒ†ã‚­ã‚¹ãƒˆã®Lesson-chars: è¡Œã‚’ä½œã‚‹ã€‚
+RECOMPILE-ALL ãŒ non-nil ã®å ´åˆã«ã¯ã€
+æ—¢å­˜ã®Lesson-chars:ã‚’ã™ã¹ã¦å‰Šé™¤ã—ã¦ã‹ã‚‰æ–°ãŸã«ä½œã‚Šç›´ã™ã€‚"
   (interactive "P")
   (find-file (tcode-path-for-write eelll-text))
   (let ((reached-eob nil) (eelll-buffer (current-buffer)))
     (save-restriction
       (widen)
       (goto-char (point-min))
-      (save-excursion
-	(set-buffer (get-buffer-create " *eelll: lessons*"))
+      (with-current-buffer (get-buffer-create " *eelll: lessons*")
 	(delete-region (point-min) (point-max)))
       (while (and (not reached-eob) (not (eobp)))
 	(let ((point (point)))

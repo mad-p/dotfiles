@@ -25,6 +25,10 @@
 ;;; Code:
 (require 'tc-pre)
 
+(when (or (not (boundp 'emacs-major-version))
+	  (< emacs-major-version 19))
+  (error "Old Emacs? Emacs-19 and later is supported."))
+
 ;;;
 ;;; Define some new functions that are not present in Emacs 18.
 ;;;
@@ -91,28 +95,22 @@ function, it is changed to a list of functions."
 
 (unless (fboundp 'japanese-hiragana)
   (defun japanese-hiragana (char)
-    "Ê¸»ú CHAR ¤¬¥«¥¿¥«¥Ê¤Ê¤é¤Ò¤é¤¬¤Ê¤ËÊÑ´¹¤¹¤ë¡£
-¥«¥¿¥«¥Ê¤Ç¤Ê¤¤¾ì¹ç¤Ï¤½¤Î¤Ş¤Ş¤ÎÃÍ¤òÊÖ¤¹¡£"
+    "æ–‡å­— CHAR ãŒã‚«ã‚¿ã‚«ãƒŠãªã‚‰ã²ã‚‰ãŒãªã«å¤‰æ›ã™ã‚‹ã€‚
+ã‚«ã‚¿ã‚«ãƒŠã§ãªã„å ´åˆã¯ãã®ã¾ã¾ã®å€¤ã‚’è¿”ã™ã€‚"
     (let ((str (char-to-string char)))
-      (if (string-match (concat "^[¥¡-¥ó]$") str)
-	  (if (tcode-nemacs-p)
-	      (let ((ch (mod char 256)))
-		(+ (* ?\244 256) ch))
-	    (let ((ch (char-component char 2)))
-	      (make-character lc-jp ?\244 ch)))
+      (if (string-match (concat "^[ã‚¡-ãƒ³]$") str)
+	  (let ((ch (char-component char 2)))
+	    (make-character lc-jp ?\244 ch))
 	char))))
 
 (unless (fboundp 'japanese-katakana)
   (defun japanese-katakana (char)
-    "Ê¸»ú CHAR ¤¬¤Ò¤é¤¬¤Ê¤Ê¤é¥«¥¿¥«¥Ê¤ËÊÑ´¹¤¹¤ë¡£
-¤Ò¤é¤¬¤Ê¤Ç¤Ê¤¤¾ì¹ç¤Ï¤½¤Î¤Ş¤Ş¤ÎÃÍ¤òÊÖ¤¹¡£"
+    "æ–‡å­— CHAR ãŒã²ã‚‰ãŒãªãªã‚‰ã‚«ã‚¿ã‚«ãƒŠã«å¤‰æ›ã™ã‚‹ã€‚
+ã²ã‚‰ãŒãªã§ãªã„å ´åˆã¯ãã®ã¾ã¾ã®å€¤ã‚’è¿”ã™ã€‚"
     (let ((str (char-to-string char)))
-      (if (string-match (concat "^[¤¡-¤ó]$") str)
-	  (if (tcode-nemacs-p)
-	      (let ((ch (mod char 256)))
-		(+ (* ?\245 256) ch))
-	    (let ((ch (char-component char 2)))
-	      (make-character lc-jp ?\245 ch)))
+      (if (string-match (concat "^[ã-ã‚“]$") str)
+	  (let ((ch (char-component char 2)))
+	    (make-character lc-jp ?\245 ch))
 	char))))
 
 (defconst tcode-jisx0208 (if (tcode-mule-2-p)
@@ -225,101 +223,29 @@ BODY should be a list of lisp expressions."
   (defun buffer-substring-no-properties (start end)
     (buffer-substring start end)))
 
-;;;
-;;; Fix incompatibilities between 18 and 19.
-;;;
-(if (string-match "^\\(19\\|2[0-9]\\)" emacs-version)
-    (progn
-      (defun tcode-redo-command (ch)
-	"¥­¡¼ CH ¤ò¸½ºß¤Î¥­¡¼¥Ş¥Ã¥×¤ÇºÆ¼Â¹Ô¤¹¤ë"
-	(setq unread-command-events
-	      (cons (character-to-event ch) unread-command-events)))
-      (or (fboundp 'character-to-event)
-	  (defun character-to-event (ch)
-	    ch))
-      ;; XEmacs
-      (or (fboundp 'isearch-last-command-event)
-	  (defun isearch-last-command-event ()
-	    last-command-event))
-      (or (boundp 'search-upper-case)
-	  (setq search-upper-case 'not-yanks)))
-  (if (tcode-nemacs-p)
-      ;; NEmacs
-      (defun tcode-redo-command (ch)
-        "¥­¡¼ CH ¤ò¸½ºß¤Î¥­¡¼¥Ş¥Ã¥×¤ÇºÆ¼Â¹Ô¤¹¤ë"
-        (setq unread-command-char ch))
-    (error "Unknown emacs version %s" emacs-version)))
+(defun tcode-redo-command (ch)
+  "ã‚­ãƒ¼ CH ã‚’ç¾åœ¨ã®ã‚­ãƒ¼ãƒãƒƒãƒ—ã§å†å®Ÿè¡Œã™ã‚‹"
+  (setq unread-command-events
+	(cons (character-to-event ch) unread-command-events)))
+(or (fboundp 'character-to-event)
+    (defun character-to-event (ch)
+      ch))
+;; XEmacs
+(or (fboundp 'isearch-last-command-char)
+    (defun isearch-last-command-char ()
+      last-command-event))
+(or (boundp 'search-upper-case)
+    (setq search-upper-case 'not-yanks))
 
-(if (not (tcode-nemacs-p))
-    (progn
-      (defun tcode-string-to-char (p) (string-to-char p))
-      (defmacro tcode-following-char () (list 'following-char))
-      (defmacro tcode-preceding-char () (list 'preceding-char))
-      (defmacro tcode-forward-char (p) (list 'forward-char p))
-      (defmacro tcode-backward-char (p) (list 'backward-char p))
-      (or (fboundp 'string-to-list)
-	  (defun string-to-list (s)
-	    (string-to-char-list s)))
-      (defmacro tcode-delete-char (p) (list 'delete-char p)))
-  ;;;
-  ;;; NEmacs ÍÑ¤ÎÄêµÁ
-  ;;; °Ê²¼¤Î´Ø¿ô¤Ç¤Ï¡¤2¥Ğ¥¤¥ÈÊ¸»ú¤ò¿ôÃÍ¤ËÊÑ´¹¤¹¤ë¤È¡¤
-  ;;; (1¥Ğ¥¤¥ÈÌÜ*256 + 2¥Ğ¥¤¥ÈÌÜ)¤Ë¤Ê¤ë¡£
-  ;;;
-  (defun char-width (c)
-    (if (> c 256) 2 1))
-  (unless (fboundp 'orig:char-to-string)
-    (fset 'orig:char-to-string (symbol-function 'char-to-string))
-    (defun char-to-string (c)
-      (if (> c 256)
-	  (format "%c%c" (/ c 256) (mod c 256))
-	(orig:char-to-string c))))
-  (defun tcode-string-to-char (s)
-    (let ((1st (aref s 0)))
-      (if (>= 1st 128)
-          (+ (* 1st 256) (aref s 1))
-        1st)))
-  (defun tcode-following-char ()
-    (let ((1st (following-char)))
-      (if (and 1st
-	       (>= 1st 128))
-          (+ (* 1st 256) (char-after (1+ (point))))
-        1st)))
-  (defun tcode-preceding-char ()
-    (let ((1st (char-after (save-excursion (backward-char 1) (point)))))
-      (if (and 1st
-	       (>= 1st 128))
-	  (+ (* 1st 256) (preceding-char))
-	(preceding-char))))
-  (defun string-to-list (s)
-    (kanji-word-list s))
-  (defun tcode-forward-char (i)
-    (if (< i 0)
-	(while (< i 0)
-	  (if (>= (preceding-char) 128) (backward-char 2)
-	    (backward-char 1))
-	  (setq i (1+ i)))
-      (while (> i 0)
-	(if (>= (char-after (point)) 128) (forward-char 2)
-	  (forward-char 1))
-	(setq i (1- i)))))
-  (defmacro tcode-backward-char (i)
-    (list 'tcode-forward-char (list '- 0 i)))
-
-  (defun tcode-delete-char (i)
-    (if (< i 0)
-	(while (< i 0)
-	  (if (>= (preceding-char) 128)
-	      (delete-char -2)
-	    (delete-char -1))
-	  (setq i (1+ i)))
-      (while (> i 0)
-	(if (>= (char-after (point)) 128)
-	    (delete-char 2)
-	  (delete-char 1))
-	(setq i (1- i)))))
-
-  (defmacro string-width (p) (list 'length p)))
+(defun tcode-string-to-char (p) (string-to-char p))
+(defmacro tcode-following-char () (list 'following-char))
+(defmacro tcode-preceding-char () (list 'preceding-char))
+(defmacro tcode-forward-char (p) (list 'forward-char p))
+(defmacro tcode-backward-char (p) (list 'backward-char p))
+(or (fboundp 'string-to-list)
+    (defun string-to-list (s)
+      (string-to-char-list s)))
+(defmacro tcode-delete-char (p) (list 'delete-char p))
 
 (defun tcode-do-auto-fill ()
   (cond ((boundp 'auto-fill-function)
@@ -409,8 +335,8 @@ See also the variable `input-method-verbose-flag'."
 ;;; mode-line
 
 (defun tcode-find-symbol-in-tree (item tree)
-  "ITEM ¤òÇ¤°Õ¤Î¹½Â¤¤Î¥ê¥¹¥È TREE ¤«¤éequal¤ÇÃµ¤¹¡£
-¸«¤Ä¤«¤ë¤Èt, ¸«¤Ä¤«¤é¤Ê¤±¤ì¤Ğ nil¡£"
+  "ITEM ã‚’ä»»æ„ã®æ§‹é€ ã®ãƒªã‚¹ãƒˆ TREE ã‹ã‚‰equalã§æ¢ã™ã€‚
+è¦‹ã¤ã‹ã‚‹ã¨t, è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã° nilã€‚"
   (if (consp tree)
       (or (tcode-find-symbol-in-tree item (car tree))
 	  (tcode-find-symbol-in-tree item (cdr tree)))
@@ -420,9 +346,8 @@ See also the variable `input-method-verbose-flag'."
 (or (and (boundp 'tcode-mode-indicator)
 	 (tcode-find-symbol-in-tree 'tcode-mode-indicator
 				    (default-value 'mode-line-format)))
-    (cond ((or (tcode-nemacs-p)
-	       (tcode-xemacs-p))
-	   
+    (cond ((tcode-xemacs-p)
+
 	   (setq-default mode-line-format
 			 (cons '(tcode-ready-in-this-buffer
 				 ("[" tcode-mode-indicator "]"))
@@ -513,7 +438,7 @@ without loading the relevant Quail packages."
       (apply (nth 2 slot) input-method (nthcdr 5 slot))
       (setq current-input-method input-method))))
 
-(when (or (memq tcode-emacs-version '(nemacs mule-1 mule-2))
+(when (or (memq tcode-emacs-version '(mule-1 mule-2))
 	  (and (eq tcode-emacs-version 'xemacs)
 	       (< emacs-major-version 21)
 	       (< emacs-minor-version 3)))

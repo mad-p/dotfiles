@@ -96,7 +96,7 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
  '(package-selected-packages
-   '(typescript-mode yaml-mode lsp-ui helm go-eldoc go-autocomplete ggo-mode company-go go-mode markdown-mode+ counsel-dash company-lsp counsel company groovy-mode editorconfig use-package flycheck))
+   '(win-switch swift-mode json-mode typescript-mode yaml-mode lsp-ui helm go-eldoc go-autocomplete ggo-mode company-go go-mode markdown-mode+ counsel-dash company-lsp counsel company groovy-mode editorconfig use-package flycheck))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(ruby-deep-arglist nil)
@@ -132,6 +132,7 @@
  '(lsp-ui-sideline-current-symbol ((t (:foreground "black" :box (:line-width -1 :color "white") :weight ultra-bold :height 0.99))))
  '(lsp-ui-sideline-global ((t (:background "thistle1"))))
  '(lsp-ui-sideline-symbol ((t (:foreground "grey40" :box (:line-width -1 :color "grey40") :height 0.99))))
+ '(markdown-code-face ((t (:inherit font-lock-type-face))))
  '(markdown-inline-code-face ((t (:inherit font-lock-type-face))))
  '(markdown-pre-face ((t (:inherit font-lock-type-face))))
  '(message-header-subject-face ((t (:background "light blue" :weight bold))) t)

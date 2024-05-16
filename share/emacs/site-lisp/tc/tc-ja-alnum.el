@@ -35,7 +35,7 @@
 (make-variable-buffer-local 'tcode-2byte-alnum-mode)
 
 (defun tcode-2byte-alnum-inactivate ()
-  "T¥³¡¼¥É2¥Ğ¥¤¥È±Ñ¿ô¥â¡¼¥É¤òÌµ¸ú¤Ë¤¹¤ë¡£"
+  "Tã‚³ãƒ¼ãƒ‰2ãƒã‚¤ãƒˆè‹±æ•°ãƒ¢ãƒ¼ãƒ‰ã‚’ç„¡åŠ¹ã«ã™ã‚‹ã€‚"
   (tcode-2byte-alnum-activate -1))
 
 (defun tcode-2byte-alnum-mode-line-redisplay ()
@@ -46,14 +46,14 @@
   (set-buffer-modified-p (buffer-modified-p)))
 
 (defun tcode-2byte-alnum-activate (&optional arg)
-  "T¥³¡¼¥É2¥Ğ¥¤¥È±Ñ¿ô¥â¡¼¥É¤òÍ­¸ú¤Ë¤¹¤ë¡£ARG¤¬Éé¤ÎÀ°¿ô¤Î¤È¤­¤ÏÌµ¸ú¤Ë¤¹¤ë¡£"
+  "Tã‚³ãƒ¼ãƒ‰2ãƒã‚¤ãƒˆè‹±æ•°ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚ARGãŒè² ã®æ•´æ•°ã®ã¨ãã¯ç„¡åŠ¹ã«ã™ã‚‹ã€‚"
   (if (and arg
 	   (< (prefix-numeric-value arg) 0))
       ;; inactivate T-Code mode
       (unwind-protect
 	  (progn
 	    (setq tcode-2byte-alnum-mode nil)
-	    (run-hooks 'input-method-inactivate-hook))
+	    (run-hooks 'input-method-deactivate-hook))
 	(setq input-method-function nil))
     ;; activate T-Code mode
     (setq tcode-2byte-alnum-mode t)
@@ -65,7 +65,7 @@
 
 ;;;###autoload
 (defun tcode-use-2byte-alnum (package-name &rest libraries)
-  (setq inactivate-current-input-method-function 'tcode-2byte-alnum-inactivate
+  (setq deactivate-current-input-method-function 'tcode-2byte-alnum-inactivate
 	describe-current-input-method-function nil
 	current-input-method package-name)
   (tcode-2byte-alnum-mode 1))
@@ -89,7 +89,7 @@
     (let ((ch (car (tcode-2byte-alnum-input-method last-command-event))))
       (insert (char-to-string ch))))
 
-  ;; ¥Ş¥¤¥Ê¡¼¥â¡¼¥É
+  ;; ãƒã‚¤ãƒŠãƒ¼ãƒ¢ãƒ¼ãƒ‰
   (unless (assq 'tcode-2byte-alnum-mode minor-mode-alist)
     (setq minor-mode-alist
 	  (cons (list 'tcode-2byte-alnum-mode nil) minor-mode-alist)))
@@ -98,7 +98,7 @@
 
   (if (boundp 'minor-mode-map-alist)
       (progn
-	;; ¼«Æ°Åª¤Ë¥Ş¥¤¥Ê¡¼¥â¡¼¥É¥­¡¼¥Ş¥Ã¥×¤ËÊÑ¹¹
+	;; è‡ªå‹•çš„ã«ãƒã‚¤ãƒŠãƒ¼ãƒ¢ãƒ¼ãƒ‰ã‚­ãƒ¼ãƒãƒƒãƒ—ã«å¤‰æ›´
 	(unless tcode-2byte-alnum-mode-map
 	  (setq tcode-2byte-alnum-mode-map (make-keymap))
 	  (let ((c ? ))
@@ -113,7 +113,7 @@
 		  (cons (cons 'tcode-2byte-alnum-mode 
 			      tcode-2byte-alnum-mode-map)
 			minor-mode-map-alist))))
-    ;; ¼«Á°¤Ç¥Ş¥¤¥Ê¡¼¥â¡¼¥É¥­¡¼¥Ş¥Ã¥×¤ËÊÑ¹¹
+    ;; è‡ªå‰ã§ãƒã‚¤ãƒŠãƒ¼ãƒ¢ãƒ¼ãƒ‰ã‚­ãƒ¼ãƒãƒƒãƒ—ã«å¤‰æ›´
     (make-variable-buffer-local 'tcode-2byte-alnum-mode-map)
     (defvar tcode-2byte-alnum-original-local-map nil)
     (make-variable-buffer-local 'tcode-2byte-alnum-original-local-map)
@@ -147,7 +147,7 @@
 (register-input-method "japanese-2byte-alnum"
 		       "Japanese"
 		       'tcode-use-2byte-alnum
-		       "£Á"
+		       "ï¼¡"
 		       "a Japanese 2byte alphabet and number input method")
 
 (provide 'tc-ja-alnum)
