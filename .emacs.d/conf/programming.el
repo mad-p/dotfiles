@@ -8,6 +8,7 @@
 ;;
 ;; Ruby
 ;;
+(setq font-lock-reference-face 'font-lock-property-name-face)
 (require 'align)
 (add-to-list 'align-rules-list
              '(ruby-comma-delimiter

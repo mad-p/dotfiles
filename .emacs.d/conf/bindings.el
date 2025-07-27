@@ -194,6 +194,11 @@
       '(java-mode-hook c-mode-hook c++-mode-hook ruby-mode-hook groovy-mode-hook))
 
 ;;
+;; Redefine prog-fill-reindent-defun to scroll-down
+;;
+(define-key prog-mode-map (kbd "M-q") 'scroll-down)
+
+;;
 ;; Diff mode
 (add-hook 'diff-mode-hook
           #'(lambda ()

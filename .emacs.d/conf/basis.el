@@ -43,3 +43,4 @@
 (global-auto-revert-mode 1)
 (setq auto-revert-interval 10)
 (setq auto-revert-check-vc-info nil)
+(easy-menu-add-item nil '("Tools") ["Top Level" (top-level) t])

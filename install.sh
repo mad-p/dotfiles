@@ -25,11 +25,12 @@ for i in bin/*; do
   ln -s ../dotfiles/$i ~/bin/
 done
 
+mkdir -p "$HOME/Library/Containers/jp.mad-p.inputmethod.MacTcode/Data/Library/Application Support/MacTcode/"
+ln share/config.json "$HOME/Library/Containers/jp.mad-p.inputmethod.MacTcode/Data/Library/Application Support/MacTcode/"
+
 if [ `uname` = "Darwin" ]; then
   echo installing homebrew
   bash brew-install.sh
 fi
-
-# vim -c ':NeoBundleInstall!' -c ':q!' -c ':q!'
 
 exit 0

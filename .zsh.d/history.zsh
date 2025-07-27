@@ -11,5 +11,6 @@ zshaddhistory() {
     [[ ${cmd} != (m|w|zz|,|\./[0-4][0-4])
         && ${cmd} != (gst|gg)
         && ${cmd} != (wordle)
+        && ${line} != (* m [fsg]*)
     ]]
 }

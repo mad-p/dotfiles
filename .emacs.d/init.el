@@ -73,7 +73,7 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
  '(package-selected-packages
-   '(helm go-eldoc go-autocomplete ggo-mode company-go go-mode typescript-mode markdown-mode+ counsel-dash company-lsp lsp-mode counsel ivy company scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck lsp-ui))
+   '(eglot helm go-eldoc go-autocomplete ggo-mode company-go go-mode typescript-mode markdown-mode+ counsel-dash counsel ivy company scala-mode markdown-mode groovy-mode editorconfig use-package json-mode flycheck))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(ruby-deep-arglist nil)
@@ -119,7 +119,7 @@
 (load "~/.emacs.d/conf/frame-title.el")
 (load "~/.emacs.d/conf/conf-auto-install")
 (load "~/.emacs.d/conf/conf-ivy")
-(load "~/.emacs.d/conf/lsp")
+;;(load "~/.emacs.d/conf/lsp")
 (load "~/.emacs.d/conf/conf-helm")
 (load "~/.emacs.d/conf/basis")
 (load "~/.emacs.d/conf/calc")
