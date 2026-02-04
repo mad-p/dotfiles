@@ -28,3 +28,4 @@ __pycache__
 .fonts/.uuid
 .emacs.d/.cache
 .emacs.d/.lsp-session*
+.zsh.d/okta-aws-cli.zsh

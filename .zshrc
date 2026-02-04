@@ -140,14 +140,17 @@ alias ssh-agent-start='ssh-agent > ~/.ssh/agent; source ~/.ssh/agent; ssh-add'
 alias ssh-agent-stop='eval `ssh-agent -k`; cp /dev/null ~/.ssh/agent'
 alias ssh-agent-read='source ~/.ssh/agent; ssh-add -l'
 function d () { colordiff -u $@ | diff-highlight | less -R; }
+alias dt=difft
 
 alias g='git'
 alias gd='git diff'
-alias gst='git status -uno --ignore-submodules'
+alias gst='git status -uno --no-ignore-submodules'
 alias gl='git --no-pager log --oneline --decorate -8'
 alias gg='gl --graph'
-alias gd='git diff'
 alias gdc='git diff --cached'
+alias gdt='git difftool'
+alias gdtc='git difftool --cached'
+alias gsh='git show --ext-diff'
 om() { export om=$1; termtab $1 }
 title() { export PROMPT=$PROMPT0; echo "\033]2;" $* "\007"}
 
@@ -162,8 +165,16 @@ PERL_LOCAL_LIB_ROOT="/Users/kaoru.maeda/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCA
 PERL_MB_OPT="--install_base \"/Users/kaoru.maeda/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/kaoru.maeda/perl5"; export PERL_MM_OPT;
 
+# difftastic
+export DFT_BACKGROUND=light
+export DFT_DISPLAY=inline
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/kaoru.maeda/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kaoru.maeda/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/kaoru.maeda/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kaoru.maeda/google-cloud-sdk/completion.zsh.inc'; fi
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/kaoru.maeda/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

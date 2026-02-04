@@ -18,7 +18,9 @@ br = branch
 l = log --pretty=oneline --abbrev-commit
 lg = log --graph --pretty=oneline --abbrev-commit
 lo = log --pretty=short
+lp = log -p --ext-diff
 url = config --get remote.origin.url
+sh = show --ext-diff
 svnmerge = merge --no-ff --no-commit
 
 [color]
@@ -64,9 +66,16 @@ autosetupmerge = true
 	default = simple
 
 [pager]
-	log = diff-highlight | less -FRSX
-        show = diff-highlight | less -FRSX
-        diff = diff-highlight | less -FRSX
+	log = less -FRSX
+        show = less -FRSX
+        diff = less -FRSX
+        difftool = less -FRSX
+[diff]
+        tool = difftastic
+[difftool]
+        prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -86,3 +95,10 @@ autosetupmerge = true
 	path = ~/.gitconfig.local
 [diff "lfstext"]
 	textconv = cat
+[credential "https://github.dena.jp"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[init]
+	defaultBranch = main
+[diff "to_utf8"]
+	textconv = iconv -f UTF-16LE -t UTF-8

@@ -1,5 +1,5 @@
 export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
+export PATH="$GOENV_ROOT/shims:$PATH"
 if [ -x /opt/homebrew/bin/goenv ]; then
   eval "$(/opt/homebrew/bin/goenv init -)"
 elif [ -x /usr/local/bin/goenv ]; then
