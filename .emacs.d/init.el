@@ -42,6 +42,7 @@
 (load "~/.emacs.d/conf/fonts")
 (load "~/.emacs.d/conf/company")
 (load "~/.emacs.d/conf/w32")
+(load "~/.emacs.d/conf/yaml")
 (load "~/.emacs.d/conf/macosx")
 (let* ((host (system-name))
        (file (concat "~/.emacs.d/local/" host ".el")))
@@ -56,9 +57,7 @@
  '(Buffer-menu-name-width 35)
  '(calendar-date-display-form '(year "/" month "/" day))
  '(calendar-time-display-form
-   '(24-hours ":" minutes
-              (if time-zone " (")
-              time-zone
+   '(24-hours ":" minutes (if time-zone " (") time-zone
               (if time-zone ")")) t)
  '(cperl-comment-column 40)
  '(cperl-continued-statement-offset 4)
@@ -70,11 +69,8 @@
  '(diff-switches "-u")
  '(display-time-mode t)
  '(edit-server-new-frame-alist
-   '((name . "Edit with Emacs FRAME")
-     (width . 96)
-     (height . 32)
-     (minibuffer . t)
-     (menu-bar-lines . t)))
+   '((name . "Edit with Emacs FRAME") (width . 96) (height . 32)
+     (minibuffer . t) (menu-bar-lines . t)))
  '(flycheck-idle-change-delay 3)
  '(indent-tabs-mode nil)
  '(ivy-magic-tilde nil)
@@ -96,12 +92,17 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
  '(package-selected-packages
-   '(win-switch swift-mode json-mode typescript-mode yaml-mode lsp-ui helm go-eldoc go-autocomplete ggo-mode company-go go-mode markdown-mode+ counsel-dash company-lsp counsel company groovy-mode editorconfig use-package flycheck))
+   '(win-switch swift-mode json-mode typescript-mode yaml-mode lsp-ui
+                helm go-eldoc go-autocomplete ggo-mode company-go
+                go-mode markdown-mode+ counsel-dash company-lsp
+                counsel company groovy-mode editorconfig use-package
+                flycheck))
  '(recentf-max-saved-items 50)
  '(recentf-mode t)
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
- '(safe-local-variable-values '((charset . utf-8) (encoding . utf-8)))
+ '(safe-local-variable-values
+   '((yaml-indent-offset . 2) (charset . utf-8) (encoding . utf-8)))
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-paren-mode t)

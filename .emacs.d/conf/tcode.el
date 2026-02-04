@@ -3,3 +3,5 @@
 	                      (make-face 'mazegaki-conversion)
                             (set-face-underline 'mazegaki-conversion t)))
 (require 'tc-setup)
+(setq tcode-input-command-list
+      (cons 'yaml-electric-dash-and-dot tcode-input-command-list))

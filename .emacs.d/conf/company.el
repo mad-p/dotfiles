@@ -7,6 +7,7 @@
 (setq completion-ignore-case t)
 (setq company-dabbrev-downcase nil)
 (defun my-dabbrev (arg)
+  "With ARG 1, run `dabbrev-expand'. Without ARG,  run `company-complete'."
   (interactive "P")
   (if (or arg (eq last-command 'my-dabbrev))
       (dabbrev-expand arg)

@@ -9,6 +9,7 @@
 ;; Ruby
 ;;
 (require 'align)
+(setq font-lock-reference-face 'font-lock-property-name-face)
 (add-to-list 'align-rules-list
              '(ruby-comma-delimiter
                (regexp . ",\\(\\s-*\\)[^# \t\n]")
@@ -134,3 +135,23 @@
                           (go-eldoc-setup)
           )
 ;; (add-hook 'go-mode-hook 'lsp-ui-mode)
+
+;;
+;; sh
+;;
+(defun my/set-sh-shell-from-shebang ()
+  (when (and (eq major-mode 'sh-mode)
+             (not (file-remote-p (or buffer-file-name default-directory))))
+    (save-excursion
+      (goto-char (point-min))
+      (when (looking-at "#!.*bash$")
+        (setq-local sh-shell "bash")))))
+(add-hook 'sh-mode-hook #'my/set-sh-shell-from-shebang)
+
+;;
+;; JSON
+;;
+(add-hook 'json-mode-hook
+          #'(lambda ()
+              (define-key json-mode-map "\eq" 'scroll-down)))
+

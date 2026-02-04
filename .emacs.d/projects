@@ -1,3 +1,4 @@
 ;;; -*- lisp-data -*-
-(("~/Work/SWET/src/miro-dev/")
+(("~/src/onnxruntime/")
+ ("~/Work/SWET/src/miro-dev/")
  ("~/Work/SWET/src/bhspec/"))
