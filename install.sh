@@ -25,6 +25,13 @@ for i in bin/*; do
   ln -s ../dotfiles/$i ~/bin/
 done
 
+if [ -d "$HOME/.local/share/locale" ]; then
+  :
+else
+  mkdir -p "$HOME/.local/share"
+  cp -r share/locale "$HOME/.local/share/"
+fi
+
 mkdir -p "$HOME/Library/Containers/jp.mad-p.inputmethod.MacTcode/Data/Library/Application Support/MacTcode/"
 ln share/config.json "$HOME/Library/Containers/jp.mad-p.inputmethod.MacTcode/Data/Library/Application Support/MacTcode/"
 

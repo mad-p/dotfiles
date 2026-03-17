@@ -1,6 +1,11 @@
 {
   "bushu" : {
-    "dictionaryFile" : "bushu.dic"
+    "autoEnabled" : true,
+    "autoFile" : "bushu_auto.dic",
+    "bushuYomiCharacters" : "0-9、。「」・\\p{Hiragana}\\p{Katakana}\\p{Han}",
+    "dictionaryFile" : "bushu.dic",
+    "disableAutoKeys" : ["-"],
+    "addAutoKeys" : ["+"]
   },
   "keyBindings" : {
     "basicTable" : [
@@ -40,7 +45,7 @@
       "ぇ■■■■去疑ぢ綿離読鈴恐督況後間場ニ産向府富直倉新」9子五説週号葉派委化ビ目市",
       "ぉ○×☆□秒範核影麻族丁未才返問ム七住北割ぶ番望元事田会前そ休省央福毎気売下都株",
       "欲巣茂述朗■■■■■帰庁昨跡ゲ洗羽個医静億録赤想消支協用表正図挙険ゼ波ヤ心界意今",
-      "迫災恋脳老■■■■■監寄裁達芝響忘討史環色貸販編仕先多商ハ交之末ぼ街免再ネ～口台",
+      "迫災恋脳老■■■■■監寄裁達芝響忘討史環色貸販編仕先多商ハ交之末ぼ街免再ネ〜口台",
       "留列刻豆看■■↓■■竹注介具失司迎華許補左態花栄ザ調混ポ決ミ州払乗庫状団計夫食総",
       "替沼?辞献■■■■■ゅ修究答養復並浦ユ冷ぬ展警型誰組選党択体例満津準遊戸ひょ価与",
       "還更占箱矢■■■■■志抜航層深担陸巻競護根様独止堂銀以ヌ営治字材過諸単身ピ勝反ズ"
@@ -50,20 +55,25 @@
     "mazegakiConversion" : "uh",
     "symbolSet1" : "\\",
     "symbolSet2" : "\\\\",
-    "zenkakuMode" : "90"
+    "zenkakuMode" : "90",
+    "lineMode" : "88"
   },
   "mazegaki" : {
     "dictionaryFile" : "mazegaki.dic",
+    "mruEnabled" : true,
+    "mruFile" : "mazegaki_user.dic",
     "maxInflection" : 4,
     "maxYomi" : 10,
-    "nonYomiCharacters" : [
-      "、", "。", "，", "．", "・", "「", "」", "（", "）"
-    ]
+    "mazegakiYomiCharacters" : "々ー\\p{Hiragana}\\p{Katakana}\\p{Han}"
   },
   "system" : {
+    "cancelPeriod" : 1.5,
     "excludedApplications" : [
       "com.apple.loginwindow",
       "com.apple.SecurityAgent"
+    ],
+    "disableOneYomiApplications" : [
+      "com.google.Chrome"
     ],
     "keyboardLayout" : "dvorak",
     "keyboardLayoutMapping" : [
@@ -72,14 +82,33 @@
       "a", "o", "e", "u", "i", "d", "h", "t", "n", "s",
       ";", "q", "j", "k", "x", "b", "m", "w", "v", "z"
     ],
-    "logEnabled" : false,
-    "recentTextMaxLength" : 20
+    "logEnabled" : true,
+    "recentTextMaxLength" : 20,
+    "syncStatsInterval": 1200,
+    "dummyInsertTextApps": {
+      "org.keepassx.keepassx": "empty",
+      "com.google.android.studio": "nul",
+      "com.jetbrains.webstorm": "nul"
+    }
   },
   "ui" : {
     "backspaceDelay" : 0.05,
     "backspaceLimit" : 10,
     "candidateSelectionKeys" : [
-      "j", "k", "l", ";", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+      "j",
+      "k",
+      "l",
+      ";",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0"
     ],
     "yomiIgnoreTexts" : [
       "\u200b",
@@ -88,7 +117,7 @@
       "xt left)\n\n",
       "──────╯\n\n\n"
     ],
-    "symbolSet1Chars" : "√∂『』　“《》【】┏┳┓┃◎◆■●▲▼┣╋┫━　◇□○△▽┗┻┛／＼§※¶†‡",
+    "symbolSet1Chars" : "√∂『』　“《》【】┏┳┓┃◎◆■●▲▼┣╋┫━　◇□○△▽┗┻┛／＼※§¶†‡",
     "symbolSet2Chars" : "♠♡♢♣㌧㊤㊥㊦㊧㊨㉖㉗㉘㉙㉚⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳①②③④⑤㉑㉒㉓㉔㉕⑥⑦⑧⑨⑩"
   }
 }

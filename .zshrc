@@ -5,8 +5,10 @@ if [ -f ~/.proxyrc ]; then
   source ~/.proxyrc
 fi
 
-LANG=ja_JP.UTF-8
-LC_MESSAGES=en_US.UTF-8
+export LANG=ja_JP.UTF-8
+export PATH_LOCALE=$HOME/.local/share/locale
+# export LC_TIME=$HOME/.local/share/locale/ja_JP.UTF-8/LC_TIME
+# export LC_MESSAGES=en_US.UTF-8
 
 if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -168,3 +170,5 @@ PERL_MM_OPT="INSTALL_BASE=/Users/kaoru.maeda/perl5"; export PERL_MM_OPT;
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/maeda/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
