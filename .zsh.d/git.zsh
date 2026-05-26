@@ -22,6 +22,7 @@ chpwd()
   _update_rprompt
 }
 
+
 #compdef git-br git-co
 x=( /usr/share/zsh/**/_git )
 if [ -f "$x" ]; then
