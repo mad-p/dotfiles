@@ -122,6 +122,7 @@ if [ -d ~/.zsh.d ]; then
 	;;
     esac
   done
+  unset f
 fi
 
 ## aliases
